@@ -1,0 +1,2 @@
+# ignoring db.php (because of password, ...)
+src/app/database/db.php
