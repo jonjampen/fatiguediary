@@ -4,24 +4,32 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/style.css">
     <title>Register</title>
 </head>
 <body>
     <div class="login-container">
-        <h2>Register</h2>
-        <form action="register.php" method="post">
-            <label for="name">Name</label>
-            <input type="text" name="name">
-            <label for="name">Username</label>
-            <input type="text" name="username">
-            <label for="name">Email</label>
-            <input type="email" name="email">
-            <label for="name">Password</label>
-            <input type="password" name="password">
-            <label for="name">Repeat password</label>
-            <input type="password" name="passwordConf">
-            <button type="submit" name="register">Register</button>
-        </form>
+        <h2 class="form-title">Register</h2>
+        <div class="form">
+            <form action="register.php" method="post">
+                <label for="name">Name</label>
+                <input type="text" name="name">
+
+                <label for="name">E-Mail</label>
+                <input type="email" name="email">
+
+                <label for="name">Passwort</label>
+                <input type="password" name="password">
+
+                <label for="name">Passwort wiederholen</label>
+                <input type="password" name="passwordConf">
+        
+                <button type="submit" name="register">Register</button>
+
+                <p class="login-link">Already have an account? <a href="login.php">Log in now</a></p>
+            </form>
+        </div>
+        
     </div>
 </body>
 </html>
