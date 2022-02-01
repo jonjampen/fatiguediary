@@ -13,16 +13,16 @@
         <div class="form">
             <form action="register.php" method="post">
                 <label for="name">Name</label>
-                <input type="text" name="name">
+                <input type="text" name="name" placeholder="Name eingeben...">
 
-                <label for="name">E-Mail</label>
-                <input type="email" name="email">
+                <label for="email">E-Mail</label>
+                <input type="email" name="email" placeholder="E-Mail-Adresse eingeben">
 
-                <label for="name">Passwort</label>
-                <input type="password" name="password">
+                <label for="password">Passwort</label>
+                <input type="password" name="password" placeholder="Passwort eingeben...">
 
-                <label for="name">Passwort wiederholen</label>
-                <input type="password" name="passwordConf">
+                <label for="passwordConf">Passwort wiederholen</label>
+                <input type="password" name="passwordConf" placeholder="Passwort erneut eingeben...">
         
                 <button type="submit" name="register">Register</button>
 
