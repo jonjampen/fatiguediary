@@ -11,7 +11,7 @@
     <div class="login-container">
         <h2 class="form-title">Register</h2>
         <div class="form">
-            <form action="register.php" method="post">
+            <form action="index.php?page=users" method="post">
                 <label for="name">Name</label>
                 <input type="text" name="name" placeholder="Name eingeben...">
 
