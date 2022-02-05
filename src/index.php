@@ -10,6 +10,7 @@ if(isset($_GET["page"])) {
 
 
 if ($page == "users") {
+    include("app/controllers/validation.php");
     include("app/controllers/users.php");
 }
 elseif ($page == "register") {

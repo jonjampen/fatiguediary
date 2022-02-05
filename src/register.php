@@ -10,6 +10,15 @@
 <body>
     <div class="login-container">
         <h2 class="form-title">Register</h2>
+        <div class="error">
+            <?php if (isset($_SESSION['errors'])): ?>
+                <ul>
+                    <?php foreach($_SESSION['errors'] as $error): ?>
+                        <li><?php echo($error); ?></li>
+                    <?php endforeach; ?>
+                </ul>
+            <?php endif; ?>
+        </div>
         <div class="form">
             <form action="index.php?page=users" method="post">
                 <label for="name">Name</label>

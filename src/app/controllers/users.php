@@ -11,15 +11,24 @@ $hashed_password = password_hash($password, PASSWORD_DEFAULT);
 
 //If registering
 if(isset($_POST['register'])) {
-    //Preparing the statement
-    $stmt = $conn->prepare("INSERT INTO users (name, email, password) VALUES (?, ?, ?)");
+    $errors = validateUser($_POST);
 
-    //Binding the parameters to the statement
-    $stmt->bind_param("sss", $name, $email, $hashed_password); //"sss" because name, email, password are three strings
+    if(empty($errors)) {
+        //Preparing the statement
+        $stmt = $conn->prepare("INSERT INTO users (name, email, password) VALUES (?, ?, ?)");
 
-    //Executing the statement
-    $stmt->execute();
-    login($_POST);
+        //Binding the parameters to the statement
+        $stmt->bind_param("sss", $name, $email, $hashed_password); //"sss" because name, email, password are three strings
+
+        //Executing the statement
+        $stmt->execute();
+        login($_POST);
+    } else {
+        $_SESSION['errors'] = $errors;
+        header("location: index.php?page=register");
+    }
+
+    
 }
 
 
