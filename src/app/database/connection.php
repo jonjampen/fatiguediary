@@ -11,4 +11,6 @@ if($conn->connect_error) {
     echo "Connected successfully.";
 }
 
+session_start();
+
 ?>
