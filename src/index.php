@@ -13,9 +13,20 @@ if ($page == "users") {
     include("app/controllers/validation.php");
     include("app/controllers/users.php");
 }
-elseif ($page == "register") {
-    include("register.php");
-}
-elseif ($page == "dashboard") {
-    include("dashboard.php");
-}
+
+
+//only if not logged in
+//if(!isset($_SESSION['name'])) {
+    if ($page == "register") {
+        include("register.php");
+    }
+    elseif ($page == "login") {
+        include("login.php");
+    }
+//}
+//only if logged in
+//else {
+    if ($page == "dashboard") {
+        include("dashboard.php");
+    }
+//}

@@ -10,10 +10,12 @@ $hashed_password = password_hash($password, PASSWORD_DEFAULT);
 
 
 //If registering
-if(isset($_POST['register'])) {
-    $errors = validateUser($_POST);
+if (isset($_POST['register'])) {
+    unset($_POST['register']);
 
-    if(empty($errors)) {
+    $errors = validateUser($_POST);
+    
+    if (empty($errors)) {
         //Preparing the statement
         $stmt = $conn->prepare("INSERT INTO users (name, email, password) VALUES (?, ?, ?)");
 
@@ -23,19 +25,32 @@ if(isset($_POST['register'])) {
         //Executing the statement
         $stmt->execute();
         login($_POST);
-    } else {
+    }
+    else {
         $_SESSION['errors'] = $errors;
         header("location: index.php?page=register");
     }
+}
 
-    
+
+//Logout
+if (isset($_POST['logout'])) {
+    logout();
 }
 
 
 
+
+function logout() {
+    //Deleting session data
+    session_destroy();
+    header("location: index.php?page=login");
+}
+
+
 function login($user) {
     $_SESSION['name'] = $user['name'];
-    
+    unset($_SESSION['errors']);
     //Redirecting
     header("location: index.php?page=dashboard");
 }

@@ -8,5 +8,8 @@
 </head>
 <body>
     welcome <?php echo($_SESSION['name']);?>;
+    <form action="index.php?page=users" method="post">
+        <button type="submit" name="logout">Logout</button>
+    </form>
 </body>
 </html>
