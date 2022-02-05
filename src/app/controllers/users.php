@@ -11,6 +11,7 @@ $hashed_password = password_hash($password, PASSWORD_DEFAULT);
 
 //If registering
 if (isset($_POST['register'])) {
+    unset($_SESSION['errors']);
     unset($_POST['register']);
 
     $errors = validateUser($_POST);
