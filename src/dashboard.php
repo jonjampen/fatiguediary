@@ -7,6 +7,6 @@
     <title>Document</title>
 </head>
 <body>
-    dashboard
+    welcome <?php echo($_SESSION['name']);?>;
 </body>
 </html>
