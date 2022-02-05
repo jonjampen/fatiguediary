@@ -6,6 +6,8 @@
     --input: #414141;
     --button: #2b6aaa;
     --link: #2b6aaa;
+    --error-content: #f39e9e;
+    --error-border: #a04444;
 }
 
 /*general*/
@@ -70,4 +72,12 @@ button {
 .login-container .login-link {
     text-align: center;
     margin-top: 25px;
+}
+
+.error {
+    margin: auto;
+    background: var(--error-content);
+    border: 1px solid var(--error-border);
+    width: 90%;
+    border-radius: 5px;
 }
