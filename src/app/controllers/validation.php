@@ -1,6 +1,6 @@
 <?php
 
-function validateUser($user){
+function validateRegisterUser($user){
     $errors = array();
 
     //empty
@@ -28,7 +28,6 @@ function validateUser($user){
     }
 
     //E-Mail already existing
-    #...
 
     return $errors;
 }

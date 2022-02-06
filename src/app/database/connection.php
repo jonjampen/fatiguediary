@@ -1,6 +1,4 @@
 <?php
-//db.php with $servername, $username, $password (gitignore)
-include("db.php");
 
 //Creating a connection to the db
 $conn = new mysqli($servername, $username, $password, $dbname);

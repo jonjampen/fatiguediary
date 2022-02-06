@@ -1,5 +1,8 @@
 <?php
+//db.php with $servername, $username, $password (gitignore)
+include("app/database/db.php");
 include("app/database/connection.php");
+
 $page = "register";
 
 

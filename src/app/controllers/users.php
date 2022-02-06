@@ -14,7 +14,7 @@ if (isset($_POST['register'])) {
     unset($_SESSION['errors']);
     unset($_POST['register']);
 
-    $errors = validateUser($_POST);
+    $errors = validateRegisterUser($_POST);
     
     if (empty($errors)) {
         //Preparing the statement
