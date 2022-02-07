@@ -13,6 +13,7 @@ if(isset($_GET["page"])) {
 
 
 if ($page == "users") {
+    include("app/controllers/functions.php");
     include("app/controllers/validation.php");
     include("app/controllers/users.php");
 }

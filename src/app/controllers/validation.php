@@ -28,6 +28,9 @@ function validateRegisterUser($user){
     }
 
     //E-Mail already existing
+    if (isEmailExisting($user['email']) == true) {
+        array_push($errors, "Diese E-Mail-Adresse wird bereits verwendet");
+    }
 
     return $errors;
 }
