@@ -1,3 +1,11 @@
+<?php
+if (isset($_GET['email'])) {
+    $email = $_GET['email'];
+} else {
+    $email = '';
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -24,7 +32,7 @@
         <div class="form">
             <form action="index.php?page=users" method="post">
                 <label for="email">E-Mail</label>
-                <input type="email" name="email" placeholder="E-Mail-Adresse eingeben...">
+                <input type="email" name="email" placeholder="E-Mail-Adresse eingeben..." <?php echo("value= '" . $email . "'"); ?>>
 
                 <label for="password">Passwort</label>
                 <input type="password" name="password" placeholder="Passwort eingeben...">

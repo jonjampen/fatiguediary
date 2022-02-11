@@ -1,6 +1,5 @@
 <?php
 
-
 //If registering
 if (isset($_POST['register'])) {
 
@@ -31,7 +30,7 @@ if (isset($_POST['register'])) {
     }
     else {
         $_SESSION['errors'] = $errors;
-        header("location: index.php?page=register");
+        header("location: index.php?page=register&name=$name&email=$email");
     }
 }
 
@@ -55,7 +54,7 @@ if (isset($_POST['login'])) {
     }
     else {
         $_SESSION['errors'] = $errors;
-        header("location: index.php?page=login");
+        header("location: index.php?page=login&email=$email");
     }
 }
 
