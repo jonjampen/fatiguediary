@@ -27,7 +27,7 @@ if (isset($_POST['register'])) {
 
         //Executing the statement
         $stmt->execute();
-        login($_POST);
+        login($email);
     }
     else {
         $_SESSION['errors'] = $errors;
@@ -51,7 +51,7 @@ if (isset($_POST['login'])) {
     $errors = validateLoginUser($email, $hashed_password);
     
     if (empty($errors)) {
-        login($_POST);
+        login($email);
     }
     else {
         $_SESSION['errors'] = $errors;
@@ -73,10 +73,20 @@ function logout() {
     header("location: index.php?page=login");
 }
 
-function login($user) {
-    $_SESSION['name'] = $user['name'];
-    $_SESSION['email'] = $user['email'];
+function login($email) {
+    global $conn;
+
+    $stmt = $conn->prepare("SELECT id, name, email FROM users WHERE email=?");
+    $stmt->bind_param("s", $email);
+    $stmt->execute();
+    $stmt->bind_result($id, $name, $email);
+    $stmt->fetch();
+
+    $_SESSION['id'] = $id;
+    $_SESSION['name'] = $name;
+    $_SESSION['email'] = $email;
     unset($_SESSION['errors']);
+    
     //Redirecting
     header("location: index.php?page=dashboard");
 }
