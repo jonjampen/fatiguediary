@@ -2,11 +2,14 @@
 
 function isEmailExisting($email) {
     global $conn;
-    //TODO: prepared statement
-    $check = $conn->query("SELECT email from users WHERE email='$email'");
+
+    $check = $conn->prepare("SELECT email from users WHERE email=?");
+    $check->bind_param("s", $email);
+    $check->execute();
+    $check->store_result();
 
     $row_count = $check->num_rows;
-    
+
     if($row_count > 0) {
         return true;
     }
@@ -15,13 +18,16 @@ function isEmailExisting($email) {
 
 function isPasswordMatchingEmail($email, $hashed_password) {
     global $conn;
-    //TODO: prepared statement
-    $check = $conn->query("SELECT * from users WHERE email='$email' AND password='$hashed_password'");
     
+    $check = $conn->prepare("SELECT * from users WHERE email=? AND password=?");
+    $check->bind_param("ss", $email, $hashed_password);
+    $check->execute();
+    $check->store_result();
+
     $row_count = $check->num_rows;
+
     if($row_count > 0) {
         return true;
     }
-
     return false;
 }
