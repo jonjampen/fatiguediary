@@ -6,14 +6,16 @@
     --input: #414141;
     --button: #2b6aaa;
     --link: #2b6aaa;
-    --nav: #2b6aaa;
     --error-content: #f39e9e;
     --error-border: #a04444;
+    --nav: #2b6aaa;
+    --nav_icons: #ffffff;
 }
 
 /*general*/
 * {
     box-sizing: border-box;
+    margin: 0;
 }
 html, body {
     background: var(--background);
@@ -86,5 +88,24 @@ button {
 
 /*Navbar*/
 nav {
-    background: var(--nav);
+    margin-top: 0;
+    width: 100%;
+    height: 64px;
+    background-color: var(--nav);
+}
+nav ul {
+    padding-left: 30px;
+    padding-right: 30px;
+    display: flex;
+    justify-content: space-between;
+
+}
+nav ul li {
+    margin-top: 20px;
+
+    display: inline-block;
+    list-style-type: none;
+}
+nav i{
+    color: var(--nav_icons);
 }

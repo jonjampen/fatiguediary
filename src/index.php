@@ -1,7 +1,14 @@
+<head>
+<link rel="stylesheet" href="assets/fontawesome/all.css">
+    <link rel="stylesheet" href="assets/css/style.css">
+</head>
+
 <?php
 //db.php with $servername, $username, $password (gitignore)
 include("app/database/db.php");
 include("app/database/connection.php");
+
+include("app/includes/navbar.php");
 
 //Setting default page
 if(isset($_SESSION['id'])) {
