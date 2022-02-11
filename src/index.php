@@ -40,16 +40,13 @@ if(!isset($_SESSION['id'])) {
     elseif ($page == "login") {
         include("login.php");
     }
-    if ($page == "dashboard") {
+    if ($page == "dashboard" || $page == "profile" || $page == "entries" || $page == "add-new" || $page == "tricks") {
         header("location: index.php?page=login");
     }
 }
 //only if logged in
 else {
-    if ($page == "register") {
-        header("location: index.php?page=dashboard");
-    }
-    elseif ($page == "login") {
+    if ($page == "register" || $page == "login") {
         header("location: index.php?page=dashboard");
     }
     if ($page == "dashboard") {

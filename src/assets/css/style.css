@@ -10,6 +10,7 @@
     --error-border: #a04444;
     --nav: #2b6aaa;
     --nav_icons: #ffffff;
+    --active: #1c1c1c;
 }
 
 /*general*/
@@ -108,4 +109,50 @@ nav ul li {
 }
 nav i{
     color: var(--nav_icons);
+    transition: 0.4s;
+}
+
+#open {
+    display: inline;
+}
+
+#close {
+    display: none;
+}
+
+nav i:hover {
+    color: var(--active);
+}
+
+/*Sidenavbar*/
+.sidenav {
+    height: 100%;
+    width: 0;
+    z-index: 1;
+    position: fixed;
+    right: 0;
+    background: var(--nav);
+    transition: 0.5s;
+}
+.sidenav ul {
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    gap: 30px;
+}
+.sidenav ul li {
+    margin-top: 0px;
+    list-style-type: none;
+    transition: 1s;
+}
+
+.sidenav a {
+    color: var(--nav_icons);
+    font-size: 25px;
+    overflow-x: hidden;
+    transition: 0.4s;
+}
+
+.sidenav a:hover {
+    color: var(--active);
 }
