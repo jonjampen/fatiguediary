@@ -9,7 +9,7 @@
 </head>
 <body>
     <div class="login-container">
-        <h2 class="form-title">Login</h2>
+        <h2 class="form-title">Anmelden</h2>
         <?php if (isset($_SESSION['errors'])): ?>
             <div class="error">
                 <ul>
@@ -24,12 +24,12 @@
         <div class="form">
             <form action="index.php?page=users" method="post">
                 <label for="email">E-Mail</label>
-                <input type="email" name="email" placeholder="E-Mail-Adresse eingeben">
+                <input type="email" name="email" placeholder="E-Mail-Adresse eingeben...">
 
                 <label for="password">Passwort</label>
                 <input type="password" name="password" placeholder="Passwort eingeben...">
         
-                <button type="submit" name="login">Log In</button>
+                <button type="submit" name="login">Anmelden</button>
 
                 <p class="login-link">Noch keinen Account? <a href="index.php?page=register">Jetzt registrieren</a></p>
             </form>

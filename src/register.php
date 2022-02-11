@@ -9,7 +9,7 @@
 </head>
 <body>
     <div class="login-container">
-        <h2 class="form-title">Register</h2>
+        <h2 class="form-title">Registrieren</h2>
         <?php if (isset($_SESSION['errors'])): ?>
             <div class="error">
                 <ul>
@@ -27,7 +27,7 @@
                 <input type="text" name="name" placeholder="Name eingeben...">
 
                 <label for="email">E-Mail</label>
-                <input type="email" name="email" placeholder="E-Mail-Adresse eingeben">
+                <input type="email" name="email" placeholder="E-Mail-Adresse eingeben...">
 
                 <label for="password">Passwort</label>
                 <input type="password" name="password" placeholder="Passwort eingeben...">
@@ -37,7 +37,7 @@
         
                 <button type="submit" name="register">Register</button>
 
-                <p class="login-link">Already have an account? <a href="index.php?page=login">Log in now</a></p>
+                <p class="login-link">Bereits einen Account? <a href="index.php?page=login">Jetzt anmelden</a></p>
             </form>
         </div>
         
