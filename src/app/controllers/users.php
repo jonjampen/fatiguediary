@@ -1,16 +1,18 @@
 <?php
 
-//Setting variables to values from the form
-$name = $_POST['name'];
-$email = $_POST['email'];
-$password = $_POST['password'];
-
-//Hashing password
-$hashed_password = password_hash($password, PASSWORD_DEFAULT);
-
 
 //If registering
 if (isset($_POST['register'])) {
+
+    //Setting variables to values from the form
+    $name = $_POST['name'];
+    $email = $_POST['email'];
+    $password = $_POST['password'];
+
+    //Hashing password
+    $hashed_password = hash("sha3-512", $password);
+
+
     unset($_SESSION['errors']);
     unset($_POST['register']);
 
@@ -33,6 +35,29 @@ if (isset($_POST['register'])) {
     }
 }
 
+//If login
+if (isset($_POST['login'])) {
+    //Setting variables to values from the form
+    $email = $_POST['email'];
+    $password = $_POST['password'];
+
+    //Hashing password
+    $hashed_password = hash("sha3-512", $password);
+
+    unset($_SESSION['errors']);
+    unset($_POST['login']);
+
+    //check user data
+    $errors = validateLoginUser($email, $hashed_password);
+    
+    if (empty($errors)) {
+        login($_POST);
+    }
+    else {
+        $_SESSION['errors'] = $errors;
+        header("location: index.php?page=login");
+    }
+}
 
 //Logout
 if (isset($_POST['logout'])) {
@@ -48,9 +73,9 @@ function logout() {
     header("location: index.php?page=login");
 }
 
-
 function login($user) {
     $_SESSION['name'] = $user['name'];
+    $_SESSION['email'] = $user['email'];
     unset($_SESSION['errors']);
     //Redirecting
     header("location: index.php?page=dashboard");

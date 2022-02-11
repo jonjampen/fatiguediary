@@ -29,9 +29,19 @@ function validateRegisterUser($user){
 
     //E-Mail already existing
     if (isEmailExisting($user['email']) == true) {
-        array_push($errors, "Diese E-Mail-Adresse wird bereits verwendet");
+        array_push($errors, "Diese E-Mail-Adresse wird bereits verwendet. Versuche stattdessen dich <a href='index.php?page=login'>hier</a> einzuloggen");
     }
 
     return $errors;
 }
-    
+
+
+function validateLoginUser($email, $hashed_password){
+    $errors = array();
+    //Wrong email or password
+    if (!isPasswordMatchingEmail($email, $hashed_password)) {        
+        array_push($errors, "E-Mail oder Passwort falsch.");
+    }
+
+    return $errors;
+}

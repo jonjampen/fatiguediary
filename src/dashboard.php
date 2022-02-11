@@ -7,7 +7,7 @@
     <title>Document</title>
 </head>
 <body>
-    welcome <?php echo($_SESSION['name']);?>;
+    welcome <?php echo($_SESSION['name'] . $_SESSION['email']);?>;
     <form action="index.php?page=users" method="post">
         <button type="submit" name="logout">Logout</button>
     </form>
