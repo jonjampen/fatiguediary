@@ -40,7 +40,7 @@ if(!isset($_SESSION['id'])) {
     elseif ($page == "login") {
         include("login.php");
     }
-    if ($page == "dashboard" || $page == "profile" || $page == "entries" || $page == "add-new" || $page == "tricks") {
+    if ($page == "dashboard" || $page == "profile" || $page == "entries" || $page == "add-new" || $page == "tricks" || $page == "logout") {
         header("location: index.php?page=login");
     }
 }
@@ -51,5 +51,9 @@ else {
     }
     if ($page == "dashboard") {
         include("dashboard.php");
+    }
+    if ($page == "logout") {
+        include("app/controllers/users.php");
+        include("app/controllers/logout.php");
     }
 }

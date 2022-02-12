@@ -9,8 +9,5 @@
 </head>
 <body>
     <p>welcome <?php echo($_SESSION['name'] . " " . $_SESSION['email']);?></p>
-    <form action="index.php?page=users" method="post">
-        <button type="submit" name="logout">Logout</button>
-    </form>
 </body>
 </html>

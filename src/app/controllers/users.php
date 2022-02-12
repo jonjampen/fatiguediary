@@ -58,10 +58,10 @@ if (isset($_POST['login'])) {
     }
 }
 
-//Logout
-if (isset($_POST['logout'])) {
-    logout();
-}
+// //Logout
+// if (isset($_POST['logout'])) {
+//     logout();
+// }
 
 
 
