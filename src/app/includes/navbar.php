@@ -16,7 +16,7 @@
         <li><a href="index.php?page=about-app">Über LCD</a></li>
         <li><a href="index.php?page=new">Was ist neu?</a></li>
         <li><a href="index.php?page=contact">Kontakt</a></li>
-        <li><a href="index.php?page=logout">Logout</a></li>
+        <li><a href="index.php?page=logout" class="logout"><i class="fa-solid fa-arrow-right-from-bracket"></i> Logout</a></li>
     </ul>
 </div>
 
