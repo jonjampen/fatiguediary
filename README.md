@@ -1,4 +1,4 @@
-# Long Covid Diary
+# Fatigue Diary
 
 ## Projektbeschrieb
 
