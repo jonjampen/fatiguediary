@@ -174,7 +174,6 @@ nav i:hover {
 }
 
 
-
 /*Add entry*/
 .add-container {
     width: min(400px, 90%);
@@ -191,6 +190,15 @@ nav i:hover {
 .datetime {
     display: flex;
     justify-content: space-between;
+    padding-bottom: 20px;
+}
+.add-container .datetime i {
+    color: var(--text);
+}
+.add-container .datetime input {
+    background-color: var(--container);
+    border: none;
+    color: var(--text);
 }
 .add-section input {
     width: 100%;

@@ -21,11 +21,12 @@
             <br>
         <?php endif; ?>
 
-        <div class="form">
+        <div class="add-form">
             <form action="index.php?page=entries" method="post">
                 <div class="datetime">
-                    <input type="date" name="" id="">
-                    <input type="time" name="" id="">
+                    <div><i class="fa-solid fa-calendar-days"></i> <input type="date" name="" id="currentDate"></div>
+                
+                    <div><i class="fa-solid fa-clock"></i> <input type="time" name="" id="currentTime"></div>
                 </div>
                 <div class="add-section">
                     <div class="title">
@@ -68,4 +69,16 @@
         
     </div>
 </body>
+
+<script>
+    //calculate todays date and time
+    var today = new Date();
+    var date = today.toISOString().substring(0,10);
+    var time = today.toISOString().substring(11,16);
+    document.getElementById("currentDate").value = date;
+    document.getElementById("currentTime").value = time;
+
+</script>
+
+
 </html>
