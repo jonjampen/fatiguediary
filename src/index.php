@@ -56,4 +56,7 @@ else {
         include("app/controllers/users.php");
         include("app/controllers/logout.php");
     }
+    if ($page == "add-new") {
+        include("addnew.php");
+    }
 }
