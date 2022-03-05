@@ -71,14 +71,26 @@ if (isset($_GET['energy'])) {
                         <a href="#" class="activity">School</a>
                         <a href="#" class="activity">Therapy</a>
                         
-                        <a href="#" class="activity add"><i class="fa-solid fa-plus fa-2x"></i></a>
+                        <a href="#" class="activity add"  id="modalOpen"><i class="fa-solid fa-plus fa-2x"></i></a>
                     </div>
                 </div>
                 <textarea name="notes" id="notes" rows="6" placeholder="Notizen..."><?php echo($notes); ?></textarea>
         
                 <button type="submit" name="add-energy">Hinzufügen</button>
-
             </form>
+
+            <div class="modal-box" id="modal">
+                <div class="add-modal">
+                    <h3>Neue Aktivität hinzufügen.</h3>
+                    <form action="index.php?page=add-new" method="get">
+                        <input type="text" name="activity" id="" placeholder="Aktivität eingeben...">
+                        <div class="modal-buttons">
+                            <button class="modal-button1" type="submit" name="add-activity">Hinzufügen</button>
+                            <button class="modal-button2" type="reset" id="modalClose">Abbrechen</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
         </div>
         
     </div>
@@ -126,6 +138,24 @@ if (isset($_GET['energy'])) {
     //add notes to url
     function addToUrl() {
         window.history.pushState({urlPath:'index.php'}, "", '?page=add-new&date=' + date.value + '&time=' + time.value + '&energy=' + energySlider.value + '&notes=' + notes.value);
+    }
+
+
+
+    //open/close modal
+    var modal = document.getElementById("modal");
+
+    var modalOpen = document.getElementById("modalOpen");
+    modalOpen.addEventListener('click', openModal, false);
+
+    var modalClose = document.getElementById("modalClose");
+    modalClose.addEventListener('click', closeModal, false);
+    
+    function openModal() {
+        modal.style.display = "block";
+    }
+    function closeModal() {
+        modal.style.display = "none";
     }
 </script>
 
