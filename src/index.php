@@ -58,5 +58,6 @@ else {
     }
     if ($page == "add-new") {
         include("addnew.php");
+        include("app/controllers/energy.php");
     }
 }

@@ -22,18 +22,18 @@
         <?php endif; ?>
 
         <div class="add-form">
-            <form action="index.php?page=entries" method="post">
+            <form action="index.php?page=add-new" method="post">
                 <div class="datetime">
-                    <div><i class="fa-solid fa-calendar-days"></i> <input type="date" name="" id="currentDate"></div>
+                    <div><i class="fa-solid fa-calendar-days"></i> <input type="date" name="date" id="currentDate"></div>
                 
-                    <div><i class="fa-solid fa-clock"></i> <input type="time" name="" id="currentTime"></div>
+                    <div><i class="fa-solid fa-clock"></i> <input type="time" name="time" id="currentTime"></div>
                 </div>
                 <div class="add-section">
                     <div class="title">
                         <h3>Energie-Level</h3>
                         <i class="fa-solid fa-circle-info"></i>
                     </div>
-                    <input class="slider" type="range" name="level" min="0" max="10" value="5" step="0.5">
+                    <input class="slider" type="range" name="energylevel" min="0" max="10" value="5" step="0.5">
                     <div class="description">
                         <h3>7.5</h3>
                         <h3 class="level-text">eher hoch</h3>                        
@@ -62,7 +62,7 @@
                 
                 <textarea name="notes" rows="6" placeholder="Notizen..."></textarea>
         
-                <button type="submit" name="login">Hinzufügen</button>
+                <button type="submit" name="add-energy">Hinzufügen</button>
 
             </form>
         </div>
