@@ -73,11 +73,14 @@
 <script>
     //calculate todays date and time
     var today = new Date();
+    //consider timezone offset
+    today.setMinutes(today.getMinutes() - today.getTimezoneOffset());
+    
     var date = today.toISOString().substring(0,10);
     var time = today.toISOString().substring(11,16);
+
     document.getElementById("currentDate").value = date;
     document.getElementById("currentTime").value = time;
-
 </script>
 
 
