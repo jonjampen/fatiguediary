@@ -33,10 +33,11 @@
                         <h3>Energie-Level</h3>
                         <i class="fa-solid fa-circle-info"></i>
                     </div>
-                    <input class="slider" type="range" name="energylevel" min="0" max="10" value="5" step="0.5">
+                    <input class="slider" id="energySlider" type="range" name="energylevel" min="0" max="10" value="5" step="0.5">
                     <div class="description">
-                        <h3>7.5</h3>
-                        <h3 class="level-text">eher hoch</h3>                        
+                        <h1 id="energyValue" class="level-text"></h1>
+                        <h1 id="energyIcon"></h1>
+                        <!-- <h3 class="level-text">eher hoch</h3>                         -->
                     </div>
                 </div>
 
@@ -70,6 +71,7 @@
     </div>
 </body>
 
+<script src="assets/js/visualizeValue.js"></script>
 <script>
     //calculate todays date and time
     var today = new Date();
@@ -78,10 +80,28 @@
     
     var date = today.toISOString().substring(0,10);
     var time = today.toISOString().substring(11,16);
-
+    
     document.getElementById("currentDate").value = date;
     document.getElementById("currentTime").value = time;
-</script>
 
+    var energySlider = document.getElementById("energySlider");
+    var energyValue = document.getElementById("energyValue");
+    var energyIcon = document.getElementById("energyIcon");
+
+    //get value
+
+    //display first slider value, emoji and color
+    energyValue.innerHTML = energySlider.value;
+    calculateEmoji(energySlider.value, energyIcon);
+    calculateColor(energySlider.value, energyValue);
+
+    //update slider
+    energySlider.addEventListener('input', writeValue, false);
+    function writeValue() {
+        energyValue.innerHTML = energySlider.value;
+        calculateEmoji(energySlider.value, energyIcon);
+        calculateColor(energySlider.value, energyValue);
+    }
+</script>
 
 </html>
