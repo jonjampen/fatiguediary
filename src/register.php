@@ -17,8 +17,8 @@ if (isset($_GET['name'])) {
     <title>Register</title>
 </head>
 <body>
-    <div class="login-container">
-        <h2 class="form-title">Registrieren</h2>
+    <div class="container">
+        <h2 class="container-title">Registrieren</h2>
         <?php if (isset($_SESSION['errors'])): ?>
             <div class="error">
                 <ul>
@@ -43,10 +43,12 @@ if (isset($_GET['name'])) {
 
                 <label for="passwordConf">Passwort wiederholen</label>
                 <input type="password" name="passwordConf" placeholder="Passwort erneut eingeben...">
-        
-                <button type="submit" name="register">Register</button>
 
-                <p class="login-link">Bereits einen Account? <a href="index.php?page=login">Jetzt anmelden</a></p>
+                <div class="btn-center">
+                    <button class="btn-primary" type="submit" name="register">Register</button>
+                </div>
+
+                <p class="other-option-link">Bereits einen Account? <a href="index.php?page=login">Jetzt anmelden</a></p>
             </form>
         </div>
         

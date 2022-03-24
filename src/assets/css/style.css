@@ -12,12 +12,14 @@
 
     --error-content: #f39e9e;
     --error-border: #a04444;
-    
+
+    --link: #0F74DC;
+
+
     --text: #ffffff;
     --input: #121212;
     --add_btn: #414141;
     --button: #0F74DC;
-    --link: #0F74DC;
 
     --bottom_nav: #212225;
     --nav_icons: #ffffff;
@@ -34,7 +36,6 @@
 html, body {
     background: var(--background);
 }
-
 h2 {
     color: var(--text_container);
     font-family: 'Roboto', sans-serif;
@@ -52,64 +53,61 @@ a {
     color: var(--link);
 }
 
-button {
+.btn-primary {
     width: 100px;
     height: 30px;
     background: var(--primary);
+    color: var(--text_primary);
     border: none;
     border-radius: 30px;
-    position: relative;
-    left: 50%;
-    margin-left: -50px;
 }
-
-
-/*Register*/
-.login-container {
-    background: var(--container);
-    width: min(400px, 90%);
-    margin: auto;
-    margin-top: 30px;
-}
-
-.form-title {
-    text-align: center;
-    padding-top: 10px;
-}
-
-.login-container .form {
-    margin-left: 25px;
-    margin-right: 25px;
-    padding-bottom: 5px;
-}
-
-.login-container .form label {
-    color: var(--text_container);
-}
-
-.login-container .form input {
-    width: 100%;
-    height: 35px;
-    margin-bottom: 20px;
-    margin-top: 5px;
-    background: var(--input);
-    color: var(--text_container);
-    border: none;
-    border-radius: 5px;
-}
-
-.login-container .login-link {
-    text-align: center;
-    margin-top: 25px;
+.btn-center {
+    display: flex;
+    justify-content: center;
 }
 
 .error {
     margin: auto;
     background: var(--error-content);
     border: 1px solid var(--error-border);
-    width: 90%;
+    width: 100%;
+    border-radius: 4px;
+    padding: 8px;
+}
+
+
+.container {
+    background: var(--container);
+    margin-right: 16px;
+    margin-left: 16px;
+    margin-top: 32px;
+    padding: 8px 16px;
+}
+.container-title {
+    text-align: center;
+    margin-bottom: 8px;
+}
+.container .form label {
+    color: var(--text_container);
+}
+.container .form input {
+    width: 100%;
+    height: 35px;
+    margin-top: 4px;
+    margin-bottom: 16px;
+    background: var(--input);
+    color: var(--text_container);
+    border: none;
     border-radius: 5px;
 }
+.container .form input:last-child {
+    margin-bottom: 100px;
+}
+.container .other-option-link {
+    text-align: center;
+    margin-top: 16px;
+}
+
 
 
 /*Navbar*/

@@ -22,7 +22,7 @@ if (isset($_GET['energy'])) {
 </head>
 <body>
     <div class="add-container">
-        <h2 class="form-title">Eintrag hinzufügen</h2>
+        <h2 class="container-title">Eintrag hinzufügen</h2>
         <br>
         <?php if (isset($_SESSION['errors'])): ?>
             <div class="error">
@@ -76,7 +76,7 @@ if (isset($_GET['energy'])) {
                 </div>
                 <textarea name="notes" id="notes" rows="6" placeholder="Notizen..."><?php echo($notes); ?></textarea>
         
-                <button type="submit" name="add-energy">Hinzufügen</button>
+                <button class="btn-primary" type="submit" name="add-energy">Hinzufügen</button>
             </form>
 
             <div class="modal-box" id="modal">
@@ -85,8 +85,8 @@ if (isset($_GET['energy'])) {
                     <form action="index.php?page=add-new" method="get">
                         <input type="text" name="activity" id="" placeholder="Aktivität eingeben...">
                         <div class="modal-buttons">
-                            <button class="modal-button1" type="submit" name="add-activity">Hinzufügen</button>
-                            <button class="modal-button2" type="reset" id="modalClose">Abbrechen</button>
+                            <button class="modal-button1 btn-primary" type="submit" name="add-activity">Hinzufügen</button>
+                            <button class="modal-button2 btn-primary" type="reset" id="modalClose">Abbrechen</button>
                         </div>
                     </form>
                 </div>

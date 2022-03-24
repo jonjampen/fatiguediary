@@ -15,8 +15,8 @@ if (isset($_GET['email'])) {
     <title>Register</title>
 </head>
 <body>
-    <div class="login-container">
-        <h2 class="form-title">Anmelden</h2>
+    <div class="container">
+        <h2 class="container-title">Anmelden</h2>
         <?php if (isset($_SESSION['errors'])): ?>
             <div class="error">
                 <ul>
@@ -28,19 +28,19 @@ if (isset($_GET['email'])) {
             <br>
         <?php endif; ?>
 
-        <div class="form">
-            <form action="index.php?page=users" method="post">
-                <label for="email">E-Mail</label>
-                <input type="email" name="email" placeholder="E-Mail-Adresse eingeben..." <?php echo("value= '" . $email . "'"); ?>>
+        <form class="form" action="index.php?page=users" method="post">
+            <label for="email">E-Mail</label>
+            <input type="email" name="email" placeholder="E-Mail-Adresse eingeben..." <?php echo("value= '" . $email . "'"); ?>>
 
-                <label for="password">Passwort</label>
-                <input type="password" name="password" placeholder="Passwort eingeben...">
-        
-                <button type="submit" name="login">Anmelden</button>
+            <label for="password">Passwort</label>
+            <input type="password" name="password" placeholder="Passwort eingeben...">
 
-                <p class="login-link">Noch keinen Account? <a href="index.php?page=register">Jetzt registrieren</a></p>
-            </form>
-        </div>
+            <div class="btn-center">
+                <button class="btn-primary" type="submit" name="login">Anmelden</button>
+            </div>
+
+            <p class="other-option-link">Noch keinen Account? <a href="index.php?page=register">Jetzt registrieren</a></p>
+        </form>
         
     </div>
 </body>
