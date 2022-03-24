@@ -8,7 +8,8 @@
 include("app/database/db.php");
 include("app/database/connection.php");
 
-include("app/includes/navbar.php");
+include("app/includes/topNavbar.php");
+include("app/includes/bottomNavbar.php");
 
 //Setting default page
 if(isset($_SESSION['id'])) {
