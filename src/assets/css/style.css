@@ -1,15 +1,25 @@
 /*variables*/
 :root {
+    --primary: #0F74DC;
+    --secondary: #0CBCDB;
     --background: #121212;
-    --container: #1c1c1c;
-    --text: #ffffff;
-    --input: #414141;
-    --add_btn: #414141;
-    --button: #2b6aaa;
-    --link: #2b6aaa;
+    --container: #212225;
+
+    --text_primary: #ffffff;
+    --text_secondary: #000000;
+    --text_background: #ffffff;
+    --text_container: #ffffff;
+
     --error-content: #f39e9e;
     --error-border: #a04444;
-    --nav: #2b6aaa;
+    
+    --text: #ffffff;
+    --input: #121212;
+    --add_btn: #414141;
+    --button: #0F74DC;
+    --link: #0F74DC;
+
+    --bottom_nav: #212225;
     --nav_icons: #ffffff;
     --active: #1c1c1c;
 }
@@ -18,16 +28,24 @@
 * {
     box-sizing: border-box;
     margin: 0;
+    font-family: 'Roboto', sans-serif;
+    font-size: 14px;
 }
 html, body {
     background: var(--background);
 }
 
 h2 {
-    color: var(--text);
+    color: var(--text_container);
+    font-family: 'Roboto', sans-serif;
+    font-weight: 500;
+    font-size: 34px;
 }
 p {
-    color: var(--text);
+    color: var(--text_container);
+    font-family: 'Roboto', sans-serif;
+    font-weight: 300;
+    font-size: 16px;
 }
 a {
     text-decoration: none;
@@ -37,7 +55,7 @@ a {
 button {
     width: 100px;
     height: 30px;
-    background: var(--button);
+    background: var(--primary);
     border: none;
     border-radius: 30px;
     position: relative;
@@ -66,7 +84,7 @@ button {
 }
 
 .login-container .form label {
-    color: var(--text);
+    color: var(--text_container);
 }
 
 .login-container .form input {
@@ -75,7 +93,7 @@ button {
     margin-bottom: 20px;
     margin-top: 5px;
     background: var(--input);
-    color: var(--text);
+    color: var(--text_container);
     border: none;
     border-radius: 5px;
 }
@@ -99,7 +117,7 @@ nav {
     margin-top: 0;
     width: 100%;
     height: 64px;
-    background-color: var(--nav);
+    background-color: var(--bottom_nav);
 }
 
 nav ul {
@@ -141,7 +159,7 @@ nav i:hover {
     z-index: 1;
     position: fixed;
     right: 0;
-    background: var(--nav);
+    background: var(--bottom_nav);
     transition: 0.5s;
 }
 
@@ -193,12 +211,12 @@ nav i:hover {
     padding-bottom: 20px;
 }
 .add-container .datetime i {
-    color: var(--text);
+    color: var(--text_container);
 }
 .add-container .datetime input {
     background-color: var(--container);
     border: none;
-    color: var(--text);
+    color: var(--text_container);
 }
 .add-section input {
     width: 100%;
@@ -210,7 +228,7 @@ form textarea {
     border: none;
     border-radius: 4px;
     resize: vertical;
-    color: var(--text);
+    color: var(--text_container);
 }
 .add-section .slider {
     -webkit-appearance: none;
@@ -238,7 +256,7 @@ form textarea {
     padding-top: 10px;
     display: flex;
     justify-content: space-between;
-    color: var(--text);
+    color: var(--text_background);
     padding-bottom: 10px;
 }
 .add-section .description {
@@ -246,7 +264,7 @@ form textarea {
     padding-bottom: 10px;
     display: flex;
     justify-content: space-between;
-    color: var(--text);
+    color: var(--text_container);
 }
 .add-section .description .level-text {
     color: greenyellow;
@@ -264,7 +282,7 @@ form textarea {
     border-radius: 4px;
     height: 45px;
     text-align: center;
-    color: var(--text);
+    color: var(--text_container);
 }
 .activities a.add{
     border: 1px dashed var(--add_btn);
@@ -290,7 +308,7 @@ form textarea {
     margin: auto;
     background-color: var(--container);
     top: 30%;
-    color: var(--text);
+    color: var(--text_container);
     text-align: center;
     padding-bottom: 40px;
     padding-top: 10px;
@@ -301,7 +319,7 @@ form textarea {
     height: 35px;
     margin-bottom: 20px;
     background: var(--input);
-    color: var(--text);
+    color: var(--text_container);
     border: none;
     border-radius: 5px;
 }
