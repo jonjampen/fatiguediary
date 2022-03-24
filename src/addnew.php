@@ -21,8 +21,8 @@ if (isset($_GET['energy'])) {
     <title>Add New</title>
 </head>
 <body>
-    <div class="add-container">
-        <h2 class="container-title">Eintrag hinzufügen</h2>
+    <div class="add-screen">
+        <h2>Eintrag hinzufügen</h2>
         <br>
         <?php if (isset($_SESSION['errors'])): ?>
             <div class="error">
@@ -35,65 +35,68 @@ if (isset($_GET['energy'])) {
             <br>
         <?php endif; ?>
 
-        <div class="add-form">
-            <form action="index.php?page=add-new" method="post">
-                <div class="datetime">
-                    <div><i class="fa-solid fa-calendar-days"></i> <input type="date" name="date" id="currentDate" <?php echo("value= '" . $date . "'"); ?>></div>
-                
-                    <div><i class="fa-solid fa-clock"></i> <input type="time" name="time" id="currentTime" <?php echo("value= '" . $time . "'"); ?>></div>
+        <form action="index.php?page=add-new" method="post">
+            <div class="datetime">
+                <div><i class="fa-solid fa-calendar-days"></i> <input type="date" name="date" id="currentDate" <?php echo("value= '" . $date . "'"); ?>></div>
+            
+                <div><i class="fa-solid fa-clock"></i> <input type="time" name="time" id="currentTime" <?php echo("value= '" . $time . "'"); ?>></div>
+            </div>
+            <div class="container">
+                <div class="title-info">
+                    <h3>Energie-Level</h3>
+                    <i class="fa-solid fa-circle-info"></i>
                 </div>
-                <div class="add-section">
-                    <div class="title">
-                        <h3>Energie-Level</h3>
-                        <i class="fa-solid fa-circle-info"></i>
-                    </div>
-                    <input class="slider" id="energySlider" type="range" name="energylevel" min="0" max="10" <?php echo("value= '" . $energy . "'"); ?> step="0.5">
-                    <div class="description">
-                        <h1 id="energyValue" class="level-text"></h1>
-                        <h1 id="energyIcon"></h1>
-                        <!-- <h3 class="level-text">eher hoch</h3>                         -->
-                    </div>
-                </div>
-
-                <div class="add-section">
-                    <div class="title">
-                        <h3>Aktivitäten</h3>
-                        <i class="fa-solid fa-pencil"></i>
-                    </div>
-                    <div class="activities">
-                        <a href="#" class="activity">Relax</a>
-                        <a href="#" class="activity">School</a>
-                        <a href="#" class="activity">Therapy</a>
-                        <a href="#" class="activity">Relax</a>
-                        <a href="#" class="activity">School</a>
-                        <a href="#" class="activity">Therapy</a>
-                        <a href="#" class="activity">Relax</a>
-                        <a href="#" class="activity">School</a>
-                        <a href="#" class="activity">Therapy</a>
-                        
-                        <a href="#" class="activity add"  id="modalOpen"><i class="fa-solid fa-plus fa-2x"></i></a>
-                    </div>
-                </div>
-                <textarea name="notes" id="notes" rows="6" placeholder="Notizen..."><?php echo($notes); ?></textarea>
-        
-                <button class="btn-primary" type="submit" name="add-energy">Hinzufügen</button>
-            </form>
-
-            <div class="modal-box" id="modal">
-                <div class="add-modal">
-                    <h3>Neue Aktivität hinzufügen.</h3>
-                    <form action="index.php?page=add-new" method="get">
-                        <input type="text" name="activity" id="" placeholder="Aktivität eingeben...">
-                        <div class="modal-buttons">
-                            <button class="modal-button1 btn-primary" type="submit" name="add-activity">Hinzufügen</button>
-                            <button class="modal-button2 btn-primary" type="reset" id="modalClose">Abbrechen</button>
-                        </div>
-                    </form>
+                <input class="slider" id="energySlider" type="range" name="energylevel" min="0" max="10" <?php echo("value= '" . $energy . "'"); ?> step="0.5">
+                <div class="description">
+                    <h1 id="energyValue" class="level-text"></h1>
+                    <h1 id="energyIcon"></h1>
+                    <!-- <h3 class="level-text">eher hoch</h3>                         -->
                 </div>
             </div>
+
+            <div class="container">
+                <div class="title-info">
+                    <h3>Aktivitäten</h3>
+                    <i class="fa-solid fa-pencil"></i>
+                </div>
+                <div class="activities">
+                    <a href="#" class="activity">Relax</a>
+                    <a href="#" class="activity">School</a>
+                    <a href="#" class="activity">Therapy</a>
+                    <a href="#" class="activity">Relax</a>
+                    <a href="#" class="activity">School</a>
+                    <a href="#" class="activity">Therapy</a>
+                    <a href="#" class="activity">Relax</a>
+                    <a href="#" class="activity">School</a>
+                    <a href="#" class="activity">Therapy</a>
+                    
+                    <a href="#" class="activity add"  id="modalOpen"><i class="fa-solid fa-plus fa-2x"></i></a>
+                </div>
+            </div>
+
+            <div class="container break">
+                <textarea name="notes" id="notes" rows="6" placeholder="Notizen..."><?php echo($notes); ?></textarea>
+            </div>
+
+            <div class="btn-center break">
+                <button class="btn-primary" type="submit" name="add-energy">Hinzufügen</button>
+            </div>
+        </form>
+
+        <div class="modal-box" id="modal">
+            <div class="add-modal">
+                <h3>Neue Aktivität hinzufügen.</h3>
+                <form action="index.php?page=add-new" method="get">
+                    <input type="text" name="activity" id="" placeholder="Aktivität eingeben...">
+                    <div class="modal-buttons">
+                        <button class="modal-button1 btn-primary" type="submit" name="add-activity">Hinzufügen</button>
+                        <button class="modal-button2 btn-primary" type="reset" id="modalClose">Abbrechen</button>
+                    </div>
+                </form>
+            </div>
         </div>
-        
     </div>
+        
 </body>
 
 <script src="assets/js/visualizeValue.js"></script>

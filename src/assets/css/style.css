@@ -37,12 +37,22 @@
 html, body {
     min-height: 100%;
     background: var(--background);
+    margin-bottom: -100px;
 }
-h2 {
+h2 { /*screen title*/
     color: var(--text_container);
     font-family: 'Roboto', sans-serif;
     font-weight: 500;
     font-size: 34px;
+    text-align: center;
+    margin-bottom: 16px;
+}
+h3 { /*container title*/
+    color: var(--text_container);
+    font-family: 'Roboto', sans-serif;
+    font-weight: 500;
+    font-size: 24px;
+    margin-bottom: 16px;
 }
 p {
     color: var(--text_container);
@@ -91,15 +101,16 @@ i:hover {
     margin-left: 16px;
     margin-top: 32px;
     padding: 8px 16px;
+    border-radius: 4px;
 }
-.container-title {
-    text-align: center;
-    margin-bottom: 8px;
+.container .title-info {
+    display: flex;
+    justify-content: space-between;
 }
-.container .form label {
+.container label {
     color: var(--text_container);
 }
-.container .form input {
+.container input {
     width: 100%;
     height: 35px;
     margin-top: 4px;
@@ -109,7 +120,7 @@ i:hover {
     border: none;
     border-radius: 5px;
 }
-.container .form input:last-child {
+.container input:last-child {
     margin-bottom: 32px;
 }
 .container .other-option-link {
@@ -127,6 +138,7 @@ nav {
     /*vertical alignment*/
     display: flex;
     align-items: center;
+    overflow: hidden;
 }
 nav.top-nav {
     top: 0;
@@ -173,81 +185,52 @@ nav img {
     background: var(--side_nav);
     transition: 0.5s;
 }
-
 .sidenav ul {
     display: flex;
     flex-direction: column;
     align-items: start;
     gap: 30px;
 }
-
 .sidenav ul li {
     margin-top: 0px;
     list-style-type: none;
     transition: 1s;
 }
-
 .sidenav a {
     color: var(--nav_icons);
     font-size: 25px;
     overflow-x: hidden;
     transition: 0.4s;
 }
-
 .sidenav a:hover {
     color: var(--active);
 }
-
 .sidenav .logout {
     color: rgb(172, 0, 0);
 }
 
 
-/*Add entry*/
-.add-container {
-    width: min(400px, 90%);
-    margin: auto;
-    margin-top: 30px;
-}
-.add-section {
-    background-color: var(--container);
-    padding-left: 20px;
-    padding-right: 20px;
-    margin-bottom: 20px;
-    border-radius: 4px;
-}
+/*Add Screen*/
 .datetime {
     display: flex;
-    justify-content: space-between;
+    justify-content: space-around;
     padding-bottom: 20px;
 }
-.add-container .datetime i {
+.datetime i {
     color: var(--text_container);
 }
-.add-container .datetime input {
-    background-color: var(--container);
+.datetime input {
+    background-color: transparent;
     border: none;
     color: var(--text_container);
 }
-.add-section input {
-    width: 100%;
-}
-form textarea {
-    margin-bottom: 20px;
-    width: 100%;
-    background: var(--container);
-    border: none;
-    border-radius: 4px;
-    resize: vertical;
-    color: var(--text_container);
-}
-.add-section .slider {
+.add-screen .slider {
     -webkit-appearance: none;
     height: 10px;
     background: var(--button);
     border-radius: 5px;
 }
-.slider::-webkit-slider-thumb {
+.add-screen .slider::-webkit-slider-thumb {
     -webkit-appearance: none;
     appearance: none;
     width: 20px;
@@ -256,52 +239,48 @@ form textarea {
     background: white;
     cursor: pointer;
 }
-.slider::-moz-range-thumb {
+.add-screen .slider::-moz-range-thumb {
     width: 20px;
     height: 20px;
     border-radius: 50%;
     background: white;
     cursor: pointer;
 }
-.add-section .title {
-    padding-top: 10px;
-    display: flex;
-    justify-content: space-between;
-    color: var(--text_background);
-    padding-bottom: 10px;
-}
-.add-section .description {
-    padding-top: 10px;
-    padding-bottom: 10px;
+.container .description {
     display: flex;
     justify-content: space-between;
     color: var(--text_container);
 }
-.add-section .description .level-text {
+.container .description .level-text {
     color: greenyellow;
+    font-size: 32px;
+}
+.container .description #energyIcon {
+    font-size: 32px;
 }
 
-.activities {
+.add-screen .activities {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
     grid-row-gap: 10px;
     grid-column-gap: 10px;
     padding-bottom: 20px;
 }
-.activities a {
+.add-screen .activities a {
     border: 1px solid var(--button);
     border-radius: 4px;
     height: 45px;
     text-align: center;
     color: var(--text_container);
 }
-.activities a.add{
+.add-screen .activities a.add{
     border: 1px dashed var(--add_btn);
     color: var(--add_btn);
 }
-.activities .activity.add i {
+.add-screen .activities .activity.add i {
     padding-top: 5px;
 }
+/*modal: add activity*/
 .modal-box {
     display: none;
     left: 0;
@@ -348,4 +327,16 @@ form textarea {
     color: var(--button);
     left: 0;
     margin-left: 0;
+}
+
+.add-screen .container textarea {
+    width: 100%;
+    background: var(--container);
+    border: none;
+    border-radius: 4px;
+    resize: vertical;
+    color: var(--text_container);
+}
+.break {
+    margin-bottom: 32px;
 }
