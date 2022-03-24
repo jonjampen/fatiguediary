@@ -29,18 +29,20 @@ if (isset($_GET['email'])) {
         <?php endif; ?>
 
         <form class="form" action="index.php?page=users" method="post">
-            <label for="email">E-Mail</label>
-            <input type="email" name="email" placeholder="E-Mail-Adresse eingeben..." <?php echo("value= '" . $email . "'"); ?>>
-
-            <label for="password">Passwort</label>
-            <input type="password" name="password" placeholder="Passwort eingeben...">
+            <div class="inputs">
+                <label for="email">E-Mail</label>
+                <input type="email" name="email" placeholder="E-Mail-Adresse eingeben..." <?php echo("value= '" . $email . "'"); ?>>
+    
+                <label for="password">Passwort</label>
+                <input type="password" name="password" placeholder="Passwort eingeben...">
+            </div>
 
             <div class="btn-center">
                 <button class="btn-primary" type="submit" name="login">Anmelden</button>
             </div>
 
-            <p class="other-option-link">Noch keinen Account? <a href="index.php?page=register">Jetzt registrieren</a></p>
         </form>
+        <p class="other-option-link">Noch keinen Account? <a href="index.php?page=register">Jetzt registrieren</a></p>
         
     </div>
 </body>

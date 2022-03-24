@@ -110,7 +110,7 @@ i:hover {
     border-radius: 5px;
 }
 .container .form input:last-child {
-    margin-bottom: 100px;
+    margin-bottom: 32px;
 }
 .container .other-option-link {
     text-align: center;
