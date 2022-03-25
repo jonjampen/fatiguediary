@@ -80,6 +80,14 @@ i:hover {
     border: none;
     border-radius: 30px;
 }
+.btn-secondary {
+    width: 100px;
+    height: 30px;
+    background: transparent;
+    color: var(--secondary);
+    border: 1px solid var(--secondary);
+    border-radius: 30px;
+}
 .btn-center {
     display: flex;
     justify-content: center;
@@ -126,6 +134,11 @@ i:hover {
 .container .other-option-link {
     text-align: center;
     margin-top: 16px;
+}
+.container .description {
+    display: flex;
+    justify-content: space-between;
+    color: var(--text_container);
 }
 
 
@@ -246,16 +259,11 @@ nav img {
     background: white;
     cursor: pointer;
 }
-.container .description {
-    display: flex;
-    justify-content: space-between;
-    color: var(--text_container);
-}
-.container .description .level-text {
+.add-screen .container .description .level-text {
     color: greenyellow;
     font-size: 32px;
 }
-.container .description #energyIcon {
+.add-screen .container .description #energyIcon {
     font-size: 32px;
 }
 
@@ -264,21 +272,19 @@ nav img {
     grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
     grid-row-gap: 10px;
     grid-column-gap: 10px;
-    padding-bottom: 20px;
 }
 .add-screen .activities a {
     border: 1px solid var(--button);
     border-radius: 4px;
     height: 45px;
-    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     color: var(--text_container);
 }
 .add-screen .activities a.add{
     border: 1px dashed var(--add_btn);
     color: var(--add_btn);
-}
-.add-screen .activities .activity.add i {
-    padding-top: 5px;
 }
 /*modal: add activity*/
 .modal-box {
@@ -292,41 +298,10 @@ nav img {
     z-index: 1;
     padding-top: 200px;
 }
-.add-modal {
-    margin-top: 300px;
-    width: min(400px, 90%);
-    margin: auto;
-    background-color: var(--container);
-    top: 30%;
-    color: var(--text_container);
-    text-align: center;
-    padding-bottom: 40px;
-    padding-top: 10px;
-}
-.add-modal input {
-    margin-top: 20px;
-    width: 90%;
-    height: 35px;
-    margin-bottom: 20px;
-    background: var(--input);
-    color: var(--text_container);
-    border: none;
-    border-radius: 5px;
-}
 .modal-buttons {
     top: 20px;
-}
-.modal-button1 {
-    left: 0;
-    margin-left: 0;
-    margin-right: 40px;
-}
-.modal-button2 {
-    background-color: transparent !important;
-    border: 2px solid var(--button);
-    color: var(--button);
-    left: 0;
-    margin-left: 0;
+    display: flex;
+    justify-content: space-around;
 }
 
 .add-screen .container textarea {
