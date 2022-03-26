@@ -17,6 +17,8 @@ if (isset($_GET['email'])) {
 <body>
     <div class="container">
         <h2 class="container-title">Anmelden</h2>
+        
+        <!-- Errors -->
         <?php if (isset($_SESSION['errors'])): ?>
             <div class="error">
                 <ul>
@@ -35,13 +37,17 @@ if (isset($_GET['email'])) {
     
                 <label for="password">Passwort</label>
                 <input type="password" name="password" placeholder="Passwort eingeben...">
+
+                <!-- TODO: remember me   -->
+                <input type="checkbox" name="remember" id="remember" value="true" class="check">
+                <label for="remember"> Eingeloggt bleiben</label>
             </div>
 
             <div class="btn-center">
                 <button class="btn-primary" type="submit" name="login">Anmelden</button>
             </div>
-
         </form>
+        
         <p class="other-option-link">Noch keinen Account? <a href="index.php?page=register">Jetzt registrieren</a></p>
         
     </div>

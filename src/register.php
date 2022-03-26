@@ -18,7 +18,9 @@ if (isset($_GET['name'])) {
 </head>
 <body>
     <div class="container">
-        <h2 class="container-title">Registrieren</h2>
+        <h2>Registrieren</h2>
+
+        <!-- Errors -->
         <?php if (isset($_SESSION['errors'])): ?>
             <div class="error">
                 <ul>
@@ -30,8 +32,8 @@ if (isset($_GET['name'])) {
             <br>
         <?php endif; ?>
 
-        <div class="form">
-            <form action="index.php?page=users" method="post">
+        <form action="index.php?page=users" method="post">
+            <div class="inputs">
                 <label for="name">Name</label>
                 <input type="text" name="name" placeholder="Name eingeben..." <?php echo("value= '" . $name . "'"); ?>>
 
@@ -44,13 +46,17 @@ if (isset($_GET['name'])) {
                 <label for="passwordConf">Passwort wiederholen</label>
                 <input type="password" name="passwordConf" placeholder="Passwort erneut eingeben...">
 
-                <div class="btn-center">
-                    <button class="btn-primary" type="submit" name="register">Register</button>
-                </div>
+                <!-- TODO: remember me   -->
+                <input type="checkbox" name="remember" id="remember" value="true" class="check">
+                <label for="remember"> Eingeloggt bleiben</label>
+            </div>
 
-                <p class="other-option-link">Bereits einen Account? <a href="index.php?page=login">Jetzt anmelden</a></p>
-            </form>
-        </div>
+            <div class="btn-center">
+                <button class="btn-primary" type="submit" name="register">Register</button>
+            </div>
+        </form>
+        
+        <p class="other-option-link">Bereits einen Account? <a href="index.php?page=login">Jetzt anmelden</a></p>
         
     </div>
 </body>
