@@ -64,11 +64,11 @@ a {
     text-decoration: none;
     color: var(--link);
 }
-i {
+.material-icons {
     color: var(--text_container);
     transition: 0.4s;
 }
-i:hover {
+.material-icons:hover {
     color: var(--secondary);
 }
 
@@ -118,7 +118,7 @@ i:hover {
 .container label {
     color: var(--text_container);
 }
-.container input:not(.check) {
+.container input {
     width: 100%;
     height: 35px;
     margin-top: 4px;

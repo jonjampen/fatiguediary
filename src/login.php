@@ -49,7 +49,6 @@ if (isset($_GET['email'])) {
         </form>
         
         <p class="other-option-link">Noch keinen Account? <a href="index.php?page=register">Jetzt registrieren</a></p>
-        
     </div>
 </body>
 </html>

@@ -70,7 +70,7 @@ if (isset($_GET['energy'])) {
                     <a href="#" class="activity">School</a>
                     <a href="#" class="activity">Therapy</a>
                     
-                    <a href="#" class="activity add"  id="modalOpen"><i class="fa-solid fa-plus fa-2x"></i></a>
+                    <a href="#" class="activity add"  id="modalOpen"><span class="material-icons">add</span></a>
                 </div>
             </div>
 

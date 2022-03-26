@@ -1,5 +1,5 @@
 <head>
-<link rel="stylesheet" href="assets/fontawesome/all.css">
+<link rel="stylesheet" href="assets/fonts/materialicons.css">
     <link rel="stylesheet" href="assets/css/style.css">
 </head>
 
