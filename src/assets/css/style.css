@@ -37,7 +37,9 @@
 html, body {
     min-height: 100%;
     background: var(--background);
-    margin-bottom: -100px;
+}
+body {
+    margin-bottom: 70px; /* to compensate bottom nav */
 }
 h2 { /*screen title*/
     color: var(--text_container);
@@ -128,6 +130,10 @@ a {
     border: none;
     border-radius: 5px;
 }
+.container input.check {
+    height: 16px;
+    width: 16px;
+}
 .container .inputs {
     margin-bottom: 32px;
 }
@@ -175,7 +181,15 @@ nav ul li {
     display: inline-block;
     list-style-type: none;
 }
-
+nav ul li .add {
+    background-color: var(--primary);
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
 nav img {
     height: 34px;
 }
