@@ -70,8 +70,8 @@ a {
     color: var(--text_container);
     transition: 0.4s;
 }
-.material-icons:hover {
-    color: var(--secondary);
+nav .material-icons:hover {
+    color: var(--primary);
 }
 
 .btn-primary {
@@ -86,8 +86,8 @@ a {
     width: 100px;
     height: 30px;
     background: transparent;
-    color: var(--secondary);
-    border: 1px solid var(--secondary);
+    color: var(--primary);
+    border: 1px solid var(--primary);
     border-radius: 30px;
 }
 .btn-center {
@@ -109,7 +109,7 @@ a {
     background: var(--container);
     margin-right: 16px;
     margin-left: 16px;
-    margin-top: 32px;
+    margin-bottom: 16px;
     padding: 8px 16px;
     border-radius: 4px;
 }
@@ -239,12 +239,16 @@ nav img {
 
 /*Add Screen*/
 .datetime {
+    margin-left: 16px;
+    margin-right: 16px;
     display: flex;
-    justify-content: space-around;
-    padding-bottom: 20px;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 16px;
 }
-.datetime i {
+.datetime span {
     color: var(--text_container);
+    font-size: 14px;
 }
 .datetime input {
     background-color: transparent;
@@ -307,13 +311,16 @@ nav img {
     top: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(200, 200, 200, 50%);
+    background-color: rgba(18, 18, 18, 0.9);
     position: fixed;
     z-index: 1;
     padding-top: 200px;
 }
+.modal-box .container {
+    background-color: var(--container);
+}
 .modal-buttons {
-    top: 20px;
+    margin-bottom: 8px;
     display: flex;
     justify-content: space-around;
 }
