@@ -74,11 +74,11 @@ if (isset($_GET['energy'])) {
                 </div>
             </div>
 
-            <div class="container break">
+            <div class="container">
                 <textarea name="notes" id="notes" rows="6" placeholder="Notizen..."><?php echo($notes); ?></textarea>
             </div>
 
-            <div class="btn-center break">
+            <div class="btn-center">
                 <button class="btn-primary" type="submit" name="add-energy">Hinzufügen</button>
             </div>
         </form>
