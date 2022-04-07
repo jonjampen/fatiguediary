@@ -190,7 +190,7 @@ nav ul li .add {
     justify-content: center;
     align-items: center;
 }
-nav img {
+nav .logo img {
     height: 34px;
 }
 
@@ -298,6 +298,7 @@ nav img {
     display: flex;
     justify-content: center;
     align-items: center;
+    text-align: center;
     color: var(--text_container);
 }
 .add-screen .activities a.add{
@@ -332,4 +333,14 @@ nav img {
     border-radius: 4px;
     resize: vertical;
     color: var(--text_container);
+}
+
+/* removes icons in date/time-input for chrome  */
+input[type="time"]::-webkit-calendar-picker-indicator {
+    background: none;
+    display: none;
+}
+input[type="date"]::-webkit-calendar-picker-indicator {
+    background: none;
+    display: none;
 }
