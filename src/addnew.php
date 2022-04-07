@@ -37,9 +37,9 @@ if (isset($_GET['energy'])) {
 
         <form action="index.php?page=add-new" method="post">
             <div class="datetime">
-                <div><span class="material-icons">schedule</span> <input type="date" name="date" id="currentDate" <?php echo("value= '" . $date . "'"); ?>></div>
+                <div><span class="material-icons">calendar_month</span> <input type="date" name="date" id="currentDate" <?php echo("value= '" . $date . "'"); ?>></div>
             
-                <div><span class="material-icons">calendar_month</span> <input type="time" name="time" id="currentTime" <?php echo("value= '" . $time . "'"); ?>></div>
+                <div><span class="material-icons">schedule</span> <input type="time" name="time" id="currentTime" <?php echo("value= '" . $time . "'"); ?>></div>
             </div>
             <div class="container">
                 <div class="title-info">
