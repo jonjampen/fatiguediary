@@ -36,17 +36,6 @@ while($row = mysqli_fetch_assoc($result)) {
 <body>
     <div class="add-screen">
         <h2>Eintrag hinzufügen</h2>
-        <br>
-        <?php if (isset($_SESSION['errors'])): ?>
-            <div class="error">
-                <ul>
-                    <?php foreach($_SESSION['errors'] as $error): ?>
-                        <li><?php echo($error); ?></li>
-                    <?php endforeach; ?>
-                </ul>
-            </div>
-            <br>
-        <?php endif; ?>
 
         <form action="index.php?page=add-new" method="post">
             <div class="datetime">
@@ -74,10 +63,10 @@ while($row = mysqli_fetch_assoc($result)) {
                 </div>
                 <div class="activities">
                     <?php foreach ($activities as $activity): ?>
-                        <a href="#" class="activity"><?php echo $activity['name']; ?></a>
+                        <a class="" id="addActivity_<?php echo $activity['id']; ?>" href="javascript:addActivity(<?php echo $activity['id']; ?>)"><?php echo $activity['name']; ?></a>
                     <?php endforeach; ?>
                     
-                    <a href="#" class="activity add"  id="modalOpen"><span class="material-icons">add</span></a>
+                    <a class="activity add"  id="modalOpen"><span class="material-icons">add</span></a>
                 </div>
             </div>
 
@@ -125,6 +114,7 @@ while($row = mysqli_fetch_assoc($result)) {
     var notes = document.getElementById("notes");
     var date = document.getElementById("currentDate");
     var time = document.getElementById("currentTime");
+    var selected_activities = [];
 
     //display first slider value, emoji and color
     energyValue.innerHTML = energySlider.value;
@@ -135,7 +125,20 @@ while($row = mysqli_fetch_assoc($result)) {
     notes.addEventListener('input', addToUrl, false);
     date.addEventListener('input', addToUrl, false);
     time.addEventListener('input', addToUrl, false);
-    
+
+    function addActivity(id) {
+        if (selected_activities.includes(id)) {
+            index = selected_activities.indexOf(id);
+            selected_activities.splice(index, 1); //removes from array
+        } else {
+            selected_activities.push(id);
+        }
+        var activity = document.getElementById("addActivity_" + id);
+        activity.classList.toggle("active");
+        console.log(id);
+        addToUrl();
+    }
+
     //update slider
     function writeValue() {
         energyValue.innerHTML = energySlider.value;
@@ -147,7 +150,7 @@ while($row = mysqli_fetch_assoc($result)) {
 
     //add notes to url
     function addToUrl() {
-        window.history.pushState({urlPath:'index.php'}, "", '?page=add-new&date=' + date.value + '&time=' + time.value + '&energy=' + energySlider.value + '&notes=' + notes.value);
+        window.history.pushState({urlPath:'index.php'}, "", '?page=add-new&date=' + date.value + '&time=' + time.value + '&energy=' + energySlider.value + '&activities=' + selected_activities + '&notes=' + notes.value);
     }
 
 
@@ -168,5 +171,4 @@ while($row = mysqli_fetch_assoc($result)) {
         modal.style.display = "none";
     }
 </script>
-
 </html>

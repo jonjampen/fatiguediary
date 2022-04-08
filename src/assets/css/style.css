@@ -301,6 +301,11 @@ nav .logo img {
     text-align: center;
     color: var(--text_container);
 }
+.add-screen .activities a.active {
+    border: none;
+    color: var(--text_primary);
+    background-color: var(--primary);
+}
 .add-screen .activities a.add{
     border: 1px dashed var(--add_btn);
     color: var(--add_btn);
