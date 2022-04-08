@@ -10,6 +10,19 @@ if (isset($_GET['energy'])) {
     $energy = 5;
     $notes = '';
 }
+ 
+// $result = $conn->prepare("SELECT * from activities WHERE user_id=?");
+// $result->bind_param("s", $_SESSION['id']);
+// $result->execute();
+// $result->store_result();
+
+$user_id = $_SESSION['id'];
+$result = $conn->query("SELECT * from activities WHERE user_id=$user_id");
+$activities = [];
+
+while($row = mysqli_fetch_assoc($result)) {
+    $activities[] = $row;
+}
 ?>
 
 <!DOCTYPE html>
@@ -60,15 +73,9 @@ if (isset($_GET['energy'])) {
                     <i class="fa-solid fa-pencil"></i>
                 </div>
                 <div class="activities">
-                    <a href="#" class="activity">Relax</a>
-                    <a href="#" class="activity">School</a>
-                    <a href="#" class="activity">Listening to music</a>
-                    <a href="#" class="activity">Relax</a>
-                    <a href="#" class="activity">School</a>
-                    <a href="#" class="activity">Therapy</a>
-                    <a href="#" class="activity">Relax</a>
-                    <a href="#" class="activity">School</a>
-                    <a href="#" class="activity">Therapy</a>
+                    <?php foreach ($activities as $activity): ?>
+                        <a href="#" class="activity"><?php echo $activity['name']; ?></a>
+                    <?php endforeach; ?>
                     
                     <a href="#" class="activity add"  id="modalOpen"><span class="material-icons">add</span></a>
                 </div>
@@ -86,7 +93,7 @@ if (isset($_GET['energy'])) {
         <div class="modal-box" id="modal">
             <div class="container">
                 <h3>Neue Aktivität hinzufügen</h3>
-                <form action="index.php?page=add-new" method="get">
+                <form action="index.php?page=add-new" method="post">
                     <input type="text" name="activity" id="" placeholder="Aktivität eingeben...">
                     <div class="modal-buttons">
                         <button class="btn-primary" type="submit" name="add-activity">Hinzufügen</button>
