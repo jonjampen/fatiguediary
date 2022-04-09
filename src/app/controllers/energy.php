@@ -9,17 +9,25 @@ if (isset($_POST['add-energy'])) {
     $datetime = strtotime($date . " " . $time);
     $datetime2 = date("Y-m-d H:i", $datetime);
     $energylevel = $_POST['energylevel'];
+    $activities = explode(",", $_POST['activities']); //string to array
     $notes = $_POST['notes'];
 
     unset($_SESSION['errors']);
     
-    //Preparing the statement
-    $stmt = $conn->prepare("INSERT INTO energy (user_id, energylevel, notes, datetime) VALUES (?, ?, ?, ?)");
 
-    //Binding the parameters to the statement
-    $stmt->bind_param("ssss", $_SESSION['id'], $energylevel, $notes, $datetime2);
+    //Adding energylevel
+    $stmt_add_energy = $conn->prepare("INSERT INTO energy (user_id, energylevel, notes, datetime) VALUES (?, ?, ?, ?)");
+    $stmt_add_energy->bind_param("ssss", $_SESSION['id'], $energylevel, $notes, $datetime2);
+    $stmt_add_energy->execute();
+    $energy_id = $stmt_add_energy->insert_id;
 
-    //Executing the statement
-    $stmt->execute();
+    //adding activities to db
+    foreach ($activities as $activity) {
+        $stmt_add_activities = $conn->prepare("INSERT INTO energy_activities (user_id, energy_id, activity_id) VALUES (?, ?, ?)");
+        $stmt_add_activities->bind_param("sss", $_SESSION['id'], $energy_id, $activity);
+        $stmt_add_activities->execute();
+    }
+
+    
     header("location: index.php?page=dashboard");
 }

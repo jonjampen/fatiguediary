@@ -11,17 +11,15 @@ if (isset($_GET['energy'])) {
     $notes = '';
 }
  
-// $result = $conn->prepare("SELECT * from activities WHERE user_id=?");
-// $result->bind_param("s", $_SESSION['id']);
-// $result->execute();
-// $result->store_result();
-
-$user_id = $_SESSION['id'];
-$result = $conn->query("SELECT * from activities WHERE user_id=$user_id");
+//get activities form db
+$stmt = $conn->prepare("SELECT id, name from activities WHERE user_id=?");
+$stmt->bind_param("s", $_SESSION['id']);
+$stmt->execute();
+$stmt->bind_result($activity_id, $activity_name);
 $activities = [];
 
-while($row = mysqli_fetch_assoc($result)) {
-    $activities[] = $row;
+while ($stmt->fetch()) {
+    $activities[] = array("id" => $activity_id, "name" => $activity_name);
 }
 ?>
 
@@ -65,6 +63,7 @@ while($row = mysqli_fetch_assoc($result)) {
                     <?php foreach ($activities as $activity): ?>
                         <a class="" id="addActivity_<?php echo $activity['id']; ?>" href="javascript:addActivity(<?php echo $activity['id']; ?>)"><?php echo $activity['name']; ?></a>
                     <?php endforeach; ?>
+                    <input type="hidden" name="activities" id="post_activities">
                     
                     <a class="activity add"  id="modalOpen"><span class="material-icons">add</span></a>
                 </div>
@@ -111,6 +110,7 @@ while($row = mysqli_fetch_assoc($result)) {
     var energySlider = document.getElementById("energySlider");
     var energyValue = document.getElementById("energyValue");
     var energyIcon = document.getElementById("energyIcon");
+    var post_activities = document.getElementById("post_activities");
     var notes = document.getElementById("notes");
     var date = document.getElementById("currentDate");
     var time = document.getElementById("currentTime");
@@ -133,9 +133,11 @@ while($row = mysqli_fetch_assoc($result)) {
         } else {
             selected_activities.push(id);
         }
+        //change style
         var activity = document.getElementById("addActivity_" + id);
         activity.classList.toggle("active");
-        console.log(id);
+        
+        post_activities.value = selected_activities;
         addToUrl();
     }
 
