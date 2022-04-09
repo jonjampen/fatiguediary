@@ -75,7 +75,7 @@ while ($stmt->fetch()) {
 
                 <div class="modal-buttons">
                     <button class="btn-primary" name="add-activity" id="modalClose add_activity_btn" onclick="addActivity()">Hinzufügen</button>
-                    <button class="btn-secondary" type="reset" id="modalClose">Abbrechen</button>
+                    <button cglass="btn-secondary" type="reset" id="modalClose">Abbrechen</button>
                 </div>
             </div>
         </div>
@@ -98,7 +98,7 @@ while ($stmt->fetch()) {
         
         //add activity using ajax
         var xmlhttp = new XMLHttpRequest();
-        xmlhttp.open("GET", "app/controllers/activities.php?activity_name=" + activity_name.value, true);
+        xmlhttp.open("GET", "app/controllers/add-activity.php?activity_name=" + activity_name.value, true);
         xmlhttp.send();        
     }
 
