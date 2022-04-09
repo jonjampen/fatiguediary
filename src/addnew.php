@@ -1,15 +1,4 @@
 <?php
-if (isset($_GET['energy'])) {
-    $date = $_GET['date'];
-    $time = $_GET['time'];
-    $energy = $_GET['energy'];
-    $notes = $_GET['notes'];
-} else {
-    $date = '';
-    $time = '';
-    $energy = 5;
-    $notes = '';
-}
  
 //get activities form db
 $stmt = $conn->prepare("SELECT id, name from activities WHERE user_id=?");
@@ -37,16 +26,16 @@ while ($stmt->fetch()) {
 
         <form action="index.php?page=add-new" method="post">
             <div class="datetime">
-                <div><span class="material-icons">calendar_month</span> <input type="date" name="date" id="currentDate" <?php echo("value= '" . $date . "'"); ?>></div>
+                <div><span class="material-icons">calendar_month</span> <input type="date" name="date" id="currentDate"></div>
             
-                <div><span class="material-icons">schedule</span> <input type="time" name="time" id="currentTime" <?php echo("value= '" . $time . "'"); ?>></div>
+                <div><span class="material-icons">schedule</span> <input type="time" name="time" id="currentTime"></div>
             </div>
             <div class="container">
                 <div class="title-info">
                     <h3>Energie-Level</h3>
                     <i class="fa-solid fa-circle-info"></i>
                 </div>
-                <input class="slider" id="energySlider" type="range" name="energylevel" min="0" max="10" <?php echo("value= '" . $energy . "'"); ?> step="0.5">
+                <input class="slider" id="energySlider" type="range" name="energylevel" min="0" max="10" step="0.5">
                 <div class="description">
                     <h1 id="energyValue" class="level-text"></h1>
                     <h1 id="energyIcon"></h1>
@@ -70,7 +59,7 @@ while ($stmt->fetch()) {
             </div>
 
             <div class="container">
-                <textarea name="notes" id="notes" rows="6" placeholder="Notizen..."><?php echo($notes); ?></textarea>
+                <textarea name="notes" id="notes" rows="6" placeholder="Notizen..."></textarea>
             </div>
 
             <div class="btn-center">
@@ -81,13 +70,13 @@ while ($stmt->fetch()) {
         <div class="modal-box" id="modal">
             <div class="container">
                 <h3>Neue Aktivität hinzufügen</h3>
-                <form action="index.php?page=add-new" method="post">
-                    <input type="text" name="activity" id="" placeholder="Aktivität eingeben...">
-                    <div class="modal-buttons">
-                        <button class="btn-primary" type="submit" name="add-activity">Hinzufügen</button>
-                        <button class="btn-secondary" type="reset" id="modalClose">Abbrechen</button>
-                    </div>
-                </form>
+
+                <input type="text" name="activity_name" id="activity_name" placeholder="Aktivität eingeben...">
+
+                <div class="modal-buttons">
+                    <button class="btn-primary" name="add-activity" id="modalClose add_activity_btn" onclick="addActivity()">Hinzufügen</button>
+                    <button class="btn-secondary" type="reset" id="modalClose">Abbrechen</button>
+                </div>
             </div>
         </div>
     </div>
@@ -96,63 +85,21 @@ while ($stmt->fetch()) {
 
 <script src="assets/js/visualizeValue.js"></script>
 <script>
-    <?php if (!isset($_GET['energy'])) : ?>
-        //calculate todays date and time
-        var today = new Date();
-        //consider timezone offset
-        today.setMinutes(today.getMinutes() - today.getTimezoneOffset());
-        var date = today.toISOString().substring(0,10);
-        var time = today.toISOString().substring(11,16);
-        document.getElementById("currentDate").value = date;
-        document.getElementById("currentTime").value = time;
-    <?php endif; ?>
+    var modalClose = document.getElementById("modalClose");
 
-    var energySlider = document.getElementById("energySlider");
-    var energyValue = document.getElementById("energyValue");
-    var energyIcon = document.getElementById("energyIcon");
-    var post_activities = document.getElementById("post_activities");
-    var notes = document.getElementById("notes");
-    var date = document.getElementById("currentDate");
-    var time = document.getElementById("currentTime");
-    var selected_activities = [];
 
-    //display first slider value, emoji and color
-    energyValue.innerHTML = energySlider.value;
-    calculateEmoji(energySlider.value, energyIcon);
-    calculateColor(energySlider.value, energyValue);
 
-    energySlider.addEventListener('input', writeValue, false);
-    notes.addEventListener('input', addToUrl, false);
-    date.addEventListener('input', addToUrl, false);
-    time.addEventListener('input', addToUrl, false);
-
-    function addActivity(id) {
-        if (selected_activities.includes(id)) {
-            index = selected_activities.indexOf(id);
-            selected_activities.splice(index, 1); //removes from array
-        } else {
-            selected_activities.push(id);
-        }
-        //change style
-        var activity = document.getElementById("addActivity_" + id);
-        activity.classList.toggle("active");
+    //add activity
+    var activity_name = document.getElementById("activity_name");
+    var add_activity_btn = document.getElementById("add_activity_btn");
+    function addActivity() {
+        //close modal
+        modal.style.display = "none";
         
-        post_activities.value = selected_activities;
-        addToUrl();
-    }
-
-    //update slider
-    function writeValue() {
-        energyValue.innerHTML = energySlider.value;
-        calculateEmoji(energySlider.value, energyIcon);
-        calculateColor(energySlider.value, energyValue);
-        //add energylevel to url
-        addToUrl();
-    }
-
-    //add notes to url
-    function addToUrl() {
-        window.history.pushState({urlPath:'index.php'}, "", '?page=add-new&date=' + date.value + '&time=' + time.value + '&energy=' + energySlider.value + '&activities=' + selected_activities + '&notes=' + notes.value);
+        //add activity using ajax
+        var xmlhttp = new XMLHttpRequest();
+        xmlhttp.open("GET", "app/controllers/activities.php?activity_name=" + activity_name.value, true);
+        xmlhttp.send();        
     }
 
 
@@ -163,8 +110,8 @@ while ($stmt->fetch()) {
     var modalOpen = document.getElementById("modalOpen");
     modalOpen.addEventListener('click', openModal, false);
 
-    var modalClose = document.getElementById("modalClose");
-    modalClose.addEventListener('click', closeModal, false);
+    // var modalClose = document.getElementById("modalClose");
+    // modalClose.addEventListener('click', closeModal, false);
     
     function openModal() {
         modal.style.display = "block";
