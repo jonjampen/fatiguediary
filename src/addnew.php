@@ -56,7 +56,7 @@
                 <input type="text" name="activity_name" id="activity_name" placeholder="Aktivität eingeben..." value="">
 
                 <div class="modal-buttons">
-                    <button class="btn-primary" name="add-activity" id="modalClose add_activity_btn" onclick="addActivity()">Hinzufügen</button>
+                    <button class="btn-primary" name="add-activity" id="add_activity_btn" onclick="addActivity()">Hinzufügen</button>
                     <button class="btn-secondary" type="reset" id="modalClose">Abbrechen</button>
                 </div>
             </div>
@@ -65,16 +65,18 @@
         
 </body>
 
+<script src="assets/js/modal.js"></script>
 <script src="assets/js/visualizeValue.js"></script>
 <script src="assets/js/calculateDateTime.js"></script>
 <script>
-    var modalClose = document.getElementById("modalClose");
+    var activities = document.getElementById("activities");
+    var activity_name = document.getElementById("activity_name");
 
     function loadActivities() {
         var xmlhttp2 = new XMLHttpRequest();
         xmlhttp2.onreadystatechange=function() {
             if (this.readyState==4 && this.status==200) {
-                document.getElementById("activities").innerHTML=this.responseText;            
+                activities.innerHTML=this.responseText;            
                 var modalOpen = document.getElementById("modalOpen");
                 modalOpen.addEventListener('click', openModal, false);
             }
@@ -83,35 +85,24 @@
         xmlhttp2.send();
     }
 
-    //add activity
-    var activity_name = document.getElementById("activity_name");
-    var add_activity_btn = document.getElementById("add_activity_btn");
     function addActivity() {
-        //close modal
-        modal.style.display = "none";
-        
+        closeModal();
+
         //add activity using ajax
         var xmlhttp = new XMLHttpRequest();
         xmlhttp.open("GET", "app/controllers/add-activity.php?activity_name=" + activity_name.value, true);
         xmlhttp.send();
+
+        //display new activity
         loadActivities();
-        setTimeout(loadActivities, 500);
+        setTimeout(loadActivities, 500); //reload if not ready
         setTimeout(loadActivities, 2000);
     }
+
+    //update date&time every minute
     calculateDateTime();
     setInterval(calculateDateTime, 60000);
 
-    //open/close modal
-    var modal = document.getElementById("modal");
-
-    // var modalClose = document.getElementById("modalClose");
-    // modalClose.addEventListener('click', closeModal, false);
     
-    function openModal() {
-        modal.style.display = "block";
-    }
-    function closeModal() {
-        modal.style.display = "none";
-    }
 </script>
 </html>
