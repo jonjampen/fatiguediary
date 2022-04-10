@@ -94,9 +94,7 @@
         xmlhttp.send();
 
         //display new activity
-        loadActivities();
         setTimeout(loadActivities, 500); //reload if not ready
-        setTimeout(loadActivities, 2000);
     }
 
     //update date&time every minute
