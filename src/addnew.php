@@ -120,6 +120,25 @@
         
         activities_storage.value = selected_activities;
     }
-    
+
+        
+    // slider description
+    var energySlider = document.getElementById("energySlider");
+    var energyValue = document.getElementById("energyValue");
+    var energyIcon = document.getElementById("energyIcon");
+
+    //display initial slider value, emoji and color
+    energyValue.innerHTML = energySlider.value;
+    calculateEmoji(energySlider.value, energyIcon);
+    calculateColor(energySlider.value, energyValue);
+
+    energySlider.addEventListener('input', updateSliderDescription, false);
+
+    function updateSliderDescription() {
+        energyValue.innerHTML = energySlider.value;
+        calculateEmoji(energySlider.value, energyIcon);
+        calculateColor(energySlider.value, energyValue);
+    }
+
 </script>
 </html>
