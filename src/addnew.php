@@ -12,9 +12,9 @@
 
         <form action="index.php?page=add-new" method="post">
             <div class="datetime">
-                <div><span class="material-icons">calendar_month</span> <input type="date" name="date" id="currentDate"></div>
+                <div><span class="material-icons">calendar_month</span> <input type="date" name="date" id="currentDate" onchange="stopUpdatingDate()"></div>
             
-                <div><span class="material-icons">schedule</span> <input type="time" name="time" id="currentTime"></div>
+                <div><span class="material-icons">schedule</span> <input type="time" name="time" id="currentTime" onchange="stopUpdatingTime()"></div>
             </div>
             <div class="container">
                 <div class="title-info">
@@ -66,6 +66,7 @@
 </body>
 
 <script src="assets/js/visualizeValue.js"></script>
+<script src="assets/js/calculateDateTime.js"></script>
 <script>
     var modalClose = document.getElementById("modalClose");
 
@@ -97,8 +98,8 @@
         setTimeout(loadActivities, 500);
         setTimeout(loadActivities, 2000);
     }
-
-
+    calculateDateTime();
+    setInterval(calculateDateTime, 60000);
 
     //open/close modal
     var modal = document.getElementById("modal");
