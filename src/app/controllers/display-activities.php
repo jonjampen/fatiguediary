@@ -15,7 +15,7 @@ while ($stmt->fetch()) {
 
 
 foreach ($activities as $activity) {
-    echo "<a class='' id='addActivity_" . $activity['id'] . "' href='javascript:addActivity(" . $activity['id'] . ")'>" . $activity['name'] . "</a>";
+    echo "<a class='' id='toggleActivity_" . $activity['id'] . "' href='javascript:toggleActivity(" . $activity['id'] . ")'>" . $activity['name'] . "</a>";
 }
 echo "<a class='activity add' id='modalOpen'><span class='material-icons'>add</span></a>";
 

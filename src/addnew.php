@@ -37,7 +37,7 @@
                     <?php //include("app/controllers/display-activities.php"); ?>
                     <!-- code from ajax -->
                 </div>
-                <input type="hidden" name="activities" id="post_activities">
+                <input type="hidden" name="activities" id="activities_storage">
             </div>
 
             <div class="container">
@@ -56,7 +56,7 @@
                 <input type="text" name="activity_name" id="activity_name" placeholder="Aktivität eingeben..." value="">
 
                 <div class="modal-buttons">
-                    <button class="btn-primary" name="add-activity" id="add_activity_btn" onclick="addActivity()">Hinzufügen</button>
+                    <button class="btn-primary" name="add-activity" id="add_activity_btn" onclick="toggleActivity()">Hinzufügen</button>
                     <button class="btn-secondary" type="reset" id="modalClose">Abbrechen</button>
                 </div>
             </div>
@@ -103,6 +103,23 @@
     calculateDateTime();
     setInterval(calculateDateTime, 60000);
 
+
+    var selected_activities = [];
+    var activities_storage = document.getElementById("activities_storage");
+
+    function toggleActivity(id) {
+        if (selected_activities.includes(id)) {
+            index = selected_activities.indexOf(id);
+            selected_activities.splice(index, 1); //removes from array
+        } else {
+            selected_activities.push(id); //adds to array
+        }
+        //change style
+        var activity = document.getElementById("toggleActivity_" + id);
+        activity.classList.toggle("active");
+        
+        activities_storage.value = selected_activities;
+    }
     
 </script>
 </html>
