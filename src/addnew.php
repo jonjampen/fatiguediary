@@ -56,7 +56,7 @@
                 <input type="text" name="activity_name" id="activity_name" placeholder="Aktivität eingeben..." value="">
 
                 <div class="modal-buttons">
-                    <button class="btn-primary" name="add-activity" id="add_activity_btn" onclick="toggleActivity()">Hinzufügen</button>
+                    <button class="btn-primary" name="add-activity" id="add_activity_btn" onclick="addActivity()">Hinzufügen</button>
                     <button class="btn-secondary" type="reset" id="modalClose">Abbrechen</button>
                 </div>
             </div>

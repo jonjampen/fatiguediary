@@ -81,6 +81,7 @@ nav .material-icons:hover {
     color: var(--text_primary);
     border: none;
     border-radius: 30px;
+    cursor: pointer;
 }
 .btn-secondary {
     width: 100px;
@@ -89,6 +90,7 @@ nav .material-icons:hover {
     color: var(--primary);
     border: 1px solid var(--primary);
     border-radius: 30px;
+    cursor: pointer;
 }
 .btn-center {
     display: flex;
