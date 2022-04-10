@@ -1,17 +1,3 @@
-<?php
- 
-//get activities form db
-$stmt = $conn->prepare("SELECT id, name from activities WHERE user_id=?");
-$stmt->bind_param("s", $_SESSION['id']);
-$stmt->execute();
-$stmt->bind_result($activity_id, $activity_name);
-$activities = [];
-
-while ($stmt->fetch()) {
-    $activities[] = array("id" => $activity_id, "name" => $activity_name);
-}
-?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -20,7 +6,7 @@ while ($stmt->fetch()) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Add New</title>
 </head>
-<body>
+<body onload="loadActivities()">
     <div class="add-screen">
         <h2>Eintrag hinzufügen</h2>
 
@@ -39,7 +25,6 @@ while ($stmt->fetch()) {
                 <div class="description">
                     <h1 id="energyValue" class="level-text"></h1>
                     <h1 id="energyIcon"></h1>
-                    <!-- <h3 class="level-text">eher hoch</h3>                         -->
                 </div>
             </div>
 
@@ -48,14 +33,11 @@ while ($stmt->fetch()) {
                     <h3>Aktivitäten</h3>
                     <i class="fa-solid fa-pencil"></i>
                 </div>
-                <div class="activities">
-                    <?php foreach ($activities as $activity): ?>
-                        <a class="" id="addActivity_<?php echo $activity['id']; ?>" href="javascript:addActivity(<?php echo $activity['id']; ?>)"><?php echo $activity['name']; ?></a>
-                    <?php endforeach; ?>
-                    <input type="hidden" name="activities" id="post_activities">
-                    
-                    <a class="activity add"  id="modalOpen"><span class="material-icons">add</span></a>
+                <div class="activities" id="activities">
+                    <?php //include("app/controllers/display-activities.php"); ?>
+                    <!-- code from ajax -->
                 </div>
+                <input type="hidden" name="activities" id="post_activities">
             </div>
 
             <div class="container">
@@ -71,11 +53,11 @@ while ($stmt->fetch()) {
             <div class="container">
                 <h3>Neue Aktivität hinzufügen</h3>
 
-                <input type="text" name="activity_name" id="activity_name" placeholder="Aktivität eingeben...">
+                <input type="text" name="activity_name" id="activity_name" placeholder="Aktivität eingeben..." value="">
 
                 <div class="modal-buttons">
                     <button class="btn-primary" name="add-activity" id="modalClose add_activity_btn" onclick="addActivity()">Hinzufügen</button>
-                    <button cglass="btn-secondary" type="reset" id="modalClose">Abbrechen</button>
+                    <button class="btn-secondary" type="reset" id="modalClose">Abbrechen</button>
                 </div>
             </div>
         </div>
@@ -87,7 +69,18 @@ while ($stmt->fetch()) {
 <script>
     var modalClose = document.getElementById("modalClose");
 
-
+    function loadActivities() {
+        var xmlhttp2 = new XMLHttpRequest();
+        xmlhttp2.onreadystatechange=function() {
+            if (this.readyState==4 && this.status==200) {
+                document.getElementById("activities").innerHTML=this.responseText;            
+                var modalOpen = document.getElementById("modalOpen");
+                modalOpen.addEventListener('click', openModal, false);
+            }
+        };
+        xmlhttp2.open("GET", "app/controllers/display-activities.php", true);
+        xmlhttp2.send();
+    }
 
     //add activity
     var activity_name = document.getElementById("activity_name");
@@ -99,16 +92,16 @@ while ($stmt->fetch()) {
         //add activity using ajax
         var xmlhttp = new XMLHttpRequest();
         xmlhttp.open("GET", "app/controllers/add-activity.php?activity_name=" + activity_name.value, true);
-        xmlhttp.send();        
+        xmlhttp.send();
+        loadActivities();
+        setTimeout(loadActivities, 500);
+        setTimeout(loadActivities, 2000);
     }
 
 
 
     //open/close modal
     var modal = document.getElementById("modal");
-
-    var modalOpen = document.getElementById("modalOpen");
-    modalOpen.addEventListener('click', openModal, false);
 
     // var modalClose = document.getElementById("modalClose");
     // modalClose.addEventListener('click', closeModal, false);
