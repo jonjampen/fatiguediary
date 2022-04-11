@@ -351,3 +351,9 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     background: none;
     display: none;
 }
+
+
+/* dashboard */
+.diagram {
+    height: 300px;
+}

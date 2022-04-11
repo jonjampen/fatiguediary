@@ -43,6 +43,7 @@ else {
         header("location: index.php?page=dashboard");
     }
     if ($page == "dashboard") {
+        include("app/controllers/get-energy.php");
         include("dashboard.php");
     }
     if ($page == "logout") {
