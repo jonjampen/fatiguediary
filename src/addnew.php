@@ -1,12 +1,7 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Add New</title>
-</head>
-<body onload="loadActivities()">
+<?php
+print_head(array());
+print_body("loadActivities()");
+?>
     <div class="add-screen">
         <h2>Eintrag hinzufügen</h2>
 
