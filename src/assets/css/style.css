@@ -358,3 +358,31 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 .diagram {
     height: 300px;
 }
+
+/* Entries */
+.container.day {
+    border-left: 4px solid green;
+}
+.day .title-row {
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 1px solid gray;
+    margin-bottom: 8px;
+}
+.day .entry .time {
+    color: gray;
+}
+.day .entry {
+    display: flex;
+    justify-content: space-between;
+    padding-bottom: 8px;
+    border-bottom: 1px solid gray;
+}
+.day .entry .description {
+    display: block;
+}
+.day .entry .energyValue {
+    display: flex;
+    align-items: center;
+    color: green;
+}

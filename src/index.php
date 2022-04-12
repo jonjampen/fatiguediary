@@ -58,6 +58,10 @@ else {
         include("app/controllers/energy.php");
         include("addnew.php");
     }
+    if ($page == "entries") {
+        include("app/controllers/get-energy.php");
+        include("all-entries.php");
+    }
 }
 
 
