@@ -6,7 +6,7 @@ print_head(array(
 
     '<title>Document</title>'));
 print_body();
-$todayDate = "2022-04-11";
+$todayDate = date("Y-m-d");
 $energylevels = getEnergyLevelsByDate($todayDate);
 ?>
 
