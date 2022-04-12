@@ -58,6 +58,7 @@ if (isset($_POST['login'])) {
 function logout() {
     //Deleting session data
     session_destroy();
+    setcookie("remember-me", "", time() - 3600);
     header("location: index.php?page=login");
 }
 
@@ -91,7 +92,7 @@ function createRememberToken($user_id) {
     $stmt->close();
 
     //create cookie
-    setcookie("remember-me", $token, time() + 60 * 60 * 24 * 30 * 6);
+    setcookie("remember-me", $token, time() + 60 * 60 * 24 * 30);
 }
 
 ?>
