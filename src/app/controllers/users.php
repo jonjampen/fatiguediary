@@ -18,14 +18,10 @@ if (isset($_POST['register'])) {
     $errors = validateRegisterUser($_POST);
     
     if (empty($errors)) {
-        //Preparing the statement
         $stmt = $conn->prepare("INSERT INTO users (name, email, password) VALUES (?, ?, ?)");
-
-        //Binding the parameters to the statement
         $stmt->bind_param("sss", $name, $email, $hashed_password); //"sss" because name, email, password are three strings
-
-        //Executing the statement
         $stmt->execute();
+        $stmt->close();
         login($email);
     }
     else {
@@ -73,14 +69,29 @@ function login($email) {
     $stmt->execute();
     $stmt->bind_result($id, $name, $email);
     $stmt->fetch();
+    $stmt->close();
 
     $_SESSION['id'] = $id;
     $_SESSION['name'] = $name;
     $_SESSION['email'] = $email;
     unset($_SESSION['errors']);
     
+    createRememberToken($_SESSION['id']);
     //Redirecting
     header("location: index.php?page=dashboard");
+}
+
+function createRememberToken($user_id) {
+    global $conn;
+
+    $token = bin2hex(random_bytes(10));
+    $stmt = $conn->prepare("INSERT INTO tokens (user_id, token) VALUES (?, ?)");
+    $stmt->bind_param("is", $user_id, $token);
+    $stmt->execute();
+    $stmt->close();
+
+    //create cookie
+    setcookie("remember-me", $token, time() + 60 * 60 * 24 * 30 * 6);
 }
 
 ?>

@@ -20,12 +20,14 @@ if (isset($_POST['add-energy'])) {
     $stmt_add_energy->bind_param("iiss", $_SESSION['id'], $energylevel, $notes, $datetime2);
     $stmt_add_energy->execute();
     $energy_id = $stmt_add_energy->insert_id;
+    $stmt_add_energy->close();
 
     //adding activities to db
     foreach ($activities as $activity) {
         $stmt_add_activities = $conn->prepare("INSERT INTO energy_activities (user_id, energy_id, activity_id) VALUES (?, ?, ?)");
         $stmt_add_activities->bind_param("iii", $_SESSION['id'], $energy_id, $activity);
         $stmt_add_activities->execute();
+        $stmt_add_activities->close();
     }
 
     

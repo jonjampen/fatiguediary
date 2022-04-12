@@ -14,5 +14,6 @@ function getEnergyLevelsByDate($date) {
         $newDate = date("M d, Y", strtotime($datetime));
         $energylevels[] = array("energylevel" => $energylevel, "datetime" => $newDateTime, "date" => $newDate);
     }
+    $stmt_get_energy_level->close();
     return $energylevels;
 }

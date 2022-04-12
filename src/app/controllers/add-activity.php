@@ -11,4 +11,5 @@ if (isset($_GET['activity_name'])) {
     $stmt = $conn->prepare("INSERT INTO activities (user_id, name) VALUES (?, ?)");
     $stmt->bind_param("ss", $_SESSION['id'], $name);
     $stmt->execute();
+    $stmt->close();
 }

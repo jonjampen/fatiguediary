@@ -12,7 +12,7 @@ $activities = [];
 while ($stmt->fetch()) {
     $activities[] = array("id" => $activity_id, "name" => $activity_name);
 }
-
+$stmt->close();
 
 foreach ($activities as $activity) {
     echo "<a class='' id='toggleActivity_" . $activity['id'] . "' href='javascript:toggleActivity(" . $activity['id'] . ")'>" . $activity['name'] . "</a>";

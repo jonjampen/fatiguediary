@@ -37,6 +37,7 @@
 html, body {
     min-height: 100%;
     background: var(--background);
+    color: white;
 }
 body {
     margin-bottom: 70px; /* to compensate bottom nav */

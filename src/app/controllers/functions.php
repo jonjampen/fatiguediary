@@ -13,6 +13,7 @@ function isEmailExisting($email) {
     if($row_count > 0) {
         return true;
     }
+    $check->close();
     return false;
 }
 
@@ -25,6 +26,7 @@ function isPasswordMatchingEmail($email, $hashed_password) {
     $check->store_result();
 
     $row_count = $check->num_rows;
+    $check->close();
 
     if($row_count > 0) {
         return true;

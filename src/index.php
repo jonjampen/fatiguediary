@@ -4,8 +4,12 @@ include("app/database/db.php");
 include("app/database/connection.php");
 
 //Setting default page
-if(isset($_SESSION['id'])) {
-    $page = "register";
+if(!isset($_SESSION['id'])) {
+    include("app/controllers/checkCookie.php");
+    $page = "login";
+    if (checkCookie()) {
+        $page = "dashboard";
+    }
 }
 else {
     $page = "dashboard";
