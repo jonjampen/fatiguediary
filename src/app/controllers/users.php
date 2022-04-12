@@ -85,7 +85,7 @@ function login($email) {
 function createRememberToken($user_id) {
     global $conn;
 
-    $token = bin2hex(random_bytes(10));
+    $token = bin2hex(random_bytes(100));
     $stmt = $conn->prepare("INSERT INTO tokens (user_id, token) VALUES (?, ?)");
     $stmt->bind_param("is", $user_id, $token);
     $stmt->execute();
