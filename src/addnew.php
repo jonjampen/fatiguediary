@@ -76,7 +76,7 @@ print_body("loadActivities()");
                 modalOpen.addEventListener('click', openModal, false);
             }
         };
-        xmlhttp2.open("GET", "app/controllers/display-activities.php", true);
+        xmlhttp2.open("GET", "app/controllers/display-activities.php?type=ajax", true);
         xmlhttp2.send();
     }
 

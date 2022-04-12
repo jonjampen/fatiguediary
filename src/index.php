@@ -60,6 +60,7 @@ else {
     }
     if ($page == "entries") {
         include("app/controllers/get-energy.php");
+        include("app/controllers/display-activities.php");
         include("all-entries.php");
     }
 }

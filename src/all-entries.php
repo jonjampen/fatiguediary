@@ -5,7 +5,7 @@ print_body();
 
 <div class="entries-screen">
         <h2>Einträge</h2>
-        <?php for ($i = 0; $i < 7; $i++): ?> //for each day of the past week
+         <?php for ($i = 0; $i < 7; $i++): ?> <!-- for each day of the past week -->
             <?php
                 $date = date("Y-m-d");
                 $date = date_sub(date_create($datetime = "now"), date_interval_create_from_date_string($i . ' day'));
@@ -27,11 +27,21 @@ print_body();
                     <h3 class="energyValue"><?php echo($average); ?></h3>
                 </div>
                 <?php foreach ($entries as $entry): ?>
+                    <?php
+                        $activity_ids = getActivitiesByEnergyId($entry['energy_id']);
+                    ?>
                     <div class="entry">
                         <div class="description">
                             <p class="time"><?php echo(date("H:i", strtotime($entry['datetime']))); ?></p>
                             <br>
-                            <p class="activities">Activities[...]</p>
+                            <div class="activities">
+                                <?php
+                                foreach ($activity_ids as $activity_id){
+                                    $activity_name = getActivityNameById($activity_id['id']);
+                                    echo($activity_name . " ");
+                                }
+                                ?>
+                            </div>
                         </div>
                         <h3 class="energyValue"><?php echo($entry['energylevel']); ?></h3>
                     </div>
