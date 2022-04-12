@@ -34,8 +34,7 @@ print_body();
                 <label for="password">Passwort</label>
                 <input type="password" name="password" placeholder="Passwort eingeben...">
 
-                <!-- TODO: remember me   -->
-                <input type="checkbox" name="remember" id="remember" checked class="check">
+                <input type="checkbox" name="remember" checked class="check">
                 <label for="remember"> Eingeloggt bleiben</label>
             </div>
 
