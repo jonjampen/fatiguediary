@@ -7,6 +7,7 @@ if (isset($_POST['register'])) {
     $name = $_POST['name'];
     $email = $_POST['email'];
     $password = $_POST['password'];
+    $remember = $_POST['remember'];
 
     //Hashing password
     $hashed_password = hash("sha3-512", $password);
@@ -22,7 +23,7 @@ if (isset($_POST['register'])) {
         $stmt->bind_param("sss", $name, $email, $hashed_password); //"sss" because name, email, password are three strings
         $stmt->execute();
         $stmt->close();
-        login($email);
+        login($email, $remember);
     }
     else {
         $_SESSION['errors'] = $errors;
@@ -35,6 +36,7 @@ if (isset($_POST['login'])) {
     //Setting variables to values from the form
     $email = $_POST['email'];
     $password = $_POST['password'];
+    $remember = $_POST['remember'];
 
     //Hashing password
     $hashed_password = hash("sha3-512", $password);
@@ -46,7 +48,7 @@ if (isset($_POST['login'])) {
     $errors = validateLoginUser($email, $hashed_password);
     
     if (empty($errors)) {
-        login($email);
+        login($email, $remember);
     }
     else {
         $_SESSION['errors'] = $errors;
@@ -62,7 +64,7 @@ function logout() {
     header("location: index.php?page=login");
 }
 
-function login($email) {
+function login($email, $remember) {
     global $conn;
 
     $stmt = $conn->prepare("SELECT id, name, email FROM users WHERE email=?");
@@ -77,7 +79,10 @@ function login($email) {
     $_SESSION['email'] = $email;
     unset($_SESSION['errors']);
     
-    createRememberToken($_SESSION['id']);
+    if($remember) {
+        createRememberToken($_SESSION['id']);
+    }
+
     //Redirecting
     header("location: index.php?page=dashboard");
 }
