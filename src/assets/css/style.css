@@ -1,7 +1,7 @@
 /*variables*/
 :root {
-    --primary: #0F74DC;
-    --secondary: #0CBCDB;
+    --primary: #4A83B4;
+    --secondary: #F55B53;
     --background: #121212;
     --container: #212225;
     
@@ -9,7 +9,7 @@
     --text_secondary: #000000;
     --text_background: #ffffff;
     --text_container: #ffffff;
-    --link: #0F74DC;
+    --link: #4A83B4;
     
     --error-content: #f39e9e;
     --error-border: #a04444;
@@ -20,7 +20,7 @@
     --text: #ffffff;
     --input: #121212;
     --add_btn: #414141;
-    --button: #0F74DC;
+    --button: #4A83B4;
 
     --bottom_nav: #212225;
     --nav_icons: #ffffff;
@@ -76,8 +76,8 @@ nav .material-icons:hover {
 }
 
 .btn-primary {
-    width: 100px;
-    height: 30px;
+    width: 120px;
+    height: 40px;
     background: var(--primary);
     color: var(--text_primary);
     border: none;
@@ -85,11 +85,12 @@ nav .material-icons:hover {
     cursor: pointer;
 }
 .btn-secondary {
-    width: 100px;
-    height: 30px;
+    width: 120px;
+    height: 40px;
     background: transparent;
-    color: var(--primary);
-    border: 1px solid var(--primary);
+    color: white;
+    background-color: var(--secondary);
+    border: 1px solid var(--secondary);
     border-radius: 30px;
     cursor: pointer;
 }
@@ -97,7 +98,13 @@ nav .material-icons:hover {
     display: flex;
     justify-content: center;
 }
-
+.btn-fixed {
+    position: fixed;
+    bottom: 70px;
+}
+.space {
+    height: 30px;
+}
 .error {
     margin: auto;
     background: var(--error-content);

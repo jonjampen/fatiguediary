@@ -1,20 +1,23 @@
 <?php
-print_head(array());
+print_head(array(
+    '<script src="assets/js/visualizeValue.js"></script>',
+    '<script src="assets/js/calculateDateTime.js"></script>'));
 print_body("loadActivities()");
 ?>
+
     <div class="add-screen">
         <h2>Eintrag hinzufügen</h2>
 
         <form action="index.php?page=add-new" method="post">
             <div class="datetime">
                 <div><span class="material-icons">calendar_month</span> <input type="date" name="date" id="currentDate" onchange="stopUpdatingDate()"></div>
-            
                 <div><span class="material-icons">schedule</span> <input type="time" name="time" id="currentTime" onchange="stopUpdatingTime()"></div>
             </div>
+
             <div class="container">
                 <div class="title-info">
                     <h3>Energie-Level</h3>
-                    <i class="fa-solid fa-circle-info"></i>
+                    <a href=""><span class="material-icons">question_mark</span></a>
                 </div>
                 <input class="slider" id="energySlider" type="range" name="energylevel" min="0" max="10" step="0.5">
                 <div class="description">
@@ -26,10 +29,9 @@ print_body("loadActivities()");
             <div class="container">
                 <div class="title-info">
                     <h3>Aktivitäten</h3>
-                    <i class="fa-solid fa-pencil"></i>
+                    <a href=""><span class="material-icons">question_mark</span></a>
                 </div>
                 <div class="activities" id="activities">
-                    <?php //include("app/controllers/display-activities.php"); ?>
                     <!-- code from ajax -->
                 </div>
                 <input type="hidden" name="activities" id="activities_storage">
@@ -38,9 +40,11 @@ print_body("loadActivities()");
             <div class="container">
                 <textarea name="notes" id="notes" rows="6" placeholder="Notizen..."></textarea>
             </div>
+            <div class="space">
 
+            </div>
             <div class="btn-center">
-                <button class="btn-primary" type="submit" name="add-energy">Hinzufügen</button>
+                <button class="btn-secondary btn-fixed" type="submit" name="add-energy">Hinzufügen</button>
             </div>
         </form>
 
@@ -56,13 +60,12 @@ print_body("loadActivities()");
                 </div>
             </div>
         </div>
+
     </div>
         
 </body>
 
 <script src="assets/js/modal.js"></script>
-<script src="assets/js/visualizeValue.js"></script>
-<script src="assets/js/calculateDateTime.js"></script>
 <script>
     var activities = document.getElementById("activities");
     var activity_name = document.getElementById("activity_name");
@@ -92,9 +95,9 @@ print_body("loadActivities()");
         setTimeout(loadActivities, 500); //reload if not ready
     }
 
-    //update date&time every minute
+    //update date&time every 10seconds
     calculateDateTime();
-    setInterval(calculateDateTime, 60000);
+    setInterval(calculateDateTime, 10000);
 
 
     var selected_activities = [];
