@@ -384,5 +384,5 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 .day .entry .energyValue {
     display: flex;
     align-items: center;
-    color: green;
+    font-size: 20px;
 }

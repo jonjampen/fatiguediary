@@ -21,10 +21,10 @@ print_body();
                     $average = round(($sum/$counter) * 2) / 2; //round to 0.5
                 }
             ?>
-            <div class="container day">
+            <div class="container day border-color">
                 <div class="title-row">
                     <h3><?php echo($date->format("D, d.m.Y")); ?></h3>
-                    <h3 class="energyValue"><?php echo($average); ?></h3>
+                    <h3 class="energyAverage"><?php echo($average); ?></h3>
                 </div>
                 <?php foreach ($entries as $entry): ?>
                     <?php
@@ -49,5 +49,17 @@ print_body();
             </div>
         <?php endfor; ?>
     </div>
+    <script src="assets/js/visualizeValue.js"></script>
+    <script>
+        var entryValue = document.getElementsByClassName("energyValue");
+        for (var i = 0; i < entryValue.length; i++) {
+            calculateColor(entryValue[i].textContent, entryValue[i]);
+        }
+
+        var averageValue = document.getElementsByClassName("energyAverage");
+        for (var i = 0; i < averageValue.length; i++) {
+            calculateColor(averageValue[i].textContent, averageValue[i]);
+        }
+    </script>
 </body>
 </html>
