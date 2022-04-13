@@ -5,7 +5,8 @@ include("app/database/connection.php");
 
 //Setting default page
 if(!isset($_SESSION['id'])) {
-    include("app/controllers/checkCookie.php");
+    include("app/controllers/validation.php");
+    include("app/controllers/users.php");
     $page = "login";
     if (checkCookie()) {
         $page = "dashboard";
@@ -23,7 +24,6 @@ if(isset($_GET["page"])) {
 
 
 if ($page == "users") {
-    include("app/controllers/functions.php");
     include("app/controllers/validation.php");
     include("app/controllers/users.php");
 }

@@ -12,6 +12,7 @@ if (isset($_GET['name'])) {
 print_head(array());
 print_body();
 ?>
+
     <div class="container">
         <h2>Registrieren</h2>
 
@@ -53,5 +54,6 @@ print_body();
         <p class="other-option-link">Bereits einen Account? <a href="index.php?page=login">Jetzt anmelden</a></p>
         
     </div>
+    
 </body>
 </html>

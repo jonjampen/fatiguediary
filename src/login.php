@@ -30,7 +30,7 @@ print_body();
             <div class="inputs">
                 <label for="email">E-Mail</label>
                 <input type="email" name="email" placeholder="E-Mail-Adresse eingeben..." <?php echo("value= '" . $email . "'"); ?>>
-    
+
                 <label for="password">Passwort</label>
                 <input type="password" name="password" placeholder="Passwort eingeben...">
 
@@ -45,5 +45,6 @@ print_body();
         
         <p class="other-option-link">Noch keinen Account? <a href="index.php?page=register">Jetzt registrieren</a></p>
     </div>
+
 </body>
 </html>

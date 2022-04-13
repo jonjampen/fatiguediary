@@ -36,7 +36,7 @@ function validateRegisterUser($user){
 }
 
 
-function validateLoginUser($email, $hashed_password){
+function validateLoginUser($email, $hashed_password) {
     $errors = array();
     //Wrong email or password
     if (!isPasswordMatchingEmail($email, $hashed_password)) {        
@@ -44,4 +44,40 @@ function validateLoginUser($email, $hashed_password){
     }
 
     return $errors;
+}
+
+
+function isEmailExisting($email) {
+    global $conn;
+
+    $check = $conn->prepare("SELECT email from users WHERE email=?");
+    $check->bind_param("s", $email);
+    $check->execute();
+    $check->store_result();
+
+    $row_count = $check->num_rows;
+
+    if($row_count > 0) {
+        return true;
+    }
+    $check->close();
+    return false;
+}
+
+
+function isPasswordMatchingEmail($email, $hashed_password) {
+    global $conn;
+    
+    $check = $conn->prepare("SELECT * from users WHERE email=? AND password=?");
+    $check->bind_param("ss", $email, $hashed_password);
+    $check->execute();
+    $check->store_result();
+
+    $row_count = $check->num_rows;
+    $check->close();
+
+    if($row_count > 0) {
+        return true;
+    }
+    return false;
 }
