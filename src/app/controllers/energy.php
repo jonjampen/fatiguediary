@@ -17,7 +17,7 @@ if (isset($_POST['add-energy'])) {
 
     //Adding energylevel
     $stmt_add_energy = $conn->prepare("INSERT INTO energy (user_id, energylevel, notes, datetime) VALUES (?, ?, ?, ?)");
-    $stmt_add_energy->bind_param("iiss", $_SESSION['id'], $energylevel, $notes, $datetime2);
+    $stmt_add_energy->bind_param("idss", $_SESSION['id'], $energylevel, $notes, $datetime2);
     $stmt_add_energy->execute();
     $energy_id = $stmt_add_energy->insert_id;
     $stmt_add_energy->close();
