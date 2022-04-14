@@ -31,8 +31,8 @@ print_body();
                         $activity_ids = getActivitiesByEnergyId($entry['energy_id']);
                     ?>
                     <div class="entry">
+                        <p class="time"><?php echo(date("H:i", strtotime($entry['datetime']))); ?></p>
                         <div class="description">
-                            <p class="time"><?php echo(date("H:i", strtotime($entry['datetime']))); ?></p>
                             <br>
                             <div class="activities">
                                 <?php
@@ -42,8 +42,8 @@ print_body();
                                 }
                                 ?>
                             </div>
+                            <h3 class="energyValue"><?php echo($entry['energylevel']); ?></h3>
                         </div>
-                        <h3 class="energyValue"><?php echo($entry['energylevel']); ?></h3>
                     </div>
                 <?php endforeach; ?>
             </div>

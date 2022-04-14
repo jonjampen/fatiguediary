@@ -19,7 +19,7 @@ $energylevels = getEnergyLevelsByDate($todayDate);
 <script>
   const dataArr = [
     {
-      "label": "Sensor1",
+      "label": "Energylevel",
       "fill": false,
       "data": [
         <?php
@@ -32,48 +32,50 @@ $energylevels = getEnergyLevelsByDate($todayDate);
           };
         ?>
       ],
-      "borderColor": "#00E3E3",
-      "backgroundColor": "#00E3E3"
+      "borderColor": "#F55B53",
+      "backgroundColor": "#F55B53"
     },
   ];
 
   var config = {
-          type: 'line',
-          data: {
-              datasets: dataArr
+    type: 'line',
+    data: {
+        datasets: dataArr
+    },
+    options: {
+      maintainAspectRatio: false,
+      aspectRatio: 0.4,
+      responsive: true,
+      title: {
+        display: true,
+        text: 'X-axis Example based on Time'
+      },
+      scales: {
+        x: {
+          type: "time",
+          time: {
+            unit: 'hour'
           },
-          options: {
-              maintainAspectRatio: false,
-              aspectRatio: 0.4,
-              responsive: true,
-              title: {
-                  display: true,
-                  text: 'X-axis Example based on Time'
-              },
-              scales: {
-                  x: {
-                      type: "time",
-                      time: {
-                          unit: 'hour',
-                          // unitStepSize: 1,
-                          // min: "06:00 AM",
-                          // max: "23:00 PM"
-                      },
-                      ticks: {
-                          autoSkip: true,
-                          maxRotation: 0,
-                          minRotation: 0
-                      },
-                      min: '<?php echo($energylevels[0]['date']); ?> 06:00 AM',
-                      max: '<?php echo($energylevels[0]['date']); ?> 11:00 PM',
-                  },
-                  y: {
-                      min: 0,
-                      max: 10, 
-                  }
-              }
-          }
-      };
+          ticks: {
+            autoSkip: true,
+            maxRotation: 0,
+            minRotation: 0
+          },
+          min: '<?php echo($energylevels[0]['date']); ?> 06:00 AM',
+          max: '<?php echo($energylevels[0]['date']); ?> 11:00 PM',
+        },
+        y: {
+          min: 0,
+          max: 10, 
+        }
+      },
+      plugins: {
+        legend: {
+          display: false
+        }
+      }
+    }
+  };
 
   window.onload = function() {
     var ctx = document.getElementById('canvas').getContext('2d');

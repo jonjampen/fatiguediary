@@ -364,6 +364,10 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 /* dashboard */
 .diagram {
     height: 300px;
+    padding-left: 4px;
+    padding-right: 4px;
+    padding-bottom: 4px;
+    height: 300px;
 }
 
 /* Entries */
@@ -374,19 +378,22 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     display: flex;
     justify-content: space-between;
     border-bottom: 1px solid gray;
-    margin-bottom: 8px;
+}
+.day .entry .activities {
+    width: 95%;
 }
 .day .entry .time {
     color: gray;
+    padding-top: 4px;
 }
 .day .entry {
-    display: flex;
-    justify-content: space-between;
-    padding-bottom: 8px;
     border-bottom: 1px solid gray;
 }
 .day .entry .description {
-    display: block;
+    padding-top: 4px;
+    padding-bottom: 8px;
+    display: flex;
+    justify-content: space-between;
 }
 .day .entry .energyValue {
     display: flex;
