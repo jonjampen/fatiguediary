@@ -2,8 +2,8 @@
 :root {
     --primary: #4A83B4;
     --secondary: #F55B53;
-    --background: #121212;
-    --container: #212225;
+    --background: #293742;
+    --container: #35434F;
     
     --text_primary: #ffffff;
     --text_secondary: #000000;
@@ -14,15 +14,15 @@
     --error-content: #f39e9e;
     --error-border: #a04444;
     
-    --side_nav: #121212;
+    --side_nav: #293742;
 
 
     --text: #ffffff;
-    --input: #121212;
+    --input: #293742;
     --add_btn: #414141;
     --button: #4A83B4;
 
-    --bottom_nav: #212225;
+    --bottom_nav: #35434F;
     --nav_icons: #ffffff;
     --active: #1c1c1c;
 }
@@ -368,6 +368,11 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     padding-right: 4px;
     padding-bottom: 4px;
     height: 300px;
+}
+
+.welcome-text {
+    color: var(--primary);
+    text-align: center;
 }
 
 /* Entries */

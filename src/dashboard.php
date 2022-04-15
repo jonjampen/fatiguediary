@@ -10,7 +10,7 @@ $todayDate = date("Y-m-d");
 $energylevels = getEnergyLevelsByDate($todayDate);
 ?>
 
-    <p>welcome <?php echo($_SESSION['name']);?></p>
+    <h3 class="welcome-text">Willkommen <?php echo($_SESSION['name']);?></h3>
     
     <div class="container diagram">
       <canvas id="canvas"></canvas>
