@@ -30,7 +30,7 @@ print_body();
                     <?php
                         $activity_ids = getActivitiesByEnergyId($entry['energy_id']);
                     ?>
-                    <div class="entry">
+                    <div class="entry" onclick="redirectToEdit(<?php echo($entry['energy_id']);?>)">
                         <p class="time"><?php echo(date("H:i", strtotime($entry['datetime']))); ?></p>
                         <div class="description">
                             <br>
@@ -59,6 +59,10 @@ print_body();
         var averageValue = document.getElementsByClassName("energyAverage");
         for (var i = 0; i < averageValue.length; i++) {
             calculateColor(averageValue[i].textContent, averageValue[i]);
+        }
+
+        function redirectToEdit(id) {
+            window.location.href = "index.php?page=add-new&id=" + id;
         }
     </script>
 </body>

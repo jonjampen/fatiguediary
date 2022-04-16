@@ -2,7 +2,16 @@
 print_head(array(
     '<script src="assets/js/visualizeValue.js"></script>',
     '<script src="assets/js/calculateDateTime.js"></script>'));
-print_body("loadActivities()");
+    
+$notes = "";
+
+if(isset($_GET['id'])) {
+    print_body("loadActivities()");
+    $energylevels = getEnergyLevelsById($_GET['id']);
+    $notes = $energylevels['notes'];
+} else {
+    print_body("loadActivities(), calculateDateTime(), setInterval(calculateDateTime, 10000)");
+}
 ?>
 
     <div class="add-screen">
@@ -10,8 +19,8 @@ print_body("loadActivities()");
 
         <form action="index.php?page=add-new" method="post">
             <div class="datetime">
-                <div><span class="material-icons">calendar_month</span> <input type="date" name="date" id="currentDate" onchange="stopUpdatingDate()"></div>
-                <div><span class="material-icons">schedule</span> <input type="time" name="time" id="currentTime" onchange="stopUpdatingTime()"></div>
+                <div><span class="material-icons">calendar_month</span> <input type="date" name="date" id="currentDate" onchange="stopUpdatingDate()" value="<?php echo(date("Y-m-d", strtotime($energylevels['datetime']))); ?>"></div>
+                <div><span class="material-icons">schedule</span> <input type="time" name="time" id="currentTime" onchange="stopUpdatingTime()" value="<?php echo(date("H:i", strtotime($energylevels['datetime']))); ?>"></div>
             </div>
 
             <div class="container">
@@ -19,7 +28,7 @@ print_body("loadActivities()");
                     <h3>Energie-Level</h3>
                     <a href=""><span class="material-icons">question_mark</span></a>
                 </div>
-                <input class="slider" id="energySlider" type="range" name="energylevel" min="0" max="10" step="0.5">
+                <input class="slider" id="energySlider" type="range" name="energylevel" min="0" max="10" step="0.5" value="<?php echo($energylevels['energylevel']); ?>">
                 <div class="description">
                     <h1 id="energyValue" class="level-text"></h1>
                     <h1 id="energyIcon"></h1>
@@ -34,11 +43,11 @@ print_body("loadActivities()");
                 <div class="activities" id="activities">
                     <!-- code from ajax -->
                 </div>
-                <input type="hidden" name="activities" id="activities_storage">
+                <input type="hidden" name="activities" id="activities_storage" value="">
             </div>
 
             <div class="container">
-                <textarea name="notes" id="notes" rows="6" placeholder="Notizen..."></textarea>
+                <textarea name="notes" id="notes" rows="6" placeholder="Notizen..." ><?php echo($notes); ?></textarea>
             </div>
             <div class="space">
 
@@ -60,13 +69,15 @@ print_body("loadActivities()");
                 </div>
             </div>
         </div>
-
-    </div>
         
+    </div>
+    
 </body>
 
 <script src="assets/js/modal.js"></script>
+
 <script>
+    
     var activities = document.getElementById("activities");
     var activity_name = document.getElementById("activity_name");
 
@@ -94,15 +105,12 @@ print_body("loadActivities()");
         //display new activity
         setTimeout(loadActivities, 500); //reload if not ready
     }
-
-    //update date&time every 10seconds
-    calculateDateTime();
-    setInterval(calculateDateTime, 10000);
-
-
+    <?php //foreach ($selected_activities as $selected_activity) { $value[]= $selected_activity['id'];} echo(implode(",", $value));?>
+    
     var selected_activities = [];
     var activities_storage = document.getElementById("activities_storage");
-
+    
+    
     function toggleActivity(id) {
         if (selected_activities.includes(id)) {
             index = selected_activities.indexOf(id);

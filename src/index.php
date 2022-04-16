@@ -55,6 +55,8 @@ else {
         include("app/controllers/logout.php");
     }
     if ($page == "add-new") {
+        include("app/controllers/get-energy.php");
+        include("app/controllers/display-activities.php");
         include("app/controllers/energy.php");
         include("addnew.php");
     }
