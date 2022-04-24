@@ -5,12 +5,12 @@
 | Datum | Was? |
 |-----|----|
 | 03.04.2022 | Abgabe Vorvertrag |
-| 10.04.2022 | Nutzbare Version für mich <br /> (Einträge & Aktivitäten erfassen; Diagramm mit Tagesverlauf)|
-| Frühlingsferien | Neues Design; Liste mit allen Einträgen; Einträge bearbeiten können (Zusatz: mehrere Diagramm-Zeitspannen auswählbar; Auswertung schlechte/gute Aktivitäten) |
-|Frühling - Sommer | Testen der Web-App durch Kollegen|
+| 10.04.2022 | Nutzbare Version für mich (MVP): <br /> Einträge & Aktivitäten erfassen; Diagramm mit Tagesverlauf|
+| Frühlingsferien | Neues Design; Liste mit allen Einträgen; Einträge bearbeiten können; Webserver einrichten (Zusatz: mehrere Diagramm-Zeitspannen auswählbar; Auswertung schlechte/gute Aktivitäten) |
+|Frühling - Sommer | Testen der Web-App durch Kollegen <br /> Startseite und Informationsseiten|
 | 22.05.2022 | Abgabe Projektvertrag |
-| ab 04.07.2022 | Maturaarbeitswoche <br /> Fertigstellen, dass sie für PatientInnen / TherapeutInnen testbar ist: Webserver einrichten; Startseite und Informationsseiten; Versenden von Link, "Werbung machen"; Feedback-Formular <br /> Zusatz: Mehrsprach-Option (Englisch und Deutsch) |
-| Sommerferien | Verbessern durch Rückmeldungen; Fertigstellen, was in der Maturaarbeitswoche nicht gereicht hat;  neue Features (Seite mit Tipps; Diagramm mit Aktivitäten) |
+| ab 04.07.2022 <br /> Maturaarbeits-woche| Fertigstellen, dass sie für PatientInnen / TherapeutInnen testbar ist; Versenden von Link, "Werbung machen"; Feedback-Formular <br /> Auswertung gute/schlechte Aktivitäten; Zeitspanne auswählen (Zusatz: Mehrsprach-Option: Englisch und Deutsch) |
+| Sommerferien | Verbessern durch Rückmeldungen; Fertigstellen, was in der Maturaarbeitswoche nicht gereicht hat;  neue Features (Seite mit Tipps; Diagramm mit Aktivitäten; Profil Seite) |
 | ab 26.09.2022 | Projektwoche <br /> Arbeiten am Bericht & Weiterentwicklung der Web-App |
 | Herbstferien | Bericht schreiben & Weiterentwicklung |
 | 29.10.2022 | Ausdrucken der Maturaarbeit |
@@ -34,7 +34,8 @@
 - Diagramm mit Aktivitäten
 
 ### Zusatz (nur wenn zu viel Zeit)
-1. PWA (progressiv web application) - So könnte man die Webseite installieren
+1. verbesserte Desktop-Ansicht
+1. PWA (progressive web application) - So könnte man die Webseite installieren
 1. Remider senden (geht nur mit PWA)
 
 
