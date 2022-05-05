@@ -46,5 +46,7 @@
         <p><a href="https://www.fatiguediary.ch/">www.fatiuediary.ch</a> | Developed by <a href="index.php?page=about">Jon Jampen</a></p>
     </section>
 </body>
-<script src="language.js"></script>
+<script src="assets/languages/de.js"></script>
+<script src="assets/languages/en.js"></script>
+<script src="assets/js/language-manager.js"></script>
 </html>
