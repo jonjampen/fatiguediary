@@ -5,7 +5,7 @@
 <?php include("app/includes/publicNavbar.php"); ?>
     
     <div class="contact">
-        <form action="index.php?page=mail.php" method="POST">
+        <form action="index.php?page=mail" method="POST">
             <input type="email" name="email" id="">
             <input type="text" name="name" id="">
             <input type="text" name="subject" id="">
