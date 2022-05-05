@@ -1,5 +1,5 @@
 <?php
-if(isset($_POST['send-email'])){
+if(isset($_POST['send-contact-mail'])){
     $to = "info@fatiguediary.ch";
     $subject = $_POST['subject'];
     $message = "{$_POST['name']} schrieb folgendes:" . "\n" . "{$_POST['message']}";
