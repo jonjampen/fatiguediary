@@ -33,6 +33,12 @@ if ($page == "users") {
 if ($page == "app") {
     include("app.php");
 }
+if ($page == "contact") {
+    include("contact.php");
+}
+if ($page == "mail") {
+    include("app/controllers/mail.php");
+}
 
 //only if not logged in
 if(!isset($_SESSION['id'])) {
