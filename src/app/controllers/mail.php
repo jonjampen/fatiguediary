@@ -5,7 +5,7 @@ if(isset($_POST['send-contact-mail'])){
     $message = "{$_POST['name']} schrieb folgendes:" . "\n" . "{$_POST['message']}";
 
     $headers = "MIME-Version: 1.0" . "\n";
-    $headers .= "Content-type:text/html;charset=UTF-8" . "\n";
+    $headers .= "Content-type:text/plain;charset=UTF-8" . "\n";
     $headers .= 'From: <no-reply@fatiguediary.ch>' . "\n";
     $headers .= 'Reply-To: <' . $_POST['email'] . '>' . "\n";
 
@@ -16,7 +16,7 @@ if(isset($_POST['send-contact-mail'])){
 
 function sendConfirmationMail($to, $from, $subject, $message) {
     $headers = "MIME-Version: 1.0" . "\n";
-    $headers .= "Content-type:text/html;charset=UTF-8" . "\n";
+    $headers .= "Content-type:text/plain;charset=UTF-8" . "\n";
     $headers .= 'From: <' . $from . '>' . "\n";
 
     mail($to,$subject,$message,$headers);
