@@ -7,7 +7,7 @@ include("app/database/connection.php");
 if(!isset($_SESSION['id'])) {
     include("app/controllers/validation.php");
     include("app/controllers/users.php");
-    $page = "login";
+    $page = "app";
     if (checkCookie()) {
         $page = "dashboard";
     }
@@ -28,6 +28,9 @@ if ($page == "users") {
     include("app/controllers/users.php");
 }
 
+if ($page == "app") {
+    include("app.php");
+}
 
 //only if not logged in
 if(!isset($_SESSION['id'])) {
@@ -78,7 +81,7 @@ function print_head($page_head) {
         '<meta name="viewport" content="width=device-width, initial-scale=1.0">',
         '<link rel="stylesheet" href="assets/fonts/materialicons.css">',
         '<link rel="stylesheet" href="assets/css/style.css">',
-        '<link rel="icon" type="image/x-icon" href="assets/img/logo.png">'
+        '<link rel="icon" type="image/x-icon" href="assets/img/logo.svg">'
     );
 
     foreach ($head as $head_line) {

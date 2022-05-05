@@ -1,6 +1,6 @@
 <nav class="top-nav">
     <ul class="nav_items">
-        <li class="logo"><a href="index.php?page=dashboard"><img src="assets/img/logo.png" alt=""></a></li>
+        <li class="logo"><a href="index.php?page=dashboard"><img src="assets/img/logo.svg" alt=""></a></li>
         <li><a href="javascript:void(0)" onclick="openNav()"><span class="material-icons" id="open">menu</span></i></a> <a href="javascript:void(0)" onclick="closeNav()"><span class="material-icons" id="close">close</span></a></li>
     </ul>
 </nav>

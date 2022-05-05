@@ -405,3 +405,262 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     align-items: center;
     font-size: 20px;
 }
+
+.public * {
+    font-size: 24px;
+}
+body.public {
+    margin-bottom: 0;
+}
+
+.public h1 {
+    color: #4A83B4;
+    font-size: 50px;
+    margin-bottom: 32px;
+}
+.public h2 {
+    color: #F55B53;
+    font-size: 40px;
+    margin-bottom: 16px;
+}
+.public h3 {
+    color: white;
+    font-size: 24px;
+    margin-bottom: 16px;
+}
+.public p {
+    font-size: 24px;
+    margin-bottom: 16px;
+}
+
+.public section {
+    padding-left: 64px;
+    padding-right: 64px;
+}
+.public img {
+    height: 700px;
+    max-width: 500px;
+}
+.public a {
+    color: #F55B53;
+    font-size: 24px;
+    text-decoration: none;
+}
+.public section.left-right {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.public .text {
+    width: 45%;
+}
+.public .one {
+    height: 100vh;
+    background-color: #35434F;
+    color: white;
+}
+.public .two {
+    padding-top: 16px;
+    height: auto;
+    min-height: 400px;
+    background-color: #293742;
+    color: white;
+    text-align: center;
+}
+.public .five {
+    height: 100vh;
+    background-color: #4A83B4;
+}
+.public .five h2 {
+    text-align: left !important;
+}
+
+.public .features {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    column-gap: 128px;
+    padding-bottom: 32px;
+}
+.public .container {
+    min-height: 300px;
+    height: auto;
+    width: 100%;
+    background-color: var(--container);
+    border-radius: 8px;
+    color: white;
+    padding-left: 16px;
+    padding-right: 16px;
+}
+.public .two span {
+    font-size: 64px;
+    margin-bottom: 32px;
+    color: var(--primary);
+}
+.public .description {
+    margin-bottom: 16px;
+    font-size: 16px;
+}
+.public .footer {
+    text-align: center;
+    margin-top: 16px;
+}
+.public .footer a {
+    color: white;
+}
+
+
+/*Nav*/
+.public .mobile-nav {
+    display: none;
+}
+.public nav {
+    background-color: #293742;
+    color: white;
+    padding-top: 8px;
+    padding-bottom: 8px;
+    padding-right: 8px;
+    padding-left: 8px;
+    font-size: 24px;
+}
+.public nav ul {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    list-style: none;
+}
+.public ul img {
+    height: 50px;
+    width: auto;
+}
+.public nav ul li a {
+    color: white;
+}
+.public nav ul .left {
+    width: 20%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.public nav ul .language {
+    display: flex;
+    align-items: center;
+}
+.public nav ul .language li {
+    padding-right: 10px;
+    cursor: pointer;
+}
+.public nav ul .language li.active{
+    color: #F55B53;
+}
+
+.public .desktop-nav ul .right {
+    display: flex;
+    justify-content: space-between;
+    column-gap: 70px;
+    align-items: center;
+}
+.public .desktop-nav ul .right button {
+    height: 30px;
+    min-width: 110px;
+    width: auto;
+    background-color: #4A83B4;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+.public button {
+    width: auto;
+    background-color: var(--secondary);
+}
+
+
+
+@media only screen and (max-width: 1000px) {
+    .public section.left-right {
+        flex-direction: column;
+    }
+    
+    .public section {
+        padding-left: 16px;
+        padding-right: 16px;
+    }
+    .public img {
+        max-width: 90%;
+        max-height: 700px;
+        height: auto;
+        width: auto;
+    }
+    .public .text {
+        width: 100%;
+        text-align: center;
+    }
+
+    .public .one {
+        height: auto;
+        padding-top: 100px;
+    }
+    .public .two {
+        height: auto;
+        text-align: center;
+    }
+    .public .five {
+        height: auto;
+        padding-top: 50px;
+    }
+
+    .public .features {
+        flex-direction: column;
+        row-gap: 64px;
+        margin-left: 16px;
+        margin-right: 16px;
+    }
+
+
+    /*Nav*/
+    .public .desktop-nav {
+        display: none;
+    }
+    .public .mobile-nav {
+        display: block;
+    }
+    
+    .public #open {
+        display: inline;
+    }
+
+    .public #close {
+        display: none;
+    }
+
+    /*Sidenavbar*/
+    .public .sidenav {
+        height: 100%;
+        width: 0;
+        z-index: 2;
+        position: fixed;
+        right: 0;
+        background: #293742;
+        transition: 0.5s;
+    }
+    .public .sidenav ul {
+        display: flex;
+        flex-direction: column;
+        align-items: start;
+        gap: 30px;
+        margin-left: 16px;
+    }
+    .public .sidenav ul li {
+        margin-top: 0px;
+        list-style-type: none;
+        transition: 1s;
+    }
+    .public .sidenav a {
+        color: white;
+        font-size: 25px;
+        overflow-x: hidden;
+        transition: 0.4s;
+    }
+    .public .sidenav .logout {
+        color: rgb(172, 0, 0);
+    }
+}
