@@ -1,5 +1,5 @@
 <?php
-    print_head(array('<title>Fatigue Diary</title>'));
+    print_head(array('<title>Fatigue Diary</title>'), true);
 ?>
 <body class="public">
     <?php include("app/includes/publicNavbar.php"); ?>

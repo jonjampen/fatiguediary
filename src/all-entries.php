@@ -1,5 +1,5 @@
 <?php
-print_head(array());
+print_head(array(), false);
 print_body();
 ?>
 

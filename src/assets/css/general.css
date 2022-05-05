@@ -1,0 +1,35 @@
+/*variables*/
+:root {
+    --primary: #4A83B4;
+    --secondary: #F55B53;
+    --background: #293742;
+    --container: #35434F;
+    
+    --text_primary: #ffffff;
+    --text_secondary: #000000;
+    --text_background: #ffffff;
+    --text_container: #ffffff;
+    --link: #4A83B4;
+    
+    --error-content: #f39e9e;
+    --error-border: #a04444;
+    
+    --side_nav: #293742;
+
+
+    --text: #ffffff;
+    --input: #293742;
+    --add_btn: #414141;
+    --button: #4A83B4;
+
+    --bottom_nav: #35434F;
+    --nav_icons: #ffffff;
+    --active: #1c1c1c;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    font-family: 'Roboto', sans-serif;
+    font-size: 14px;
+}

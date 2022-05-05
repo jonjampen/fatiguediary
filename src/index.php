@@ -4,10 +4,11 @@ include("app/database/db.php");
 include("app/database/connection.php");
 
 //Setting default page
+$page = "app";
+
 if(!isset($_SESSION['id'])) {
     include("app/controllers/validation.php");
     include("app/controllers/users.php");
-    $page = "app";
     if (checkCookie()) {
         $page = "dashboard";
     }
@@ -22,6 +23,7 @@ if(isset($_GET["page"])) {
 }
 
 
+//Display Content
 
 if ($page == "users") {
     include("app/controllers/validation.php");
@@ -71,7 +73,7 @@ else {
 }
 
 
-function print_head($page_head) {
+function print_head($page_head, $public) {
     $head = array(
         '<!DOCTYPE html>',
         '<html lang="en">',
@@ -80,7 +82,7 @@ function print_head($page_head) {
         '<meta http-equiv="X-UA-Compatible" content="IE=edge">',
         '<meta name="viewport" content="width=device-width, initial-scale=1.0">',
         '<link rel="stylesheet" href="assets/fonts/materialicons.css">',
-        '<link rel="stylesheet" href="assets/css/style.css">',
+        '<link rel="stylesheet" href="assets/css/general.css">',
         '<link rel="icon" type="image/x-icon" href="assets/img/logo.svg">'
     );
 
@@ -89,6 +91,11 @@ function print_head($page_head) {
     }
     foreach ($page_head as $head_line) {
         echo($head_line."\n");
+    }
+    if ($public) {
+        echo('<link rel="stylesheet" href="assets/css/public.css">' . "\n");
+    } else {
+        echo('<link rel="stylesheet" href="assets/css/app.css">' . "\n");
     }
     echo('</head>'."\n");
     

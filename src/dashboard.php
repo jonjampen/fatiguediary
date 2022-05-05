@@ -4,7 +4,7 @@ print_head(array(
     '<script src="assets/chart/moment.min.js"></script>',
     '<script src="assets/chart/chartjs-adapter-moment.js"></script>',
 
-    '<title>Document</title>'));
+    '<title>Document</title>'), false);
 print_body();
 $todayDate = date("Y-m-d");
 $energylevels = getEnergyLevelsByDate($todayDate);

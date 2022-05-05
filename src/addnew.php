@@ -1,7 +1,7 @@
 <?php
 print_head(array(
     '<script src="assets/js/visualizeValue.js"></script>',
-    '<script src="assets/js/calculateDateTime.js"></script>'));
+    '<script src="assets/js/calculateDateTime.js"></script>'), false);
     
 $notes = "";
 
