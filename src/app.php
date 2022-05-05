@@ -7,7 +7,7 @@
         <div class="text">
             <h1 id="title"></h1>
             <p id="title-desc"></p>
-            <button class="btn-secondary" id="use-for-free"></button>
+            <button class="btn-secondary" id="use-for-free" onclick="location.href='index.php?page=register'"></button>
         </div>
         <img src="assets/img/screenshots/add.png" alt="">
     </section>

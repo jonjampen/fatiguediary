@@ -11,11 +11,19 @@ document.getElementById("de_mobile").addEventListener("click", changeLangDe);
 
 function changeLangEn() {
     lang = en;
+    changeActive();
     writeText();
 }
 function changeLangDe() {
     lang = de;
+    changeActive();
     writeText();
+}
+function changeActive() {
+    document.getElementById("en").classList.toggle("active");
+    document.getElementById("de").classList.toggle("active");
+    document.getElementById("en_mobile").classList.toggle("active");
+    document.getElementById("de_mobile").classList.toggle("active");
 }
 
 function writeText() {

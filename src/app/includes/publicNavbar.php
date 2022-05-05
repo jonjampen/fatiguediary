@@ -1,11 +1,11 @@
 <nav class="desktop-nav">
     <ul>
         <div class="left">
-            <li class="logo"><a href="index.php"><img src="assets/img/logo.svg" alt=""></a></li>
+            <li class="logo"><a href="index.php?page=app"><img src="assets/img/logo.svg" alt=""></a></li>
             <div class="language">
                 <li class="active" id="en">EN</li>
                 <li>|</li>
-                <li id="de">DE</li>
+                <li class="" id="de">DE</li>
             </div>
         </div>
         <div class="right">
@@ -13,7 +13,7 @@
             <li><a href="index.php?page=contact" id="nav-contact"></a></li>
             <li><a href="index.php?page=about" id="nav-about"></a></li>
             <li><a href="index.php?page=login" id="nav-login"></a></li>
-            <button class="btn-primary" id="nav-signup" onclick=""></button>
+            <button class="btn-primary" id="nav-signup"onclick="location.href='index.php?page=register'"></button>
         </div>
     </ul>
 </nav>
@@ -21,7 +21,7 @@
 <div class="mobile-nav">
     <nav>
         <ul class="nav_items">
-            <li class="logo"><a href="index.php"><img src="assets/img/logo.svg" alt=""></a></li>
+            <li class="logo"><a href="index.php?page=app"><img src="assets/img/logo.svg" alt=""></a></li>
             <div class="language">
                 <li class="active" id="en_mobile">EN</li>
                 <li>|</li>
