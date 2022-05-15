@@ -95,16 +95,6 @@ nav .material-icons:hover {
 .container label {
     color: var(--text_container);
 }
-.container input {
-    width: 100%;
-    height: 35px;
-    margin-top: 4px;
-    margin-bottom: 16px;
-    background: var(--input);
-    color: var(--text_container);
-    border: none;
-    border-radius: 5px;
-}
 .container input.check {
     height: 16px;
     width: 16px;
@@ -306,14 +296,7 @@ nav .logo img {
     justify-content: space-around;
 }
 
-.add-screen .container textarea {
-    width: 100%;
-    background: var(--container);
-    border: none;
-    border-radius: 4px;
-    resize: vertical;
-    color: var(--text_container);
-}
+
 
 /* removes icons in date/time-input for chrome  */
 input[type="time"]::-webkit-calendar-picker-indicator {

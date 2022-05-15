@@ -6,6 +6,7 @@
 
 body {
     margin-bottom: 0;
+    min-height: 100vh;
 }
 
 h1 {
@@ -46,6 +47,10 @@ p {
     border: 1px solid var(--secondary);
     border-radius: 30px;
     cursor: pointer;
+}
+.btn-center {
+    display: flex;
+    justify-content: center;
 }
 button {
     margin-top: 10px;
@@ -189,6 +194,35 @@ nav ul .language li.active{
 }
 
 
+
+.contact {
+    background-color: var(--background);
+}
+.contact section {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.contact .form, .info{
+    width: 40%;
+    height: 90%;
+    background-color: var(--container);
+}
+.contact .form label{
+    font-size: 16px;
+}
+.contact .form input, textarea{
+    font-size: 16px;
+    background-color: var(--input);
+}
+.contact .links {
+    display: flex;
+    justify-content: space-around;
+}
+contact .links .icon {
+    display: flex;
+    align-items: space-between;
+}
 
 @media only screen and (max-width: 1000px) {
     section.left-right {
