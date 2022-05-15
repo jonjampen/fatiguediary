@@ -1,4 +1,6 @@
 <?php
+$pages = ["login", "register", "users", "logout", "dashboard", "add-new", "entries"];
+
 //db.php with $servername, $username, $password (gitignore)
 include("app/database/db.php");
 include("app/database/connection.php");
@@ -65,6 +67,9 @@ else {
     }
 }
 
+if (!in_array($page, $pages)) {
+    include("not-found.php");
+}
 
 function print_head($page_head) {
     $head = array(
