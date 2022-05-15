@@ -187,6 +187,9 @@ nav ul {
     justify-content: space-between;
     align-items: center;
 }
+nav.bottom-nav ul {
+    justify-content: space-around;
+}
 nav ul li {
     display: inline-block;
     list-style-type: none;
