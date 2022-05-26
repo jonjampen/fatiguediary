@@ -205,7 +205,9 @@ nav ul .language li.active{
 }
 .contact section {
     width: 70%;
-    padding-left: 16px;
+    padding-left: 32px;
+    padding-right: 0px;
+    margin-right: 0px;
     border-radius: 4px;
     background-color: var(--container);
     margin-top: 32px;

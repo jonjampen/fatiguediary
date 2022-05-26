@@ -1,7 +1,7 @@
 <?php
 if(isset($_POST['send-contact-mail'])){
     $to = "info@fatiguediary.ch";
-    $subject = $_POST['subject'];
+    $subject = "Kontaktanfrage: " . $_POST['subject'];
     $message = $_POST['name'] . " schrieb folgendes:" . "\n\n" . $_POST['message'];
 
     $headers = "MIME-Version: 1.0" . "\n";
