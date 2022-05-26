@@ -5,7 +5,9 @@ $pages = [
     //app
     "dashboard", "add-new", "entries",
     //information
-    "app", "contact"
+    "app", "contact",
+    // controllers
+    "mail",
 ];
 
 //db.php with $servername, $username, $password (gitignore)
