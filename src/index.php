@@ -1,5 +1,12 @@
 <?php
-$pages = ["login", "register", "users", "logout", "dashboard", "add-new", "entries"];
+$pages = [
+    //user
+    "login", "register", "users", "logout",
+    //app
+    "dashboard", "add-new", "entries",
+    //information
+    "app", "contact"
+];
 
 //db.php with $servername, $username, $password (gitignore)
 include("app/database/db.php");

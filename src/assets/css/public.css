@@ -147,7 +147,7 @@ section.two span {
     display: none;
 }
 nav {
-    background-color: #293742;
+    background-color: var(--container);
     color: white;
     padding-top: 8px;
     padding-bottom: 8px;
@@ -198,31 +198,60 @@ nav ul .language li.active{
 .contact {
     background-color: var(--background);
 }
-.contact section {
+.block {
     display: flex;
-    align-items: center;
-    justify-content: space-between;
+    justify-content: center;
+    column-gap: 16px;
+}
+.contact section {
+    width: 70%;
+    padding-left: 16px;
+    border-radius: 4px;
+    background-color: var(--container);
+    margin-top: 32px;
+    display: flex;
+    justify-content: start;
+    column-gap: 32px;
 }
 .contact .form, .info{
-    width: 40%;
-    height: 90%;
-    background-color: var(--container);
+    width: 50%;
+    height: auto !important;
 }
 .contact .form label{
     font-size: 16px;
 }
 .contact .form input, textarea{
     font-size: 16px;
-    background-color: var(--input);
+    background-color: var(--background);
 }
-.contact .links {
-    display: flex;
-    justify-content: space-around;
+.contact .contact-method {
+    margin-bottom: 16px;
 }
-contact .links .icon {
-    display: flex;
-    align-items: space-between;
+.contact .contact-method span {
+    padding-right: 16px;
 }
+.contact .container {
+    border-radius: 0;
+    margin: 0;
+    padding: 0;
+}
+.contact .form textarea {
+    height: 150px
+}
+.contact h2 {
+    margin-top: 16px;
+    text-align: center;
+}
+
+.contact .info img {
+    height: 275px;
+    margin-top: 16px;
+    margin-bottom: 64px;
+}
+.container a {
+    color: var(--primary);
+}
+
 
 @media only screen and (max-width: 1000px) {
     section.left-right {
@@ -288,7 +317,7 @@ contact .links .icon {
         z-index: 2;
         position: fixed;
         right: 0;
-        background: #293742;
+        background: var(--container);
         transition: 0.5s;
     }
     .sidenav ul {
