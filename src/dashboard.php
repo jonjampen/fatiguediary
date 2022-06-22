@@ -13,77 +13,70 @@ $energylevels = getEnergyLevelsByDate($todayDate);
     <h3 class="welcome-text">Willkommen <?php echo($_SESSION['name']);?></h3>
     
     <div class="container diagram">
-      <canvas id="canvas"></canvas>
+      <div id="chart"></div>
 	  </div>
+
     
-<script>
-  const dataArr = [
-    {
-      "label": "Energylevel",
-      "fill": false,
-      "data": [
-        <?php
-          foreach ($energylevels as $energylevel) {
-            // echo('{ x: ' . "$energylevel['datetime']" . ',' .)
-            echo('{');
-            echo('"' . 'x' . '": ' . '"' . $energylevel['datetime'] . '"' . ',');
-            echo('"' . 'y' . '": ' . $energylevel['energylevel']);
-            echo('},');
-          };
-        ?>
-      ],
-      "borderColor": "#F55B53",
-      "backgroundColor": "#F55B53"
-    },
-  ];
-
-  var config = {
-    type: 'line',
-    data: {
-        datasets: dataArr
-    },
-    options: {
-      maintainAspectRatio: false,
-      aspectRatio: 0.4,
-      responsive: true,
-      title: {
-        display: true,
-        text: 'X-axis Example based on Time'
-      },
-      scales: {
-        x: {
-          type: "time",
-          time: {
-            unit: 'hour'
-          },
-          ticks: {
-            autoSkip: true,
-            maxRotation: 0,
-            minRotation: 0
-          },
-          min: '<?php echo($energylevels[0]['date']); ?> 06:00 AM',
-          max: '<?php echo($energylevels[0]['date']); ?> 11:00 PM',
+    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+    <script>
+    var options = {
+          series: [{
+          name: 'series1',
+          data: [
+            <?php
+            foreach ($energylevels as $energylevel) {
+              echo($energylevel['energylevel'] . ',');
+            };
+            ?>
+          ]
+        }],
+          chart: {
+          height: 290,
+          type: 'area'
         },
-        y: {
+        dataLabels: {
+          enabled: false
+        },
+        stroke: {
+          curve: 'smooth'
+        },
+        colors:['#F55B53'],
+        xaxis: {
+          type: 'datetime',
+          categories: [
+            <?php
+            foreach ($energylevels as $energylevel) {
+              echo('"' . date("Y-m-d H:i:s", strtotime($energylevel['datetime'])) . '"' . ',');
+            };
+            ?>
+          ],
+          labels: {
+            style: {
+              colors: '#FFFFFF',
+            }
+          },
+          min: new Date('12 Jun 2022 06:00:00'),
+          max: new Date('12 Jun 2022 22:30:00'),
+        },
+        yaxis: {
+          labels: {
+            style: {
+              colors: '#FFFFFF',
+            }
+          },
           min: 0,
-          max: 10, 
-        }
-      },
-      plugins: {
-        legend: {
-          display: false
-        }
-      }
-    }
-  };
+          max: 10
+        },
+        tooltip: {
+          x: {
+            format: 'dd/MM/yy HH:mm'
+          },
+        },
+        };
 
-  window.onload = function() {
-    var ctx = document.getElementById('canvas').getContext('2d');
-    window.myLine = new Chart(ctx, config);
-  };
-
-	</script>
-
+        var chart = new ApexCharts(document.querySelector("#chart"), options);
+        chart.render();
+</script>
 
 </body>
 </html>
