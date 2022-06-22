@@ -197,9 +197,6 @@ nav .logo img {
     overflow-x: hidden;
     transition: 0.4s;
 }
-.sidenav a:hover {
-    color: var(--active);
-}
 .sidenav .logout {
     color: rgb(172, 0, 0);
 }

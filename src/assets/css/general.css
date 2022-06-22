@@ -2,19 +2,16 @@
 :root {
     --primary: #4A83B4;
     --secondary: #F55B53;
-    --background: #293742;
-    --container: #35434F;
+    --background: #1E1F1F;
+    --container: #252627;
+
+    --text_white: #F8FAFC;
+    --text_black: #1E1F1F;
+    --text_grey: #7D8082;
     
-    --text_primary: #ffffff;
-    --text_secondary: #000000;
-    --text_background: #ffffff;
-    --text_container: #ffffff;
-    --link: #4A83B4;
+    --error-content: #E88E82;
+    --error-border: #F74649;
     
-    --error-content: #f39e9e;
-    --error-border: #a04444;
-    
-    --side_nav: #293742;
 
 
     --text: #ffffff;
@@ -22,16 +19,16 @@
     --add_btn: #414141;
     --button: #4A83B4;
 
-    --bottom_nav: #35434F;
-    --nav_icons: #ffffff;
-    --active: #1c1c1c;
+    --bottom_nav: var(--background);
+    --side_nav: var(--background);
+    --nav_icons: var(--text_white);  
 }
 
 * {
     box-sizing: border-box;
     margin: 0;
     font-family: 'Roboto', sans-serif;
-    font-size: 14px;
+    font-size: 16px;
 }
 
 .container input {
