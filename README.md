@@ -29,13 +29,13 @@
 1. Energielevel mit Aktivitäten erfassen ✔
 1. Diagramm mit Tagesverlauf ✔
 
+Weitere Features finden Sie neu unter [Issues](https://github.com/jonjampen/fatigue-diary/issues)
 
 ### Weitere Features
 1. Liste aller Einträge (Einträge bearbeiten), in Tages-Blöcken
 1. Auswertung schlechte / gute Aktivitäten
 - Symptome erfassen
 - Mehrsprachig (Deutsch und Englisch)
-- Tipps-Seite
 - Diagramm mit Aktivitäten
 
 ### Zusatz (nur wenn zu viel Zeit)
