@@ -1,6 +1,7 @@
 <?php
     //fill in name and email after error
-    isset($_GET['name']) ? $name = $_GET['name'] & $email = $_GET['email'] : $name = '' & $email = '';
+    isset($_GET['name']) ? $name = $_GET['name'] : $name = '';
+    isset($_GET['email']) ? $email = $_GET['email'] : $email = '';
     
     print_head(array(), false);
     print_body();

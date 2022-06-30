@@ -28,7 +28,7 @@ function validateRegisterUser($user){
     }
 
     //E-Mail already existing
-    if (isEmailExisting($user['email']) == true) {
+    if (isEmailExisting($user['email'])) {
         array_push($errors, "Diese E-Mail-Adresse wird bereits verwendet. Versuche stattdessen dich <a href='index.php?page=login'>hier</a> einzuloggen");
     }
 
@@ -56,12 +56,9 @@ function isEmailExisting($email) {
     $check->store_result();
 
     $row_count = $check->num_rows;
-
-    if($row_count > 0) {
-        return true;
-    }
     $check->close();
-    return false;
+
+    return $row_count > 0 ? true : false;
 }
 
 
