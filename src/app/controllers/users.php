@@ -2,7 +2,6 @@
 
 //If registering
 if (isset($_POST['register'])) {
-
     //Setting variables to values from the form
     $name = $_POST['name'];
     $email = $_POST['email'];
@@ -12,7 +11,6 @@ if (isset($_POST['register'])) {
     //Hashing password
     $hashed_password = hash("sha3-512", $password);
 
-
     unset($_SESSION['errors']);
     unset($_POST['register']);
 
@@ -20,7 +18,7 @@ if (isset($_POST['register'])) {
     
     if (empty($errors)) {
         $stmt = $conn->prepare("INSERT INTO users (name, email, password) VALUES (?, ?, ?)");
-        $stmt->bind_param("sss", $name, $email, $hashed_password); //"sss" because name, email, password are three strings
+        $stmt->bind_param("sss", $name, $email, $hashed_password); //"sss" for data type
         $stmt->execute();
         $stmt->close();
         login($email, null, $remember);
@@ -30,6 +28,7 @@ if (isset($_POST['register'])) {
         header("location: index.php?page=register&name=$name&email=$email");
     }
 }
+
 
 //If login
 if (isset($_POST['login'])) {
@@ -44,7 +43,7 @@ if (isset($_POST['login'])) {
     unset($_SESSION['errors']);
     unset($_POST['login']);
 
-    //check user data
+    //validate user data
     $errors = validateLoginUser($email, $hashed_password);
     
     if (empty($errors)) {
@@ -58,14 +57,18 @@ if (isset($_POST['login'])) {
 
 
 function logout() {
-    //Deleting session data
+    //Deleting session data and unset cookie
     session_destroy();
-    setcookie("remember-me", "", time() - 3600); //unset cookie
+    setcookie("remember-me", "", time() - 3600);
+
     header("location: index.php?page=login");
 }
 
+
 function login($email, $id, $remember) {
     global $conn;
+
+    // login by email or id
     if($email) {
         $stmt = $conn->prepare("SELECT id, name, email FROM users WHERE email=?");
         $stmt->bind_param("s", $email);
@@ -91,6 +94,7 @@ function login($email, $id, $remember) {
     header("location: index.php?page=dashboard");
 }
 
+
 function createRememberToken($user_id) {
     global $conn;
 
@@ -104,10 +108,11 @@ function createRememberToken($user_id) {
     setcookie("remember-me", $token, time() + 60 * 60 * 24 * 30);
 }
 
+
 function checkCookie() {
     global $conn;
 
-    if(isset($_COOKIE['remember-me'])) {
+    if (isset($_COOKIE['remember-me'])) {
         $token = $_COOKIE['remember-me'];
         $stmt = $conn->prepare("SELECT user_id FROM tokens WHERE token=?");
         $stmt->bind_param("s", $token);
@@ -117,13 +122,14 @@ function checkCookie() {
         $stmt->close();
 
         if ($user_id) {
-            login(null, $user_id, true);
+            login(null, $user_id, false);
             return true;
         }
         else {
             return false;
         }
-    } else {
+    }
+    else {
         return false;
     }
 }
