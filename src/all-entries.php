@@ -1,26 +1,28 @@
 <?php
-print_head(array(), false);
-print_body();
+    print_head(array(), false);
+    print_body();
 ?>
 
-<div class="entries-screen">
+    <div class="entries-screen">
         <h2>Einträge</h2>
-         <?php for ($i = 0; $i < 7; $i++): ?> <!-- for each day of the past week -->
+        <?php for ($day_counter = 0; $day_counter < 7; $day_counter++): //for each day of the past week ?>
             <?php
-                $date = date("Y-m-d");
-                $date = date_sub(date_create($datetime = "now"), date_interval_create_from_date_string($i . ' day'));
+                $date = date_sub(new DateTime(), date_interval_create_from_date_string($day_counter . ' day')); // subtract i days from date
                 $entries = getEnergyLevelsByDate($date->format("Y-m-d"));
+
+                // calculate daily energy average
                 $sum = 0;
                 $counter = 0;
-                $average = 0;
+                $average = null;
                 foreach ($entries as $entry) {
                     $sum += $entry['energylevel'];
                     $counter++;
                 }
-                if($counter != 0) {
+                if ($counter != 0) {
                     $average = round(($sum/$counter) * 2) / 2; //round to 0.5
                 }
             ?>
+
             <div class="container day border-color">
                 <div class="title-row">
                     <h3><?php echo($date->format("D, d.m.Y")); ?></h3>
@@ -36,9 +38,16 @@ print_body();
                             <br>
                             <div class="activities">
                                 <?php
+                                $activity_counter = 1;
                                 foreach ($activity_ids as $activity_id){
                                     $activity_name = getActivityNameById($activity_id['id']);
                                     echo($activity_name . " ");
+
+                                    // add comma after activity except for last activity
+                                    if ($activity_counter != count($activity_ids)) {
+                                        echo(", ");
+                                    }
+                                    $activity_counter++;
                                 }
                                 ?>
                             </div>
