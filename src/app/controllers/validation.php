@@ -20,7 +20,7 @@ function validateRegisterUser($user){
     }
 
     //Invalid input
-    if (!preg_match("/^[a-zA-Z- ]*$/", $user['name'])) {
+    if (!preg_match("/^[a-zA-Z- öäüéèêà]*$/", $user['name'])) {
         array_push($errors, "Der Name ist ungültig (darf nur Buchstaben, '-' und Leerschläge beinhalten).");
     }
     if (!filter_var($user['email'], FILTER_VALIDATE_EMAIL)) {

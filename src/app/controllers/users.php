@@ -4,7 +4,7 @@
 if (isset($_POST['register'])) {
     //Setting variables to values from the form
     $name = $_POST['name'];
-    $email = $_POST['email'];
+    $email = trim($_POST['email']);
     $password = $_POST['password'];
     $remember = $_POST['remember'];
 
@@ -33,7 +33,7 @@ if (isset($_POST['register'])) {
 //If login
 if (isset($_POST['login'])) {
     //Setting variables to values from the form
-    $email = $_POST['email'];
+    $email = trim($_POST['email']);
     $password = $_POST['password'];
     $remember = $_POST['remember'];
 
