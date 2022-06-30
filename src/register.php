@@ -1,16 +1,9 @@
 <?php
-if (isset($_GET['name'])) {
-    $name = $_GET['name'];
-    $email = $_GET['email'];
-} else {
-    $name = '';
-    $email = '';
-}
-?>
-
-<?php
-print_head(array(), false);
-print_body();
+    //fill in name and email after error
+    isset($_GET['name']) ? $name = $_GET['name'] & $email = $_GET['email'] : $name = '' & $email = '';
+    
+    print_head(array(), false);
+    print_body();
 ?>
 
     <div class="container">
@@ -31,13 +24,13 @@ print_body();
         <form action="index.php?page=users" method="post">
             <div class="inputs">
                 <label for="name">Name</label>
-                <input type="text" name="name" placeholder="Name eingeben..." <?php echo("value= '" . $name . "'"); ?>>
+                <input type="text" name="name" placeholder="Name eingeben..." value="<?php echo($name); ?>">
 
                 <label for="email">E-Mail</label>
-                <input type="email" name="email" placeholder="E-Mail-Adresse eingeben..." <?php echo("value= '" . $email . "'"); ?>>
+                <input type="email" name="email" placeholder="E-Mail-Adresse eingeben..." value="<?php echo($email); ?>">
 
                 <label for="password">Passwort</label>
-                <input type="password" name="password" placeholder="Passwort eingeben...">
+                <input type="password" name="password" placeholder="Passwort wählen...">
 
                 <label for="passwordConf">Passwort wiederholen</label>
                 <input type="password" name="passwordConf" placeholder="Passwort erneut eingeben...">

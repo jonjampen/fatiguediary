@@ -1,14 +1,10 @@
 <?php
-if (isset($_GET['email'])) {
-    $email = $_GET['email'];
-} else {
-    $email = '';
-}
-?>
+    //fill in email after error
+    isset($_GET['email']) ? $email = $_GET['email'] : $email = '';
 
-<?php
-print_head(array(), false);
-print_body();
+
+    print_head(array(), false);
+    print_body();
 ?>
 
     <div class="container">
@@ -29,7 +25,7 @@ print_body();
         <form class="form" action="index.php?page=users" method="post">
             <div class="inputs">
                 <label for="email">E-Mail</label>
-                <input type="email" name="email" placeholder="E-Mail-Adresse eingeben..." <?php echo("value= '" . $email . "'"); ?>>
+                <input type="email" name="email" placeholder="E-Mail-Adresse eingeben..." value="<?php echo($email); ?>">
 
                 <label for="password">Passwort</label>
                 <input type="password" name="password" placeholder="Passwort eingeben...">
