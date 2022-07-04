@@ -276,7 +276,7 @@ nav .logo img {
     background-color: var(--primary);
 }
 .add-screen .activities a.add{
-    border: 1px dashed var(--primary);
+    border: 1px dashed var(--gray);
 }
 /*modal: add activity*/
 .modal-box {
