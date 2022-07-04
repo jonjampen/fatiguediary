@@ -2,8 +2,8 @@
     <ul class="nav_items">
         <li class="logo"><a href="index.php?page=app"><img src="assets/img/logo.svg" alt=""></a></li>
         <div class="icons">
-            <li><a href="index.php?page=settings"><span class="material-icons">settings</span></i></a></li>
-            <li><a href="javascript:void(0)" onclick="openNav()"><span class="material-icons" id="open">menu</span></i></a> <a href="javascript:void(0)" onclick="closeNav()"><span class="material-icons" id="close">close</span></a></li>
+            <li><a href="index.php?page=settings"><span class="material-icons">settings</span></a></li>
+            <li><a href="javascript:void(0)" onclick="openNav()"><span class="material-icons" id="open">menu</span></a> <a href="javascript:void(0)" onclick="closeNav()"><span class="material-icons" id="close">close</span></a></li>
         </div>
     </ul>
 </nav>
