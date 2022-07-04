@@ -20,9 +20,15 @@ $energylevels = getEnergyLevelsByDate($todayDate);
         <input type="date" class="date" value="<?php echo($todayDate); ?>">
         <a href=""><span class="material-icons">chevron_right</span></a>
     </div>
-
-    <div class="container diagram">
-      <div id="energylevel_area"></div>
+    
+    <div class="container chart">
+        <h3 class="center-title">Energie</h3>
+        <div id="energylevel_area"></div>
+        <div class="point-amount">
+            <button class="btn-primary" type="" name="">Alle Werte</button>
+            <button class="btn-primary outline" type="" name="">Tages Druchschn.</button>
+            <button class="btn-primary outline" type="" name="">Wochen Druchschn.</button>
+        </div>
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
@@ -40,7 +46,7 @@ $energylevels = getEnergyLevelsByDate($todayDate);
                 ]
             }],
             chart: {
-                height: 290,
+                height: 250,
                 type: 'area'
             },
             dataLabels: {
@@ -69,8 +75,12 @@ $energylevels = getEnergyLevelsByDate($todayDate);
                 labels: {
                     style: {
                         colors: '#FFFFFF',
-                    }
+                    },
+                    formatter: function (val) {
+                        return val.toFixed(0) // only integers
+                    },
                 },
+                tickAmount: 5, // only 6 labels
                 min: 0,
                 max: 10
             },

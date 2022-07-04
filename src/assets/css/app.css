@@ -46,7 +46,7 @@ nav .material-icons:hover {
     background: var(--primary);
     color: var(--text);
     border: none;
-    border-radius: 30px;
+    border-radius: 8px;
     cursor: pointer;
 }
 .btn-secondary {
@@ -56,8 +56,16 @@ nav .material-icons:hover {
     color: white;
     background-color: var(--secondary);
     border: 1px solid var(--secondary);
-    border-radius: 30px;
+    border-radius: 8px;
     cursor: pointer;
+}
+.btn-primary.outline {
+    border: 1px solid var(--primary);
+    background-color: transparent !important;
+}
+.btn-secondary.outline {
+    border: 1px solid var(--secondary);
+    background-color: transparent !important;
 }
 .btn-center {
     display: flex;
@@ -112,7 +120,9 @@ nav .material-icons:hover {
     color: var(--text);
 }
 
-
+.center-title {
+    text-align: center;
+}
 
 /*navbar*/
 nav {
@@ -316,17 +326,22 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 }
 
 /* dashboard */
-.diagram {
-    height: 300px;
-    padding-left: 4px;
-    padding-right: 4px;
-    padding-bottom: 4px;
-    height: 300px;
+.chart {
+    height: auto;
+    padding-left: 8px;
+    padding-right: 8px;
+    padding-bottom: 8px;
+}
+
+#energylevel_area {
+    padding: 0;
+    margin: 0;
 }
 
 .welcome-text {
     margin-left: 16px;
     margin-top: 8px;
+    margin-bottom: 32px;
     color: var(--gray);
 }
 
@@ -353,6 +368,12 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     color: var(--text);
     text-align: center;
     margin-bottom: 32px;
+}
+
+.point-amount {
+    display: flex;
+    justify-content: space-between;
+    column-gap: 8px;
 }
 
 /* Entries */
