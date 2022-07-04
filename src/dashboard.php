@@ -1,9 +1,5 @@
 <?php
 print_head(array(
-    '<script src="assets/chart/chart.min.js"></script>',
-    '<script src="assets/chart/moment.min.js"></script>',
-    '<script src="assets/chart/chartjs-adapter-moment.js"></script>',
-
     '<title>Document</title>'), false);
 print_body();
 $todayDate = date("Y-m-d");
@@ -21,61 +17,59 @@ $energylevels = getEnergyLevelsByDate($todayDate);
     <script>
         var options = {
             series: [{
-            name: 'series1',
-            data: [
-                <?php
-                foreach ($energylevels as $energylevel) {
-                echo($energylevel['energylevel'] . ',');
-                };
-                ?>
-            ]
+                name: 'series1',
+                data: [
+                    <?php
+                    foreach ($energylevels as $energylevel) {
+                        echo($energylevel['energylevel'] . ',');
+                    };
+                    ?>
+                ]
             }],
             chart: {
-            height: 290,
-            type: 'area'
+                height: 290,
+                type: 'area'
             },
             dataLabels: {
-            enabled: false
+                enabled: false
             },
             stroke: {
-            curve: 'smooth'
+                curve: 'smooth'
             },
             colors:['#F55B53'],
             xaxis: {
-            type: 'datetime',
-            categories: [
-                <?php
-                foreach ($energylevels as $energylevel) {
-                echo('"' . date("Y-m-d H:i:s", strtotime($energylevel['datetime'])) . '"' . ',');
-                };
-                ?>
-            ],
-            labels: {
-                style: {
-                colors: '#FFFFFF',
-                }
-            },
-            min: new Date('12 Jun 2022 06:00:00'),
-            max: new Date('12 Jun 2022 22:30:00'),
+                type: 'datetime',
+                categories: [
+                    <?php
+                    foreach ($energylevels as $energylevel) {
+                    echo('"' . date("Y-m-d H:i:s", strtotime($energylevel['datetime'])) . '"' . ',');
+                    };
+                    ?>
+                ],
+                labels: {
+                    style: {
+                        colors: '#FFFFFF',
+                    }
+                },
             },
             yaxis: {
-            labels: {
-                style: {
-                colors: '#FFFFFF',
-                }
-            },
-            min: 0,
-            max: 10
+                labels: {
+                    style: {
+                        colors: '#FFFFFF',
+                    }
+                },
+                min: 0,
+                max: 10
             },
             tooltip: {
-            x: {
-                format: 'dd/MM/yy HH:mm'
-            },
+                x: {
+                    format: 'dd/MM/yy HH:mm'
+                },
             },
         };
 
-        var chart = new ApexCharts(document.querySelector("#chart"), options);
-        chart.render();
+        var energylevel_area = new ApexCharts(document.querySelector("#energylevel_area"), options);
+        energylevel_area.render();
     </script>
 
 </body>
