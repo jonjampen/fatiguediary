@@ -315,7 +315,6 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     display: none;
 }
 
-
 /* dashboard */
 .diagram {
     height: 300px;
@@ -343,6 +342,17 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     background-color: var(--primary);
     padding: 4px 8px;
     border-radius: 8px;
+}
+.date-picker {
+    display: flex;
+    justify-content: center;
+}
+.date-picker .date {
+    background-color: var(--background);
+    border: none;
+    color: var(--text);
+    text-align: center;
+    margin-bottom: 32px;
 }
 
 /* Entries */

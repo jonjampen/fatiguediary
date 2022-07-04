@@ -15,6 +15,12 @@ $energylevels = getEnergyLevelsByDate($todayDate);
         <p class="active">Month</p>
         <p>Year</p>
     </div>
+    <div class="date-picker">
+        <a href=""><span class="material-icons">chevron_left</span></a>
+        <input type="date" class="date" value="<?php echo($todayDate); ?>">
+        <a href=""><span class="material-icons">chevron_right</span></a>
+    </div>
+
     <div class="container diagram">
       <div id="energylevel_area"></div>
     </div>
