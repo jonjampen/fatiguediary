@@ -2,6 +2,21 @@
 :root {
     --primary: #4A83B4;
     --secondary: #F55B53;
+    --background: #1E1F1F;
+    --container: #252627;
+    --gray: #7D8082;
+    --text: #F8FAFC;
+
+    --input: var(--background);
+    --link_p: var(--primary);
+    --link_s: var(--secondary);
+
+    --error-content: #f39e9e;
+    --error-border: #a04444;
+
+    /*
+    --primary: #4A83B4;
+    --secondary: #F55B53;
     --background: #293742;
     --container: #35434F;
     
@@ -25,6 +40,7 @@
     --bottom_nav: #35434F;
     --nav_icons: #ffffff;
     --active: #1c1c1c;
+    */
 }
 
 * {
@@ -40,7 +56,7 @@
     margin-top: 4px;
     margin-bottom: 16px;
     background: var(--input);
-    color: var(--text_container);
+    color: var(--input);
     border: none;
     border-radius: 5px;
 }
@@ -51,5 +67,5 @@ textarea {
     border: none;
     border-radius: 4px;
     resize: vertical;
-    color: var(--text_container);
+    color: var(--text);
 }

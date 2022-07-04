@@ -32,7 +32,7 @@ p {
     width: auto;
     height: 40px;
     background: var(--primary);
-    color: var(--text_primary);
+    color: var(--text);
     border: none;
     border-radius: 30px;
     cursor: pointer;
@@ -95,7 +95,7 @@ section.two {
 }
 section.five {
     height: 100vh;
-    background-color: #4A83B4;
+    background-color: var(--primary);
 }
 section.five h2 {
     text-align: left !important;

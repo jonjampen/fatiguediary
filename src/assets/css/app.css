@@ -8,7 +8,7 @@ body {
     margin-bottom: 70px; /* to compensate bottom nav */
 }
 h2 { /*screen title*/
-    color: var(--text_container);
+    color: var(--text);
     font-family: 'Roboto', sans-serif;
     font-weight: 500;
     font-size: 34px;
@@ -16,35 +16,35 @@ h2 { /*screen title*/
     margin-bottom: 16px;
 }
 h3 { /*container title*/
-    color: var(--text_container);
+    color: var(--text);
     font-family: 'Roboto', sans-serif;
     font-weight: 500;
     font-size: 24px;
     margin-bottom: 16px;
 }
 p {
-    color: var(--text_container);
+    color: var(--tet);
     font-family: 'Roboto', sans-serif;
     font-weight: 300;
     font-size: 16px;
 }
 a {
     text-decoration: none;
-    color: var(--link);
+    color: var(--link_p);
 }
 .material-icons {
-    color: var(--text_container);
+    color: var(--text);
     transition: 0.4s;
 }
 nav .material-icons:hover {
-    color: var(--primary);
+    color: var(--secondary);
 }
 
 .btn-primary {
     width: 120px;
     height: 40px;
     background: var(--primary);
-    color: var(--text_primary);
+    color: var(--text);
     border: none;
     border-radius: 30px;
     cursor: pointer;
@@ -93,7 +93,7 @@ nav .material-icons:hover {
     justify-content: space-between;
 }
 .container label {
-    color: var(--text_container);
+    color: var(--text);
 }
 .container input.check {
     height: 16px;
@@ -109,7 +109,7 @@ nav .material-icons:hover {
 .container .description {
     display: flex;
     justify-content: space-between;
-    color: var(--text_container);
+    color: var(--text);
 }
 
 
@@ -117,7 +117,7 @@ nav .material-icons:hover {
 /*navbar*/
 nav {
     width: 100%;
-    height: 56px;
+    height: 64px;
     z-index: 3;
     /*vertical alignment*/
     display: flex;
@@ -132,7 +132,9 @@ nav.top-nav {
 nav.bottom-nav {
     bottom: 0;
     position: fixed;
-    background-color: var(--bottom_nav);
+    border-radius: 8px 8px 0 0;
+    background-color: var(--background);
+    box-shadow: 0 -1.5px var(--container);
 }
 nav ul {
     width: 100%;
@@ -177,7 +179,7 @@ nav .logo img {
     z-index: 2;
     position: fixed;
     right: 0;
-    background: var(--side_nav);
+    background: var(--background);
     transition: 0.5s;
 }
 .sidenav ul {
@@ -192,13 +194,13 @@ nav .logo img {
     transition: 1s;
 }
 .sidenav a {
-    color: var(--nav_icons);
+    color: var(--text);
     font-size: 25px;
     overflow-x: hidden;
     transition: 0.4s;
 }
 .sidenav a:hover {
-    color: var(--active);
+    color: var(--secondary);
 }
 .sidenav .logout {
     color: rgb(172, 0, 0);
@@ -226,7 +228,7 @@ nav .logo img {
 .add-screen .slider {
     -webkit-appearance: none;
     height: 10px;
-    background: var(--button);
+    background: var(--primary);
     border-radius: 5px;
 }
 .add-screen .slider::-webkit-slider-thumb {
@@ -235,22 +237,21 @@ nav .logo img {
     width: 20px;
     height: 20px;
     border-radius: 50%; 
-    background: white;
+    background: var(--text);
     cursor: pointer;
 }
 .add-screen .slider::-moz-range-thumb {
     width: 20px;
     height: 20px;
     border-radius: 50%;
-    background: white;
+    background: var(--text);
     cursor: pointer;
 }
 .add-screen .container .description .level-text {
-    color: greenyellow;
     font-size: 32px;
 }
 .add-screen .container .description #energyIcon {
-    font-size: 32px;
+    font-size: 24px;
 }
 
 .add-screen .activities {
@@ -260,23 +261,22 @@ nav .logo img {
     grid-column-gap: 10px;
 }
 .add-screen .activities a {
-    border: 1px solid var(--button);
+    border: 1px solid var(--primary);
     border-radius: 4px;
     height: 45px;
     display: flex;
     justify-content: center;
     align-items: center;
     text-align: center;
-    color: var(--text_container);
+    color: var(--text);
 }
 .add-screen .activities a.active {
     border: none;
-    color: var(--text_primary);
+    color: var(--text);
     background-color: var(--primary);
 }
 .add-screen .activities a.add{
-    border: 1px dashed var(--add_btn);
-    color: var(--add_btn);
+    border: 1px dashed var(--primary);
 }
 /*modal: add activity*/
 .modal-box {
@@ -333,17 +333,17 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 .day .title-row {
     display: flex;
     justify-content: space-between;
-    border-bottom: 1px solid gray;
+    border-bottom: 1px solid var(--gray);
 }
 .day .entry .activities {
     width: 95%;
 }
 .day .entry .time {
-    color: gray;
+    color: var(--gray);
     padding-top: 4px;
 }
 .day .entry {
-    border-bottom: 1px solid gray;
+    border-bottom: 1px solid var(--gray);
 }
 .day .entry .description {
     padding-top: 4px;
