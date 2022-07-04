@@ -331,6 +331,20 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     color: var(--gray);
 }
 
+.date-range {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    padding-left: 16px;
+    padding-right: 16px;
+    margin-bottom: 16px;
+}
+.date-range .active {
+    background-color: var(--primary);
+    padding: 4px 8px;
+    border-radius: 8px;
+}
+
 /* Entries */
 .container.day {
     border-left: 4px solid green;

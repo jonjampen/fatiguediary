@@ -9,7 +9,12 @@ $energylevels = getEnergyLevelsByDate($todayDate);
         <h6>Hi <?php echo($_SESSION['name']);?></h6>
         <h3>Your Dashboard</h3>
     </div>
-    
+    <div class="date-range">
+        <p>Day</p>
+        <p>Week</p>
+        <p class="active">Month</p>
+        <p>Year</p>
+    </div>
     <div class="container diagram">
       <div id="energylevel_area"></div>
     </div>
