@@ -1,6 +1,5 @@
 <?php
-print_head(array(
-    '<title>Document</title>'), false);
+print_head(array('<title>Dashboard</title>'), false);
 print_body();
 $todayDate = date("Y-m-d");
 $energylevels = getEnergyLevelsByDate($todayDate);

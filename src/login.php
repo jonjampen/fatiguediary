@@ -3,7 +3,7 @@
     isset($_GET['email']) ? $email = $_GET['email'] : $email = '';
 
 
-    print_head(array(), false);
+    print_head(array('<title>Anmelden | Fatigue Diary</title>'), false);
     print_body();
 ?>
 

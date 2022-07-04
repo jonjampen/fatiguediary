@@ -1,7 +1,8 @@
 <?php
 print_head(array(
     '<script src="assets/js/visualizeValue.js"></script>',
-    '<script src="assets/js/calculateDateTime.js"></script>'), false);
+    '<script src="assets/js/calculateDateTime.js"></script>',
+    '<title>Eintrag Hinzufügen | Fatigue Diary</title>'), false);
     
 $notes = "";
 

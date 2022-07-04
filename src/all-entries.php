@@ -1,5 +1,5 @@
 <?php
-    print_head(array(), false);
+    print_head(array('<title>Alle Einträge | Fatigue Diary</title>'), false);
     print_body();
 ?>
 
