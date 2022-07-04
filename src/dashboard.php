@@ -5,8 +5,10 @@ print_body();
 $todayDate = date("Y-m-d");
 $energylevels = getEnergyLevelsByDate($todayDate);
 ?>
-
-    <h3 class="welcome-text">Willkommen <?php echo($_SESSION['name']);?></h3>
+    <div class="welcome-text">
+        <h6>Hi <?php echo($_SESSION['name']);?></h6>
+        <h3>Your Dashboard</h3>
+    </div>
     
     <div class="container diagram">
       <div id="energylevel_area"></div>

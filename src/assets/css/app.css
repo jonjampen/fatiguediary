@@ -326,8 +326,9 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 }
 
 .welcome-text {
-    color: var(--primary);
-    text-align: center;
+    margin-left: 16px;
+    margin-top: 8px;
+    color: var(--gray);
 }
 
 /* Entries */
