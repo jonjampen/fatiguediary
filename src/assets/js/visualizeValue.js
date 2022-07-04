@@ -13,7 +13,10 @@ function calculateColor(value, text) {
     text.style.color = color;
 }
 function calculateBorderColor(value, border) {
-    color = colors[Math.floor(value/3*2)];
-    border.style.borderColor = color;
-    console.log(value);
+    if (value) {
+        colorPos = Math.floor(value/3*2);
+        color = colors[colorPos];
+        border.style.borderColor = color;
+        console.log(value);
+    }
 }
