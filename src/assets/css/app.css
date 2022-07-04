@@ -129,6 +129,10 @@ nav.top-nav {
     position: relative;
     background-color: transparent;
 }
+nav.top-nav .icons {
+    display: flex;
+    column-gap: 16px;
+}
 nav.bottom-nav {
     bottom: 0;
     position: fixed;
