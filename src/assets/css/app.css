@@ -221,13 +221,13 @@ nav .logo img {
     margin-bottom: 16px;
 }
 .datetime span {
-    color: var(--text_container);
+    color: var(--text);
     font-size: 14px;
 }
 .datetime input {
     background-color: transparent;
     border: none;
-    color: var(--text_container);
+    color: var(--text);
 }
 .add-screen .slider {
     -webkit-appearance: none;
