@@ -23,7 +23,7 @@
                 }
             ?>
 
-            <div class="container day border-color">
+            <div class="container day border_color">
                 <div class="title-row">
                     <h3><?php echo($date->format("D, d.m.Y")); ?></h3>
                     <h3 class="energyAverage"><?php echo($average); ?></h3>
@@ -68,6 +68,11 @@
         var averageValue = document.getElementsByClassName("energyAverage");
         for (var i = 0; i < averageValue.length; i++) {
             calculateColor(averageValue[i].textContent, averageValue[i]);
+        }
+
+        var border = document.getElementsByClassName("border_color");
+        for (var i = 0; i < averageValue.length; i++) {
+            calculateBorderColor(averageValue[i].textContent, border[i]);
         }
 
         function redirectToEdit(id) {

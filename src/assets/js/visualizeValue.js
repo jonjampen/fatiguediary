@@ -12,3 +12,8 @@ function calculateColor(value, text) {
     color = colors[Math.floor(value/3*2)];
     text.style.color = color;
 }
+function calculateBorderColor(value, border) {
+    color = colors[Math.floor(value/3*2)];
+    border.style.borderColor = color;
+    console.log(value);
+}

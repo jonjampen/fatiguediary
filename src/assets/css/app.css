@@ -378,7 +378,7 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 
 /* Entries */
 .container.day {
-    border-left: 4px solid green;
+    border-left: 4px solid var(--container);
 }
 .day .title-row {
     display: flex;
