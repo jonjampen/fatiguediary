@@ -1,46 +1,29 @@
 /*variables*/
 :root {
+    /* General */
     --primary: #4A83B4;
     --secondary: #F55B53;
+    --gray: #7D8082;
+    --error-content: #f39e9e;
+    --error-border: #a04444;
+
+
+    /* Dark
+    */
     --background: #1E1F1F;
     --container: #252627;
-    --gray: #7D8082;
     --text: #F8FAFC;
+    
+    /* Light
+    --background: #F8FAFC;
+    --container: #DBE6F0;
+    --text: #1E1F1F;
+    */
+    
 
     --input: var(--background);
     --link_p: var(--primary);
     --link_s: var(--secondary);
-
-    --error-content: #f39e9e;
-    --error-border: #a04444;
-
-    /*
-    --primary: #4A83B4;
-    --secondary: #F55B53;
-    --background: #293742;
-    --container: #35434F;
-    
-    --text_primary: #ffffff;
-    --text_secondary: #000000;
-    --text_background: #ffffff;
-    --text_container: #ffffff;
-    --link: #4A83B4;
-    
-    --error-content: #f39e9e;
-    --error-border: #a04444;
-    
-    --side_nav: #293742;
-
-
-    --text: #ffffff;
-    --input: #293742;
-    --add_btn: #414141;
-    --button: #4A83B4;
-
-    --bottom_nav: #35434F;
-    --nav_icons: #ffffff;
-    --active: #1c1c1c;
-    */
 }
 
 * {
