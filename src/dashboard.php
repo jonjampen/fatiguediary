@@ -2,6 +2,8 @@
 print_head(array('<title>Dashboard</title>'), false);
 print_body();
 $todayDate = date("Y-m-d");
+$daterangeStart = $todayDate;
+$daterangeEnd = $todayDate;
 $energylevels = getEnergyLevelsByDate($todayDate);
 ?>
     <div class="welcome-text">
@@ -63,6 +65,7 @@ $energylevels = getEnergyLevelsByDate($todayDate);
 
 
 
+    <script src="assets/chart/moment.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
     <script src="assets/js/visualizeValue.js"></script>
 
@@ -98,14 +101,17 @@ $energylevels = getEnergyLevelsByDate($todayDate);
                     };
                     ?>
                 ],
+                min: new Date("<?php echo($daterangeStart); ?> 06:00:00").getTime(),
+                max: new Date("<?php echo($daterangeEnd); ?> 22:30:00").getTime(),
                 labels: {
+                    formatter: function(val) {
+                        return moment(new Date(val)).format("HH:mm");
+                    },
                     style: {
                         colors: '#FFFFFF',
                     },
                     datetimeUTC: false, // Do not convert to UTC
                 },
-                // min: new Date("04.07.2022 06:00:00").getTime(),
-                // max: new Date("04.07.2022 23:00:00").getTime(),
             },
             yaxis: {
                 labels: {
