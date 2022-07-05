@@ -377,6 +377,27 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     column-gap: 8px;
 }
 
+.rated-activities {
+    display: flex;
+    flex: 1 1 0px;
+    column-gap: 8px;
+    justify-content: space-between;
+}
+.rated-activity {
+    border: 2px solid var(--primary);
+    border-radius: 8px;
+    flex-grow: 1;
+    flex-basis: 0;
+    padding-left: 4px;
+    padding-right: 4px;
+    padding-top: 16px;
+    padding-bottom: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
 /* Entries */
 .container.day {
     border-left: 2px solid var(--container);

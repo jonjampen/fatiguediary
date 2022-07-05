@@ -39,25 +39,33 @@ $energylevels = getEnergyLevelsByDate($todayDate);
 
     <div class="container">
         <h3 class="center-title">Aktivitäten, die dir Energie geben.</h3>
+        <div class="rated-activities">
         <?php
-            foreach ($goodActivities as $goodActivity) {
-                echo("<p>" . $goodActivity . "</p>");
+            for ($i = 0; $i < count($goodActivities) && $i < 3; $i++) {
+                $goodActivity = $goodActivities[$i];
+
+                echo('<p class="rated-activity border_color">' . $goodActivity['name'] . '</p>');
             }
         ?>
+        </div>
     </div>
     <div class="container">
         <h3 class="center-title">Aktivitäten, die dir Energie rauben.</h3>
-        <?php
-            foreach ($badActivities as $badActivity) {
-                echo("<p>" . $badActivity . "</p>");
-            }
-        ?>
+        <div class="rated-activities">
+            <?php
+                for ($i = 0; $i < count($badActivities) && $i < 3; $i++) {
+                    $badActivity = $badActivities[$i];
+                    echo('<p class="rated-activity border_color">' . $badActivity['name'] . '</p>');
+                }
+            ?>
+        </div>
     </div>
 
 
 
     <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
-    
+    <script src="assets/js/visualizeValue.js"></script>
+
     <script>
         var options = {
             series: [{
@@ -123,6 +131,23 @@ $energylevels = getEnergyLevelsByDate($todayDate);
 
         var energylevel_area = new ApexCharts(document.querySelector("#energylevel_area"), options);
         energylevel_area.render();
+
+        var border = document.getElementsByClassName("border_color");
+        <?php
+            $j = 0;
+            for ($i = 0; $i < count($goodActivities) && $i < 3; $i++) {
+                $goodActivity = $goodActivities[$i];
+                echo("calculateBorderColor(" . round((10 + $goodActivity['score'])*2)/4 . ", border[" . $j . "]); \n");
+                $j++;
+            }
+            for ($i = 0; $i < count($badActivities) && $i < 3; $i++) {
+                $badActivity = $badActivities[$i];
+                echo("calculateBorderColor(" . round((10 + $badActivity['score'])*2)/4 . ", border[" . $j . "]); \n");
+                $j++;
+            }
+
+        ?>
+        
     </script>
 
 </body>
