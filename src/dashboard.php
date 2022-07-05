@@ -6,15 +6,17 @@ $daterangeStart = $todayDate;
 $daterangeEnd = $todayDate;
 $energylevels = getEnergyLevelsByDate($todayDate);
 ?>
+
+
     <div class="welcome-text">
         <h6>Hi <?php echo($_SESSION['name']);?></h6>
         <h3>Your Dashboard</h3>
     </div>
     <div class="date-range">
-        <p>Day</p>
-        <p>Week</p>
-        <p class="active">Month</p>
-        <p>Year</p>
+        <p id="range_d">Day</p>
+        <p id="range_w">Week</p>
+        <p id="range_m" class="active">Month</p>
+        <p id="range_y">Year</p>
     </div>
     <div class="date-picker">
         <a href=""><span class="material-icons">chevron_left</span></a>
@@ -153,6 +155,23 @@ $energylevels = getEnergyLevelsByDate($todayDate);
             }
 
         ?>
+
+    document.getElementById("range_d").addEventListener("click", function () { changeDateRange(0); });
+    document.getElementById("range_w").addEventListener("click", function () { changeDateRange(1); });
+    document.getElementById("range_m").addEventListener("click", function () { changeDateRange(2); });
+    document.getElementById("range_y").addEventListener("click", function () { changeDateRange(3); });
+
+    function changeDateRange(index) {
+        range = ["range_d", "range_w", "range_m", "range_y"];
+        for (var i = 0; i < range.length; i++) {
+            if (i == index) {
+                document.getElementById(range[i]).classList.add("active");
+            }
+            else {
+                document.getElementById(range[i]).classList.remove("active");
+            }
+        }
+    }
         
     </script>
 
