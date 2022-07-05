@@ -30,6 +30,8 @@ $energylevels = getEnergyLevelsByDate($todayDate);
         </div>
     </div>
 
+    <?php calculateActivity(); ?>
+
     <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
     
     <script>

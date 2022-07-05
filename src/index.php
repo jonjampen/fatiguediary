@@ -69,6 +69,7 @@ else {
     }
     if ($page == "dashboard") {
         include("app/controllers/get-energy.php");
+        include("app/controllers/calculate-activities.php");
         include("dashboard.php");
     }
     if ($page == "logout") {
