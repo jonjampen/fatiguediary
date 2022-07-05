@@ -12,8 +12,37 @@ if (isset($_POST['add-energy'])) {
     $activities = explode(",", $_POST['activities']); //string to array
     $notes = $_POST['notes'];
 
+    $energylevels = getEnergyLevelsByDate();
+    $difference = $energylevel - end($energylevels)['energylevel']; //TODO if last date is not newest
+
+    // count occurrences of activity in db
+    $activities_count = array();
+    foreach ($activities as $activity_id) {
+        $stmt = $conn->prepare("SELECT * FROM energy_activities WHERE activity_id=?");
+        $stmt->bind_param("i", $activity_id);
+        $stmt->execute();
+        $stmt->store_result();
+        $activity_count = $stmt->num_rows;
+        $stmt->close();
+
+        //get old score
+        $stmt = $conn->prepare("SELECT score FROM activities WHERE id=?");
+        $stmt->bind_param("i", $activity_id);
+        $stmt->execute();
+        $stmt->bind_result($old_score);
+        $stmt->close();        
+
+        //calculate and set new score
+        $new_score = (($old_score * $activity_count) + $difference) / ($activity_count + 1);
+        echo $new_score;
+
+        $stmt = $conn->prepare("UPDATE activities SET score=? WHERE id=?");
+        $stmt->bind_param("di", $new_score, $activity_id);
+        $stmt->execute();
+        $stmt->close();
+    }
+
     unset($_SESSION['errors']);
-    
 
     //Adding energylevel
     $stmt_add_energy = $conn->prepare("INSERT INTO energy (user_id, energylevel, notes, datetime) VALUES (?, ?, ?, ?)");
