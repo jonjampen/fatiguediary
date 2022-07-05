@@ -29,12 +29,16 @@ if (isset($_POST['add-energy'])) {
         $stmt = $conn->prepare("SELECT score FROM activities WHERE id=?");
         $stmt->bind_param("i", $activity_id);
         $stmt->execute();
-        $stmt->bind_result($old_score);
+        $stmt->bind_result($selected_score);
+
+        $old_score = 0;
+        while ($stmt->fetch()) {
+            $old_score = $selected_score;
+        }
         $stmt->close();        
 
         //calculate and set new score
         $new_score = (($old_score * $activity_count) + $difference) / ($activity_count + 1);
-        echo $new_score;
 
         $stmt = $conn->prepare("UPDATE activities SET score=? WHERE id=?");
         $stmt->bind_param("di", $new_score, $activity_id);
@@ -44,14 +48,14 @@ if (isset($_POST['add-energy'])) {
 
     unset($_SESSION['errors']);
 
-    //Adding energylevel
+    // Adding energylevel
     $stmt_add_energy = $conn->prepare("INSERT INTO energy (user_id, energylevel, notes, datetime) VALUES (?, ?, ?, ?)");
     $stmt_add_energy->bind_param("idss", $_SESSION['id'], $energylevel, $notes, $datetime2);
     $stmt_add_energy->execute();
     $energy_id = $stmt_add_energy->insert_id;
     $stmt_add_energy->close();
 
-    //adding activities to db
+    // Adding activities to db
     foreach ($activities as $activity) {
         $stmt_add_activities = $conn->prepare("INSERT INTO energy_activities (user_id, energy_id, activity_id) VALUES (?, ?, ?)");
         $stmt_add_activities->bind_param("iii", $_SESSION['id'], $energy_id, $activity);
