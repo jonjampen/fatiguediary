@@ -1,4 +1,19 @@
 <?php
+function sortByDatetime($array) {
+    usort($array, function($a, $b) {
+        $a_datetime = new DateTime($a['datetime']);
+        $b_datetime = new DateTime($b['datetime']);
+        
+        if ($a_datetime == $b_datetime) {
+            return 0;
+        }
+        
+        return $a_datetime < $b_datetime ? -1 : 1;
+    });
+
+    return $array;
+}
+
 function getEnergyLevelsByDate($date) {
     global $conn;
 
@@ -14,6 +29,8 @@ function getEnergyLevelsByDate($date) {
         $energylevels[] = array("energy_id" => $energy_id, "energylevel" => $energylevel, "datetime" => $newDateTime, "date" => $newDate);
     }
     $stmt_get_energy_level->close();
+    
+    $energylevels = sortByDatetime($energylevels);
     return $energylevels;
 }
 
