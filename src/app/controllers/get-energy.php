@@ -14,11 +14,16 @@ function sortByDatetime($array) {
     return $array;
 }
 
-function getEnergyLevelsByDate($date) {
+function getEnergyLevelsByDate($date = null) {
     global $conn;
+    if (!$date == null) {
+        $stmt_get_energy_level = $conn->prepare("SELECT id, energylevel, datetime FROM energy WHERE user_id=? AND cast(datetime as date)=?");
+        $stmt_get_energy_level->bind_param("is", $_SESSION['id'], $date);
+    } else {
+        $stmt_get_energy_level = $conn->prepare("SELECT id, energylevel, datetime FROM energy WHERE user_id=?");
+        $stmt_get_energy_level->bind_param("i", $_SESSION['id']);
+    }
 
-    $stmt_get_energy_level = $conn->prepare("SELECT id, energylevel, datetime FROM energy WHERE user_id=? AND cast(datetime as date)=?");
-    $stmt_get_energy_level->bind_param("is", $_SESSION['id'], $date);
     $stmt_get_energy_level->execute();
 
     $stmt_get_energy_level->bind_result($energy_id, $energylevel, $datetime);
@@ -29,7 +34,7 @@ function getEnergyLevelsByDate($date) {
         $energylevels[] = array("energy_id" => $energy_id, "energylevel" => $energylevel, "datetime" => $newDateTime, "date" => $newDate);
     }
     $stmt_get_energy_level->close();
-    
+
     $energylevels = sortByDatetime($energylevels);
     return $energylevels;
 }
