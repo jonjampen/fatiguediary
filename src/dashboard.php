@@ -29,8 +29,32 @@ $energylevels = getEnergyLevelsByDate($todayDate);
             <button class="btn-primary outline" type="" name="">Wochen Druchschn.</button>
         </div>
     </div>
+    
+    <?php
+        $goodAndBad = array();
+        $goodAndBad = calculateActivity();
+        $goodActivities = $goodAndBad['good'];
+        $badActivities = $goodAndBad['bad'];        
+        ?>
 
-    <?php calculateActivity(); ?>
+    <div class="container">
+        <h3 class="center-title">Aktivitäten, die dir Energie geben.</h3>
+        <?php
+            foreach ($goodActivities as $goodActivity) {
+                echo("<p>" . $goodActivity . "</p>");
+            }
+        ?>
+    </div>
+    <div class="container">
+        <h3 class="center-title">Aktivitäten, die dir Energie rauben.</h3>
+        <?php
+            foreach ($badActivities as $badActivity) {
+                echo("<p>" . $badActivity . "</p>");
+            }
+        ?>
+    </div>
+
+
 
     <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
     
