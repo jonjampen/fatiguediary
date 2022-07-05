@@ -35,7 +35,7 @@ $energylevels = getEnergyLevelsByDate($todayDate);
     <script>
         var options = {
             series: [{
-                name: 'series1',
+                name: 'Energie',
                 data: [
                     <?php
                     foreach ($energylevels as $energylevel) {
@@ -60,15 +60,18 @@ $energylevels = getEnergyLevelsByDate($todayDate);
                 categories: [
                     <?php
                     foreach ($energylevels as $energylevel) {
-                    echo('"' . date("Y-m-d H:i:s", strtotime($energylevel['datetime'])) . '"' . ',');
+                        echo('"' . date("Y-m-d H:i:s", strtotime($energylevel['datetime'])) . '"' . ',');
                     };
                     ?>
                 ],
                 labels: {
                     style: {
                         colors: '#FFFFFF',
-                    }
+                    },
+                    datetimeUTC: false, // Do not convert to UTC
                 },
+                // min: new Date("04.07.2022 06:00:00").getTime(),
+                // max: new Date("04.07.2022 23:00:00").getTime(),
             },
             yaxis: {
                 labels: {
@@ -85,9 +88,11 @@ $energylevels = getEnergyLevelsByDate($todayDate);
             },
             tooltip: {
                 x: {
+                    show: true,
                     format: 'dd/MM/yy HH:mm'
                 },
             },
+
         };
 
         var energylevel_area = new ApexCharts(document.querySelector("#energylevel_area"), options);
