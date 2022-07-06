@@ -4,6 +4,7 @@ print_body();
 $todayDate = date("Y-m-d");
 $daterangeStart = $todayDate;
 $daterangeEnd = $todayDate;
+
 $energylevels = getEnergyLevelsByDate($todayDate);
 ?>
 
@@ -19,9 +20,9 @@ $energylevels = getEnergyLevelsByDate($todayDate);
         <p id="range_y" class="range-item">Jahr</p>
     </div>
     <div class="date-picker">
-        <a href=""><span class="material-icons">chevron_left</span></a>
-        <input type="date" class="date" value="<?php echo($todayDate); ?>">
-        <a href=""><span class="material-icons">chevron_right</span></a>
+        <span class="material-icons" id="nextDay">chevron_left</span>
+        <input id="dateInput" type="date" class="date" value="<?php echo($todayDate); ?>">
+        <span class="material-icons" id="prevDay">chevron_right</span>
     </div>
     
     <div class="container chart">
@@ -156,6 +157,7 @@ $energylevels = getEnergyLevelsByDate($todayDate);
 
         ?>
 
+
     document.getElementById("range_d").addEventListener("click", function () { changeDateRange(0); });
     document.getElementById("range_w").addEventListener("click", function () { changeDateRange(1); });
     document.getElementById("range_m").addEventListener("click", function () { changeDateRange(2); });
@@ -172,7 +174,31 @@ $energylevels = getEnergyLevelsByDate($todayDate);
             }
         }
     }
-        
+    
+
+    document.getElementById("nextDay").addEventListener("click", function () { changeDate(-1); });
+    document.getElementById("prevDay").addEventListener("click", function () { changeDate(1); });
+    var dateInput = document.getElementById("dateInput");
+    
+
+    function changeDate(change) {
+        var xmlhttp = new XMLHttpRequest();
+        xmlhttp.onreadystatechange=function() {
+            if (this.readyState==4 && this.status==200) {
+                dateInput.value = this.responseText;
+            }
+        };
+
+        date = new Date(dateInput.value);
+        newDate = date.setDate(date.getDate() + change); // add one day
+        newDate = moment(newDate).format("YYYY-MM-DD");
+
+        xmlhttp.open("GET", "app/controllers/dashboard-date.php?newDate=" + newDate, true);
+        xmlhttp.send();
+    }
+
+
+
     </script>
 
 </body>
