@@ -2,10 +2,7 @@
 print_head(array('<title>Dashboard</title>'), false);
 print_body();
 $todayDate = date("Y-m-d");
-$daterangeStart = $todayDate;
-$daterangeEnd = $todayDate;
 
-$energylevels = getEnergyLevelsByDate($todayDate);
 ?>
 
 
@@ -72,75 +69,9 @@ $energylevels = getEnergyLevelsByDate($todayDate);
     <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
     <script src="assets/js/visualizeValue.js"></script>
 
+    <script id="script"></script>
+
     <script>
-        var options = {
-            series: [{
-                name: 'Energie',
-                data: [
-                    <?php
-                    foreach ($energylevels as $energylevel) {
-                        echo($energylevel['energylevel'] . ',');
-                    };
-                    ?>
-                ]
-            }],
-            chart: {
-                height: 250,
-                type: 'area'
-            },
-            dataLabels: {
-                enabled: false
-            },
-            stroke: {
-                curve: 'smooth'
-            },
-            colors:['#F55B53'],
-            xaxis: {
-                type: 'datetime',
-                categories: [
-                    <?php
-                    foreach ($energylevels as $energylevel) {
-                        echo('"' . date("Y-m-d H:i:s", strtotime($energylevel['datetime'])) . '"' . ',');
-                    };
-                    ?>
-                ],
-                min: new Date("<?php echo($daterangeStart); ?> 06:00:00").getTime(),
-                max: new Date("<?php echo($daterangeEnd); ?> 22:30:00").getTime(),
-                labels: {
-                    formatter: function(val) {
-                        return moment(new Date(val)).format("HH:mm");
-                    },
-                    style: {
-                        colors: '#FFFFFF',
-                    },
-                    datetimeUTC: false, // Do not convert to UTC
-                },
-            },
-            yaxis: {
-                labels: {
-                    style: {
-                        colors: '#FFFFFF',
-                    },
-                    formatter: function (val) {
-                        return val.toFixed(0) // only integers
-                    },
-                },
-                tickAmount: 5, // only 6 labels
-                min: 0,
-                max: 10
-            },
-            tooltip: {
-                x: {
-                    show: true,
-                    format: 'dd/MM/yy HH:mm'
-                },
-            },
-
-        };
-
-        var energylevel_area = new ApexCharts(document.querySelector("#energylevel_area"), options);
-        energylevel_area.render();
-
         var border = document.getElementsByClassName("border_color");
         <?php
             $j = 0;
@@ -181,21 +112,32 @@ $energylevels = getEnergyLevelsByDate($todayDate);
     var dateInput = document.getElementById("dateInput");
     
 
-    function changeDate(change) {
-        var xmlhttp = new XMLHttpRequest();
-        xmlhttp.onreadystatechange=function() {
-            if (this.readyState==4 && this.status==200) {
-                dateInput.value = this.responseText;
-            }
-        };
+    // function changeDate(change) {
+    //     var xmlhttp = new XMLHttpRequest();
+    //     xmlhttp.onreadystatechange=function() {
+    //         if (this.readyState==4 && this.status==200) {
+    //             dateInput.value = this.responseText;
+    //         }
+    //     };
 
-        date = new Date(dateInput.value);
-        newDate = date.setDate(date.getDate() + change); // add one day
-        newDate = moment(newDate).format("YYYY-MM-DD");
+    //     date = new Date(dateInput.value);
+    //     newDate = date.setDate(date.getDate() + change); // add one day
+    //     newDate = moment(newDate).format("YYYY-MM-DD");
 
-        xmlhttp.open("GET", "app/controllers/dashboard-date.php?newDate=" + newDate, true);
-        xmlhttp.send();
-    }
+    //     xmlhttp.open("GET", "app/controllers/dashboard-date.php?newDate=" + newDate, true);
+    //     xmlhttp.send();
+    // }
+
+    var xmlhttp = new XMLHttpRequest();
+    xmlhttp.onreadystatechange=function() {
+        if (this.readyState==4 && this.status==200) {
+            document.getElementById("script").innerHTML = this.responseText;
+        }
+    };
+
+    xmlhttp.open("GET", "index.php?page=ajax&startDate=2022-07-05&endDate=2022-07-06", true);
+    xmlhttp.send();
+
 
 
 

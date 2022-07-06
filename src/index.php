@@ -7,7 +7,7 @@ $pages = [
     //information
     "app", "contact",
     // controllers
-    "mail",
+    "mail", "ajax"
 ];
 
 //db.php with $servername, $username, $password (gitignore)
@@ -70,7 +70,7 @@ else {
     if ($page == "dashboard") {
         include("app/controllers/get-energy.php");
         include("app/controllers/calculate-activities.php");
-        include("app/controllers/dashboard-date.php");
+        // include("app/controllers/dashboard-date.php");
         include("dashboard.php");
     }
     if ($page == "logout") {
@@ -87,6 +87,10 @@ else {
         include("app/controllers/get-energy.php");
         include("app/controllers/display-activities.php");
         include("all-entries.php");
+    }
+    if ($page == "ajax") {
+        include("app/controllers/get-energy.php");
+        include("chart01.php");
     }
 }
 
