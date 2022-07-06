@@ -349,16 +349,19 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 .date-range {
     display: flex;
     justify-content: space-between;
-    width: 100%;
-    padding-left: 16px;
-    padding-right: 16px;
+    margin-left: 16px;
+    margin-right: 16px;
     margin-bottom: 16px;
 }
-.date-range .active {
-    background-color: var(--primary);
+.date-range .range-item {
+    background-color: transparent;
     padding: 4px 8px;
     border-radius: 8px;
 }
+.date-range .active {
+    background-color: var(--primary);
+}
+
 .date-picker {
     display: flex;
     justify-content: center;

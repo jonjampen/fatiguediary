@@ -13,10 +13,10 @@ $energylevels = getEnergyLevelsByDate($todayDate);
         <h3>Your Dashboard</h3>
     </div>
     <div class="date-range">
-        <p id="range_d">Day</p>
-        <p id="range_w">Week</p>
-        <p id="range_m" class="active">Month</p>
-        <p id="range_y">Year</p>
+        <p id="range_d" class="range-item active">Tag</p>
+        <p id="range_w" class="range-item">Woche</p>
+        <p id="range_m" class="range-item">Monat</p>
+        <p id="range_y" class="range-item">Jahr</p>
     </div>
     <div class="date-picker">
         <a href=""><span class="material-icons">chevron_left</span></a>
