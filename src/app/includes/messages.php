@@ -12,7 +12,7 @@ if(isset($_SESSION['success'])) {
             position: "center", // `left`, `center` or `right`
             stopOnFocus: true, // Prevents dismissing of toast on hover
             style: {
-                background: "linear-gradient(to right, #00b09b, #96c93d)",
+                background: "linear-gradient(to right, #65B15E, #27A31C)",
             },
             onClick: function(){} // Callback after click
         }).showToast();
@@ -35,7 +35,7 @@ if(isset($_SESSION['errors'])) {
             position: "center", // `left`, `center` or `right`
             stopOnFocus: true, // Prevents dismissing of toast on hover
             style: {
-                background: "linear-gradient(to right, #00b09b, #96c93d)",
+                background: "linear-gradient(to right, #FC6D6D, #FC4646)",
             },
             onClick: function(){} // Callback after click
         }).showToast();
