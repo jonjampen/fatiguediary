@@ -89,6 +89,13 @@ if (isset($_POST['edit-energy'])) {
     $stmt->bind_param("ii", $energy_id, $_SESSION['id']);
     $stmt->execute();
     $stmt->close();
+        
+    foreach ($activities as $activity) {
+        $stmt = $conn->prepare("INSERT INTO energy_activities (user_id, energy_id, activity_id) VALUES (?, ?, ?)");
+        $stmt->bind_param("iii", $_SESSION['id'], $energy_id, $activity);
+        $stmt->execute();
+        $stmt->close();
+    }
 
     header("location: index.php?page=dashboard");
 
