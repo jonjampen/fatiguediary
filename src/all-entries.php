@@ -1,7 +1,8 @@
 <?php
     print_head(array('<title>Alle Einträge | Fatigue Diary</title>'), false);
     print_body();
-?>
+    includeToastify();
+    ?>
 
     <div class="entries-screen">
         <h2>Einträge</h2>
@@ -58,6 +59,8 @@
             </div>
         <?php endfor; ?>
     </div>
+
+    
     <script src="assets/js/visualizeValue.js"></script>
     <script>
         var entryValue = document.getElementsByClassName("energyValue");
@@ -79,5 +82,6 @@
             window.location.href = "index.php?page=add-new&id=" + id;
         }
     </script>
+
 </body>
 </html>

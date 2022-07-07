@@ -134,3 +134,8 @@ function print_body($onload = "") {
     include("app/includes/topNavbar.php");
     include("app/includes/bottomNavbar.php");
 }
+
+function includeToastify() {
+    echo('<script type="text/javascript" src="assets/js/toastify.js"></script>');
+    include("app/includes/messages.php");
+}
