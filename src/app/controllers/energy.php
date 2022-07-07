@@ -100,3 +100,19 @@ if (isset($_POST['edit-energy'])) {
     header("location: index.php?page=dashboard");
 
 }
+
+if (isset($_GET['delete'])) {
+    $energy_id = $_GET['id'];
+
+    $stmt = $conn->prepare("DELETE FROM energy WHERE id=?");
+    $stmt->bind_param("i", $energy_id);
+    $stmt->execute();
+    $stmt->close();
+
+    $stmt = $conn->prepare("DELETE FROM energy_activities WHERE energy_id=?");
+    $stmt->bind_param("i", $energy_id);
+    $stmt->execute();
+    $stmt->close();
+
+    header("location: index.php?page=dashboard");
+}

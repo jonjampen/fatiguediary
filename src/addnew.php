@@ -20,7 +20,11 @@ if(isset($_GET['id'])) {
 
     <div class="add-screen">
         <h2>Eintrag <?php if(isset($_GET['id'])){ echo("bearbeiten");} else{ echo("hinzufügen");} ?></h2>
-        <?php if(isset($_GET['id'])){ echo('<span class="material-icons delete">delete</span>');} ?>
+
+        <?php if(isset($_GET['id'])){
+            echo('<a href="index.php?page=add-new&id='. $_GET['id'] . '&delete=true"><span class="material-icons delete">delete</span></a>');
+        }?>
+
         <form action="index.php?page=add-new<?php if(isset($_GET['id'])) { echo("&id=" . $_GET['id']); } ?>" method="post">
             <div class="datetime">
                 <div><span class="material-icons">calendar_month</span> <input type="date" name="date" id="currentDate" onchange="stopUpdatingDate()" value="<?php echo(date("Y-m-d", strtotime($energylevel['datetime']))); ?>"></div>
