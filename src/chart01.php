@@ -1,7 +1,7 @@
 <?php
 // from get start and end date
 $startDate = date("Y-m-d", strtotime($_GET['startDate']));
-$endDate = $_GET['endDate'];
+$endDate = date("Y-m-d", strtotime($_GET['endDate']));
 
 // call function to get energylevels
 $energylevels = getEnergyLevelsByDate($startDate);
@@ -39,8 +39,8 @@ EOF;
                     };
 print<<<EOF
                 ],
-                min: new Date("<?php echo({$startDate}); ?> 06:00:00").getTime(),
-                max: new Date("<?php echo({$endDate}); ?> 22:30:00").getTime(),
+                min: new Date("{$startDate} 06:00:00").getTime(),
+                max: new Date("{$endDate} 22:30:00").getTime(),
                 labels: {
                     formatter: function(val) {
                         return moment(new Date(val)).format("HH:mm");

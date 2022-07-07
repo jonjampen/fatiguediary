@@ -110,23 +110,14 @@ $todayDate = date("Y-m-d");
     document.getElementById("nextDay").addEventListener("click", function () { changeDate(-1); });
     document.getElementById("prevDay").addEventListener("click", function () { changeDate(1); });
     var dateInput = document.getElementById("dateInput");
-    
 
-    // function changeDate(change) {
-    //     var xmlhttp = new XMLHttpRequest();
-    //     xmlhttp.onreadystatechange=function() {
-    //         if (this.readyState==4 && this.status==200) {
-    //             dateInput.value = this.responseText;
-    //         }
-    //     };
-
-    //     date = new Date(dateInput.value);
-    //     newDate = date.setDate(date.getDate() + change); // add one day
-    //     newDate = moment(newDate).format("YYYY-MM-DD");
-
-    //     xmlhttp.open("GET", "app/controllers/dashboard-date.php?newDate=" + newDate, true);
-    //     xmlhttp.send();
-    // }
+    function changeDate(change) {
+        date = new Date(dateInput.value);
+        newDate = date.setDate(date.getDate() + change); // add one day
+        newDate = moment(newDate).format("YYYY-MM-DD");
+        dateInput.value = newDate;
+    }
+    console.log(dateInput.value);
 
     var xmlhttp = new XMLHttpRequest();
     xmlhttp.onreadystatechange=function() {
@@ -135,7 +126,7 @@ $todayDate = date("Y-m-d");
         }
     };
 
-    xmlhttp.open("GET", "index.php?page=ajax&startDate=2022-07-05&endDate=2022-07-06", true);
+    xmlhttp.open("GET", "index.php?page=ajax&startDate=2022-07-05" + "&endDate=2022-07-07", true);
     xmlhttp.send();
 
 
