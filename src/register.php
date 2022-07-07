@@ -5,23 +5,11 @@
     
     print_head(array('<title>Registrieren | Fatigue Diary</title>'), false);
     print_body();
+    includeToastify();
 ?>
 
     <div class="container">
         <h2>Registrieren</h2>
-
-        <!-- Errors -->
-        <?php if (isset($_SESSION['errors'])): ?>
-            <div class="error">
-                <ul>
-                    <?php foreach($_SESSION['errors'] as $error): ?>
-                        <li><?php echo($error); ?></li>
-                    <?php endforeach; ?>
-                </ul>
-            </div>
-            <br>
-        <?php endif; ?>
-
         <form action="index.php?page=users" method="post">
             <div class="inputs">
                 <label for="name">Name</label>

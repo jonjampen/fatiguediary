@@ -21,6 +21,7 @@ if (isset($_POST['register'])) {
         $stmt->bind_param("sss", $name, $email, $hashed_password); //"sss" for data type
         $stmt->execute();
         $stmt->close();
+        $_SESSION['success'][] = "Du hast dich erfolgreich registriert.";
         login($email, null, $remember);
     }
     else {
@@ -47,6 +48,7 @@ if (isset($_POST['login'])) {
     $errors = validateLoginUser($email, $hashed_password);
     
     if (empty($errors)) {
+        $_SESSION['success'][] = "Du hast dich erfolgreich angemeldet.";
         login($email, null, $remember);
     }
     else {
