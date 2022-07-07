@@ -76,10 +76,17 @@ if (isset($_POST['edit-energy'])) {
     $energylevel = $_POST['energylevel'];
     $activities = explode(",", $_POST['activities']); //string to array
     $notes = $_POST['notes'];
+    $energy_id = $_GET['id'];
 
 
     $stmt = $conn->prepare("UPDATE energy SET energylevel=?, notes=?, datetime=? WHERE id=?");
-    $stmt->bind_param("issi", $energylevel, $notes, $datetime2, $_GET['id']);
+    $stmt->bind_param("dssi", $energylevel, $notes, $datetime2, $energy_id);
+    $stmt->execute();
+    $stmt->close();
+
+    // updating activities in db
+    $stmt = $conn->prepare("DELETE FROM energy_activities WHERE energy_id=? AND user_id=?");
+    $stmt->bind_param("ii", $energy_id, $_SESSION['id']);
     $stmt->execute();
     $stmt->close();
 
