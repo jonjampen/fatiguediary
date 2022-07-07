@@ -312,6 +312,14 @@ nav .logo img {
     display: flex;
     justify-content: space-around;
 }
+.delete {
+    color: var(--secondary);
+    display: flex;
+    justify-content: center;
+    font-size: 36px;
+    margin-top: -16px;
+    margin-bottom: 8px;
+}
 
 
 

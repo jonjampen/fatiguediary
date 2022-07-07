@@ -7,21 +7,24 @@ print_head(array(
 $notes = "";
 
 if(isset($_GET['id'])) {
-    print_body("loadActivities()");
-    $energylevels = getEnergyLevelsById($_GET['id']);
-    $notes = $energylevels['notes'];
+    print_body("loadActivities();");
+    $energylevel = getEnergyLevelsById($_GET['id']);
+    $activities = [];
+    $activities = getActivitiesByEnergyId($energylevel['energy_id']);
+    $notes = $energylevel['notes'];
 } else {
     print_body("loadActivities(), calculateDateTime(), setInterval(calculateDateTime, 10000)");
+    $activities = [];
 }
 ?>
 
     <div class="add-screen">
-        <h2>Eintrag hinzufügen</h2>
-
+        <h2>Eintrag <?php if(isset($_GET['id'])){ echo("bearbeiten");} else{ echo("hinzufügen");} ?></h2>
+        <?php if(isset($_GET['id'])){ echo('<span class="material-icons delete">delete</span>');} ?>
         <form action="index.php?page=add-new" method="post">
             <div class="datetime">
-                <div><span class="material-icons">calendar_month</span> <input type="date" name="date" id="currentDate" onchange="stopUpdatingDate()" value="<?php echo(date("Y-m-d", strtotime($energylevels['datetime']))); ?>"></div>
-                <div><span class="material-icons">schedule</span> <input type="time" name="time" id="currentTime" onchange="stopUpdatingTime()" value="<?php echo(date("H:i", strtotime($energylevels['datetime']))); ?>"></div>
+                <div><span class="material-icons">calendar_month</span> <input type="date" name="date" id="currentDate" onchange="stopUpdatingDate()" value="<?php echo(date("Y-m-d", strtotime($energylevel['datetime']))); ?>"></div>
+                <div><span class="material-icons">schedule</span> <input type="time" name="time" id="currentTime" onchange="stopUpdatingTime()" value="<?php echo(date("H:i", strtotime($energylevel['datetime']))); ?>"></div>
             </div>
 
             <div class="container">
@@ -29,7 +32,7 @@ if(isset($_GET['id'])) {
                     <h3>Energie-Level</h3>
                     <a href=""><span class="material-icons">question_mark</span></a>
                 </div>
-                <input class="slider" id="energySlider" type="range" name="energylevel" min="0" max="10" step="0.5" value="<?php echo($energylevels['energylevel']); ?>">
+                <input class="slider" id="energySlider" type="range" name="energylevel" min="0" max="10" step="0.5" value="<?php echo($energylevel['energylevel']); ?>">
                 <div class="description">
                     <h1 id="energyValue" class="level-text"></h1>
                     <h1 id="energyIcon"></h1>
@@ -44,7 +47,14 @@ if(isset($_GET['id'])) {
                 <div class="activities" id="activities">
                     <!-- code from ajax -->
                 </div>
-                <input type="hidden" name="activities" id="activities_storage" value="">
+                <?php
+                $activities_string = "";
+                foreach ($activities as $activity) {
+                    $activities_string .= $activity['id'] . ",";
+                }
+
+                ?>
+                <input type="hidden" name="activities" id="activities_storage" value="<?php echo($activities_string); ?>">
             </div>
 
             <div class="container">
@@ -54,7 +64,7 @@ if(isset($_GET['id'])) {
 
             </div>
             <div class="btn-center">
-                <button class="btn-secondary btn-fixed" type="submit" name="add-energy">Hinzufügen</button>
+                <button class="btn-secondary btn-fixed" type="submit" name="add-energy"><?php if(isset($_GET['id'])){ echo("Änderungen Speichern");} else{ echo("Hinzufügen");} ?></button>
             </div>
         </form>
 
@@ -89,6 +99,7 @@ if(isset($_GET['id'])) {
                 activities.innerHTML=this.responseText;            
                 var modalOpen = document.getElementById("modalOpen");
                 modalOpen.addEventListener('click', openModal, false);
+                setSelectedActivities();
             }
         };
         xmlhttp2.open("GET", "app/controllers/display-activities.php?type=ajax", true);
@@ -108,20 +119,36 @@ if(isset($_GET['id'])) {
     }
     <?php //foreach ($selected_activities as $selected_activity) { $value[]= $selected_activity['id'];} echo(implode(",", $value));?>
     
-    var selected_activities = [];
     var activities_storage = document.getElementById("activities_storage");
     
     
+    function setSelectedActivities() {
+        var selected_activities = [<?php echo $activities_string; ?>];
+        for (var i = 0; i < selected_activities.length; i++) {
+            id = selected_activities[i];
+            
+            //change style
+            let activity = document.getElementById("toggleActivity_" + id);
+            activity.classList.add("active");
+        }
+    }
+    
+    var selected_activities = [<?php echo $activities_string; ?>];
     function toggleActivity(id) {
         if (selected_activities.includes(id)) {
             index = selected_activities.indexOf(id);
             selected_activities.splice(index, 1); //removes from array
+
+            //change style
+            let activity = document.getElementById("toggleActivity_" + id);
+            activity.classList.remove("active");
         } else {
             selected_activities.push(id); //adds to array
+
+            //change style
+            let activity = document.getElementById("toggleActivity_" + id);
+            activity.classList.add("active");
         }
-        //change style
-        var activity = document.getElementById("toggleActivity_" + id);
-        activity.classList.toggle("active");
         
         activities_storage.value = selected_activities;
     }
