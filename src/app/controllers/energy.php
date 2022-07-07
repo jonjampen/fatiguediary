@@ -66,3 +66,23 @@ if (isset($_POST['add-energy'])) {
     
     header("location: index.php?page=dashboard");
 }
+
+if (isset($_POST['edit-energy'])) {
+    //Setting variables to values from the form
+    $date = $_POST['date'];
+    $time = $_POST['time'];
+    $datetime = strtotime($date . " " . $time);
+    $datetime2 = date("Y-m-d H:i", $datetime);
+    $energylevel = $_POST['energylevel'];
+    $activities = explode(",", $_POST['activities']); //string to array
+    $notes = $_POST['notes'];
+
+
+    $stmt = $conn->prepare("UPDATE energy SET energylevel=?, notes=?, datetime=? WHERE id=?");
+    $stmt->bind_param("issi", $energylevel, $notes, $datetime2, $_GET['id']);
+    $stmt->execute();
+    $stmt->close();
+
+    header("location: index.php?page=dashboard");
+
+}

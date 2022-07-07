@@ -21,7 +21,7 @@ if(isset($_GET['id'])) {
     <div class="add-screen">
         <h2>Eintrag <?php if(isset($_GET['id'])){ echo("bearbeiten");} else{ echo("hinzufügen");} ?></h2>
         <?php if(isset($_GET['id'])){ echo('<span class="material-icons delete">delete</span>');} ?>
-        <form action="index.php?page=add-new" method="post">
+        <form action="index.php?page=add-new<?php if(isset($_GET['id'])) { echo("&id=" . $_GET['id']); } ?>" method="post">
             <div class="datetime">
                 <div><span class="material-icons">calendar_month</span> <input type="date" name="date" id="currentDate" onchange="stopUpdatingDate()" value="<?php echo(date("Y-m-d", strtotime($energylevel['datetime']))); ?>"></div>
                 <div><span class="material-icons">schedule</span> <input type="time" name="time" id="currentTime" onchange="stopUpdatingTime()" value="<?php echo(date("H:i", strtotime($energylevel['datetime']))); ?>"></div>
@@ -64,7 +64,8 @@ if(isset($_GET['id'])) {
 
             </div>
             <div class="btn-center">
-                <button class="btn-secondary btn-fixed" type="submit" name="add-energy"><?php if(isset($_GET['id'])){ echo("Änderungen Speichern");} else{ echo("Hinzufügen");} ?></button>
+                
+                <button class="btn-secondary btn-fixed" type="submit" name="<?php if(isset($_GET['id'])){ echo("edit-energy");} else { echo("add-energy");} ?>"><?php if(isset($_GET['id'])){ echo("Änderungen Speichern");} else{ echo("Hinzufügen");} ?></button>
             </div>
         </form>
 
