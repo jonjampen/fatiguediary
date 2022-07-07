@@ -68,6 +68,7 @@ $todayDate = date("Y-m-d");
     <script src="assets/chart/moment.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
     <script src="assets/js/visualizeValue.js"></script>
+    <script type="text/javascript" src="assets/js/toastify.js"></script>
 
     <script id="script"></script>
 
@@ -131,6 +132,19 @@ $todayDate = date("Y-m-d");
 
 
 
+    Toastify({
+        text: "Eintrag wurde erfolgreich bearbeitet!",
+        duration: 3000,
+        newWindow: true,
+        close: true,
+        gravity: "top", // `top` or `bottom`
+        position: "center", // `left`, `center` or `right`
+        stopOnFocus: true, // Prevents dismissing of toast on hover
+        style: {
+            background: "linear-gradient(to right, #00b09b, #96c93d)",
+        },
+        onClick: function(){} // Callback after click
+    }).showToast();
 
     </script>
 
