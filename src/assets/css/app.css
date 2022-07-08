@@ -442,7 +442,7 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 
 
 /* Onboarding */
-.onboarding-screen p, h3 {
+.onboarding-screen p, .onboarding-screen h3 {
     display: flex;
     justify-content: center;
     text-align: center;
