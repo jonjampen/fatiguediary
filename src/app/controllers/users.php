@@ -88,14 +88,18 @@ function login($email, $id, $remember) {
     $_SESSION['email'] = $email;
     unset($_SESSION['errors']);
 
-    loadSettings();
+    $start_onboarding = loadSettings();
     
     if($remember) {
         createRememberToken($_SESSION['id']);
     }
 
     //Redirecting
-    header("location: index.php?page=dashboard");
+    if ($start_onboarding) {
+        header("location: index.php?page=onboarding");
+    } else {
+        header("location: index.php?page=dashboard");
+    }
 }
 
 
@@ -140,7 +144,7 @@ function checkCookie() {
 
 function loadSettings () {
     $settings = loadSettingsDB();
-
+    $start_onboarding = false;
     if (!$settings) {
         global $conn;
         $stmt = $conn->prepare("INSERT INTO settings (user_id) VALUES(?)");
@@ -148,10 +152,14 @@ function loadSettings () {
         $stmt->execute();
         $stmt->close();
 
+        $start_onboarding = true;
+
         $settings = loadSettingsDB();
     }
 
     addSettingsToSession($settings);
+
+    return $start_onboarding;
 
 }
 function loadSettingsDB () {

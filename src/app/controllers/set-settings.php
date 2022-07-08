@@ -8,8 +8,10 @@ if (isset($_POST['set-settings'])) {
     $newsletter = $_GET['n'];
 
 
-    $stmt = $conn->prepare("INSERT INTO settings (user_id, theme, wake_up_time, bed_time, newsletter) VALUES (?,?,?,?,?)");
-    $stmt->bind_param("iissi", $_SESSION['id'], $theme, $wake_up_time, $bed_time, $newsletter);
+    $stmt = $conn->prepare("UPDATE settings SET theme=?, wake_up_time=?, bed_time=?, newsletter=? WHERE user_id =?");
+    $stmt->bind_param("issii", $theme, $wake_up_time, $bed_time, $newsletter, $_SESSION['id']);
     $stmt->execute();
     $stmt->close();
+
+    header("location: index.php?page=dashboard");
 }
