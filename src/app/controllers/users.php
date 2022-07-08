@@ -87,6 +87,8 @@ function login($email, $id, $remember) {
     $_SESSION['name'] = $name;
     $_SESSION['email'] = $email;
     unset($_SESSION['errors']);
+
+    loadSettings();
     
     if($remember) {
         createRememberToken($_SESSION['id']);
@@ -134,6 +136,40 @@ function checkCookie() {
     else {
         return false;
     }
+}
+
+function loadSettings () {
+    $settings = loadSettingsDB();
+
+    if (!$settings) {
+        global $conn;
+        $stmt = $conn->prepare("INSERT INTO settings (user_id) VALUES(?)");
+        $stmt->bind_param("i", $_SESSION['id']);
+        $stmt->execute();
+        $stmt->close();
+
+        $settings = loadSettingsDB();
+    }
+
+    addSettingsToSession($settings);
+
+}
+function loadSettingsDB () {
+    global $conn;
+    $stmt = $conn->prepare("SELECT theme, wake_up_time, bed_time, newsletter FROM settings WHERE user_id=?");
+    $stmt->bind_param("i", $_SESSION['id']);
+    $stmt->execute();
+    $stmt->bind_result($theme, $wake_up_time, $bed_time, $newsletter);
+    $settings = null;
+    
+    while ($stmt->fetch()) {
+        $settings = array("theme" => $theme, "wake_up_time" => $wake_up_time, "bed_time" => $bed_time, "newsletter" => $newsletter);
+    }
+    $stmt->close();
+    return $settings;
+}
+function addSettingsToSession($settings) {
+    $_SESSION['settings'] = $settings;
 }
 
 ?>
