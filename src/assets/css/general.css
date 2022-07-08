@@ -9,16 +9,16 @@
 
 
     /* Dark
-    */
     --background: #1E1F1F;
     --container: #252627;
     --text: #F8FAFC;
+    */
     
     /* Light
+    */
     --background: #F8FAFC;
     --container: #DBE6F0;
     --text: #1E1F1F;
-    */
     
 
     --input: var(--background);
@@ -31,6 +31,7 @@
     margin: 0;
     font-family: 'Roboto', sans-serif;
     font-size: 14px;
+    color: var(--text); 
 }
 
 .container input {
