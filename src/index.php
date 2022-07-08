@@ -1,7 +1,7 @@
 <?php
 $pages = [
     //user
-    "login", "register", "users", "logout",
+    "login", "register", "users", "logout", "onboarding", "onboarding02", "onboarding03", "onboarding04",
     //app
     "dashboard", "add-new", "entries",
     //information
@@ -91,6 +91,21 @@ else {
     if ($page == "ajax") {
         include("app/controllers/get-energy.php");
         include("chart01.php");
+    }
+    if ($page == "onboarding") {
+        include("onboarding/theme.php");
+    }
+    if ($page == "onboarding02") {
+        include("onboarding/awake-time.php");
+    }
+    if ($page == "onboarding03") {
+        include("onboarding/newsletter.php");
+    }
+    if ($page == "onboarding04") {
+        include("onboarding/tutorial.php");
+    }
+    if ($page == "set-settings") {
+        include("app/controllers/set-settings.php");
     }
 }
 

@@ -439,3 +439,27 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     align-items: center;
     font-size: 20px;
 }
+
+
+/* Onboarding */
+.onboarding-screen p, h3 {
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    margin-bottom: 16px;
+    padding-left: 16px;
+    padding-right: 16px;
+}
+.onboarding-screen .btn-option {
+    display: flex;
+    justify-content: center;
+    column-gap: 32px;
+    margin-bottom: 32px;
+}
+.onboarding-screen img {
+    display: block;
+    margin: auto;
+    width: min(90%, 300px);
+    margin-top: 32px;
+    margin-bottom: 32px;
+}
