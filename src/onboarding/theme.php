@@ -23,7 +23,7 @@ includeToastify();
         var btn1 = document.getElementById("btn1");
         var btn2 = document.getElementById("btn2");
         var btn_next = document.getElementById("btn_next");
-        var theme = 1;
+        var theme = 0;
 
         btn1.addEventListener("click", function() { changeOption(1)});
         btn2.addEventListener("click", function() { changeOption(2)});
@@ -34,11 +34,11 @@ includeToastify();
             if (option === 1) {
                 btn1.classList.remove("outline");
                 btn2.classList.add("outline");
-                theme = 0;
+                theme = 1;
             } else if (option === 2) {
                 btn2.classList.remove("outline");
                 btn1.classList.add("outline");
-                theme = 1;
+                theme = 0;
             }
         }
 
