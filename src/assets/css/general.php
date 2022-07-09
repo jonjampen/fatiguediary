@@ -10,6 +10,7 @@ session_start();
     --gray: #7D8082;
     --error-content: #f39e9e;
     --error-border: #a04444;
+    --background: #F8FAFC;
 
     <?php if ($_SESSION['settings']['theme'] === 1) {
         echo("
