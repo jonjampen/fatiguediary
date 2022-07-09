@@ -122,7 +122,7 @@ function print_head($page_head, $public) {
         '<meta http-equiv="X-UA-Compatible" content="IE=edge">',
         '<meta name="viewport" content="width=device-width, initial-scale=1.0">',
         '<link rel="stylesheet" href="assets/fonts/materialicons.css">',
-        '<link rel="stylesheet" href="assets/css/general.css">',
+        '<link rel="stylesheet" href="assets/css/general.php">',
         '<link rel="icon" type="image/x-icon" href="assets/img/logo.svg">',
         '<link rel="stylesheet" type="text/css" href="assets/css/toastify.min.css">'
     );
