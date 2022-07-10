@@ -160,7 +160,7 @@ $todayDate = date("Y-m-d");
         });
 
         tour.addStep({
-            text: 'Klicke auf das Plus-Icon, um einen Eintrag hinzuzufügen.',
+            text: 'Mit einem Klick auf das Plus-Icon fügst du einen Eintrag hinzufügen.',
             attachTo: {
                 element: '.add',
                 on: 'top'

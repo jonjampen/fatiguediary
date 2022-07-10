@@ -190,7 +190,7 @@ if(isset($_GET['id'])) {
         });
 
         tour.addStep({
-            text: 'Trage dein Energielevel ein. <br> <br> Energielevel: Das Energielevel beschreibt, wie gut du dich momentan gerade fühlst. Wenn du dich gerade gut fühlst, wähle ein höheres Energielevel, wenn du dich aber schlecht fühlst, wähle ein tiefes Level.',
+            text: 'Hier kannst du dein Energielevel einstellen. <br> <br> Energielevel: Das Energielevel beschreibt, wie gut du dich momentan gerade fühlst. Wenn du dich gerade gut fühlst, wähle ein höheres Energielevel, wenn du dich aber schlecht fühlst, wähle ein tiefes Level.',
             attachTo: {
                 element: '.energy-container',
                 on: 'bottom'
