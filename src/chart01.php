@@ -1,10 +1,18 @@
 <?php
-// from get start and end date
-$startDate = date("Y-m-d", strtotime($_GET['startDate']));
-$endDate = date("Y-m-d", strtotime($_GET['endDate']));
+// type: int
+$startDatetime = strtotime($_GET['startDate']);
+$endDatetime = strtotime($_GET['endDate']);
 
-// call function to get energylevels
-$energylevels = getEnergyLevelsByDate($startDate);
+//type: string
+$startDate = date("Y-m-d", $startDatetime);
+$endDate = date("Y-m-d", $endDatetime);
+
+//$energylevels = array(    array("energy_id" => $energy_id, "energylevel" => $energylevel, "datetime" => $newDateTime, "date" => $newDate), array(...)   )
+$energylevels = array();
+for ($i = $startDatetime; $i <= $endDatetime; $i = strtotime(date("Y-m-d", $i) . ' +1 day')) {
+    $energylevels = array_merge($energylevels, getEnergyLevelsByDate(date("Y-m-d", $i)));
+}
+
 
 print<<<EOF
         var options = {
