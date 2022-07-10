@@ -155,6 +155,7 @@ function loadSettings () {
         $start_onboarding = true;
 
         $settings = loadSettingsDB();
+        $_SESSION['tour'] = 1;
     }
 
     addSettingsToSession($settings);

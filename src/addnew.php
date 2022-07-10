@@ -2,7 +2,8 @@
 print_head(array(
     '<script src="assets/js/visualizeValue.js"></script>',
     '<script src="assets/js/calculateDateTime.js"></script>',
-    '<title>Eintrag Hinzufügen | Fatigue Diary</title>'), false);
+    '<title>Eintrag Hinzufügen | Fatigue Diary</title>',
+    '<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/shepherd.js@8.3.1/dist/css/shepherd.css"/>'), false);
     
 $notes = "";
 
@@ -31,7 +32,7 @@ if(isset($_GET['id'])) {
                 <div><span class="material-icons">schedule</span> <input type="time" name="time" id="currentTime" onchange="stopUpdatingTime()" value="<?php echo(date("H:i", strtotime($energylevel['datetime']))); ?>"></div>
             </div>
 
-            <div class="container">
+            <div class="container energy-container">
                 <div class="title-info">
                     <h3>Energie-Level</h3>
                     <a href=""><span class="material-icons">question_mark</span></a>
@@ -69,7 +70,7 @@ if(isset($_GET['id'])) {
             </div>
             <div class="btn-center">
                 
-                <button class="btn-secondary btn-fixed" type="submit" name="<?php if(isset($_GET['id'])){ echo("edit-energy");} else { echo("add-energy");} ?>"><?php if(isset($_GET['id'])){ echo("Änderungen Speichern");} else{ echo("Hinzufügen");} ?></button>
+                <button class="btn-secondary btn-fixed tour_add_entry" type="submit" name="<?php if(isset($_GET['id'])){ echo("edit-energy");} else { echo("add-energy");} ?>"><?php if(isset($_GET['id'])){ echo("Änderungen Speichern");} else{ echo("Hinzufügen");} ?></button>
             </div>
         </form>
 
@@ -85,11 +86,11 @@ if(isset($_GET['id'])) {
                 </div>
             </div>
         </div>
-        
     </div>
     
 </body>
 
+<script src="https://cdn.jsdelivr.net/npm/shepherd.js@8.3.1/dist/js/shepherd.min.js"></script>
 <script src="assets/js/modal.js"></script>
 
 <script>
@@ -178,4 +179,99 @@ if(isset($_GET['id'])) {
     }
 
 </script>
+
+<script>
+        const tour = new Shepherd.Tour({
+            useModalOverlay: true,
+            defaultStepOptions: {
+                classes: 'shadow-md bg-purple-dark',
+                scrollTo: true
+            }
+        });
+
+        tour.addStep({
+            text: 'Trage dein Energielevel ein. <br> <br> Energielevel: Das Energielevel beschreibt, wie gut du dich momentan gerade fühlst. Wenn du dich gerade gut fühlst, wähle ein höheres Energielevel, wenn du dich aber schlecht fühlst, wähle ein tiefes Level.',
+            attachTo: {
+                element: '.energy-container',
+                on: 'bottom'
+            },
+            buttons: [
+                {
+                text: 'Weiter',
+                action: tour.next
+                }
+            ]
+        });
+
+        tour.addStep({
+            text: 'Erstelle deine eigenen Aktivitäten indem du aufs Plus-Icon klickst.',
+            attachTo: {
+                element: '.modalOpen',
+                on: 'top'
+            },
+            buttons: [
+                {
+                    action () {
+                        const selector = document.getElementById('modalOpen')
+                        selector.click()
+                        return this.next()
+                    },
+                    text: 'Weiter'
+                }
+            ]
+        });
+
+        tour.addStep({
+            text: 'Gebe den Namen der Aktivität ein und klicke auf "Hinzufügen".',
+            attachTo: {
+                element: '.modal-box .container',
+                on: 'top'
+            },
+            buttons: [
+                {
+                action () {
+                    // const selector = document.getElementById('add_activity_btn'); 
+                    // selector.click()
+                    closeModal();
+                    return this.next()
+                },
+                text: 'Weiter'
+                }
+            ]
+        });
+
+        tour.addStep({
+            text: 'Wähle die Aktivitäten aus, die du gerade gemacht hast, indem du die entsprechenden Aktivitäten anklickst.',
+            attachTo: {
+                element: '.activities',
+                on: 'top'
+            },
+            buttons: [
+                {
+                action () {
+                    // const selector = document.getElementById('add_activity_btn'); 
+                    // selector.click()
+                    closeModal();
+                    return this.next()
+                },
+                text: 'Weiter'
+                }
+            ]
+        });
+
+        tour.addStep({
+            text: 'Klicke auf "Hinzufügen".',
+            attachTo: {
+                element: '.tour_add_entry',
+                on: 'top'
+            },
+
+        });
+
+        tour.start();
+
+        // document.getElementById('modalOpen').addEventListener('click', function() { tour.next(); });
+
+
+    </script>
 </html>

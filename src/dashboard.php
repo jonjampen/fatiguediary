@@ -1,5 +1,5 @@
 <?php
-print_head(array('<title>Dashboard</title>'), false);
+print_head(array('<title>Dashboard</title>', '<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/shepherd.js@8.3.1/dist/css/shepherd.css"/>'), false);
 print_body();
 includeToastify();
 $todayDate = date("Y-m-d");
@@ -41,7 +41,7 @@ $todayDate = date("Y-m-d");
         ?>
 
     <div class="container">
-        <h3 class="center-title">Aktivitäten, die dir Energie geben.</h3>
+        <h3>Aktivitäten, die dir Energie geben.</h3>
         <div class="rated-activities">
         <?php
             for ($i = 0; $i < count($goodActivities) && $i < 3; $i++) {
@@ -53,7 +53,7 @@ $todayDate = date("Y-m-d");
         </div>
     </div>
     <div class="container">
-        <h3 class="center-title">Aktivitäten, die dir Energie rauben.</h3>
+        <h3>Aktivitäten, die dir Energie rauben.</h3>
         <div class="rated-activities">
             <?php
                 for ($i = 0; $i < count($badActivities) && $i < 3; $i++) {
@@ -69,6 +69,7 @@ $todayDate = date("Y-m-d");
     <script src="assets/chart/moment.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
     <script src="assets/js/visualizeValue.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/shepherd.js@8.3.1/dist/js/shepherd.min.js"></script>
 
     <script id="script"></script>
 
@@ -130,6 +131,55 @@ $todayDate = date("Y-m-d");
     xmlhttp.open("GET", "index.php?page=ajax&startDate=2022-07-05" + "&endDate=2022-07-07", true);
     xmlhttp.send();
 
+    </script>
+
+    <script>
+        const tour = new Shepherd.Tour({
+            useModalOverlay: true,
+            defaultStepOptions: {
+                classes: 'shadow-md bg-purple-dark',
+                scrollTo: true
+            }
+        });
+
+        tour.addStep({
+            text: 'Dies ist ein Tutorial für Fatigue Diary. <br> Willkommen zu deinem Dashboard.',
+            attachTo: {
+                on: 'center'
+            },
+            buttons: [
+                {
+                    text: 'Skip tutorial',
+                    action: tour.cancel,
+                },
+                {
+                text: 'Weiter',
+                action: tour.next
+                }
+            ]
+        });
+
+        tour.addStep({
+            text: 'Klicke auf das Plus-Icon, um einen Eintrag hinzuzufügen.',
+            attachTo: {
+                element: '.add',
+                on: 'top'
+            },
+            buttons: [
+                {
+                action () {
+                    const selector = document.getElementById('add');
+                    selector.click()
+                    return this.next()
+                },
+                text: 'Weiter'
+                }
+            ]
+        });
+
+        <?php if($_SESSION['tour'] == 1): ?>
+            tour.start();
+        <?php endif; ?>
     </script>
 
 </body>

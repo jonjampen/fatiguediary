@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/shepherd.js@8.3.1/dist/css/shepherd.css"/>
+</head>
+<body>
+    <div>
+        <button class="btn" id="btn">button</button>
+        <p class="example-css-selector" id="example-step">hello</p>
+    </div>
+</body>
+</html>
+
+
+<script src="https://cdn.jsdelivr.net/npm/shepherd.js@8.3.1/dist/js/shepherd.min.js"></script>
+<script>
+    
+
+    const tour = new Shepherd.Tour({
+        useModalOverlay: true,
+        defaultStepOptions: {
+            classes: 'shadow-md bg-purple-dark',
+            scrollTo: true
+        }
+    });
+
+    tour.addStep({
+        text: 'This step is attached to the bottom of the <code>.example-css-selector</code> element.',
+        attachTo: {
+            element: '.btn',
+            on: 'bottom'
+        },
+        buttons: [
+            {
+            action () {
+                const selector = document.getElementById('btn')
+                selector.click()
+                return this.next()
+            },
+            text: 'Continue'
+            }
+        ]
+    });
+
+    tour.addStep({
+        text: 'This step is attached to the bottom of the <code>.example-css-selector</code> element.',
+        attachTo: {
+            element: '.example-css-selector',
+            on: 'bottom'
+        },
+        buttons: [
+            {
+            text: 'Next',
+            action: tour.next
+            }
+        ]
+    });
+    tour.start();
+    document.getElementById('btn').addEventListener('click', function() { tour.next(); });
+</script>

@@ -23,7 +23,7 @@ function displayActivities() {
     foreach ($activities as $activity) {
         echo "<a class='' id='toggleActivity_" . $activity['id'] . "' href='javascript:toggleActivity(" . $activity['id'] . ")'>" . $activity['name'] . "</a>";
     }
-    echo "<a class='activity add' id='modalOpen'><span class='material-icons'>add</span></a>";
+    echo "<a class='activity add modalOpen' id='modalOpen'><span class='material-icons'>add</span></a>";
 
 }
 
