@@ -17,20 +17,20 @@ $todayDate = date("Y-m-d");
         <p id="range_m" class="range-item">Monat</p>
         <p id="range_y" class="range-item">Jahr</p>
     </div>
-    <div class="date-picker">
+    <!-- <div class="date-picker">
         <span class="material-icons" id="nextDay">chevron_left</span>
         <input id="dateInput" type="date" class="date" value="<?php echo($todayDate); ?>">
         <span class="material-icons" id="prevDay">chevron_right</span>
-    </div>
+    </div> -->
     
     <div class="container chart">
         <h3 class="center-title">Energie</h3>
         <div id="energylevel_area"></div>
-        <div class="point-amount">
+        <!-- <div class="point-amount">
             <button class="btn-primary" type="" name="">Alle Werte</button>
             <button class="btn-primary outline" type="" name="">Tages Druchschn.</button>
             <button class="btn-primary outline" type="" name="">Wochen Druchschn.</button>
-        </div>
+        </div> -->
     </div>
     
     <?php
@@ -106,7 +106,11 @@ $todayDate = date("Y-m-d");
                 document.getElementById(range_type[i]).classList.remove("active");
             }
         }
-        updateChart();
+        if (range >= 2) {
+            document.getElementById("energylevel_area").innerHTML = "<p>Diese Ansicht kommt bald...</p>";
+        } else {
+            updateChart();
+        }
     }
     
 
