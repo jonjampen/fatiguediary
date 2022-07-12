@@ -1,11 +1,10 @@
 <?php
-// type: int
-$startDatetime = strtotime($_GET['startDate']);
-$endDatetime = strtotime($_GET['endDate']);
-
-//type: string
+$startDatetime = strtotime($_GET['date'] . 'last monday');
 $startDate = date("Y-m-d", $startDatetime);
+
+$endDatetime = strtotime($startDate . " +7 days");
 $endDate = date("Y-m-d", $endDatetime);
+
 
 //$energylevels = array(    array("energy_id" => $energy_id, "energylevel" => $energylevel, "datetime" => $newDateTime, "date" => $newDate), array(...)   )
 $energylevels = array();
@@ -36,7 +35,7 @@ print<<<EOF
             stroke: {
                 curve: 'smooth'
             },
-            colors:['#ffffff'],
+            colors:['#F55B53'],
             xaxis: {
                 type: 'datetime',
                 categories: [
@@ -51,7 +50,7 @@ print<<<EOF
                 max: new Date("{$endDate} 22:30:00").getTime(),
                 labels: {
                     formatter: function(val) {
-                        return moment(new Date(val)).format("HH:mm");
+                        return moment(new Date(val)).format("ddd");
                     },
                     style: {
                         colors: '#FFFFFF',

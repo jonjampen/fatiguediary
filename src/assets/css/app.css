@@ -1,4 +1,7 @@
 /*general*/
+* {
+    color: #000000;
+}
 html, body {
     min-height: 100%;
     background: var(--background);
@@ -21,6 +24,10 @@ h3 { /*container title*/
     font-weight: 500;
     font-size: 24px;
     margin-bottom: 16px;
+}
+h6 {
+    color: var(--gray);
+    font-weight: 100;
 }
 p {
     color: var(--text);

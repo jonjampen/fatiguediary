@@ -1,21 +1,24 @@
 <?php
 // type: int
-$startDatetime = strtotime($_GET['startDate']);
-$endDatetime = strtotime($_GET['endDate']);
+$startDatetime = strtotime($_GET['date']);
 
 //type: string
 $startDate = date("Y-m-d", $startDatetime);
-$endDate = date("Y-m-d", $endDatetime);
+$endDate = $startDate;
+
+$wakeUpTime = date("H:i:s", strtotime($_SESSION['settings']['wake_up_time']));
+$bedTime = date("H:i:s", strtotime($_SESSION['settings']['bed_time']));
 
 //$energylevels = array(    array("energy_id" => $energy_id, "energylevel" => $energylevel, "datetime" => $newDateTime, "date" => $newDate), array(...)   )
 $energylevels = array();
-for ($i = $startDatetime; $i <= $endDatetime; $i = strtotime(date("Y-m-d", $i) . ' +1 day')) {
-    $energylevels = array_merge($energylevels, getEnergyLevelsByDate(date("Y-m-d", $i)));
-}
+$energylevels = getEnergyLevelsByDate($startDate);
 
 
 print<<<EOF
         var options = {
+            noData: {
+                text: "No Data Available",
+            },
             series: [{
                 name: 'Energie',
                 data: [
@@ -47,14 +50,14 @@ EOF;
                     };
 print<<<EOF
                 ],
-                min: new Date("{$startDate} 06:00:00").getTime(),
-                max: new Date("{$endDate} 22:30:00").getTime(),
+                min: new Date("{$startDate} {$wakeUpTime}").getTime(),
+                max: new Date("{$endDate} {$bedTime}").getTime(),
                 labels: {
                     formatter: function(val) {
                         return moment(new Date(val)).format("HH:mm");
                     },
                     style: {
-                        colors: '#FFFFFF',
+                        colors: '#7D8082',
                     },
                     datetimeUTC: false, // Do not convert to UTC
                 },
@@ -62,7 +65,7 @@ print<<<EOF
             yaxis: {
                 labels: {
                     style: {
-                        colors: '#FFFFFF',
+                        colors: '#7D8082',
                     },
                     formatter: function (val) {
                         return val.toFixed(0) // only integers
@@ -78,6 +81,9 @@ print<<<EOF
                     format: 'dd/MM/yy HH:mm'
                 },
             },
+            grid: {
+                borderColor: '#7D8082',
+            }
 
         };
 

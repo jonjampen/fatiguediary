@@ -128,7 +128,7 @@ $todayDate = date("Y-m-d");
                 eval(this.responseText);
             }
         };
-        xmlhttp.open("GET", "index.php?page=ajax&chart=" + range + "&startDate=2022-07-10" + "&endDate=2022-07-11", true);
+        xmlhttp.open("GET", "index.php?page=ajax&chart=" + range + "&date=2022-07-12", true);
         xmlhttp.send();
     }   
     </script>
