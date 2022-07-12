@@ -17,11 +17,11 @@ $todayDate = date("Y-m-d");
         <p id="range_m" class="range-item">Monat</p>
         <p id="range_y" class="range-item">Jahr</p>
     </div>
-    <!-- <div class="date-picker">
+    <div class="date-picker">
         <span class="material-icons" id="nextDay">chevron_left</span>
         <input id="dateInput" type="date" class="date" value="<?php echo($todayDate); ?>">
         <span class="material-icons" id="prevDay">chevron_right</span>
-    </div> -->
+    </div>
     
     <div class="container chart">
         <h3 class="center-title">Energie</h3>
@@ -117,12 +117,16 @@ $todayDate = date("Y-m-d");
     document.getElementById("nextDay").addEventListener("click", function () { changeDate(-1); });
     document.getElementById("prevDay").addEventListener("click", function () { changeDate(1); });
     var dateInput = document.getElementById("dateInput");
+    dateInput.addEventListener("change", function () { changeDate(0); });
+    var date = new Date();
 
     function changeDate(change) {
         date = new Date(dateInput.value);
         newDate = date.setDate(date.getDate() + change); // add one day
         newDate = moment(newDate).format("YYYY-MM-DD");
         dateInput.value = newDate;
+        date = newDate;
+        updateChart();
     }
 
     function updateChart() {
@@ -132,7 +136,7 @@ $todayDate = date("Y-m-d");
                 eval(this.responseText);
             }
         };
-        xmlhttp.open("GET", "index.php?page=ajax&chart=" + range + "&date=2022-07-12", true);
+        xmlhttp.open("GET", "index.php?page=ajax&chart=" + range + "&date=" + moment(date).format("YYYY-MM-DD"), true);
         xmlhttp.send();
     }   
     </script>
