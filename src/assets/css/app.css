@@ -388,6 +388,9 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     text-align: center;
     margin-bottom: 32px;
 }
+.date-picker span {
+    cursor: pointer;
+}
 
 .point-amount {
     display: flex;

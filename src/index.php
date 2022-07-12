@@ -5,7 +5,8 @@ $pages = [
     //app
     "dashboard", "add-new", "entries",
     //information
-    "app", "contact",
+    //"app",
+    "contact",
     // controllers
     "mail", "ajax"
 ];
@@ -41,10 +42,10 @@ if ($page == "users") {
 }
 
 if ($page == "app") {
-    include("app.php");
+    header("location: index.php?page=dashboard");
 }
 if ($page == "contact") {
-    include("contact.php");
+    include("contact_temp.php");
 }
 if ($page == "mail") {
     include("app/controllers/mail.php");
