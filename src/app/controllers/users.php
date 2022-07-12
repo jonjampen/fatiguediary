@@ -6,7 +6,7 @@ if (isset($_POST['register'])) {
     $name = trim($_POST['name']);
     $email = trim($_POST['email']);
     $password = $_POST['password'];
-    $remember = $_POST['remember'];
+    $remember = isset($_POST['remember']) ? $_POST['remember'] : false;
 
     //Hashing password
     $hashed_password = hash("sha3-512", $password);
@@ -36,8 +36,8 @@ if (isset($_POST['login'])) {
     //Setting variables to values from the form
     $email = trim($_POST['email']);
     $password = $_POST['password'];
-    $remember = $_POST['remember'];
-
+    $remember = isset($_POST['remember']) ? $_POST['remember'] : false;
+    
     //Hashing password
     $hashed_password = hash("sha3-512", $password);
 
