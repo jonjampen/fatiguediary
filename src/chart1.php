@@ -36,7 +36,7 @@ print<<<EOF
             stroke: {
                 curve: 'smooth'
             },
-            colors:['#F55B53'],
+            colors:['#ffffff'],
             xaxis: {
                 type: 'datetime',
                 categories: [
@@ -47,7 +47,7 @@ EOF;
                     };
 print<<<EOF
                 ],
-                min: new Date("{$startDate} 06:00:00").getTime(),
+                min: new Date("{$startDate} 05:00:00").getTime(),
                 max: new Date("{$endDate} 22:30:00").getTime(),
                 labels: {
                     formatter: function(val) {
@@ -81,6 +81,7 @@ print<<<EOF
 
         };
 
+        document.getElementById("energylevel_area").innerHTML = "";
         var energylevel_area = new ApexCharts(document.querySelector("#energylevel_area"), options);
         energylevel_area.render();
 EOF;

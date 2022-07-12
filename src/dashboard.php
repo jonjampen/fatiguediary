@@ -70,8 +70,6 @@ $todayDate = date("Y-m-d");
     <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
     <script src="assets/js/visualizeValue.js"></script>
 
-    <script id="script"></script>
-
     <script>
         var border = document.getElementsByClassName("border_color");
         <?php
@@ -90,21 +88,25 @@ $todayDate = date("Y-m-d");
         ?>
 
 
-    document.getElementById("range_d").addEventListener("click", function () { changeDateRange(0); });
-    document.getElementById("range_w").addEventListener("click", function () { changeDateRange(1); });
-    document.getElementById("range_m").addEventListener("click", function () { changeDateRange(2); });
-    document.getElementById("range_y").addEventListener("click", function () { changeDateRange(3); });
+    var range = 0;
+    updateChart();
+
+    document.getElementById("range_d").addEventListener("click", function () { range = 0; changeDateRange(range); });
+    document.getElementById("range_w").addEventListener("click", function () { range = 1; changeDateRange(range); });
+    document.getElementById("range_m").addEventListener("click", function () { range = 2; changeDateRange(range); });
+    document.getElementById("range_y").addEventListener("click", function () { range = 3; changeDateRange(range); });
 
     function changeDateRange(index) {
-        range = ["range_d", "range_w", "range_m", "range_y"];
-        for (var i = 0; i < range.length; i++) {
+        range_type = ["range_d", "range_w", "range_m", "range_y"];
+        for (var i = 0; i < range_type.length; i++) {
             if (i == index) {
-                document.getElementById(range[i]).classList.add("active");
+                document.getElementById(range_type[i]).classList.add("active");
             }
             else {
-                document.getElementById(range[i]).classList.remove("active");
+                document.getElementById(range_type[i]).classList.remove("active");
             }
         }
+        updateChart();
     }
     
 
@@ -118,18 +120,17 @@ $todayDate = date("Y-m-d");
         newDate = moment(newDate).format("YYYY-MM-DD");
         dateInput.value = newDate;
     }
-    console.log(dateInput.value);
 
-    var xmlhttp = new XMLHttpRequest();
-    xmlhttp.onreadystatechange=function() {
-        if (this.readyState==4 && this.status==200) {
-            document.getElementById("script").innerHTML = this.responseText;
-        }
-    };
-
-    xmlhttp.open("GET", "index.php?page=ajax&startDate=2022-07-10" + "&endDate=2022-07-11", true);
-    xmlhttp.send();
-
+    function updateChart() {
+        var xmlhttp = new XMLHttpRequest();
+        xmlhttp.onreadystatechange=function() {
+            if (this.readyState==4 && this.status==200) {
+                eval(this.responseText);
+            }
+        };
+        xmlhttp.open("GET", "index.php?page=ajax&chart=" + range + "&startDate=2022-07-10" + "&endDate=2022-07-11", true);
+        xmlhttp.send();
+    }   
     </script>
 
 </body>

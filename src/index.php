@@ -88,8 +88,9 @@ else {
         include("all-entries.php");
     }
     if ($page == "ajax") {
+        $chart = $_GET['chart'];
         include("app/controllers/get-energy.php");
-        include("chart01.php");
+        include("chart" . $chart . ".php");
     }
 }
 
