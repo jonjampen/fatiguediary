@@ -1,3 +1,7 @@
+<?php header("Content-type: text/css");
+session_start();
+?>
+
 /*variables*/
 :root {
     /* General */
@@ -6,22 +10,24 @@
     --gray: #7D8082;
     --error-content: #f39e9e;
     --error-border: #a04444;
-
-
-    /* Dark
-    */
-    --background: #1E1F1F;
-    --container: #252627;
-    --text: #F8FAFC;
-    
-    /* Light
     --background: #F8FAFC;
-    --container: #DBE6F0;
-    --text: #1E1F1F;
-    */
-    
 
-    --input: var(--background);
+    <?php if ($_SESSION['settings']['theme'] === 1) {
+        echo("
+            --background: #1E1F1F;
+            --container: #252627;
+            --text: #F8FAFC;
+        ");
+    }
+    else {
+        echo("        
+        --background: #F8FAFC;
+        --container: #DBE6F0;
+        --text: #1E1F1F;
+        ");
+    } ?>
+
+    --input: var(--background); 
     --link_p: var(--primary);
     --link_s: var(--secondary);
 }
@@ -31,6 +37,7 @@
     margin: 0;
     font-family: 'Roboto', sans-serif;
     font-size: 14px;
+    color: var(--text); 
 }
 
 .container input {

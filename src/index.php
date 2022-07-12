@@ -1,7 +1,7 @@
 <?php
 $pages = [
     //user
-    "login", "register", "users", "logout",
+    "login", "register", "users", "logout", "onboarding", "onboarding02", "onboarding03", "onboarding04",
     //app
     "dashboard", "add-new", "entries",
     //information
@@ -92,6 +92,21 @@ else {
         include("app/controllers/get-energy.php");
         include("chart" . $chart . ".php");
     }
+    if ($page == "onboarding") {
+        include("onboarding/theme.php");
+    }
+    if ($page == "onboarding02") {
+        include("onboarding/awake-time.php");
+    }
+    if ($page == "onboarding03") {
+        include("onboarding/newsletter.php");
+    }
+    if ($page == "onboarding04") {
+        include("onboarding/tutorial.php");
+    }
+    if ($page == "set-settings") {
+        include("app/controllers/set-settings.php");
+    }
 }
 
 if (!in_array($page, $pages)) {
@@ -107,7 +122,7 @@ function print_head($page_head, $public) {
         '<meta http-equiv="X-UA-Compatible" content="IE=edge">',
         '<meta name="viewport" content="width=device-width, initial-scale=1.0">',
         '<link rel="stylesheet" href="assets/fonts/materialicons.css">',
-        '<link rel="stylesheet" href="assets/css/general.css">',
+        '<link rel="stylesheet" href="assets/css/general.php">',
         '<link rel="icon" type="image/x-icon" href="assets/img/logo.svg">',
         '<link rel="stylesheet" type="text/css" href="assets/css/toastify.min.css">'
     );
