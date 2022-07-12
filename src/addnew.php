@@ -46,8 +46,9 @@ if(isset($_GET['id'])) {
             <div class="container">
                 <div class="title-info">
                     <h3>Aktivitäten</h3>
-                    <a href=""><span class="material-icons">question_mark</span></a>
+                    <!-- <a href=""><span class="material-icons">question_mark</span></a> -->
                 </div>
+                <p class="hint">Markiere die gemachten Aktivitäten</p>
                 <div class="activities" id="activities">
                     <!-- code from ajax -->
                 </div>

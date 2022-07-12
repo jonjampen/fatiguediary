@@ -291,6 +291,10 @@ nav .logo img {
     text-align: center;
     color: var(--text);
 }
+.add-screen p.hint {
+    margin-top: -8px;
+    margin-bottom: 16px;
+}
 .add-screen .activities a.active {
     border: none;
     color: var(--text);
