@@ -42,11 +42,11 @@
                                 $activity_counter = 1;
                                 foreach ($activity_ids as $activity_id){
                                     $activity_name = getActivityNameById($activity_id['id']);
-                                    echo($activity_name . " ");
+                                    echo("<p>{$activity_name}</p>");
 
                                     // add comma after activity except for last activity
                                     if ($activity_counter != count($activity_ids)) {
-                                        echo(", ");
+                                        echo("<p>,&nbsp</p>");
                                     }
                                     $activity_counter++;
                                 }

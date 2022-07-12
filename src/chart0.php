@@ -67,9 +67,7 @@ print<<<EOF
                     style: {
                         colors: '#7D8082',
                     },
-                    formatter: function (val) {
-                        return val.toFixed(0) // only integers
-                    },
+
                 },
                 tickAmount: 5, // only 6 labels
                 min: 0,
