@@ -434,7 +434,7 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     border-bottom: 1px solid var(--gray);
 }
 .day .entry .activities {
-    width: 95%;
+    width: 100%;
     display: flex;
     justify-content: start;
 }
@@ -445,11 +445,18 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 .day .entry {
     border-bottom: 1px solid var(--gray);
 }
-.day .entry .description {
+.day .entry .info {
     padding-top: 4px;
     padding-bottom: 8px;
     display: flex;
     justify-content: space-between;
+}
+.day .entry .info .description {
+    display: inline;
+}
+.day .entry .info .description .notes p{
+    margin-top: 4px;
+    color: var(--gray);
 }
 .day .entry .energyValue {
     display: flex;

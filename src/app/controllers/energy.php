@@ -79,7 +79,10 @@ if (isset($_POST['edit-energy'])) {
     $datetime = strtotime($date . " " . $time);
     $datetime2 = date("Y-m-d H:i", $datetime);
     $energylevel = $_POST['energylevel'];
-    $activities = explode(",", $_POST['activities']); //string to array
+    $activities = array();
+    if (!empty($_POST['activities'])) {
+        $activities = explode(",", $_POST['activities']); //string to array
+    }
     $notes = $_POST['notes'];
     $energy_id = $_GET['id'];
 
