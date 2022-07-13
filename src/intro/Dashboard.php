@@ -10,6 +10,7 @@
 <link rel="stylesheet" type="text/css" href="Dashboard-Dateien/toastify.min.css">
 <title>Dashboard</title>
 <link rel="stylesheet" href="Dashboard-Dateien/app.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/shepherd.js@8.3.1/dist/css/shepherd.css"/>
 <style id="apexcharts-css">.apexcharts-canvas {
   position: relative;
   user-select: none;
@@ -801,12 +802,13 @@ function closeNav() {
         <div class="rated-activities">
             <p class="rated-activity border_color" style="border-color: rgb(232, 142, 130);">Arbeiten</p><p class="rated-activity border_color" style="border-color: rgb(243, 114, 44);">Therapie</p>        </div>
     </div>
-
-
-
+    
+    
+    
     <script src="Dashboard-Dateien/moment.min.js"></script>
     <script src="Dashboard-Dateien/apexcharts"></script>
     <script src="Dashboard-Dateien/visualizeValue.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/shepherd.js@8.3.1/dist/js/shepherd.min.js"></script>
 
     <script>
         var border = document.getElementsByClassName("border_color");
@@ -867,8 +869,53 @@ calculateBorderColor(4, border[4]);
         };
         xmlhttp.open("GET", "index.php?page=ajax&chart=" + range + "&date=" + moment(date).format("YYYY-MM-DD"), true);
         xmlhttp.send();
-    }   
+    }
     </script>
+
+  <script>
+    const tour = new Shepherd.Tour({
+        useModalOverlay: true,
+        defaultStepOptions: {
+            classes: 'shadow-md bg-purple-dark',
+            scrollTo: true
+        }
+    });
+
+    tour.addStep({
+        text: 'Dies ist ein Tutorial für Fatigue Diary. <br> Willkommen zu deinem Dashboard.',
+        attachTo: {
+            on: 'center'
+        },
+        buttons: [
+            {
+                text: 'Skip tutorial',
+                action: tour.cancel,
+            },
+            {
+              text: 'Weiter',
+              action: tour.next
+            }
+        ]
+    });
+    
+    tour.addStep({
+      text: 'Mit einem Klick auf das Plus-Icon fügst du einen Eintrag hinzufügen. Füge wenn möglich nach jeder Aktivität einen Eintrag hinzu.',
+      attachTo: {
+          element: '.add',
+          on: 'top'
+      },
+      buttons: [
+        {
+          text: 'Weiter',
+          action: function () {
+            window.location.href = 'addnew.php';
+          }
+        }
+      ]
+    });
+
+    tour.start();
+  </script>
 
 
 <svg id="SvgjsSvg1001" width="2" height="0" xmlns="http://www.w3.org/2000/svg" version="1.1" xlink="http://www.w3.org/1999/xlink" svgjs="http://svgjs.dev" style="overflow: hidden; top: -100%; left: -100%; position: absolute; opacity: 0;"><defs id="SvgjsDefs1002"></defs><polyline id="SvgjsPolyline1003" points="0,0"></polyline><path id="SvgjsPath1004" d="M-1 185.8L-1 185.8C-1 185.8 24.392648135914524 185.8 24.392648135914524 185.8C24.392648135914524 185.8 78.59853288239124 185.8 78.59853288239124 185.8C78.59853288239124 185.8 82.12191539091222 185.8 82.12191539091222 185.8C82.12191539091222 185.8 93.50515118767234 185.8 93.50515118767234 185.8C93.50515118767234 185.8 131.44927051020605 185.8 131.44927051020605 185.8C131.44927051020605 185.8 131.44927051020605 185.8 131.44927051020605 185.8 "></path></svg></body></html>
