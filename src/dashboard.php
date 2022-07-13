@@ -9,7 +9,7 @@ $todayDate = date("Y-m-d");
 
     <div class="welcome-text">
         <h6>Hi <?php echo($_SESSION['name']);?></h6>
-        <h3>Your Dashboard</h3>
+        <h3>Dein Dashboard</h3>
     </div>
     <div class="date-range">
         <p id="range_d" class="range-item active">Tag</p>

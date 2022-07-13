@@ -59,7 +59,7 @@ if(isset($_GET['id'])) {
                 }
 
                 ?>
-                <input type="text" name="activities" id="activities_storage" value="<?php echo($activities_string); ?>">
+                <input type="hidden" name="activities" id="activities_storage" value="<?php echo($activities_string); ?>">
             </div>
 
             <div class="container">
