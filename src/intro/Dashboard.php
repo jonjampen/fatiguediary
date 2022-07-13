@@ -961,7 +961,7 @@ calculateBorderColor(4, border[4]);
         ]
       });
       tour.addStep({
-        text: 'Hier werden Aktivitäten berechnet, die dir Energie rauben. Beachte aber, dass nur die kurzfristige Änderung und nicht der langfristigen Einfluss einer Aktivität miteinbezogen wird.',
+        text: 'Hier werden Aktivitäten berechnet, die dir Energie rauben. Beachte aber, dass nur die kurzfristige Änderung und nicht der langfristige Einfluss einer Aktivität miteinbezogen wird.',
         attachTo: {
             element: '.bad-activities-tour',
             on: 'top'

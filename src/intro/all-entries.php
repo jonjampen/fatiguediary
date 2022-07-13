@@ -293,7 +293,7 @@ function closeNav() {
         useModalOverlay: true,
         defaultStepOptions: {
             classes: 'shadow-md bg-purple-dark',
-            scrollTo: true
+            scrollTo: false
         }
     });
 
