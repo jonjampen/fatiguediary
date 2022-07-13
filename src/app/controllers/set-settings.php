@@ -13,5 +13,5 @@ if (isset($_POST['set-settings'])) {
     $stmt->execute();
     $stmt->close();
 
-    header("location: index.php?page=dashboard");
+    header("location: intro/Dashboard.php");
 }
