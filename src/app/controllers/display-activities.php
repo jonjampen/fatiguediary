@@ -34,7 +34,7 @@ function getActivitiesByEnergyId($energy_id) {
     $stmt->bind_param("si", $_SESSION['id'], $energy_id);
     $stmt->execute();
     $stmt->bind_result($activity_id);
-    $activities = [];
+    $activities = array();
     
     while ($stmt->fetch()) {
         $activities[] = array("id" => $activity_id);
@@ -42,6 +42,7 @@ function getActivitiesByEnergyId($energy_id) {
     $stmt->close();
     return $activities;
 }
+
 function getActivityNameById($activity_id) {
     global $conn;
     //get activities form db

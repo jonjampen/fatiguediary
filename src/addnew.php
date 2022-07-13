@@ -9,7 +9,7 @@ $notes = "";
 if(isset($_GET['id'])) {
     print_body("loadActivities();");
     $energylevel = getEnergyLevelsById($_GET['id']);
-    $activities = [];
+    $activities = array();
     $activities = getActivitiesByEnergyId($energylevel['energy_id']);
     $notes = $energylevel['notes'];
 } else {
@@ -59,7 +59,7 @@ if(isset($_GET['id'])) {
                 }
 
                 ?>
-                <input type="hidden" name="activities" id="activities_storage" value="<?php echo($activities_string); ?>">
+                <input type="text" name="activities" id="activities_storage" value="<?php echo($activities_string); ?>">
             </div>
 
             <div class="container">
