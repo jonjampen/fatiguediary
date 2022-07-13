@@ -53,7 +53,7 @@ function closeNav() {
     <ul class="nav_items">
         <li><a href="http://localhost/fatigue-diary/src/index.php?page=dashboard"><span class="material-icons">bar_chart</span></a></li>
         <li><a href="http://localhost/fatigue-diary/src/index.php?page=add-new" class="add"><span class="material-icons">add</span></a></li>
-        <li><a href="http://localhost/fatigue-diary/src/index.php?page=entries" class="entries"><span class="material-icons">assignment</span></a></li>
+        <li class="entries"><a href="http://localhost/fatigue-diary/src/index.php?page=entries"><span class="material-icons">assignment</span></a></li>
     </ul>
 </nav>
     <div class="add-screen">
@@ -216,7 +216,7 @@ function closeNav() {
     });
 
     tour.addStep({
-        text: 'Hier kannst du dein Energie Level einstellen. <br> Das Energielevel beschreibt, wie gut du dich gerade fühlst. Wenn deine Fatigue stark ist und du sehr erschöpft bist, wähle eine tiefere Zahl. Hingegen, wenn du dich gerade etwas besser fühlst, wähle eine höhere Zahl.',
+        text: 'Hier kannst du dein Energie-Level einstellen. <br> Das Energie-Level beschreibt, wie gut du dich gerade fühlst. Wenn deine Fatigue stark ist und du sehr erschöpft bist, wähle eine tiefere Zahl. Hingegen, wenn du dich gerade etwas besser fühlst, wähle eine höhere Zahl.',
         attachTo: {
             element: '.energy',
             on: 'bottom'
@@ -230,7 +230,7 @@ function closeNav() {
     });
     
     tour.addStep({
-      text: 'Mit einem Klick aufs Plus kannst du deine eigenen Aktivitäten hinzufügen.',
+      text: 'Mit einem Klick aufs Plus-Icon kannst du deine eigenen Aktivitäten hinzufügen.',
       attachTo: {
           element: '.activity.add',
           on: 'bottom'
@@ -238,13 +238,16 @@ function closeNav() {
       buttons: [
         {
           text: 'Weiter',
-          action: tour.next
+          action: function () {
+            toggleActivity(295);
+            tour.next();
+          }
         }
       ]
     });
 
     tour.addStep({
-      text: 'Durch klicken auf alle Aktivitäten, die du gerade gemacht hast, fügst du sie zum Eintrag hinzu.',
+      text: 'Durch Klicken auf alle Aktivitäten, die du gerade gemacht hast, fügst du sie zum Eintrag hinzu. Ausgewählte Aktivitäten werden blau markiert.',
       attachTo: {
           element: '.container-activities',
           on: 'top'
@@ -258,7 +261,7 @@ function closeNav() {
     });
 
     tour.addStep({
-      text: 'Wenn du möchtest können hier noch Notizen hinzugefügt werden (z.B. Beschreibung, Dauer, ...)',
+      text: 'Wenn du möchtest, können hier noch Notizen hinzugefügt werden (z.B. Beschreibung, Dauer, ...).',
       attachTo: {
           element: '#notes',
           on: 'top'
@@ -272,7 +275,7 @@ function closeNav() {
     });
 
     tour.addStep({
-      text: 'Auch das Datum und die Zeit können noch geändert werden.',
+      text: 'Auch das Datum und die Zeit können noch geändert werden, falls du einen Eintrag für die Vergangenheit erstellen möchtest.',
       attachTo: {
           element: '.datetime',
           on: 'bottom'

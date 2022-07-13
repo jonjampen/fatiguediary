@@ -705,7 +705,7 @@
         <li class="logo"><a href="http://localhost/fatigue-diary/src/index.php?page=app"><img src="Dashboard-Dateien/logo.svg" alt=""></a></li>
         <div class="icons">
             <li><a href="http://localhost/fatigue-diary/src/index.php?page=settings"><span class="material-icons">settings</span></a></li>
-            <li><a href="javascript:void(0)" onclick="openNav()"><span class="material-icons" id="open">menu</span></a> <a href="javascript:void(0)" onclick="closeNav()"><span class="material-icons" id="close">close</span></a></li>
+            <li><a href="javascript:void(0)" onclick="openNav()" class="menu-tour"><span class="material-icons" id="open">menu</span></a> <a href="javascript:void(0)" onclick="closeNav()"><span class="material-icons" id="close">close</span></a></li>
         </div>
     </ul>
 </nav>
@@ -746,16 +746,18 @@ function closeNav() {
         <h6>Hi Max Mustermann</h6>
         <h3>Dein Dashboard</h3>
     </div>
-    <div class="date-range">
-        <p id="range_d" class="range-item active">Tag</p>
-        <p id="range_w" class="range-item">Woche</p>
-        <p id="range_m" class="range-item">Monat</p>
-        <p id="range_y" class="range-item">Jahr</p>
-    </div>
-    <div class="date-picker">
-        <span class="material-icons" id="nextDay">chevron_left</span>
-        <input id="dateInput" type="date" class="date" value="2022-07-13">
-        <span class="material-icons" id="prevDay">chevron_right</span>
+    <div class="date-tour">
+      <div class="date-range">
+          <p id="range_d" class="range-item active">Tag</p>
+          <p id="range_w" class="range-item">Woche</p>
+          <p id="range_m" class="range-item">Monat</p>
+          <p id="range_y" class="range-item">Jahr</p>
+      </div>
+      <div class="date-picker">
+          <span class="material-icons" id="nextDay">chevron_left</span>
+          <input id="dateInput" type="date" class="date" value="2022-07-13">
+          <span class="material-icons" id="prevDay">chevron_right</span>
+      </div>
     </div>
     
     <div class="container chart">
@@ -792,12 +794,12 @@ function closeNav() {
     </div>
     
     
-    <div class="container">
+    <div class="container good-activities-tour">
         <h3 class="center-title">Aktivitäten, die dir Energie geben.</h3>
         <div class="rated-activities">
         <p class="rated-activity border_color" style="border-color: rgb(105, 164, 85);">Schlafen</p><p class="rated-activity border_color" style="border-color: rgb(164, 190, 109);">Ausruhen</p><p class="rated-activity border_color" style="border-color: rgb(249, 196, 70);">Duschen</p>        </div>
     </div>
-    <div class="container">
+    <div class="container bad-activities-tour">
         <h3 class="center-title">Aktivitäten, die dir Energie rauben.</h3>
         <div class="rated-activities">
             <p class="rated-activity border_color" style="border-color: rgb(232, 142, 130);">Arbeiten</p><p class="rated-activity border_color" style="border-color: rgb(243, 114, 44);">Therapie</p>        </div>
@@ -881,38 +883,127 @@ calculateBorderColor(4, border[4]);
         }
     });
 
-    tour.addStep({
-        text: 'Dies ist ein Tutorial für Fatigue Diary. <br> Willkommen zu deinem Dashboard.',
+    <?php if (!isset($_GET['intro'])) : ?>
+      tour.addStep({
+          text: 'Dies ist ein Tutorial für Fatigue Diary. <br> Willkommen zu deinem Dashboard.',
+          attachTo: {
+              on: 'center'
+          },
+          buttons: [
+              {
+                  text: 'Tour überspringen',
+                  action: function () {
+                    window.location.href = '../index.php';
+                  }
+              },
+              {
+                text: 'Weiter',
+                action: tour.next
+              }
+          ]
+      });
+      
+      tour.addStep({
+        text: 'Mit einem Klick auf das Plus-Icon fügst du einen Eintrag hinzu. Füge wenn möglich nach jeder Aktivität einen eigenen Eintrag hinzu.',
+        attachTo: {
+            element: '.add',
+            on: 'top'
+        },
+        buttons: [
+          {
+            text: 'Weiter',
+            action: function () {
+              window.location.href = 'addnew.php';
+            }
+          }
+        ]
+      });
+    
+    <?php else: ?>
+      tour.addStep({
+          text: 'Hier siehst du deinen Tagesverlauf.',
+          attachTo: {
+              element: '.container.chart',
+              on: 'top'
+          },
+          buttons: [
+              {
+                text: 'Weiter',
+                action: tour.next
+              }
+          ]
+      });
+      
+      tour.addStep({
+        text: 'Du kannst auch den dargestellten Bereich und das Datum ändern.',
+        attachTo: {
+            element: '.date-tour',
+            on: 'top'
+        },
+        buttons: [
+          {
+            text: 'Weiter',
+            action: tour.next
+          }
+        ]
+      });
+      tour.addStep({
+        text: 'Hier werden Aktivitäten berechnet, die dir Energie geben.',
+        attachTo: {
+            element: '.good-activities-tour',
+            on: 'top'
+        },
+        buttons: [
+          {
+            text: 'Weiter',
+            action: tour.next
+          }
+        ]
+      });
+      tour.addStep({
+        text: 'Hier werden Aktivitäten berechnet, die dir Energie rauben. Beachte aber, dass nur die kurzfristige Änderung und nicht der langfristigen Einfluss einer Aktivität miteinbezogen wird.',
+        attachTo: {
+            element: '.bad-activities-tour',
+            on: 'top'
+        },
+        buttons: [
+          {
+            text: 'Weiter',
+            action: tour.next
+          }
+        ]
+      });
+
+      tour.addStep({
+        text: 'Im Menu findet du noch weitere Informationen und Einstellungsmöglichkeiten zur App.',
+        attachTo: {
+            element: '.menu-tour',
+            on: 'top'
+        },
+        buttons: [
+          {
+            text: 'Weiter',
+            action: tour.next
+          }
+        ]
+      });
+
+      tour.addStep({
+        text: 'Dies waren Beispiel-Daten, nun bringe ich dich zu deinem eigenen Dashboard.',
         attachTo: {
             on: 'center'
         },
         buttons: [
-            {
-                text: 'Skip tutorial',
-                action: tour.cancel,
-            },
-            {
-              text: 'Weiter',
-              action: tour.next
+          {
+            text: 'Tour beenden',
+            action: function () {
+              window.location.href = '../index.php';
             }
-        ]
-    });
-    
-    tour.addStep({
-      text: 'Mit einem Klick auf das Plus-Icon fügst du einen Eintrag hinzufügen. Füge wenn möglich nach jeder Aktivität einen Eintrag hinzu.',
-      attachTo: {
-          element: '.add',
-          on: 'top'
-      },
-      buttons: [
-        {
-          text: 'Weiter',
-          action: function () {
-            window.location.href = 'addnew.php';
           }
-        }
-      ]
-    });
+        ]
+      });
+    <?php endif; ?>
+  
 
     tour.start();
   </script>

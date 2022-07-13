@@ -49,7 +49,7 @@ function closeNav() {
 }
 </script><nav class="bottom-nav">
     <ul class="nav_items">
-        <li><a href="http://localhost/fatigue-diary/src/index.php?page=dashboard" class="dashboard tour"><span class="material-icons">bar_chart</span></a></li>
+        <li class="dashboard tour"><a href="http://localhost/fatigue-diary/src/index.php?page=dashboard"><span class="material-icons">bar_chart</span></a></li>
         <li><a href="http://localhost/fatigue-diary/src/index.php?page=add-new" class="add"><span class="material-icons">add</span></a></li>
         <li><a href="http://localhost/fatigue-diary/src/index.php?page=entries"><span class="material-icons">assignment</span></a></li>
     </ul>
@@ -312,7 +312,7 @@ function closeNav() {
     });
     
     tour.addStep({
-      text: 'Durch klicken auf einen Eintrag kannst du ihn bearbeiten oder löschen.',
+      text: 'Durch Klicken auf einen Eintrag kannst du ihn bearbeiten oder löschen.',
       attachTo: {
           element: '.entry.tour',
           on: 'bottom'
@@ -335,7 +335,7 @@ function closeNav() {
         {
           text: 'Weiter',
           action: function () {
-            window.location.href = 'dashboard.php';
+            window.location.href = 'dashboard.php?intro=1';
           }
         }
       ]
