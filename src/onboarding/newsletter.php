@@ -9,7 +9,7 @@ includeToastify();
         <img src="assets/img/onboarding-mail.svg" alt="">
         <p>Möchtest du über Neuigkeiten von Fatigue Diary informiert werden?</p>
         <div class="btn-option">
-            <input type="checkbox" name="" id="newsletter_check" checked> Ich möchte Informationen erhalten.
+            <input type="checkbox" name="newsletter" id="newsletter_check" checked> <label for="newsletter"> Ich möchte Informationen erhalten.</label>
         </div>
         <div class="btn-option">
             <button class="btn-secondary" id="btn_next">Weiter</button>
