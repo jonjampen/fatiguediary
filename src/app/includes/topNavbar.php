@@ -12,7 +12,8 @@
 <div class="sidenav" id="mySidenav">
     <ul>
         <li><a href="index.php?page=profile">Profil</a></li>
-        <li><a href="index.php?page=appe">Fatigue Diary</a></li>
+        <li><a href="index.php?page=app">Fatigue Diary</a></li>
+        <li><a href="intro/Dashboard.php">Tour starten</a></li>
         <li><a href="index.php?page=about-app">Über</a></li>
         <li><a href="index.php?page=new">Was ist neu?</a></li>
         <li><a href="index.php?page=contact">Kontakt</a></li>
