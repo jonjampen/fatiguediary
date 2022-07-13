@@ -376,6 +376,7 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     background-color: transparent;
     padding: 4px 8px;
     border-radius: 8px;
+    cursor: pointer;
 }
 .date-range .active {
     background-color: var(--primary);
