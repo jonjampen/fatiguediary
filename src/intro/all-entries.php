@@ -49,7 +49,7 @@ function closeNav() {
 }
 </script><nav class="bottom-nav">
     <ul class="nav_items">
-        <li class="dashboard tour"><a href="http://localhost/fatigue-diary/src/index.php?page=dashboard"><span class="material-icons">bar_chart</span></a></li>
+        <li class="dashboard tour"><a><span class="material-icons">bar_chart</span></a></li>
         <li><a href="http://localhost/fatigue-diary/src/index.php?page=add-new" class="add"><span class="material-icons">add</span></a></li>
         <li><a href="http://localhost/fatigue-diary/src/index.php?page=entries"><span class="material-icons">assignment</span></a></li>
     </ul>
@@ -62,7 +62,7 @@ function closeNav() {
                     <h3>Wed, 13.07.2022</h3>
                     <h3 class="energyAverage tour" style="color: rgb(248, 169, 73);">5.5</h3>
                 </div>
-                                                        <div class="entry tour" onclick="redirectToEdit(376)">
+                                                        <div class="entry tour">
                         <p class="time">06:30</p>
                         <div class="info">
                             <div class="description">

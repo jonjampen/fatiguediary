@@ -53,14 +53,14 @@ function closeNav() {
     <ul class="nav_items">
         <li><a href="http://localhost/fatigue-diary/src/index.php?page=dashboard"><span class="material-icons">bar_chart</span></a></li>
         <li><a href="http://localhost/fatigue-diary/src/index.php?page=add-new" class="add"><span class="material-icons">add</span></a></li>
-        <li class="entries"><a href="http://localhost/fatigue-diary/src/index.php?page=entries"><span class="material-icons">assignment</span></a></li>
+        <li class="entries"><a><span class="material-icons">assignment</span></a></li>
     </ul>
 </nav>
     <div class="add-screen">
         <h2>Eintrag hinzufügen</h2>
 
         
-        <form action="index.php?page=add-new" method="post">
+        <form>
             <div class="datetime">
                 <div><span class="material-icons">calendar_month</span> <input type="date" name="date" id="currentDate" onchange="stopUpdatingDate()" value="2022-07-13"></div>
                 <div><span class="material-icons">schedule</span> <input type="time" name="time" id="currentTime" onchange="stopUpdatingTime()" value="21:28"></div>
@@ -84,19 +84,19 @@ function closeNav() {
                     <!-- <a href=""><span class="material-icons">question_mark</span></a> -->
                 </div>
                 <p class="hint">Markiere die gemachten Aktivitäten</p>
-                <div class="activities" id="activities"><a class="" id="toggleActivity_294" href="javascript:toggleActivity(294)">Schlafen</a><a class="" id="toggleActivity_295" href="javascript:toggleActivity(295)">Arbeiten</a><a class="" id="toggleActivity_296" href="javascript:toggleActivity(296)">Essen</a><a class="" id="toggleActivity_297" href="javascript:toggleActivity(297)">Ausruhen</a><a class="" id="toggleActivity_298" href="javascript:toggleActivity(298)">Therapie</a><a class="" id="toggleActivity_299" href="javascript:toggleActivity(299)">Duschen</a><a class="" id="toggleActivity_301" href="javascript:toggleActivity(301)">Baden</a><a class="activity add" id="modalOpen"><span class="material-icons">add</span></a></div>
+                <div class="activities" id="activities"><a class="" id="toggleActivity_294" href="javascript:toggleActivity(294)">Schlafen</a><a class="" id="toggleActivity_295" href="javascript:toggleActivity(295)">Arbeiten</a><a class="" id="toggleActivity_296" href="javascript:toggleActivity(296)">Essen</a><a class="" id="toggleActivity_297" href="javascript:toggleActivity(297)">Ausruhen</a><a class="" id="toggleActivity_298" href="javascript:toggleActivity(298)">Therapie</a><a class="" id="toggleActivity_299" href="javascript:toggleActivity(299)">Duschen</a><a class="" id="toggleActivity_301" href="javascript:toggleActivity(301)">Baden</a><a class="activity add"><span class="material-icons">add</span></a></div>
                                 <input type="hidden" name="activities" id="activities_storage" value="">
             </div>
 
             <div class="container">
-                <textarea name="notes" id="notes" rows="6" placeholder="Notizen..."></textarea>
+                <textarea name="notes" id="notes" rows="6" placeholder="Notizen..." readonly></textarea>
             </div>
             <div class="space">
 
             </div>
             <div class="btn-center">
                 
-                <button class="btn-secondary btn-fixed" type="submit" name="add-energy">Hinzufügen</button>
+                <button class="btn-secondary btn-fixed" disabled>Hinzufügen</button>
             </div>
         </form>
 

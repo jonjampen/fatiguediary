@@ -705,7 +705,7 @@
         <li class="logo"><a href="http://localhost/fatigue-diary/src/index.php?page=app"><img src="Dashboard-Dateien/logo.svg" alt=""></a></li>
         <div class="icons">
             <li><a href="http://localhost/fatigue-diary/src/index.php?page=settings"><span class="material-icons">settings</span></a></li>
-            <li><a href="javascript:void(0)" onclick="openNav()" class="menu-tour"><span class="material-icons" id="open">menu</span></a> <a href="javascript:void(0)" onclick="closeNav()"><span class="material-icons" id="close">close</span></a></li>
+            <li><a href="javascript:void(0)" class="menu-tour"><span class="material-icons" id="open">menu</span></a> <a href="javascript:void(0)" onclick="closeNav()"><span class="material-icons" id="close">close</span></a></li>
         </div>
     </ul>
 </nav>
@@ -737,7 +737,7 @@ function closeNav() {
 </script><nav class="bottom-nav">
     <ul class="nav_items">
         <li><a href="http://localhost/fatigue-diary/src/index.php?page=dashboard"><span class="material-icons">bar_chart</span></a></li>
-        <li><a href="http://localhost/fatigue-diary/src/index.php?page=add-new" class="add"><span class="material-icons">add</span></a></li>
+        <li><a class="add"><span class="material-icons">add</span></a></li>
         <li><a href="http://localhost/fatigue-diary/src/index.php?page=entries"><span class="material-icons">assignment</span></a></li>
     </ul>
 </nav><script type="text/javascript" src="Dashboard-Dateien/toastify.js"></script>
@@ -824,10 +824,10 @@ calculateBorderColor(4, border[4]);
     var range = 0;
     updateChart();
 
-    document.getElementById("range_d").addEventListener("click", function () { range = 0; changeDateRange(range); });
-    document.getElementById("range_w").addEventListener("click", function () { range = 1; changeDateRange(range); });
-    document.getElementById("range_m").addEventListener("click", function () { range = 2; changeDateRange(range); });
-    document.getElementById("range_y").addEventListener("click", function () { range = 3; changeDateRange(range); });
+    // document.getElementById("range_d").addEventListener("click", function () { range = 0; changeDateRange(range); });
+    // document.getElementById("range_w").addEventListener("click", function () { range = 1; changeDateRange(range); });
+    // document.getElementById("range_m").addEventListener("click", function () { range = 2; changeDateRange(range); });
+    // document.getElementById("range_y").addEventListener("click", function () { range = 3; changeDateRange(range); });
 
     function changeDateRange(index) {
         range_type = ["range_d", "range_w", "range_m", "range_y"];
