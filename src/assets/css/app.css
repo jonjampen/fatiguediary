@@ -433,6 +433,9 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     justify-content: space-between;
     border-bottom: 1px solid var(--gray);
 }
+.day .entry {
+    cursor: pointer;
+}
 .day .entry .activities {
     width: 100%;
     display: flex;
