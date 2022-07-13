@@ -1,10 +1,17 @@
 <?php
-// from get start and end date
-$startDate = date("Y-m-d", strtotime($_GET['startDate']));
-$endDate = date("Y-m-d", strtotime($_GET['endDate']));
+$startDatetime = strtotime($_GET['date'] . 'last monday');
+$startDate = date("Y-m-d", $startDatetime);
 
-// call function to get energylevels
-$energylevels = getEnergyLevelsByDate($startDate);
+$endDatetime = strtotime($startDate . " +7 days");
+$endDate = date("Y-m-d", $endDatetime);
+
+
+//$energylevels = array(    array("energy_id" => $energy_id, "energylevel" => $energylevel, "datetime" => $newDateTime, "date" => $newDate), array(...)   )
+$energylevels = array();
+for ($i = $startDatetime; $i <= $endDatetime; $i = strtotime(date("Y-m-d", $i) . ' +1 day')) {
+    $energylevels = array_merge($energylevels, getEnergyLevelsByDate(date("Y-m-d", $i)));
+}
+
 
 print<<<EOF
         var options = {
@@ -39,11 +46,11 @@ EOF;
                     };
 print<<<EOF
                 ],
-                min: new Date("{$startDate} 06:00:00").getTime(),
+                min: new Date("{$startDate} 05:00:00").getTime(),
                 max: new Date("{$endDate} 22:30:00").getTime(),
                 labels: {
                     formatter: function(val) {
-                        return moment(new Date(val)).format("HH:mm");
+                        return moment(new Date(val)).format("ddd");
                     },
                     style: {
                         colors: '#FFFFFF',
@@ -73,6 +80,7 @@ print<<<EOF
 
         };
 
+        document.getElementById("energylevel_area").innerHTML = "";
         var energylevel_area = new ApexCharts(document.querySelector("#energylevel_area"), options);
         energylevel_area.render();
 EOF;

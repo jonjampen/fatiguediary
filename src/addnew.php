@@ -10,12 +10,19 @@ $notes = "";
 if(isset($_GET['id'])) {
     print_body("loadActivities();");
     $energylevel = getEnergyLevelsById($_GET['id']);
-    $activities = [];
+    $activities = array();
     $activities = getActivitiesByEnergyId($energylevel['energy_id']);
     $notes = $energylevel['notes'];
+    
 } else {
     print_body("loadActivities(), calculateDateTime(), setInterval(calculateDateTime, 10000)");
     $activities = [];
+    $lastEntries = getEnergyLevelsByDate(date("Y-m-d"));
+    if (!empty($lastEntries)) {
+        $lastEntry = $lastEntries[count($lastEntries)-1];
+    } else {
+        $lastEntry['energylevel'] = 10; // default (if no entry today)
+    }
 }
 ?>
 
@@ -37,7 +44,7 @@ if(isset($_GET['id'])) {
                     <h3>Energie-Level</h3>
                     <a href=""><span class="material-icons">question_mark</span></a>
                 </div>
-                <input class="slider" id="energySlider" type="range" name="energylevel" min="0" max="10" step="0.5" value="<?php echo($energylevel['energylevel']); ?>">
+                <input class="slider" id="energySlider" type="range" name="energylevel" min="0" max="10" step="0.5" value="<?php if(isset($energylevel)) { echo($energylevel['energylevel'] );  } else { echo($lastEntry['energylevel']); }; ?>">
                 <div class="description">
                     <h1 id="energyValue" class="level-text"></h1>
                     <h1 id="energyIcon"></h1>
@@ -47,15 +54,21 @@ if(isset($_GET['id'])) {
             <div class="container">
                 <div class="title-info">
                     <h3>Aktivitäten</h3>
-                    <a href=""><span class="material-icons">question_mark</span></a>
+                    <!-- <a href=""><span class="material-icons">question_mark</span></a> -->
                 </div>
+                <p class="hint">Markiere die gemachten Aktivitäten</p>
                 <div class="activities" id="activities">
                     <!-- code from ajax -->
                 </div>
                 <?php
                 $activities_string = "";
+                $activity_counter = 1;
                 foreach ($activities as $activity) {
-                    $activities_string .= $activity['id'] . ",";
+                    $activities_string .= $activity['id'];
+                    if ($activity_counter != count($activities)) {
+                        $activities_string .= ",";
+                    }
+                    $activity_counter++;
                 }
 
                 ?>

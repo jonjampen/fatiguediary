@@ -6,4 +6,6 @@ $todayDate = date("Y-m-d");
 
 ?>
 
-<h3>Diese Seite gibt es momentan noch nicht.</h1>
+    <h3>Kontakt</h3>
+    <p>Jon Jampen</p>
+    <a href="mailto:info@fatiguediary.ch">info@fatiguediary.ch</a>

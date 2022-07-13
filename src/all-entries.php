@@ -5,7 +5,7 @@
     ?>
 
     <div class="entries-screen">
-        <h2>Einträge</h2>
+        <h2>Einträge (letzte 7 Tage)</h2>
         <?php for ($day_counter = 0; $day_counter < 7; $day_counter++): //for each day of the past week ?>
             <?php
                 $date = date_sub(new DateTime(), date_interval_create_from_date_string($day_counter . ' day')); // subtract i days from date
@@ -35,22 +35,31 @@
                     ?>
                     <div class="entry" onclick="redirectToEdit(<?php echo($entry['energy_id']);?>)">
                         <p class="time"><?php echo(date("H:i", strtotime($entry['datetime']))); ?></p>
-                        <div class="description">
-                            <br>
-                            <div class="activities">
-                                <?php
-                                $activity_counter = 1;
-                                foreach ($activity_ids as $activity_id){
-                                    $activity_name = getActivityNameById($activity_id['id']);
-                                    echo($activity_name . " ");
-
-                                    // add comma after activity except for last activity
-                                    if ($activity_counter != count($activity_ids)) {
-                                        echo(", ");
+                        <div class="info">
+                            <div class="description">
+                                <div class="activities">
+                                    <?php
+                                    $activity_counter = 1;
+                                    foreach ($activity_ids as $activity_id){
+                                        $activity_name = getActivityNameById($activity_id['id']);
+                                        echo("<p>{$activity_name}</p>");
+    
+                                        // add comma after activity except for last activity
+                                        if ($activity_counter != count($activity_ids)) {
+                                            echo("<p>,&nbsp</p>");
+                                        }
+                                        $activity_counter++;
                                     }
-                                    $activity_counter++;
-                                }
-                                ?>
+                                    ?>
+                                </div>
+                                <div class="notes">
+                                    <?php
+                                    $energylevel = getEnergyLevelsById($entry['energy_id']);
+                                    if (!empty($energylevel['notes'])) {
+                                        echo ('<p> ' . $energylevel['notes'] . '</p>');
+                                    }
+                                    ?>
+                                </div>
                             </div>
                             <h3 class="energyValue"><?php echo($entry['energylevel']); ?></h3>
                         </div>

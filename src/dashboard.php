@@ -9,7 +9,7 @@ $todayDate = date("Y-m-d");
 
     <div class="welcome-text">
         <h6>Hi <?php echo($_SESSION['name']);?></h6>
-        <h3>Your Dashboard</h3>
+        <h3>Dein Dashboard</h3>
     </div>
     <div class="date-range">
         <p id="range_d" class="range-item active">Tag</p>
@@ -26,11 +26,11 @@ $todayDate = date("Y-m-d");
     <div class="container chart">
         <h3 class="center-title">Energie</h3>
         <div id="energylevel_area"></div>
-        <div class="point-amount">
+        <!-- <div class="point-amount">
             <button class="btn-primary" type="" name="">Alle Werte</button>
             <button class="btn-primary outline" type="" name="">Tages Druchschn.</button>
             <button class="btn-primary outline" type="" name="">Wochen Druchschn.</button>
-        </div>
+        </div> -->
     </div>
     
     <?php
@@ -71,8 +71,6 @@ $todayDate = date("Y-m-d");
     <script src="assets/js/visualizeValue.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/shepherd.js@8.3.1/dist/js/shepherd.min.js"></script>
 
-    <script id="script"></script>
-
     <script>
         var border = document.getElementsByClassName("border_color");
         <?php
@@ -91,20 +89,28 @@ $todayDate = date("Y-m-d");
         ?>
 
 
-    document.getElementById("range_d").addEventListener("click", function () { changeDateRange(0); });
-    document.getElementById("range_w").addEventListener("click", function () { changeDateRange(1); });
-    document.getElementById("range_m").addEventListener("click", function () { changeDateRange(2); });
-    document.getElementById("range_y").addEventListener("click", function () { changeDateRange(3); });
+    var range = 0;
+    updateChart();
+
+    document.getElementById("range_d").addEventListener("click", function () { range = 0; changeDateRange(range); });
+    document.getElementById("range_w").addEventListener("click", function () { range = 1; changeDateRange(range); });
+    document.getElementById("range_m").addEventListener("click", function () { range = 2; changeDateRange(range); });
+    document.getElementById("range_y").addEventListener("click", function () { range = 3; changeDateRange(range); });
 
     function changeDateRange(index) {
-        range = ["range_d", "range_w", "range_m", "range_y"];
-        for (var i = 0; i < range.length; i++) {
+        range_type = ["range_d", "range_w", "range_m", "range_y"];
+        for (var i = 0; i < range_type.length; i++) {
             if (i == index) {
-                document.getElementById(range[i]).classList.add("active");
+                document.getElementById(range_type[i]).classList.add("active");
             }
             else {
-                document.getElementById(range[i]).classList.remove("active");
+                document.getElementById(range_type[i]).classList.remove("active");
             }
+        }
+        if (range >= 1) {
+            document.getElementById("energylevel_area").innerHTML = "<p>Diese Ansicht kommt bald...</p>";
+        } else {
+            updateChart();
         }
     }
     
@@ -112,25 +118,28 @@ $todayDate = date("Y-m-d");
     document.getElementById("nextDay").addEventListener("click", function () { changeDate(-1); });
     document.getElementById("prevDay").addEventListener("click", function () { changeDate(1); });
     var dateInput = document.getElementById("dateInput");
+    dateInput.addEventListener("change", function () { changeDate(0); });
+    var date = new Date();
 
     function changeDate(change) {
         date = new Date(dateInput.value);
         newDate = date.setDate(date.getDate() + change); // add one day
         newDate = moment(newDate).format("YYYY-MM-DD");
         dateInput.value = newDate;
+        date = newDate;
+        updateChart();
     }
-    console.log(dateInput.value);
 
-    var xmlhttp = new XMLHttpRequest();
-    xmlhttp.onreadystatechange=function() {
-        if (this.readyState==4 && this.status==200) {
-            document.getElementById("script").innerHTML = this.responseText;
-        }
-    };
-
-    xmlhttp.open("GET", "index.php?page=ajax&startDate=2022-07-05" + "&endDate=2022-07-07", true);
-    xmlhttp.send();
-
+    function updateChart() {
+        var xmlhttp = new XMLHttpRequest();
+        xmlhttp.onreadystatechange=function() {
+            if (this.readyState==4 && this.status==200) {
+                eval(this.responseText);
+            }
+        };
+        xmlhttp.open("GET", "index.php?page=ajax&chart=" + range + "&date=" + moment(date).format("YYYY-MM-DD"), true);
+        xmlhttp.send();
+    }   
     </script>
 
     <script>

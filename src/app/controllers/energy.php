@@ -9,41 +9,46 @@ if (isset($_POST['add-energy'])) {
     $datetime = strtotime($date . " " . $time);
     $datetime2 = date("Y-m-d H:i", $datetime);
     $energylevel = $_POST['energylevel'];
-    $activities = explode(",", $_POST['activities']); //string to array
+    $activities = array();
+    if (!empty($_POST['activities'])) {
+        $activities = explode(",", $_POST['activities']); //string to array
+    }
     $notes = $_POST['notes'];
 
     $energylevels = getEnergyLevelsByDate();
-    $difference = $energylevel - end($energylevels)['energylevel']; //TODO if last date is not newest
-
-    // count occurrences of activity in db
-    $activities_count = array();
-    foreach ($activities as $activity_id) {
-        $stmt = $conn->prepare("SELECT * FROM energy_activities WHERE activity_id=?");
-        $stmt->bind_param("i", $activity_id);
-        $stmt->execute();
-        $stmt->store_result();
-        $activity_count = $stmt->num_rows;
-        $stmt->close();
-
-        //get old score
-        $stmt = $conn->prepare("SELECT score FROM activities WHERE id=?");
-        $stmt->bind_param("i", $activity_id);
-        $stmt->execute();
-        $stmt->bind_result($selected_score);
-
-        $old_score = 0;
-        while ($stmt->fetch()) {
-            $old_score = $selected_score;
+    if (count($energylevels) > 0) {
+        $difference = $energylevel - end($energylevels)['energylevel']; //TODO if last date is not newest
+    
+        // count occurrences of activity in db
+        $activities_count = array();
+        foreach ($activities as $activity_id) {
+            $stmt = $conn->prepare("SELECT * FROM energy_activities WHERE activity_id=?");
+            $stmt->bind_param("i", $activity_id);
+            $stmt->execute();
+            $stmt->store_result();
+            $activity_count = $stmt->num_rows;
+            $stmt->close();
+    
+            //get old score
+            $stmt = $conn->prepare("SELECT score FROM activities WHERE id=?");
+            $stmt->bind_param("i", $activity_id);
+            $stmt->execute();
+            $stmt->bind_result($selected_score);
+    
+            $old_score = 0;
+            while ($stmt->fetch()) {
+                $old_score = $selected_score;
+            }
+            $stmt->close();        
+    
+            //calculate and set new score
+            $new_score = (($old_score * $activity_count) + $difference) / ($activity_count + 1);
+    
+            $stmt = $conn->prepare("UPDATE activities SET score=? WHERE id=?");
+            $stmt->bind_param("di", $new_score, $activity_id);
+            $stmt->execute();
+            $stmt->close();
         }
-        $stmt->close();        
-
-        //calculate and set new score
-        $new_score = (($old_score * $activity_count) + $difference) / ($activity_count + 1);
-
-        $stmt = $conn->prepare("UPDATE activities SET score=? WHERE id=?");
-        $stmt->bind_param("di", $new_score, $activity_id);
-        $stmt->execute();
-        $stmt->close();
     }
 
     unset($_SESSION['errors']);
@@ -74,7 +79,10 @@ if (isset($_POST['edit-energy'])) {
     $datetime = strtotime($date . " " . $time);
     $datetime2 = date("Y-m-d H:i", $datetime);
     $energylevel = $_POST['energylevel'];
-    $activities = explode(",", $_POST['activities']); //string to array
+    $activities = array();
+    if (!empty($_POST['activities'])) {
+        $activities = explode(",", $_POST['activities']); //string to array
+    }
     $notes = $_POST['notes'];
     $energy_id = $_GET['id'];
 

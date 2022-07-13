@@ -5,7 +5,8 @@ $pages = [
     //app
     "dashboard", "add-new", "entries",
     //information
-    "app", "contact",
+    //"app",
+    "contact",
     // controllers
     "mail", "ajax"
 ];
@@ -41,10 +42,10 @@ if ($page == "users") {
 }
 
 if ($page == "app") {
-    include("app.php");
+    header("location: index.php?page=dashboard");
 }
 if ($page == "contact") {
-    include("contact.php");
+    include("contact_temp.php");
 }
 if ($page == "mail") {
     include("app/controllers/mail.php");
@@ -70,7 +71,6 @@ else {
     if ($page == "dashboard") {
         include("app/controllers/get-energy.php");
         include("app/controllers/calculate-activities.php");
-        // include("app/controllers/dashboard-date.php");
         include("dashboard.php");
     }
     if ($page == "logout") {
@@ -89,8 +89,9 @@ else {
         include("all-entries.php");
     }
     if ($page == "ajax") {
+        $chart = $_GET['chart'];
         include("app/controllers/get-energy.php");
-        include("chart01.php");
+        include("chart" . $chart . ".php");
     }
     if ($page == "onboarding") {
         include("onboarding/theme.php");
