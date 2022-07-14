@@ -1,35 +1,22 @@
 <?php
-if (isset($_GET['email'])) {
-    $email = $_GET['email'];
-} else {
-    $email = '';
-}
-?>
+    //fill in email after error
+    isset($_GET['email']) ? $email = $_GET['email'] : $email = '';
 
-<?php
-print_head(array());
-print_body();
+
+    print_head(array('<title>Anmelden | Fatigue Diary</title>'), false);
+    print_body();
+    includeToastify();
 ?>
 
     <div class="container">
         <h2 class="container-title">Anmelden</h2>
         
-        <!-- Errors -->
-        <?php if (isset($_SESSION['errors'])): ?>
-            <div class="error">
-                <ul>
-                    <?php foreach($_SESSION['errors'] as $error): ?>
-                        <li><?php echo($error); ?></li>
-                    <?php endforeach; ?>
-                </ul>
-            </div>
-            <br>
-        <?php endif; ?>
+        
 
         <form class="form" action="index.php?page=users" method="post">
             <div class="inputs">
                 <label for="email">E-Mail</label>
-                <input type="email" name="email" placeholder="E-Mail-Adresse eingeben..." <?php echo("value= '" . $email . "'"); ?>>
+                <input type="email" name="email" placeholder="E-Mail-Adresse eingeben..." value="<?php echo($email); ?>">
 
                 <label for="password">Passwort</label>
                 <input type="password" name="password" placeholder="Passwort eingeben...">

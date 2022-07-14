@@ -1,7 +1,10 @@
 <nav class="top-nav">
     <ul class="nav_items">
-        <li class="logo"><a href="index.php?page=dashboard"><img src="assets/img/logo.png" alt=""></a></li>
-        <li><a href="javascript:void(0)" onclick="openNav()"><span class="material-icons" id="open">menu</span></i></a> <a href="javascript:void(0)" onclick="closeNav()"><span class="material-icons" id="close">close</span></a></li>
+        <li class="logo"><a href="index.php?page=app"><img src="assets/img/logo.svg" alt=""></a></li>
+        <div class="icons">
+            <li><a href="index.php?page=settings"><span class="material-icons">settings</span></a></li>
+            <li><a href="javascript:void(0)" onclick="openNav()"><span class="material-icons" id="open">menu</span></a> <a href="javascript:void(0)" onclick="closeNav()"><span class="material-icons" id="close">close</span></a></li>
+        </div>
     </ul>
 </nav>
 
@@ -9,7 +12,8 @@
 <div class="sidenav" id="mySidenav">
     <ul>
         <li><a href="index.php?page=profile">Profil</a></li>
-        <li><a href="index.php?page=home">Fatigue Diary</a></li>
+        <li><a href="index.php?page=app">Fatigue Diary</a></li>
+        <li><a href="intro/Dashboard.php">Tour starten</a></li>
         <li><a href="index.php?page=about-app">Über</a></li>
         <li><a href="index.php?page=new">Was ist neu?</a></li>
         <li><a href="index.php?page=contact">Kontakt</a></li>
