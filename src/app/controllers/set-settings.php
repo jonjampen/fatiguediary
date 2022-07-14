@@ -13,5 +13,9 @@ if (isset($_POST['set-settings'])) {
     $stmt->execute();
     $stmt->close();
 
+    $theme = intval($theme);
+    $settings = array("theme" => $theme, "wake_up_time" => $wake_up_time, "bed_time" => $bed_time, "newsletter" => $newsletter);
+    $_SESSION['settings'] = $settings;
+
     header("location: intro/Dashboard.php");
 }
