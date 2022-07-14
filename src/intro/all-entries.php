@@ -335,7 +335,7 @@ function closeNav() {
         {
           text: 'Weiter',
           action: function () {
-            window.location.href = 'dashboard.php?intro=1';
+            window.location.href = 'Dashboard.php?intro=1';
           }
         }
       ]

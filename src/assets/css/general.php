@@ -12,7 +12,7 @@ session_start();
     --error-border: #a04444;
     --background: #F8FAFC;
 
-    <?php if ($_SESSION['settings']['theme'] === 1) {
+    <?php if ($_SESSION['settings']['theme'] === 0) {
         echo("
             --background: #1E1F1F;
             --container: #252627;
