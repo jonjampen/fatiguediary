@@ -118,6 +118,11 @@ if (isset($_POST['reset-password'])) {
         $stmt->execute();
         $stmt->close();
 
+        $stmt = $conn->prepare("DELETE FROM resettoken WHERE token=?");
+        $stmt->bind_param("s", $token);
+        $stmt->execute();
+        $stmt->close();
+
         $_SESSION['success'][] ="Passwort erfolgreich zurückgesetzt";
         header("location: index.php?page=login");
     }
