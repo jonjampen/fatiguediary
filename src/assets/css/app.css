@@ -493,3 +493,20 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 .onboarding-screen label {
     color: var(--text);
 }
+
+
+.settings-screen {
+    margin-left: 16px;
+    margin-right: 16px;
+}
+
+.settings-screen .setting {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 16px;
+}
+
+.settings-screen .setting .time {
+    display: flex;
+}

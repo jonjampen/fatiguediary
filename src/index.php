@@ -3,7 +3,7 @@ $pages = [
     //user
     "login", "register", "users", "logout", "onboarding", "onboarding02", "onboarding03", "onboarding04",
     //app
-    "dashboard", "add-new", "entries",
+    "dashboard", "add-new", "entries", "settings",
     //information
     //"app",
     "contact",
@@ -87,6 +87,10 @@ else {
         include("app/controllers/get-energy.php");
         include("app/controllers/display-activities.php");
         include("all-entries.php");
+    }
+    if ($page == "settings") {
+        include("app/controllers/set-settings.php");
+        include("settings.php");
     }
     if ($page == "ajax") {
         $chart = $_GET['chart'];

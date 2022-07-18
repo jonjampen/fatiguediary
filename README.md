@@ -33,7 +33,7 @@ Weitere Features finden Sie neu unter [Issues](https://github.com/jonjampen/fati
 
 ### Weitere Features
 1. Liste aller Einträge (Einträge bearbeiten), in Tages-Blöcken ✔
-1. Auswertung schlechte / gute Aktivitäten 
+1. Auswertung schlechte / gute Aktivitäten ✔ (muss noch verbessert werden)
 - Symptome erfassen
 - Mehrsprachig (Deutsch und Englisch)
 - Diagramm mit Aktivitäten
