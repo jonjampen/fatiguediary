@@ -117,6 +117,8 @@ if (isset($_POST['reset-password'])) {
         $stmt->bind_param("si", $hashed_password, $user_id);
         $stmt->execute();
         $stmt->close();
+
+        $_SESSION['success'][] ="Passwort erfolgreich zurückgesetzt";
         header("location: index.php?page=login");
     }
     else {
