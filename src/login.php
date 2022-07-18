@@ -28,6 +28,7 @@
             <div class="btn-center">
                 <button class="btn-primary" type="submit" name="login">Anmelden</button>
             </div>
+            <a href="index.php?page=reset-password">Passwort vergessen?</a>
         </form>
         
         <p class="other-option-link">Noch keinen Account? <a href="index.php?page=register">Jetzt registrieren</a></p>

@@ -57,6 +57,43 @@ if (isset($_POST['login'])) {
     }
 }
 
+//reset password
+if (isset($_POST['reset-password'])) {
+    global $conn;
+
+    $email = trim($_POST['email']);
+
+    $stmt = $conn->prepare("SELECT id, name FROM users WHERE email=?");
+    $stmt->bind_param("s", $email);
+    $stmt->execute();
+    $stmt->bind_result($user_id, $user_name);
+    $stmt->fetch();
+    $stmt->close();
+
+    $token = bin2hex(random_bytes(100));
+
+    $stmt = $conn->prepare("INSERT INTO resettoken (user_id, token) VALUES(?,?)");
+    $stmt->bind_param("is", $user_id, $token);
+    $stmt->execute();
+    $stmt->close();
+
+    $link = "http://localhost/fatigue-diary/src/index.php?page=reset-password&token=".$token;
+
+    $to = $email;
+    $subject = "Passwort  Zurücksetzen";
+    $message = "Hallo $user_name" . "\n\n" . "Klicke auf den Link, um  dein Passwort zurücksetzen: " . $link;
+
+    $headers = "MIME-Version: 1.0" . "\n";
+    $headers .= "Content-type:text/plain;charset=UTF-8" . "\n";
+    $headers .= 'From: <no-reply@fatiguediary.ch>' . "\n";
+    $headers .= 'Reply-To: <info@fatiguediary.ch>' . "\n";
+
+    mail($to,$subject,$message,$headers);
+    
+
+    header("location: index.php?page=login");
+}
+
 
 function logout() {
     //Deleting session data and unset cookie

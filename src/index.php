@@ -1,7 +1,7 @@
 <?php
 $pages = [
     //user
-    "login", "register", "users", "logout", "onboarding", "onboarding02", "onboarding03", "onboarding04",
+    "login", "register", "users", "reset-password", "logout", "onboarding", "onboarding02", "onboarding03", "onboarding04",
     //app
     "dashboard", "add-new", "entries", "settings",
     //information
@@ -58,6 +58,9 @@ if(!isset($_SESSION['id'])) {
     }
     elseif ($page == "login") {
         include("login.php");
+    }
+    elseif ($page == "reset-password") {
+        include("reset-password.php");
     }
     if ($page == "dashboard" || $page == "profile" || $page == "entries" || $page == "add-new" || $page == "tricks" || $page == "logout") {
         header("location: index.php?page=login");
