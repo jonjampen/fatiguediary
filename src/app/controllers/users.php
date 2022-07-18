@@ -69,26 +69,28 @@ if (isset($_POST['reset-password-send'])) {
     $stmt->bind_result($user_id, $user_name);
     $stmt->fetch();
     $stmt->close();
+    if (!empty($user_id)) {
+        $token = bin2hex(random_bytes(100));
+    
+        $stmt = $conn->prepare("INSERT INTO resettoken (user_id, token) VALUES(?,?)");
+        $stmt->bind_param("is", $user_id, $token);
+        $stmt->execute();
+        $stmt->close();
+    
+        $link = "https://dev.fatiguediary.ch/index.php?page=reset-password&token=".$token;
+    
+        $to = $email;
+        $subject = "Passwort Zurücksetzen - Fatigue Diary";
+        $message = "Hallo $user_name" . "\n\n" . "Klicke auf den Link, um  dein Passwort zurückzusetzen: " . $link;
+    
+        $headers = "MIME-Version: 1.0" . "\n";
+        $headers .= "Content-type:text/plain;charset=UTF-8" . "\n";
+        $headers .= 'From: <no-reply@fatiguediary.ch>' . "\n";
+        $headers .= 'Reply-To: <info@fatiguediary.ch>' . "\n";
+    
+        mail($to,$subject,$message,$headers);
+    }
 
-    $token = bin2hex(random_bytes(100));
-
-    $stmt = $conn->prepare("INSERT INTO resettoken (user_id, token) VALUES(?,?)");
-    $stmt->bind_param("is", $user_id, $token);
-    $stmt->execute();
-    $stmt->close();
-
-    $link = "https://dev.fatiguediary.ch/index.php?page=reset-password&token=".$token;
-
-    $to = $email;
-    $subject = "Passwort  Zurücksetzen";
-    $message = "Hallo $user_name" . "\n\n" . "Klicke auf den Link, um  dein Passwort zurücksetzen: " . $link;
-
-    $headers = "MIME-Version: 1.0" . "\n";
-    $headers .= "Content-type:text/plain;charset=UTF-8" . "\n";
-    $headers .= 'From: <no-reply@fatiguediary.ch>' . "\n";
-    $headers .= 'Reply-To: <info@fatiguediary.ch>' . "\n";
-
-    mail($to,$subject,$message,$headers);
     
     $_SESSION['success'][] = "E-Mail wurde gesendet";
     header("location: index.php?page=reset-password");
@@ -97,24 +99,33 @@ if (isset($_POST['reset-password-send'])) {
 if (isset($_POST['reset-password'])) {
     $password = $_POST['password'];
     $password_conf = $_POST['passwordConf'];
-
-    $hashed_password = hash("sha3-512", $password);
-
     $token = $_POST['token'];
+    
+    $errors = checkPasswordMatch($password, $password_conf);
+    if (empty($errors)) {
+        $hashed_password = hash("sha3-512", $password);
 
-    global $conn;
-    $stmt = $conn->prepare("SELECT user_id FROM resettoken WHERE token=?");
-    $stmt->bind_param("s", $token);
-    $stmt->execute();
-    $stmt->bind_result($user_id);
-    $stmt->fetch();
-    $stmt->close();
+        global $conn;
+        $stmt = $conn->prepare("SELECT user_id FROM resettoken WHERE token=?");
+        $stmt->bind_param("s", $token);
+        $stmt->execute();
+        $stmt->bind_result($user_id);
+        $stmt->fetch();
+        $stmt->close();
 
-    $stmt = $conn->prepare("UPDATE users SET password=? WHERE id=?");
-    $stmt->bind_param("si", $hashed_password, $user_id);
-    $stmt->execute();
-    $stmt->close();
-    header("location: index.php?page=login");
+        $stmt = $conn->prepare("UPDATE users SET password=? WHERE id=?");
+        $stmt->bind_param("si", $hashed_password, $user_id);
+        $stmt->execute();
+        $stmt->close();
+        header("location: index.php?page=login");
+    }
+    else {
+        $_SESSION['errors'] = $errors;
+        header("location: index.php?page=reset-password&token=".$token);
+    }
+
+
+    
 }
 
 

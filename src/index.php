@@ -18,7 +18,7 @@ include("app/database/connection.php");
 //Setting default page
 $page = "app";
 
-if(!isset($_SESSION['id']) && !isset($_POST['login']) && !isset($_POST['register'])) {
+if(!isset($_SESSION['id']) && !isset($_POST['login']) && !isset($_POST['register']) && !isset($_POST['reset-password'])) {
     include("app/controllers/users.php");
     if (checkCookie()) {
         $page = "dashboard";

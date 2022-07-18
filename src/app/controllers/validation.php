@@ -1,5 +1,16 @@
 <?php
 
+function checkPasswordMatch($password, $password_conf) {
+    $errors = array();
+    if (empty($password)) {
+        array_push($errors, "Das Passwort kann nicht leer sein.");
+    }
+    elseif ($password != $password_conf) {
+        array_push($errors, "Die Passwörter stimmen nicht überein.");
+    }
+    return $errors;
+}
+
 function validateRegisterUser($user){
     $errors = array();
 
