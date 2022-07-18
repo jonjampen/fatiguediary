@@ -58,7 +58,7 @@ if (isset($_POST['login'])) {
 }
 
 //reset password
-if (isset($_POST['reset-password'])) {
+if (isset($_POST['reset-password-send'])) {
     global $conn;
 
     $email = trim($_POST['email']);
@@ -90,7 +90,30 @@ if (isset($_POST['reset-password'])) {
 
     mail($to,$subject,$message,$headers);
     
+    $_SESSION['success'][] = "E-Mail wurde gesendet";
+    header("location: index.php?page=reset-password");
+}
 
+if (isset($_POST['reset-password'])) {
+    $password = $_POST['password'];
+    $password_conf = $_POST['passwordConf'];
+
+    $hashed_password = hash("sha3-512", $password);
+
+    $token = $_POST['token'];
+
+    global $conn;
+    $stmt = $conn->prepare("SELECT user_id FROM resettoken WHERE token=?");
+    $stmt->bind_param("s", $token);
+    $stmt->execute();
+    $stmt->bind_result($user_id);
+    $stmt->fetch();
+    $stmt->close();
+
+    $stmt = $conn->prepare("UPDATE users SET password=? WHERE id=?");
+    $stmt->bind_param("si", $hashed_password, $user_id);
+    $stmt->execute();
+    $stmt->close();
     header("location: index.php?page=login");
 }
 
