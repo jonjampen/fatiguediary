@@ -77,7 +77,7 @@ if (isset($_POST['reset-password-send'])) {
     $stmt->execute();
     $stmt->close();
 
-    $link = "http://localhost/fatigue-diary/src/index.php?page=reset-password&token=".$token;
+    $link = "https://dev.fatiguediary.ch/index.php?page=reset-password&token=".$token;
 
     $to = $email;
     $subject = "Passwort  Zurücksetzen";
