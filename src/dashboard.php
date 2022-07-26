@@ -106,7 +106,7 @@ $todayDate = date("Y-m-d");
                 document.getElementById(range_type[i]).classList.remove("active");
             }
         }
-        if (range >= 1) {
+        if (range >= 2) {
             document.getElementById("energylevel_area").innerHTML = "<p>Diese Ansicht kommt bald...</p>";
         } else {
             updateChart();

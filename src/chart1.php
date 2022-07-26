@@ -9,8 +9,25 @@ $endDate = date("Y-m-d", $endDatetime);
 //$energylevels = array(    array("energy_id" => $energy_id, "energylevel" => $energylevel, "datetime" => $newDateTime, "date" => $newDate), array(...)   )
 $energylevels = array();
 for ($i = $startDatetime; $i <= $endDatetime; $i = strtotime(date("Y-m-d", $i) . ' +1 day')) {
-    $energylevels = array_merge($energylevels, getEnergyLevelsByDate(date("Y-m-d", $i)));
+    /* All values */
+    //$energylevels = array_merge($energylevels, getEnergyLevelsByDate(date("Y-m-d", $i)));
+
+    /* Daily average */
+    $allEnergylevels = getEnergyLevelsByDate(date("Y-m-d", $i));
+    $sum = 0;
+    $counter = 0;
+    foreach ($allEnergylevels as $energylevel) {
+        $sum += $energylevel['energylevel'];
+        $counter += 1;
+    }
+    if ($counter == 0) {
+        $counter = 1;
+    }
+    $avgDay = $sum / $counter;
+
+    $energylevels = array_merge($energylevels, array(array("energylevel" => $avgDay, "datetime" => date("Y-m-d", $i))));
 }
+
 
 
 print<<<EOF
@@ -46,8 +63,8 @@ EOF;
                     };
 print<<<EOF
                 ],
-                min: new Date("{$startDate} 05:00:00").getTime(),
-                max: new Date("{$endDate} 22:30:00").getTime(),
+                min: new Date("{$startDate} 00:00:00").getTime(),
+                max: new Date("{$endDate} 23:59:59").getTime(),
                 labels: {
                     formatter: function(val) {
                         return moment(new Date(val)).format("ddd");
