@@ -23,15 +23,19 @@ for ($i = $startDatetime; $i <= $endDatetime; $i = strtotime(date("Y-m-d", $i) .
     if ($counter == 0) {
         $counter = 1;
     }
-    $avgDay = $sum / $counter;
-
-    $energylevels = array_merge($energylevels, array(array("energylevel" => $avgDay, "datetime" => date("Y-m-d", $i))));
+    $avgDay = round(($sum / $counter)*2)/2;
+    if (!empty($allEnergylevels)) {
+        $energylevels = array_merge($energylevels, array(array("energylevel" => $avgDay, "datetime" => date("Y-m-d", $i))));
+    }
 }
 
 
 
 print<<<EOF
         var options = {
+            noData: {
+                text: "No Data Available",
+            },
             series: [{
                 name: 'Energie',
                 data: [
@@ -64,13 +68,13 @@ EOF;
 print<<<EOF
                 ],
                 min: new Date("{$startDate} 00:00:00").getTime(),
-                max: new Date("{$endDate} 23:59:59").getTime(),
+                max: new Date("{$endDate} 00:00:00").getTime(),
                 labels: {
                     formatter: function(val) {
                         return moment(new Date(val)).format("ddd");
                     },
                     style: {
-                        colors: '#FFFFFF',
+                        colors: '#7D8082',
                     },
                     datetimeUTC: false, // Do not convert to UTC
                 },
@@ -78,10 +82,7 @@ print<<<EOF
             yaxis: {
                 labels: {
                     style: {
-                        colors: '#FFFFFF',
-                    },
-                    formatter: function (val) {
-                        return val.toFixed(0) // only integers
+                        colors: '#7D8082',
                     },
                 },
                 tickAmount: 5, // only 6 labels
@@ -94,6 +95,9 @@ print<<<EOF
                     format: 'dd/MM/yy HH:mm'
                 },
             },
+            grid: {
+                borderColor: '#7D8082',
+            }
 
         };
 
