@@ -24,6 +24,9 @@ for ($i = $startDatetime; $i <= $endDatetime; $i = strtotime(date("Y-m-d", $i) .
     if (!empty($allEnergylevels)) {
         $energylevels = array_merge($energylevels, array(array("energylevel" => $avgDay, "datetime" => date("Y-m-d", $i))));
     }
+    else {
+        $energylevels = array_merge($energylevels, array(array("energylevel" => 0, "datetime" => date("Y-m-d", $i))));
+    }
 }
 
 
@@ -45,7 +48,7 @@ print<<<EOF
             }],
             chart: {
                 height: 250,
-                type: 'area'
+                type: 'bar'
             },
             dataLabels: {
                 enabled: false
@@ -64,11 +67,12 @@ EOF;
                     };
 print<<<EOF
                 ],
-                min: new Date("{$startDate} 00:00:00").getTime(),
-                max: new Date("{$endDate} 00:00:00").getTime(),
                 labels: {
-                    formatter: function(val) {
-                        return moment(new Date(val)).format("DD");
+                    datetimeFormatter: {
+                        year: 'YYYY',
+                        month: 'MMM \'yy',
+                        day: 'dd',
+                        hour: 'HH:mm'
                     },
                     style: {
                         colors: '#7D8082',
