@@ -53,8 +53,11 @@ print<<<EOF
                 min: new Date("{$startDate} {$wakeUpTime}").getTime(),
                 max: new Date("{$endDate} {$bedTime}").getTime(),
                 labels: {
-                    formatter: function(val) {
-                        return moment(new Date(val)).format("HH:mm");
+                    datetimeFormatter: {
+                        year: 'YYYY',
+                        month: 'MMM \'yy',
+                        day: 'ddd',
+                        hour: 'HH:mm'
                     },
                     style: {
                         colors: '#7D8082',
