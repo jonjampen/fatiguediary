@@ -93,7 +93,7 @@ print<<<EOF
             tooltip: {
                 x: {
                     show: true,
-                    format: 'dd/MM/yy HH:mm'
+                    format: 'ddd, dd.MM.yy'
                 },
             },
             grid: {
