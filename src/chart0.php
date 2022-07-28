@@ -67,6 +67,9 @@ print<<<EOF
             },
             yaxis: {
                 labels: {
+                    formatter: function(val) {
+                        return val.toFixed(0);
+                    },
                     style: {
                         colors: '#7D8082',
                     },
@@ -80,6 +83,11 @@ print<<<EOF
                 x: {
                     show: true,
                     format: 'dd/MM/yy HH:mm'
+                },
+                y: {
+                    formatter: function (val) {
+                        return val.toFixed(1)
+                    },
                 },
             },
             grid: {
