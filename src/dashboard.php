@@ -134,23 +134,24 @@ $todayDate = date("Y-m-d");
         else {
             newDate = date.setDate(date.getDate() + change * increment[range]);
         }
-        
+
         newDate = moment(newDate).format("YYYY-MM-DD");
         dateInput.value = newDate;
         date = newDate;
         updateChart();
     }
 
-    function updateChart() {
+    function updateChart(orientation = window.orientation) {
         var xmlhttp = new XMLHttpRequest();
         xmlhttp.onreadystatechange=function() {
             if (this.readyState==4 && this.status==200) {
                 eval(this.responseText);
             }
         };
-        xmlhttp.open("GET", "index.php?page=ajax&chart=" + range + "&date=" + moment(date).format("YYYY-MM-DD"), true);
+        xmlhttp.open("GET", "index.php?page=ajax&chart=" + range + "&date=" + moment(date).format("YYYY-MM-DD") + "&orientation=" + orientation, true);
         xmlhttp.send();
-    }   
+    }
+    window.addEventListener("orientationchange", function(event){updateChart(event.target.screen.orientation.angle); console.log(event.target.screen.orientation.angle)})
     </script>
 
 </body>
