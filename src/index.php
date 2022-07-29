@@ -98,6 +98,7 @@ else {
     if ($page == "ajax") {
         $chart = $_GET['chart'];
         include("app/controllers/get-energy.php");
+        include("app/controllers/display-activities.php");
         include("chart" . $chart . ".php");
     }
     if ($page == "onboarding") {
