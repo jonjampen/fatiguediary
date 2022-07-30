@@ -89,6 +89,7 @@ $todayDate = date("Y-m-d");
 
 
     var range = 0;
+    var increment = [1, 7, "month", "year"];
     updateChart();
 
     document.getElementById("range_d").addEventListener("click", function () { range = 0; changeDateRange(range); });
@@ -106,11 +107,7 @@ $todayDate = date("Y-m-d");
                 document.getElementById(range_type[i]).classList.remove("active");
             }
         }
-        if (range >= 1) {
-            document.getElementById("energylevel_area").innerHTML = "<p>Diese Ansicht kommt bald...</p>";
-        } else {
             updateChart();
-        }
     }
     
 
@@ -122,7 +119,18 @@ $todayDate = date("Y-m-d");
 
     function changeDate(change) {
         date = new Date(dateInput.value);
-        newDate = date.setDate(date.getDate() + change); // add one day
+
+        // add days/month/year
+        if (increment[range] == "month") {
+            newDate = date.setMonth(date.getMonth() + change);
+        }
+        else if (increment[range] == "year") {
+            newDate = date.setYear(date.getFullYear() + change);
+        }
+        else {
+            newDate = date.setDate(date.getDate() + change * increment[range]);
+        }
+
         newDate = moment(newDate).format("YYYY-MM-DD");
         dateInput.value = newDate;
         date = newDate;
@@ -138,7 +146,7 @@ $todayDate = date("Y-m-d");
         };
         xmlhttp.open("GET", "index.php?page=ajax&chart=" + range + "&date=" + moment(date).format("YYYY-MM-DD"), true);
         xmlhttp.send();
-    }   
+    }
     </script>
 
 </body>

@@ -2,19 +2,18 @@
 $startDatetime = strtotime($_GET['date'] . 'last monday');
 $startDate = date("Y-m-d", $startDatetime);
 
-$endDatetime = strtotime($startDate . " +7 days");
+$endDatetime = strtotime($startDate . " +6 days");
 $endDate = date("Y-m-d", $endDatetime);
 
 
-//$energylevels = array(    array("energy_id" => $energy_id, "energylevel" => $energylevel, "datetime" => $newDateTime, "date" => $newDate), array(...)   )
-$energylevels = array();
-for ($i = $startDatetime; $i <= $endDatetime; $i = strtotime(date("Y-m-d", $i) . ' +1 day')) {
-    $energylevels = array_merge($energylevels, getEnergyLevelsByDate(date("Y-m-d", $i)));
-}
+$energylevels = calculateDailyAvg($startDatetime, $endDatetime);
 
 
 print<<<EOF
         var options = {
+            noData: {
+                text: "No Data Available",
+            },
             series: [{
                 name: 'Energie',
                 data: [
@@ -27,7 +26,7 @@ print<<<EOF
             }],
             chart: {
                 height: 250,
-                type: 'area'
+                type: 'bar'
             },
             dataLabels: {
                 enabled: false
@@ -46,25 +45,27 @@ EOF;
                     };
 print<<<EOF
                 ],
-                min: new Date("{$startDate} 05:00:00").getTime(),
-                max: new Date("{$endDate} 22:30:00").getTime(),
+                tickAmount: 7,
                 labels: {
-                    formatter: function(val) {
-                        return moment(new Date(val)).format("ddd");
+                    datetimeFormatter: {
+                        year: 'YYYY',
+                        month: 'MMM \'yy',
+                        day: 'ddd',
+                        hour: 'ddd'
                     },
                     style: {
-                        colors: '#FFFFFF',
+                        colors: '#7D8082',
                     },
                     datetimeUTC: false, // Do not convert to UTC
                 },
             },
             yaxis: {
                 labels: {
-                    style: {
-                        colors: '#FFFFFF',
+                    formatter: function(val) {
+                        return val.toFixed(0);
                     },
-                    formatter: function (val) {
-                        return val.toFixed(0) // only integers
+                    style: {
+                        colors: '#7D8082',
                     },
                 },
                 tickAmount: 5, // only 6 labels
@@ -74,9 +75,17 @@ print<<<EOF
             tooltip: {
                 x: {
                     show: true,
-                    format: 'dd/MM/yy HH:mm'
+                    format: 'ddd, dd.MM.yy'
+                },
+                y: {
+                    formatter: function (val) {
+                        return val.toFixed(1)
+                    },
                 },
             },
+            grid: {
+                borderColor: '#7D8082',
+            }
 
         };
 

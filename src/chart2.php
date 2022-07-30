@@ -1,21 +1,18 @@
 <?php
-// type: int
-$startDatetime = strtotime($_GET['startDate']);
-$endDatetime = strtotime($_GET['endDate']);
-
-//type: string
+$startDatetime = strtotime(date("Y-m-01", strtotime($_GET['date'])));
 $startDate = date("Y-m-d", $startDatetime);
+
+$endDatetime = strtotime(date("Y-m-t", strtotime($_GET['date'])));
 $endDate = date("Y-m-d", $endDatetime);
 
-//$energylevels = array(    array("energy_id" => $energy_id, "energylevel" => $energylevel, "datetime" => $newDateTime, "date" => $newDate), array(...)   )
-$energylevels = array();
-for ($i = $startDatetime; $i <= $endDatetime; $i = strtotime(date("Y-m-d", $i) . ' +1 day')) {
-    $energylevels = array_merge($energylevels, getEnergyLevelsByDate(date("Y-m-d", $i)));
-}
+$energylevels = calculateDailyAvg($startDatetime, $endDatetime);
 
 
 print<<<EOF
         var options = {
+            noData: {
+                text: "No Data Available",
+            },
             series: [{
                 name: 'Energie',
                 data: [
@@ -28,7 +25,7 @@ print<<<EOF
             }],
             chart: {
                 height: 250,
-                type: 'area'
+                type: 'bar'
             },
             dataLabels: {
                 enabled: false
@@ -36,7 +33,7 @@ print<<<EOF
             stroke: {
                 curve: 'smooth'
             },
-            colors:['#ffffff'],
+            colors:['#F55B53'],
             xaxis: {
                 type: 'datetime',
                 categories: [
@@ -47,25 +44,26 @@ EOF;
                     };
 print<<<EOF
                 ],
-                min: new Date("{$startDate} 05:00:00").getTime(),
-                max: new Date("{$endDate} 22:30:00").getTime(),
                 labels: {
-                    formatter: function(val) {
-                        return moment(new Date(val)).format("HH:mm");
+                    datetimeFormatter: {
+                        year: 'YYYY',
+                        month: 'MMM \'yy',
+                        day: 'dd',
+                        hour: 'HH:mm'
                     },
                     style: {
-                        colors: '#FFFFFF',
+                        colors: '#7D8082',
                     },
                     datetimeUTC: false, // Do not convert to UTC
                 },
             },
             yaxis: {
                 labels: {
-                    style: {
-                        colors: '#FFFFFF',
+                    formatter: function(val) {
+                        return val.toFixed(0);
                     },
-                    formatter: function (val) {
-                        return val.toFixed(0) // only integers
+                    style: {
+                        colors: '#7D8082',
                     },
                 },
                 tickAmount: 5, // only 6 labels
@@ -75,12 +73,21 @@ print<<<EOF
             tooltip: {
                 x: {
                     show: true,
-                    format: 'dd/MM/yy HH:mm'
+                    format: 'ddd, dd.MM.yy'
+                },
+                y: {
+                    formatter: function (val) {
+                        return val.toFixed(1)
+                    },
                 },
             },
+            grid: {
+                borderColor: '#7D8082',
+            }
 
         };
 
+        document.getElementById("energylevel_area").innerHTML = "";
         var energylevel_area = new ApexCharts(document.querySelector("#energylevel_area"), options);
         energylevel_area.render();
 EOF;

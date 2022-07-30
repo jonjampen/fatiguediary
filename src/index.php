@@ -98,6 +98,8 @@ else {
     if ($page == "ajax") {
         $chart = $_GET['chart'];
         include("app/controllers/get-energy.php");
+        include("app/controllers/display-activities.php");
+        include("app/controllers/calculate-charts.php");
         include("chart" . $chart . ".php");
     }
     if ($page == "onboarding") {
@@ -129,6 +131,7 @@ function print_head($page_head, $public) {
         '<meta charset="UTF-8">',
         '<meta http-equiv="X-UA-Compatible" content="IE=edge">',
         '<meta name="viewport" content="width=device-width, initial-scale=1.0">',
+        '<meta property="og:image" content="assets/img/logo.svg" />',
         '<link rel="stylesheet" href="assets/fonts/materialicons.css">',
         '<link rel="stylesheet" href="assets/css/general.php">',
         '<link rel="icon" type="image/x-icon" href="assets/img/logo.svg">',

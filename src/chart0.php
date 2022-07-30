@@ -24,7 +24,21 @@ print<<<EOF
                 data: [
 EOF;
                     foreach ($energylevels as $energylevel) {
-                        echo($energylevel['energylevel'] . ',');
+                        $activities = getActivitiesByEnergyId($energylevel['energy_id']);
+                        $activities_string = "";
+                        $activity_counter = 1;
+                        foreach ($activities as $activity) {
+                            $activities_string .= getActivityNameById($activity['id']);
+                            if ($activity_counter != count($activities)) {
+                                $activities_string .= ", ";
+                            }
+                            $activity_counter++;
+                        }
+                        echo('{
+                            y: ' . $energylevel['energylevel'] . ',
+                            x: "' . $energylevel['datetime'] . '",
+                            z: "' . $activities_string . '",
+                        },');
                     };
 print<<<EOF
                 ]
@@ -42,19 +56,14 @@ print<<<EOF
             colors:['#F55B53'],
             xaxis: {
                 type: 'datetime',
-                categories: [
-EOF;
-
-                    foreach ($energylevels as $energylevel) {
-                        echo('"' . date("Y-m-d H:i:s", strtotime($energylevel['datetime'])) . '"' . ',');
-                    };
-print<<<EOF
-                ],
                 min: new Date("{$startDate} {$wakeUpTime}").getTime(),
                 max: new Date("{$endDate} {$bedTime}").getTime(),
                 labels: {
-                    formatter: function(val) {
-                        return moment(new Date(val)).format("HH:mm");
+                    datetimeFormatter: {
+                        year: 'YYYY',
+                        month: 'MMM \'yy',
+                        day: 'ddd',
+                        hour: 'HH:mm'
                     },
                     style: {
                         colors: '#7D8082',
@@ -64,6 +73,9 @@ print<<<EOF
             },
             yaxis: {
                 labels: {
+                    formatter: function(val) {
+                        return val.toFixed(0);
+                    },
                     style: {
                         colors: '#7D8082',
                     },
@@ -78,6 +90,14 @@ print<<<EOF
                     show: true,
                     format: 'dd/MM/yy HH:mm'
                 },
+                y: {
+                    formatter: function (val) {
+                        return val.toFixed(1)
+                    },
+                },
+                z: {
+                    title: "Aktivitäten:",
+                }
             },
             grid: {
                 borderColor: '#7D8082',

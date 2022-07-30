@@ -196,12 +196,12 @@ nav .logo img {
 /*Sidenavbar*/
 .sidenav {
     height: 100%;
-    width: 0;
+    width: 250px;
+    display: none;
     z-index: 2;
     position: fixed;
     right: 0;
     background: var(--background);
-    transition: 0.5s;
 }
 .sidenav ul {
     display: flex;
@@ -239,7 +239,7 @@ nav .logo img {
 }
 .datetime span {
     color: var(--text);
-    font-size: 14px;
+    font-size: 16px;
 }
 .datetime input {
     background-color: transparent;
@@ -392,6 +392,7 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     color: var(--text);
     text-align: center;
     margin-bottom: 32px;
+    font-size: 16px;
 }
 .date-picker span {
     cursor: pointer;
