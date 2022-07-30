@@ -239,7 +239,7 @@ nav .logo img {
 }
 .datetime span {
     color: var(--text);
-    font-size: 14px;
+    font-size: 16px;
 }
 .datetime input {
     background-color: transparent;
@@ -392,6 +392,7 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     color: var(--text);
     text-align: center;
     margin-bottom: 32px;
+    font-size: 16px;
 }
 .date-picker span {
     cursor: pointer;
