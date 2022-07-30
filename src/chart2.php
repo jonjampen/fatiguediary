@@ -5,30 +5,7 @@ $startDate = date("Y-m-d", $startDatetime);
 $endDatetime = strtotime(date("Y-m-t", strtotime($_GET['date'])));
 $endDate = date("Y-m-d", $endDatetime);
 
-
-//$energylevels = array(    array("energy_id" => $energy_id, "energylevel" => $energylevel, "datetime" => $newDateTime, "date" => $newDate), array(...)   )
-$energylevels = array();
-for ($i = $startDatetime; $i <= $endDatetime; $i = strtotime(date("Y-m-d", $i) . ' +1 day')) {
-    /* Daily average */
-    $allEnergylevels = getEnergyLevelsByDate(date("Y-m-d", $i));
-    $sum = 0;
-    $counter = 0;
-    foreach ($allEnergylevels as $energylevel) {
-        $sum += $energylevel['energylevel'];
-        $counter += 1;
-    }
-    if ($counter == 0) {
-        $counter = 1;
-    }
-    $avgDay = round(($sum / $counter)*2)/2;
-    if (!empty($allEnergylevels)) {
-        $energylevels = array_merge($energylevels, array(array("energylevel" => $avgDay, "datetime" => date("Y-m-d", $i))));
-    }
-    else {
-        $energylevels = array_merge($energylevels, array(array("energylevel" => 0, "datetime" => date("Y-m-d", $i))));
-    }
-}
-
+$energylevels = calculateDailyAvg($startDatetime, $endDatetime);
 
 
 print<<<EOF

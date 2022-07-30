@@ -5,48 +5,9 @@ $startDate = date("Y-m-d", $startDatetime);
 $endDatetime = strtotime(date("Y-12-31", strtotime($_GET['date'])));
 $endDate = date("Y-m-d", $endDatetime);
 
+$dayAvgEnergylevels = calculateDailyAvg($startDatetime, $endDatetime);
+$monthAvgEnergylevels = calculateMonthAvg($dayAvgEnergylevels, $startDatetime);
 
-//$energylevels = array(    array("energy_id" => $energy_id, "energylevel" => $energylevel, "datetime" => $newDateTime, "date" => $newDate), array(...)   )
-$dayAvgEnergylevels = array();
-for ($i = $startDatetime; $i <= $endDatetime; $i = strtotime(date("Y-m-d", $i) . ' +1 day')) {
-    /* Daily average */
-    $allEnergylevels = getEnergyLevelsByDate(date("Y-m-d", $i));
-    $sum = 0;
-    $counter = 0;
-    foreach ($allEnergylevels as $energylevel) {
-        $sum += $energylevel['energylevel'];
-        $counter += 1;
-    }
-    if ($counter == 0) {
-        $counter = 1;
-    }
-    $avgDay = $sum / $counter;
-    if (!empty($allEnergylevels)) {
-        $dayAvgEnergylevels = array_merge($dayAvgEnergylevels, array(array("energylevel" => $avgDay, "datetime" => date("Y-m-d", $i))));
-    }
-    else {
-        $dayAvgEnergylevels = array_merge($dayAvgEnergylevels, array(array("energylevel" => 0, "datetime" => date("Y-m-d", $i))));
-    }
-}
-
-$monthSum = array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
-$monthCounter = array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
-foreach ($dayAvgEnergylevels as $dayAvgEnergylevel) {
-    $monthSum[date("n", strtotime($dayAvgEnergylevel['datetime'])) - 1] += $dayAvgEnergylevel['energylevel'];
-    if ($dayAvgEnergylevel['energylevel'] != 0) {
-        $monthCounter[date("n", strtotime($dayAvgEnergylevel['datetime'])) - 1] += 1;
-    }
-}
-
-$monthAvgEnergylevels = array();
-foreach ($monthSum as $key=>$sum) {
-    if ($monthCounter[$key] != 0) {
-        $monthAvgEnergylevels[$key] = array("energylevel" => round($sum/$monthCounter[$key], 1), "datetime" => date("Y-" . $key+1 . "-d", $startDatetime));
-    }
-    else {
-        $monthAvgEnergylevels[$key] = array("energylevel" => 0, "datetime" => date("Y-" . $key+1 . "-d", $startDatetime));
-    }
-}
 
 
 
