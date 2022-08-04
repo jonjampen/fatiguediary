@@ -1,5 +1,5 @@
 <?php
-$startDatetime = strtotime($_GET['date'] . 'last monday');
+$startDatetime = strtotime($_GET['date'] . 'Monday this week');
 $startDate = date("Y-m-d", $startDatetime);
 
 $endDatetime = strtotime($startDate . " +6 days");
