@@ -34,31 +34,28 @@ $todayDate = date("Y-m-d");
     </div>
     
     <?php
-        $goodAndBad = array();
-        $goodAndBad = calculateActivity();
+        $goodAndBad = calculateActivities();
         $goodActivities = $goodAndBad['good'];
-        $badActivities = $goodAndBad['bad'];        
+        
+        $badActivities = $goodAndBad['bad'];
         ?>
 
     <div class="container">
-        <h3 class="center-title">Aktivitäten, die dir Energie geben.</h3>
+        <h3 class="center-title">Energiegebende Aktivitäten</h3>
         <div class="rated-activities">
         <?php
-            for ($i = 0; $i < count($goodActivities) && $i < 3; $i++) {
-                $goodActivity = $goodActivities[$i];
-
-                echo('<p class="rated-activity border_color">' . $goodActivity['name'] . '</p>');
+            foreach ($goodActivities as $name=>$avg) {
+                echo('<p class="rated-activity border_color">' . $name . ' ' . round($avg*2 * 2)/2 . '</p>');
             }
         ?>
         </div>
     </div>
     <div class="container">
-        <h3 class="center-title">Aktivitäten, die dir Energie rauben.</h3>
+        <h3 class="center-title">Energieraubende Aktivitäten</h3>
         <div class="rated-activities">
             <?php
-                for ($i = 0; $i < count($badActivities) && $i < 3; $i++) {
-                    $badActivity = $badActivities[$i];
-                    echo('<p class="rated-activity border_color">' . $badActivity['name'] . '</p>');
+                foreach ($badActivities as $name=>$avg) {
+                    echo('<p class="rated-activity border_color">' . $name . ' '. round(($avg) * 2) /2 . '</p>');
                 }
             ?>
         </div>
@@ -74,17 +71,14 @@ $todayDate = date("Y-m-d");
         var border = document.getElementsByClassName("border_color");
         <?php
             $j = 0;
-            for ($i = 0; $i < count($goodActivities) && $i < 3; $i++) {
-                $goodActivity = $goodActivities[$i];
-                echo("calculateBorderColor(" . round((10 + $goodActivity['score'])*2)/4 . ", border[" . $j . "]); \n");
+            foreach ($goodActivities as $name=>$avg) {
+                echo("calculateBorderColor(" . 5 + round($avg) / 2 . ", border[" . $j . "]); \n");
                 $j++;
             }
-            for ($i = 0; $i < count($badActivities) && $i < 3; $i++) {
-                $badActivity = $badActivities[$i];
-                echo("calculateBorderColor(" . round((10 + $badActivity['score'])*2)/4 . ", border[" . $j . "]); \n");
+            foreach ($badActivities as $name=>$avg) {
+                echo("calculateBorderColor(" . 5 - round(abs($avg)) / 2 . ", border[" . $j . "]); \n");
                 $j++;
             }
-
         ?>
 
 
