@@ -77,7 +77,7 @@ function calculateActivities() {
     }
 
     // sort
-    asort($goodBad['good']);
+    arsort($goodBad['good']);
     asort($goodBad['bad']);
 
     return($goodBad);
