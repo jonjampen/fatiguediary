@@ -47,7 +47,7 @@ $todayDate = date("Y-m-d");
             $i = 0;
             foreach ($goodActivities as $name=>$avg) {
                 if ($i<3) {
-                    echo('<p class="rated-activity border_color">' . $name . '</p>');
+                    echo('<p class="rated-activity border_color">' . $name . " " . $avg . '</p>');
                 }
                 $i++;
             }
@@ -61,7 +61,7 @@ $todayDate = date("Y-m-d");
                 $i = 0;
                 foreach ($badActivities as $name=>$avg) {
                     if ($i<3) {
-                        echo('<p class="rated-activity border_color">' . $name . '</p>');
+                        echo('<p class="rated-activity border_color">' . $name . " " . $avg . '</p>');
                     }
                     $i++;
                 }
