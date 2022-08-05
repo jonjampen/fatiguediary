@@ -44,8 +44,12 @@ $todayDate = date("Y-m-d");
         <h3 class="center-title">Energiegebende Aktivitäten</h3>
         <div class="rated-activities">
         <?php
+            $i = 0;
             foreach ($goodActivities as $name=>$avg) {
-                echo('<p class="rated-activity border_color">' . $name . '</p>');
+                if ($i<3) {
+                    echo('<p class="rated-activity border_color">' . $name . '</p>');
+                }
+                $i++;
             }
         ?>
         </div>
@@ -54,8 +58,12 @@ $todayDate = date("Y-m-d");
         <h3 class="center-title">Energieraubende Aktivitäten</h3>
         <div class="rated-activities">
             <?php
+                $i = 0;
                 foreach ($badActivities as $name=>$avg) {
-                    echo('<p class="rated-activity border_color">' . $name . '</p>');
+                    if ($i<3) {
+                        echo('<p class="rated-activity border_color">' . $name . '</p>');
+                    }
+                    $i++;
                 }
             ?>
         </div>
@@ -71,13 +79,22 @@ $todayDate = date("Y-m-d");
         var border = document.getElementsByClassName("border_color");
         <?php
             $j = 0;
+            $i = 0;
             foreach ($goodActivities as $name=>$avg) {
-                echo("calculateBorderColor(" . 5 + round($avg) / 2 . ", border[" . $j . "]); \n");
-                $j++;
+                if ($i<3) {
+                    echo("calculateBorderColor(" . 5 + round($avg) / 2 . ", border[" . $j . "]); \n");
+                    $j++;
+                }
+                $i++;
             }
+
+            $i = 0;
             foreach ($badActivities as $name=>$avg) {
-                echo("calculateBorderColor(" . 5 - round(abs($avg)) / 2 . ", border[" . $j . "]); \n");
-                $j++;
+                if ($i<3) {
+                    echo("calculateBorderColor(" . 5 - round(abs($avg)) / 2 . ", border[" . $j . "]); \n");
+                    $j++;
+                }
+                $i++;
             }
         ?>
 
