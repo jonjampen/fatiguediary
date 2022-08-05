@@ -45,7 +45,7 @@ $todayDate = date("Y-m-d");
         <div class="rated-activities">
         <?php
             foreach ($goodActivities as $name=>$avg) {
-                echo('<p class="rated-activity border_color">' . $name . ' ' . round($avg*2 * 2)/2 . '</p>');
+                echo('<p class="rated-activity border_color">' . $name . '</p>');
             }
         ?>
         </div>
@@ -55,7 +55,7 @@ $todayDate = date("Y-m-d");
         <div class="rated-activities">
             <?php
                 foreach ($badActivities as $name=>$avg) {
-                    echo('<p class="rated-activity border_color">' . $name . ' '. round(($avg) * 2) /2 . '</p>');
+                    echo('<p class="rated-activity border_color">' . $name . '</p>');
                 }
             ?>
         </div>
