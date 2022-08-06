@@ -2,13 +2,24 @@
     print_head(array('<title>Alle Einträge | Fatigue Diary</title>'), false);
     print_body();
     includeToastify();
+    $todayDate = date("Y-m-d");
+    if (isset($_GET['date'])) {
+        $todayDate = date("Y-m-d", strtotime($_GET['date']));
+    }
     ?>
 
     <div class="entries-screen">
         <h2>Einträge (letzte 7 Tage)</h2>
+
+        <div class="date-picker">
+            <span class="material-icons" id="nextDay">chevron_left</span>
+            <input id="dateInput" type="date" class="date" value="<?php echo($todayDate); ?>">
+            <span class="material-icons" id="prevDay">chevron_right</span>
+        </div>
+
         <?php for ($day_counter = 0; $day_counter < 7; $day_counter++): //for each day of the past week ?>
             <?php
-                $date = date_sub(new DateTime(), date_interval_create_from_date_string($day_counter . ' day')); // subtract i days from date
+                $date = date_sub(new DateTime($todayDate), date_interval_create_from_date_string($day_counter . ' day')); // subtract i days from date
                 $entries = getEnergyLevelsByDate($date->format("Y-m-d"));
 
                 // calculate daily energy average
@@ -69,7 +80,7 @@
         <?php endfor; ?>
     </div>
 
-    
+    <script src="assets/chart/moment.min.js"></script>
     <script src="assets/js/visualizeValue.js"></script>
     <script>
         var entryValue = document.getElementsByClassName("energyValue");
@@ -89,6 +100,26 @@
 
         function redirectToEdit(id) {
             window.location.href = "index.php?page=add-new&id=" + id;
+        }
+
+
+        document.getElementById("nextDay").addEventListener("click", function () { changeDate(-1); });
+        document.getElementById("prevDay").addEventListener("click", function () { changeDate(1); });
+        var dateInput = document.getElementById("dateInput");
+        dateInput.addEventListener("change", function () { changeDate(0); });
+        var date = new Date();
+
+        function changeDate(change) {
+            date = new Date(dateInput.value);
+            newDate = date.setDate(date.getDate() + change);
+
+            newDate = moment(newDate).format("YYYY-MM-DD");
+            updateEntries(newDate);
+        }
+
+
+        function updateEntries(newDate) {
+            window.location.href = "index.php?page=entries&date=" + newDate;
         }
     </script>
 
