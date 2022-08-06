@@ -15,9 +15,6 @@ function calculateColor(value, text) {
 
 
 function calculateBorderColor(value, border) {
-   if (value) {
-        colorPos = Math.floor(value/3*2);
-        color = colors[colorPos];
+        color = colors[value];
         border.style.borderColor = color;
-    }
 }

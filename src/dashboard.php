@@ -60,7 +60,7 @@ $todayDate = date("Y-m-d");
             <?php
                 $i = 0;
                 foreach ($badActivities as $name=>$avg) {
-                    if ($i<3) {
+                    if ($i<=4) {
                         echo('<p class="rated-activity border_color">' . $name . '</p>');
                     }
                     $i++;
@@ -80,18 +80,41 @@ $todayDate = date("Y-m-d");
         <?php
             $j = 0;
             $i = 0;
+            $value = 0;
+            $worst = end($goodActivities);
+            $best = array_values($goodActivities)[0];
+            $segment = ($best - $worst) / 3;
+            
             foreach ($goodActivities as $name=>$avg) {
                 if ($i<3) {
-                    echo("calculateBorderColor(" . 5 + round($avg) / 2 . ", border[" . $j . "]); \n");
+                    for ($factor = 1; $factor <= 3; $factor++) {
+                        if ($avg <= $worst + ($segment * $factor)) {
+                            $value = 7 - (4 - $factor);
+                            break;
+                        }
+                    }
+                    echo("calculateBorderColor(" . $value . ", border[" . $j . "]); \n");
                     $j++;
                 }
                 $i++;
             }
 
+
             $i = 0;
+            $worst = array_values($badActivities)[0];
+            $best = end($badActivities);
+            $segment = (abs($worst) - abs($best)) / 3;
+
             foreach ($badActivities as $name=>$avg) {
-                if ($i<3) {
-                    echo("calculateBorderColor(" . 5 - round(abs($avg)) / 2 . ", border[" . $j . "]); \n");
+                if ($i<=4) {
+                    for ($factor = 1; $factor <= 3; $factor++) {
+                        if (abs($avg) >= abs($worst + ($segment * $factor))) {
+                            $value = $factor;
+                            break;
+                        }
+                        log_a(abs($avg) . " " . abs($worst + ($segment * $factor)) . "=>" . $factor);
+                    }
+                    echo("calculateBorderColor(" . $value . ", border[" . $j . "]); \n");
                     $j++;
                 }
                 $i++;

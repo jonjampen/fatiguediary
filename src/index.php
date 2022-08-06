@@ -72,6 +72,7 @@ else {
         header("location: index.php?page=dashboard");
     }
     if ($page == "dashboard") {
+        include("testing/debug.php");
         include("app/controllers/get-energy.php");
         include("app/controllers/calculate-activities.php");
         include("dashboard.php");
