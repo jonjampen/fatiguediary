@@ -73,4 +73,6 @@ $text =
     'change-pw' => 'Passwort ändern',
     'new-pw' => 'Neues Passwort',
     'enter-new-pw' => 'Neues Passwort eingeben...',
+
+    'dnf-page' => 'Diese Seite gibt es momentan noch nicht.'
 ];
