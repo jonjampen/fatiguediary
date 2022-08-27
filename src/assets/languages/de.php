@@ -58,5 +58,14 @@ $text =
 
     'forgot-password' => 'Passwort vergessen?',
     'no-account' => 'Noch keinen Account? ',
-    'register-now' => 'Jetzt registrieren'
+    'register-now' => 'Jetzt registrieren',
+
+    'signup' => 'Registrieren',
+    'name' => 'Name',
+    'enter-name' => 'Name eingeben...',
+    'repeat-pw' => 'Passwort wiederholen',
+    'enter-repeat-pw' => 'Passwort erneut eingeben...',
+
+    'already-registered' => 'Bereits angemeldet? ',
+    'login-now' => 'Jetzt anmelden',
 ];

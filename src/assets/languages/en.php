@@ -47,4 +47,25 @@ $text =
     'information-mail' => 'Information via e-mail:',
 
     'save' => 'Save',
+
+
+    'login' => 'Log In',
+    'email' => 'Email',
+    'enter-email' => 'Enter email adress...',
+    'password' => 'Password',
+    'enter-password' => 'Enter password...',
+    'remember-me' => 'Stay logged in',
+
+    'forgot-password' => 'Forgot your password?',
+    'no-account' => 'Not yet signed up? ',
+    'register-now' => 'Sign up now',
+
+    'signup' => 'Sign up',
+    'name' => 'Name',
+    'enter-name' => 'Enter name...',
+    'repeat-pw' => 'Repeat password',
+    'enter-repeat-pw' => 'Reenter password...',
+
+    'already-registered' => 'Already have an account? ',
+    'login-now' => 'Log In now',
 ];
