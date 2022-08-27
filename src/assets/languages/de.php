@@ -29,4 +29,7 @@ $text =
     'enter-activity' => 'Aktivität eingeben...',
     'cancel' => 'Abbrechen',
     'notes' => 'Notizen',
+
+
+    'all-title' => 'Einträge (letzte 7 Tage)',
 ];

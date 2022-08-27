@@ -5,7 +5,7 @@
     ?>
 
     <div class="entries-screen">
-        <h2>Einträge (letzte 7 Tage)</h2>
+        <h2><?php echo $text['all-title']; ?></h2>
         <?php for ($day_counter = 0; $day_counter < 7; $day_counter++): //for each day of the past week ?>
             <?php
                 $date = date_sub(new DateTime(), date_interval_create_from_date_string($day_counter . ' day')); // subtract i days from date
