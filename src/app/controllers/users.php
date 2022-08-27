@@ -21,7 +21,7 @@ if (isset($_POST['register'])) {
         $stmt->bind_param("sss", $name, $email, $hashed_password); //"sss" for data type
         $stmt->execute();
         $stmt->close();
-        $_SESSION['success'][] = "Du hast dich erfolgreich registriert.";
+        $_SESSION['success'][] = $text['register-success'];
         login($email, null, $remember);
     }
     else {
@@ -48,7 +48,7 @@ if (isset($_POST['login'])) {
     $errors = validateLoginUser($email, $hashed_password);
     
     if (empty($errors)) {
-        $_SESSION['success'][] = "Du hast dich erfolgreich angemeldet.";
+        $_SESSION['success'][] = $text['login-success'];
         login($email, null, $remember);
     }
     else {
@@ -80,8 +80,8 @@ if (isset($_POST['reset-password-send'])) {
         $link = "https://www.fatiguediary.ch/index.php?page=reset-password&token=".$token;
     
         $to = $email;
-        $subject = "Passwort Zurücksetzen - Fatigue Diary";
-        $message = "Hallo $user_name" . "\n\n" . "Klicke auf den Link, um  dein Passwort zurückzusetzen: " . $link;
+        $subject = $text['subject-reset-pw'];
+        $message = $text['hello'] . $user_name . "\n\n" . $text['content-reset-pw'] . $link;
     
         $headers = "MIME-Version: 1.0" . "\n";
         $headers .= "Content-type:text/plain;charset=UTF-8" . "\n";
@@ -92,7 +92,7 @@ if (isset($_POST['reset-password-send'])) {
     }
 
     
-    $_SESSION['success'][] = "E-Mail wurde gesendet";
+    $_SESSION['success'][] = $text['email-success'];
     header("location: index.php?page=reset-password");
 }
 

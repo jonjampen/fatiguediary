@@ -75,4 +75,26 @@ $text =
     'enter-new-pw' => 'Enter new password...',
 
     'dnf-page' => 'This page does not yet exist.',
+
+
+    'entry-added' => 'Entry added successfully.',
+    'entry-deleted' => 'Entry deleted.',
+    'changes-saved' => 'Changes have been saved.',
+    'register-success' => 'You have signed up successfully.',
+    'login-success' => 'You have logged in successfully.',
+    'email-success' => 'Email has been sent.',
+
+    'empty-pw' => 'Password can not be empty.',
+    'not-match' => 'Passwords do not match.',
+    'empty-name' => 'Name can not be empty.',
+    'invalid-name' => "Name is not valid (can only contain letters, '-' and spaces).",
+    'empty-email' => 'Email can not be empty.',
+    'invalid-email' => 'Email is not valid.',
+    'used-email' => 'Email is already in use',
+    'empty-password' => 'Password can not be empty.',
+    'em-pw-wrong' => 'Email or password wrong.',
+
+    'subject-reset-pw' => 'Reset Password - Fatigue Diary',
+    'hello' => 'Hallo',
+    'content-reset-pw' => 'Click on the link to reset your password: ',
 ];

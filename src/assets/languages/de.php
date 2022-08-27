@@ -74,5 +74,27 @@ $text =
     'new-pw' => 'Neues Passwort',
     'enter-new-pw' => 'Neues Passwort eingeben...',
 
-    'dnf-page' => 'Diese Seite gibt es momentan noch nicht.'
+    'dnf-page' => 'Diese Seite gibt es momentan noch nicht.',
+
+
+    'entry-added' => 'Eintrag wurde hinzugefügt.',
+    'entry-deleted' => 'Eintrag wurde gelöscht.',
+    'changes-saved' => 'Änderungen wurden gespeichert.',
+    'register-success' => 'Du hast dich registriert.',
+    'login-success' => 'Du hast dich angemeldet',
+    'email-success' => 'E-Mail wurde versendet.',
+
+    'empty-pw' => 'Das Passwort kann nicht leer sein.',
+    'not-match' => 'Die Passwörter stimmen nicht überein.',
+    'empty-name' => 'Der Name darf nicht leer sein.',
+    'invalid-name' => "Der Name ist ungültig (darf nur Buchstaben, '-' und Leerschläge beinhalten).",
+    'empty-email' => 'Die E-Mail-Adresse darf nicht leer sein.',
+    'invalid-email' => 'Die E-Mail-Adresse ist ungültig.',
+    'used-email' => 'Diese E-Mail-Adresse wird bereits verwendet.',
+    'empty-password' => 'Das Passwort kann nicht leer sein.',
+    'em-pw-wrong' => 'E-Mail oder Passwort falsch.',
+
+    'subject-reset-pw' => 'Passwort Zurücksetzen - Fatigue Diary',
+    'hello' => 'Hallo',
+    'content-reset-pw' => 'Klicke auf den Link, um  dein Passwort zurückzusetzen: ',
 ];
