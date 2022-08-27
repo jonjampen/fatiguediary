@@ -68,4 +68,9 @@ $text =
 
     'already-registered' => 'Bereits angemeldet? ',
     'login-now' => 'Jetzt anmelden',
+
+    'reset-pw' => 'Passwort zurücksetzen',
+    'change-pw' => 'Passwort ändern',
+    'new-pw' => 'Neues Passwort',
+    'enter-new-pw' => 'Neues Passwort eingeben...',
 ];

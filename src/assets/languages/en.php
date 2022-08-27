@@ -51,7 +51,7 @@ $text =
 
     'login' => 'Log In',
     'email' => 'Email',
-    'enter-email' => 'Enter email adress...',
+    'enter-email' => 'Enter email address...',
     'password' => 'Password',
     'enter-password' => 'Enter password...',
     'remember-me' => 'Stay logged in',
@@ -68,4 +68,9 @@ $text =
 
     'already-registered' => 'Already have an account? ',
     'login-now' => 'Log In now',
+
+    'reset-pw' => 'Reset password',
+    'change-pw' => 'Change password',
+    'new-pw' => 'New password',
+    'enter-new-pw' => 'Enter new password...',
 ];
