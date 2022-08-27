@@ -12,10 +12,10 @@ $energylevels = calculateDailyAvg($startDatetime, $endDatetime);
 print<<<EOF
         var options = {
             noData: {
-                text: "No Data Available",
+                text: "{$text['dnf']}",
             },
             series: [{
-                name: 'Energie',
+                name: "{$text['energylevel']}",
                 data: [
 EOF;
                     foreach ($energylevels as $energylevel) {

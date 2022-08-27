@@ -32,4 +32,7 @@ $text =
 
 
     'all-title' => 'Einträge (letzte 7 Tage)',
+
+
+    'dnf' => 'Keine Daten verfügbar',
 ];

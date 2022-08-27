@@ -14,10 +14,10 @@ $monthAvgEnergylevels = calculateMonthAvg($dayAvgEnergylevels, $startDatetime);
 print<<<EOF
         var options = {
             noData: {
-                text: "No Data Available",
+                text: "{$text['dnf']}",
             },
             series: [{
-                name: 'Energie',
+                name: "{$text['energylevel']}",
                 data: [
 EOF;
                     foreach ($monthAvgEnergylevels as $energylevel) {

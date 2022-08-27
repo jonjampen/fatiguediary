@@ -29,4 +29,10 @@ $text =
     'enter-activity' => 'Activity name',
     'cancel' => 'Cancel',
     'notes' => 'Notes',
+
+
+    'all-title' => 'Entries (last 7 days)',
+
+
+    'dnf' => 'No Data Available',
 ];
