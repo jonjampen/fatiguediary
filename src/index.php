@@ -14,6 +14,7 @@ $pages = [
 //db.php with $servername, $username, $password (gitignore)
 include("app/database/db.php");
 include("app/database/connection.php");
+include("assets/languages/de.php");
 
 //Setting default page
 $page = "app";
