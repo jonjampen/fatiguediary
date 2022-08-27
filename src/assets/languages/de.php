@@ -47,4 +47,16 @@ $text =
     'information-mail' => 'Informationen per Mail:',
 
     'save' => 'Speichern',
+
+
+    'login' => 'Anmelden',
+    'email' => 'E-Mail',
+    'enter-email' => 'E-Mail eingeben...',
+    'password' => 'Passwort',
+    'enter-password' => 'Passwort eingeben...',
+    'remember-me' => 'Angemeldet bleiben',
+
+    'forgot-password' => 'Passwort vergessen?',
+    'no-account' => 'Noch keinen Account? ',
+    'register-now' => 'Jetzt registrieren'
 ];
