@@ -9,13 +9,13 @@ $todayDate = date("Y-m-d");
 
     <div class="welcome-text">
         <h6>Hi <?php echo($_SESSION['name']);?></h6>
-        <h3>Dein Dashboard</h3>
+        <h3><?php echo $text['d_title']; ?></h3>
     </div>
     <div class="date-range">
-        <p id="range_d" class="range-item active">Tag</p>
-        <p id="range_w" class="range-item">Woche</p>
-        <p id="range_m" class="range-item">Monat</p>
-        <p id="range_y" class="range-item">Jahr</p>
+        <p id="range_d" class="range-item active"><?php echo $text['day']; ?></p>
+        <p id="range_w" class="range-item"><?php echo $text['week']; ?></p>
+        <p id="range_m" class="range-item"><?php echo $text['month']; ?></p>
+        <p id="range_y" class="range-item"><?php echo $text['year']; ?></p>
     </div>
     <div class="date-picker">
         <span class="material-icons" id="nextDay">chevron_left</span>
@@ -24,7 +24,7 @@ $todayDate = date("Y-m-d");
     </div>
     
     <div class="container chart">
-        <h3 class="center-title">Energie</h3>
+        <h3 class="center-title"><?php echo $text['energy']; ?></h3>
         <div id="energylevel_area"></div>
         <!-- <div class="point-amount">
             <button class="btn-primary" type="" name="">Alle Werte</button>
@@ -41,7 +41,7 @@ $todayDate = date("Y-m-d");
         ?>
 
     <div class="container">
-        <h3 class="center-title">Energiegebende Aktivitäten</h3>
+        <h3 class="center-title"><?php echo $text['good-activities']; ?></h3>
         <div class="rated-activities">
         <?php
             $i = 0;
@@ -55,7 +55,7 @@ $todayDate = date("Y-m-d");
         </div>
     </div>
     <div class="container">
-        <h3 class="center-title">Energieraubende Aktivitäten</h3>
+        <h3 class="center-title"><?php echo $text['bad-activities']; ?></h3>
         <div class="rated-activities">
             <?php
                 $i = 0;
