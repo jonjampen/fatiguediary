@@ -35,4 +35,16 @@ $text =
 
 
     'dnf' => 'No Data Available',
+
+
+    'settings' => 'Settings',
+    'mode' => 'Mode:',
+    'dark' => 'Dark',
+    'light' => 'Light',
+
+    'awake-time' => 'Awake Time:',
+
+    'information-mail' => 'Information via e-mail:',
+
+    'save' => 'Save',
 ];
