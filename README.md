@@ -12,10 +12,11 @@
 | 22.05.2022 | <span style="color:red">Abgabe Projektvertrag</span> |
 | ab 04.07.2022 <br /> Maturaarbeits-woche| Fertigstellen, dass sie für PatientInnen / TherapeutInnen testbar ist; Versenden von Link, "Werbung machen"; Feedback-Formular <br /> Auswertung gute/schlechte Aktivitäten; Zeitspanne auswählen (Zusatz: Mehrsprach-Option: Englisch und Deutsch) |
 | 05.06.2022 | <span style="color:green">Besprechung: Zwischenfazit</span> |
-| Sommerferien | Verbessern durch Rückmeldungen; Fertigstellen, was in der Maturaarbeitswoche nicht gereicht hat;  neue Features (Seite mit Tipps; Diagramm mit Aktivitäten; Profil Seite) |
+| Sommerferien | Verbessern durch Rückmeldungen; Fertigstellen, was in der Maturaarbeitswoche nicht gereicht hat;  neue Features (Profil Seite) |
+| Sommer - Herbst | Englische version und Informationsseiten |
 | KW 37 | <span style="color:green">Besprechung: Vorbereitung Projketwoche</span> |
-| ab 26.09.2022 <br /> Projektwoche| Arbeiten am Bericht & Weiterentwicklung der Web-App |
-| Herbstferien | Bericht schreiben & Weiterentwicklung |
+| ab 26.09.2022 <br /> Projektwoche| Arbeiten am Bericht & Verbesserung Berechnung Aktivitäten & Tagesdurchschnitt |
+| Herbstferien | Bericht fertigstellen |
 | 29.10.2022 | Ausdrucken der Maturaarbeit |
 | KW 44 | <span style="color:green">Besprechung: Vorbereitung Abgabe</span> |
 | 07.11.2022 | <span style="color:red">Abgabe der Maturaarbeit</span> |
@@ -29,19 +30,16 @@
 1. Energielevel mit Aktivitäten erfassen ✔
 1. Diagramm mit Tagesverlauf ✔
 
-Weitere Features finden Sie neu unter [Issues](https://github.com/jonjampen/fatigue-diary/issues)
 
 ### Weitere Features
 1. Liste aller Einträge (Einträge bearbeiten), in Tages-Blöcken ✔
-1. Auswertung schlechte / gute Aktivitäten ✔ (muss noch verbessert werden)
+1. Diagramme (Woche, Monat, Jahr) ✔
+1. Einstellungen ✔
+1. Onboarding und Tutorial ✔
+1. Auswertung schlechte / gute Aktivitäten ✔ (muss noch verbessert werden) (✔ wird noch verbessert)
+- Mehrsprachig (Deutsch und Englisch) ✔
+- Informationsseiten
 - Symptome erfassen
-- Mehrsprachig (Deutsch und Englisch)
-- Diagramm mit Aktivitäten
-
-### Zusatz (nur wenn zu viel Zeit)
-1. verbesserte Desktop-Ansicht
-1. PWA (progressive web application) - So könnte man die Webseite installieren
-1. Remider senden (geht nur mit PWA)
 
 
 ## Projektbeschrieb
