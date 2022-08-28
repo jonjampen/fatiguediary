@@ -12,10 +12,10 @@
 <div class="sidenav" id="sidenav">
     <ul>
         <li><a href="index.php?page=app">Fatigue Diary</a></li>
-        <li><a href="index.php?page=new">Was ist neu?</a></li>
-        <li><a href="index.php?page=contact">Kontakt</a></li>
-        <li><a href="intro/Dashboard.php">Tour starten</a></li>
-        <li><a href="index.php?page=logout" class="logout"><i class="fa-solid fa-arrow-right-from-bracket"></i> Logout</a></li>
+        <li><a href="index.php?page=new"><?php echo $text['whats-new']; ?></a></li>
+        <li><a href="index.php?page=contact"><?php echo $text['contact']; ?></a></li>
+        <li><a href="intro/Dashboard.php"><?php echo $text['start-tutorial']; ?></a></li>
+        <li><a href="index.php?page=logout" class="logout"><i class="fa-solid fa-arrow-right-from-bracket"></i> <?php echo $text['logout']; ?></a></li>
     </ul>
 </div>
 

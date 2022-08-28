@@ -154,6 +154,7 @@ function print_head($page_head, $public) {
     
 }
 function print_body($onload = "") {
+    global $text;
     if ($onload != "") {
         $onload = ' onload="' . $onload . '"';
     }

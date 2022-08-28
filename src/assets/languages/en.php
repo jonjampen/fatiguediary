@@ -97,4 +97,9 @@ $text =
     'subject-reset-pw' => 'Reset Password - Fatigue Diary',
     'hello' => 'Hallo',
     'content-reset-pw' => 'Click on the link to reset your password: ',
+
+    'whats-new' => 'What\'s new?',
+    'contact' => 'Contact',
+    'logout' => 'Logout',
+    'start-tutorial' => 'Start tutorial',
 ];

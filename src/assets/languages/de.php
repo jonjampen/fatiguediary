@@ -97,4 +97,9 @@ $text =
     'subject-reset-pw' => 'Passwort Zurücksetzen - Fatigue Diary',
     'hello' => 'Hallo',
     'content-reset-pw' => 'Klicke auf den Link, um  dein Passwort zurückzusetzen: ',
+
+    'whats-new' => 'Was ist neu?',
+    'contact' => 'Kontakt',
+    'logout' => 'Abmelden',
+    'start-tutorial' => 'Tutorial starten',
 ];
