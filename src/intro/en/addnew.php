@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link rel="stylesheet" href="../assets/fonts/materialicons.css">
+<link rel="stylesheet" href="../../assets/fonts/materialicons.css">
 <link rel="stylesheet" href="addnew-Dateien/general.css">
 <link rel="icon" type="image/x-icon" href="addnew-Dateien/logo.svg">
 <link rel="stylesheet" type="text/css" href="addnew-Dateien/toastify.min.css">
