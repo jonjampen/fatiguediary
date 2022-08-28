@@ -117,4 +117,6 @@ $text =
     'tutorial-desc' => 'Du kannst diese Tour jederzeit wiederholen, gehe dazu einfach im Seiten-Menu auf "Tutorial starten".',
     'start' => 'Starten',
     'language' => 'Sprache',
+
+    'all-entries' => 'Alle Einträge',
 ];

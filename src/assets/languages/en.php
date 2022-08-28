@@ -117,4 +117,6 @@ $text =
     'tutorial-desc' => 'You can repeat this tutorial at any time by going to "Start tutorial" in the side menu.',
     'start' => 'Start',
     'language' => 'Language',
+
+    'all-entries' => 'All Entries',
 ];
