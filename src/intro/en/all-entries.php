@@ -4,12 +4,12 @@
 <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link rel="stylesheet" href="../assets/fonts/materialicons.css">
+<link rel="stylesheet" href="../../assets/fonts/materialicons.css">
 <link rel="stylesheet" href="all-entries-Dateien/general.css">
 <link rel="icon" type="image/x-icon" href="all-entries-Dateien/logo.svg">
 <link rel="stylesheet" type="text/css" href="all-entries-Dateien/toastify.min.css">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/shepherd.js@8.3.1/dist/css/shepherd.css"/>
-<title>Alle Einträge | Fatigue Diary</title>
+<title>All Entries | Fatigue Diary</title>
 <link rel="stylesheet" href="all-entries-Dateien/app.css">
 </head>
 <body>
@@ -55,7 +55,7 @@ function closeNav() {
     </ul>
 </nav><script type="text/javascript" src="all-entries-Dateien/toastify.js"></script>
     <div class="entries-screen">
-        <h2>Einträge (letzte 7 Tage)</h2>
+        <h2>Entries (last 7 days)</h2>
                     
             <div class="container day border_color" style="border-color: rgb(248, 169, 73);">
                 <div class="title-row">
@@ -67,7 +67,7 @@ function closeNav() {
                         <div class="info">
                             <div class="description">
                                 <div class="activities">
-                                    <p>Schlafen</p><p>,&nbsp;</p><p>Duschen</p>                                </div>
+                                    <p>Sleep</p><p>,&nbsp;</p><p>Shower</p>                                </div>
                                 <div class="notes">
                                                                     </div>
                             </div>
@@ -79,9 +79,9 @@ function closeNav() {
                         <div class="info">
                             <div class="description">
                                 <div class="activities">
-                                    <p>Essen</p>                                </div>
+                                    <p>Eat</p>                                </div>
                                 <div class="notes">
-                                    <p> Schüssel Corn Flakes</p>                                </div>
+                                    <p> Bowl of cereal</p>                                </div>
                             </div>
                             <h3 class="energyValue" style="color: rgb(249, 196, 70);">7</h3>
                         </div>
@@ -91,9 +91,9 @@ function closeNav() {
                         <div class="info">
                             <div class="description">
                                 <div class="activities">
-                                    <p>Arbeiten</p>                                </div>
+                                    <p>Work</p>                                </div>
                                 <div class="notes">
-                                    <p> 30min im Homeoffice arbeiten.</p>                                </div>
+                                    <p> 30min work from home.</p>                                </div>
                             </div>
                             <h3 class="energyValue" style="color: rgb(248, 169, 73);">4.5</h3>
                         </div>
@@ -103,9 +103,9 @@ function closeNav() {
                         <div class="info">
                             <div class="description">
                                 <div class="activities">
-                                    <p>Ausruhen</p>                                </div>
+                                    <p>Rest</p>                                </div>
                                 <div class="notes">
-                                    <p> Musik hören</p>                                </div>
+                                    <p> listening to Music</p>                                </div>
                             </div>
                             <h3 class="energyValue" style="color: rgb(249, 196, 70);">6</h3>
                         </div>
@@ -115,9 +115,9 @@ function closeNav() {
                         <div class="info">
                             <div class="description">
                                 <div class="activities">
-                                    <p>Arbeiten</p>                                </div>
+                                    <p>Work</p>                                </div>
                                 <div class="notes">
-                                    <p> 30min Arbeiten</p>                                </div>
+                                    <p> 30min work</p>                                </div>
                             </div>
                             <h3 class="energyValue" style="color: rgb(243, 114, 44);">3.5</h3>
                         </div>
@@ -127,7 +127,7 @@ function closeNav() {
                         <div class="info">
                             <div class="description">
                                 <div class="activities">
-                                    <p>Baden</p>                                </div>
+                                    <p>Bath</p>                                </div>
                                 <div class="notes">
                                                                     </div>
                             </div>
@@ -146,9 +146,9 @@ function closeNav() {
                         <div class="info">
                             <div class="description">
                                 <div class="activities">
-                                    <p>Schlafen</p><p>,&nbsp;</p><p>Duschen</p>                                </div>
+                                    <p>Sleep</p><p>,&nbsp;</p><p>Shower</p>                                </div>
                                 <div class="notes">
-                                    <p> 8h Schlaf</p>                                </div>
+                                    <p> 8h of sleep</p>                                </div>
                             </div>
                             <h3 class="energyValue" style="color: rgb(164, 190, 109);">8</h3>
                         </div>
@@ -158,7 +158,7 @@ function closeNav() {
                         <div class="info">
                             <div class="description">
                                 <div class="activities">
-                                    <p>Essen</p>                                </div>
+                                    <p>Eat</p>                                </div>
                                 <div class="notes">
                                                                     </div>
                             </div>
@@ -170,7 +170,7 @@ function closeNav() {
                         <div class="info">
                             <div class="description">
                                 <div class="activities">
-                                    <p>Arbeiten</p>                                </div>
+                                    <p>Work</p>                                </div>
                                 <div class="notes">
                                                                     </div>
                             </div>
@@ -182,7 +182,7 @@ function closeNav() {
                         <div class="info">
                             <div class="description">
                                 <div class="activities">
-                                    <p>Ausruhen</p>                                </div>
+                                    <p>Rest</p>                                </div>
                                 <div class="notes">
                                                                     </div>
                             </div>
@@ -201,7 +201,7 @@ function closeNav() {
                         <div class="info">
                             <div class="description">
                                 <div class="activities">
-                                    <p>Schlafen</p>                                </div>
+                                    <p>Sleep</p>                                </div>
                                 <div class="notes">
                                                                     </div>
                             </div>
@@ -213,7 +213,7 @@ function closeNav() {
                         <div class="info">
                             <div class="description">
                                 <div class="activities">
-                                    <p>Arbeiten</p>                                </div>
+                                    <p>Work</p>                                </div>
                                 <div class="notes">
                                                                     </div>
                             </div>
@@ -225,7 +225,7 @@ function closeNav() {
                         <div class="info">
                             <div class="description">
                                 <div class="activities">
-                                    <p>Therapie</p>                                </div>
+                                    <p>Therapy</p>                                </div>
                                 <div class="notes">
                                                                     </div>
                             </div>
@@ -298,42 +298,42 @@ function closeNav() {
     });
 
     tour.addStep({
-        text: 'Hier wird dir der Tagesdurchschnitt gezeigt.',
+        text: 'Here you can see the daily average.',
         attachTo: {
             element: '.energyAverage.tour',
             on: 'bottom'
         },
         buttons: [
             {
-              text: 'Weiter',
+              text: 'Next',
               action: tour.next
             }
         ]
     });
     
     tour.addStep({
-      text: 'Durch Klicken auf einen Eintrag kannst du ihn bearbeiten oder löschen.',
+      text: 'By clicking on an entry you can edit or delete it.',
       attachTo: {
           element: '.entry.tour',
           on: 'bottom'
       },
       buttons: [
         {
-          text: 'Weiter',
+          text: 'Next',
           action: tour.next
         }
       ]
     });
 
     tour.addStep({
-      text: 'Das Dashboard-Icon bringt dich zurück zum Dashboard.',
+      text: 'By clicking on the dashboard icon, you can go back to the dashboard.',
       attachTo: {
           element: '.dashboard.tour',
           on: 'top'
       },
       buttons: [
         {
-          text: 'Weiter',
+          text: 'Next',
           action: function () {
             window.location.href = 'Dashboard.php?intro=1';
           }

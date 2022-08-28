@@ -1,7 +1,7 @@
 <?php
 $pages = [
     //user
-    "login", "register", "users", "reset-password", "logout", "onboarding", "onboarding02", "onboarding03", "onboarding04",
+    "login", "register", "users", "reset-password", "logout", "onboarding", "onboarding01", "onboarding02", "onboarding03", "onboarding04",
     //app
     "dashboard", "add-new", "entries", "settings",
     //information
@@ -14,6 +14,11 @@ $pages = [
 //db.php with $servername, $username, $password (gitignore)
 include("app/database/db.php");
 include("app/database/connection.php");
+
+if (empty($_SESSION['settings']['language'])) {
+    $_SESSION['settings']['language'] = substr($_SERVER['HTTP_ACCEPT_LANGUAGE'], 0, 2);
+}
+updateLanguage();
 
 //Setting default page
 $page = "app";
@@ -103,6 +108,9 @@ else {
         include("chart" . $chart . ".php");
     }
     if ($page == "onboarding") {
+        include("onboarding/language.php");
+    }
+    if ($page == "onboarding01") {
         include("onboarding/theme.php");
     }
     if ($page == "onboarding02") {
@@ -153,6 +161,7 @@ function print_head($page_head, $public) {
     
 }
 function print_body($onload = "") {
+    global $text;
     if ($onload != "") {
         $onload = ' onload="' . $onload . '"';
     }
@@ -160,8 +169,17 @@ function print_body($onload = "") {
     include("app/includes/topNavbar.php");
     include("app/includes/bottomNavbar.php");
 }
+function print_body_top_nav_only() {
+    echo('<body>' . "\n");
+    include("app/includes/topNavbar.php");
+}
 
 function includeToastify() {
     echo('<script type="text/javascript" src="assets/js/toastify.js"></script>');
     include("app/includes/messages.php");
+}
+
+function updateLanguage() {
+    global $text;
+    include("assets/languages/" . $_SESSION['settings']['language'] . ".php");
 }

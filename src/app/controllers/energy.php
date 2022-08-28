@@ -32,7 +32,7 @@ if (isset($_POST['add-energy'])) {
         $stmt_add_activities->close();
     }
 
-    $_SESSION['success'][] = "Der Eintrag wurde erfolgreich hinzugefügt.";
+    $_SESSION['success'][] = $text['entry-added'];
     header("location: index.php?page=dashboard");
 }
 
@@ -69,7 +69,7 @@ if (isset($_POST['edit-energy'])) {
         $stmt->close();
     }
 
-    $_SESSION['success'][] = "Der Eintrag wurde erfolgreich bearbeitet.";
+    $_SESSION['success'][] = $text['changes-saved'];
     header("location: index.php?page=entries");
 
 }
@@ -87,6 +87,6 @@ if (isset($_GET['delete'])) {
     $stmt->execute();
     $stmt->close();
 
-    $_SESSION['success'][] = "Der Eintrag wurde erfolgreich gelöscht.";
+    $_SESSION['success'][] = $text['entry-deleted'];
     header("location: index.php?page=entries");
 }

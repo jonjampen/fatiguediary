@@ -1,24 +1,25 @@
 <?php
 print_head(array('<title>Onboarding | Fatigue Diary</title>'), false);
-print_body();
+print_body_top_nav_only();
 includeToastify();
 ?>
 
     <div class="onboarding-screen">
-        <h2>Informationen</h2>
+        <h2><?php echo $text['news']; ?></h2>
         <img src="assets/img/onboarding-mail.svg" alt="">
-        <p>Möchtest du über Neuigkeiten von Fatigue Diary informiert werden?</p>
+        <p><?php echo $text['news-question']; ?></p>
         <div class="btn-option">
-            <input type="checkbox" name="newsletter" id="newsletter_check" checked> <label for="newsletter"> Ich möchte Informationen erhalten.</label>
+            <input type="checkbox" name="newsletter" id="newsletter_check" checked> <label for="newsletter"> <?php echo $text['receive-mail']; ?></label>
         </div>
         <div class="btn-option">
-            <button class="btn-secondary" id="btn_next">Weiter</button>
+            <button class="btn-secondary" id="btn_next"><?php echo $text['next']; ?></button>
         </div>
     </div>
 
 
     <script>
         var btn_next = document.getElementById("btn_next");
+        var lang = "<?php echo $_GET['l']; ?>";
         var theme = <?php echo($_GET['t']); ?>;
         var wake_up_time  = "<?php echo($_GET['w']); ?>";
         var bed_time  = "<?php echo($_GET['b']); ?>";
@@ -34,7 +35,7 @@ includeToastify();
             } else {
                 newsletter = 0;
             }
-            window.location.href = "index.php?page=onboarding04&t=" + theme + "&w=" + wake_up_time + "&b=" + bed_time + "&n=" + newsletter;
+            window.location.href = "index.php?page=onboarding04&l=" + lang + "&t=" + theme + "&w=" + wake_up_time + "&b=" + bed_time + "&n=" + newsletter;
         }
     </script>
 </body>

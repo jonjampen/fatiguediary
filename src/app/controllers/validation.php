@@ -1,42 +1,44 @@
 <?php
 
 function checkPasswordMatch($password, $password_conf) {
+    global $text;
     $errors = array();
     if (empty($password)) {
-        array_push($errors, "Das Passwort kann nicht leer sein.");
+        array_push($errors, $text['empty-pw']);
     }
     elseif ($password != $password_conf) {
-        array_push($errors, "Die Passwörter stimmen nicht überein.");
+        array_push($errors, $text['not-match']);
     }
     return $errors;
 }
 
 function validateRegisterUser($user){
+    global $text;
     $errors = array();
 
     //empty
     if (empty($user['name'])) {
-        array_push($errors, "Der Name darf nicht leer sein");
+        array_push($errors, $text['empty-name']);
     }
     elseif (!preg_match("/^[a-zA-Z- öäüéèêà]*$/", $user['name'])) {
-        array_push($errors, "Der Name ist ungültig (darf nur Buchstaben, '-' und Leerschläge beinhalten).");
+        array_push($errors, $text['invalid-name']);
     }
 
     if (empty($user['email'])) {
-        array_push($errors, "Die E-Mail-Adresse darf nicht leer sein.");
+        array_push($errors, $text['empty-email']);
     }
     elseif (!filter_var($user['email'], FILTER_VALIDATE_EMAIL)) {
-        array_push($errors, "Die E-Mail-Adresse ist ungültig.");
+        array_push($errors, $text['invalid-email']);
     }
     elseif (isEmailExisting($user['email'])) {
-        array_push($errors, "Diese E-Mail-Adresse wird bereits verwendet.");
+        array_push($errors, $text['used-email']);
     }
 
     if (empty($user['password'])) {
-        array_push($errors, "Das Passwort kann nicht leer sein.");
+        array_push($errors, $text['empty-password']);
     }
     elseif ($user['password'] != $user['passwordConf']) {
-        array_push($errors, "Die Passwörter stimmen nicht überein.");
+        array_push($errors, $text['not-match']);
     }
 
     return $errors;
@@ -44,10 +46,12 @@ function validateRegisterUser($user){
 
 
 function validateLoginUser($email, $hashed_password) {
+    global $text;
+
     $errors = array();
     //Wrong email or password
     if (!isPasswordMatchingEmail($email, $hashed_password)) {        
-        array_push($errors, "E-Mail oder Passwort falsch.");
+        array_push($errors, $text['em-pw-wrong']);
     }
 
     return $errors;

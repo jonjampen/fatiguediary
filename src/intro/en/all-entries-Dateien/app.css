@@ -1,0 +1,495 @@
+/*general*/
+* {
+    color: #000000;
+}
+html, body {
+    min-height: 100%;
+    background: var(--background);
+    color: white;
+}
+body {
+    margin-bottom: 70px; /* to compensate bottom nav */
+}
+h2 { /*screen title*/
+    color: var(--text);
+    font-family: 'Roboto', sans-serif;
+    font-weight: 500;
+    font-size: 34px;
+    text-align: center;
+    margin-bottom: 16px;
+}
+h3 { /*container title*/
+    color: var(--text);
+    font-family: 'Roboto', sans-serif;
+    font-weight: 500;
+    font-size: 24px;
+    margin-bottom: 16px;
+}
+h6 {
+    color: var(--gray);
+    font-weight: 100;
+}
+p {
+    color: var(--text);
+    font-family: 'Roboto', sans-serif;
+    font-weight: 300;
+    font-size: 16px;
+}
+a {
+    text-decoration: none;
+    color: var(--link_p);
+}
+.material-icons {
+    color: var(--text);
+    transition: 0.4s;
+}
+nav .material-icons:hover {
+    color: var(--secondary);
+}
+
+.btn-primary {
+    width: 120px;
+    height: 40px;
+    background: var(--primary);
+    color: var(--text);
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+}
+.btn-secondary {
+    width: 120px;
+    height: 40px;
+    background: transparent;
+    color: white;
+    background-color: var(--secondary);
+    border: 1px solid var(--secondary);
+    border-radius: 8px;
+    cursor: pointer;
+}
+.btn-primary.outline {
+    border: 1px solid var(--primary);
+    background-color: transparent !important;
+}
+.btn-secondary.outline {
+    border: 1px solid var(--secondary);
+    background-color: transparent !important;
+}
+.btn-center {
+    display: flex;
+    justify-content: center;
+}
+.btn-fixed {
+    position: fixed;
+    bottom: 70px;
+}
+.space {
+    height: 30px;
+}
+.error {
+    margin: auto;
+    background: var(--error-content);
+    border: 1px solid var(--error-border);
+    width: 100%;
+    border-radius: 4px;
+    padding: 8px;
+}
+
+
+.container {
+    background: var(--container);
+    margin-right: 16px;
+    margin-left: 16px;
+    margin-bottom: 16px;
+    padding: 8px 16px;
+    border-radius: 8px;
+}
+.container .title-info {
+    display: flex;
+    justify-content: space-between;
+}
+.container label {
+    color: var(--text);
+}
+.container input.check {
+    height: 16px;
+    width: 16px;
+}
+.container .inputs {
+    margin-bottom: 32px;
+}
+.container .other-option-link {
+    text-align: center;
+    margin-top: 16px;
+}
+.container .description {
+    display: flex;
+    justify-content: space-between;
+    color: var(--text);
+}
+
+.center-title {
+    text-align: center;
+}
+
+/*navbar*/
+nav {
+    width: 100%;
+    height: 64px;
+    z-index: 3;
+    /*vertical alignment*/
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+}
+nav.top-nav {
+    top: 0;
+    position: relative;
+    background-color: transparent;
+}
+nav.top-nav .icons {
+    display: flex;
+    column-gap: 16px;
+}
+nav.bottom-nav {
+    bottom: 0;
+    position: fixed;
+    border-radius: 8px 8px 0 0;
+    background-color: var(--background);
+    box-shadow: 0 -1.5px var(--container);
+}
+nav ul {
+    width: 100%;
+    padding-left: 16px;
+    padding-right: 16px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+nav.bottom-nav ul {
+    justify-content: space-around;
+}
+nav ul li {
+    display: inline-block;
+    list-style-type: none;
+}
+nav ul li .add {
+    background-color: var(--primary);
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+nav .logo img {
+    height: 34px;
+}
+
+#open {
+    display: inline;
+}
+
+#close {
+    display: none;
+}
+
+/*Sidenavbar*/
+.sidenav {
+    height: 100%;
+    width: 0;
+    z-index: 2;
+    position: fixed;
+    right: 0;
+    background: var(--background);
+    transition: 0.5s;
+}
+.sidenav ul {
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    gap: 30px;
+}
+.sidenav ul li {
+    margin-top: 0px;
+    list-style-type: none;
+    transition: 1s;
+}
+.sidenav a {
+    color: var(--text);
+    font-size: 25px;
+    overflow-x: hidden;
+    transition: 0.4s;
+}
+.sidenav a:hover {
+    color: var(--secondary);
+}
+.sidenav .logout {
+    color: rgb(172, 0, 0);
+}
+
+
+/*Add Screen*/
+.datetime {
+    margin-left: 16px;
+    margin-right: 16px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 16px;
+}
+.datetime span {
+    color: var(--text);
+    font-size: 14px;
+}
+.datetime input {
+    background-color: transparent;
+    border: none;
+    color: var(--text);
+}
+.add-screen .slider {
+    -webkit-appearance: none;
+    height: 10px;
+    background: var(--primary);
+    border-radius: 5px;
+}
+.add-screen .slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%; 
+    background: var(--text);
+    cursor: pointer;
+}
+.add-screen .slider::-moz-range-thumb {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: var(--text);
+    cursor: pointer;
+}
+.add-screen .container .description .level-text {
+    font-size: 32px;
+}
+.add-screen .container .description #energyIcon {
+    font-size: 24px;
+}
+
+.add-screen .activities {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+    grid-row-gap: 10px;
+    grid-column-gap: 10px;
+}
+.add-screen .activities a {
+    border: 1px solid var(--primary);
+    border-radius: 4px;
+    height: 45px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    color: var(--text);
+}
+.add-screen p.hint {
+    margin-top: -8px;
+    margin-bottom: 16px;
+}
+.add-screen .activities a.active {
+    border: none;
+    color: var(--text);
+    background-color: var(--primary);
+}
+.add-screen .activities a.add{
+    border: 1px dashed var(--gray);
+}
+/*modal: add activity*/
+.modal-box {
+    display: none;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(18, 18, 18, 0.9);
+    position: fixed;
+    z-index: 1;
+    padding-top: 200px;
+}
+.modal-box .container {
+    background-color: var(--container);
+}
+.modal-buttons {
+    margin-bottom: 8px;
+    display: flex;
+    justify-content: space-around;
+}
+.delete {
+    color: var(--secondary);
+    display: flex;
+    justify-content: center;
+    font-size: 36px;
+    margin-top: -16px;
+    margin-bottom: 8px;
+}
+
+
+
+/* removes icons in date/time-input for chrome  */
+input[type="time"]::-webkit-calendar-picker-indicator {
+    background: none;
+    display: none;
+}
+input[type="date"]::-webkit-calendar-picker-indicator {
+    background: none;
+    display: none;
+}
+
+/* dashboard */
+.chart {
+    height: auto;
+    padding-left: 8px;
+    padding-right: 8px;
+    padding-bottom: 8px;
+    color: var(--gray);
+}
+
+#energylevel_area {
+    padding: 0;
+    margin: 0;
+}
+
+.welcome-text {
+    margin-left: 16px;
+    margin-top: 8px;
+    margin-bottom: 32px;
+    color: var(--gray);
+}
+
+.date-range {
+    display: flex;
+    justify-content: space-between;
+    margin-left: 16px;
+    margin-right: 16px;
+    margin-bottom: 16px;
+}
+.date-range .range-item {
+    background-color: transparent;
+    padding: 4px 8px;
+    border-radius: 8px;
+    cursor: pointer;
+}
+.date-range .active {
+    background-color: var(--primary);
+}
+
+.date-picker {
+    display: flex;
+    justify-content: center;
+}
+.date-picker .date {
+    background-color: var(--background);
+    border: none;
+    color: var(--text);
+    text-align: center;
+    margin-bottom: 32px;
+}
+.date-picker span {
+    cursor: pointer;
+}
+
+.point-amount {
+    display: flex;
+    justify-content: space-between;
+    column-gap: 8px;
+}
+
+.rated-activities {
+    display: flex;
+    flex: 1 1 0px;
+    column-gap: 8px;
+    justify-content: space-between;
+}
+.rated-activity {
+    border: 2px solid var(--primary);
+    border-radius: 8px;
+    flex-grow: 1;
+    flex-basis: 0;
+    padding-left: 4px;
+    padding-right: 4px;
+    padding-top: 16px;
+    padding-bottom: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
+/* Entries */
+.container.day {
+    border-left: 2px solid var(--container);
+}
+.day .title-row {
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 1px solid var(--gray);
+}
+.day .entry {
+    cursor: pointer;
+}
+.day .entry .activities {
+    width: 100%;
+    display: flex;
+    justify-content: start;
+}
+.day .entry .time {
+    color: var(--gray);
+    padding-top: 4px;
+}
+.day .entry {
+    border-bottom: 1px solid var(--gray);
+}
+.day .entry .info {
+    padding-top: 4px;
+    padding-bottom: 8px;
+    display: flex;
+    justify-content: space-between;
+}
+.day .entry .info .description {
+    display: inline;
+}
+.day .entry .info .description .notes p{
+    margin-top: 4px;
+    color: var(--gray);
+}
+.day .entry .energyValue {
+    display: flex;
+    align-items: center;
+    font-size: 20px;
+}
+
+
+/* Onboarding */
+.onboarding-screen p, .onboarding-screen h3 {
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    margin-bottom: 16px;
+    padding-left: 16px;
+    padding-right: 16px;
+}
+.onboarding-screen .btn-option {
+    display: flex;
+    justify-content: center;
+    column-gap: 32px;
+    margin-bottom: 32px;
+}
+.onboarding-screen img {
+    display: block;
+    margin: auto;
+    width: min(90%, 300px);
+    margin-top: 32px;
+    margin-bottom: 32px;
+}
+.onboarding-screen label {
+    color: var(--text);
+}

@@ -6,4 +6,4 @@ $todayDate = date("Y-m-d");
 
 ?>
 
-<h3>Diese Seite gibt es momentan noch nicht.</h1>
+<h3><?php echo $text['dnf-page']; ?></h1>
