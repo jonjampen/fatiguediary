@@ -38,11 +38,11 @@ $text =
 
 
     'settings' => 'Einstellungen',
-    'mode' => 'Modus:',
+    'mode' => 'Modus',
     'dark' => 'Dunkel',
     'light' => 'Hell',
 
-    'awake-time' => 'Tageszeit:',
+    'awake-time' => 'Tageszeit',
 
     'information-mail' => 'Informationen per Mail:',
 
@@ -102,4 +102,17 @@ $text =
     'contact' => 'Kontakt',
     'logout' => 'Abmelden',
     'start-tutorial' => 'Tutorial starten',
+
+
+    'welcome' => 'Willkommen',
+    'thank-you-register' => 'Vielen Dank fürs Registrieren!',
+    'light-or-dark' => 'Möchtest du lieber den hellen oder dunklen Modus?',
+    'awake-question' => 'Wann bist du nomalerweise wach?',
+    'awake-desc' => 'Diese Information wird für die bessere Darstellung der Diagramme verwendet.',
+    'next' => 'Weiter',
+    'news' => 'Neuigkeiten',
+    'news-question' => 'Möchtest du über Neuigkeiten von Fatigue Diary informiert werden?',
+    'receive-mail' => 'Ich möchte Informationen erhalten.',
+    'tutorial-desc' => 'Du kannst diese Tour jederzeit wiederholen, gehe dazu einfach im Seiten-Menu auf "Tutorial starten".',
+    'start' => 'Starten',
 ];

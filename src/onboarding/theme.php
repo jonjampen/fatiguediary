@@ -5,16 +5,16 @@ includeToastify();
 ?>
 
     <div class="onboarding-screen">
-        <h2>Willkommen</h2>
-        <h3>Vielen Dank fürs Registrieren!</h3>
+        <h2><?php echo $text['welcome']; ?></h2>
+        <h3><?php echo $text['thank-you-register']; ?></h3>
         <img src="assets/img/onboarding-theme.svg" alt="">
-        <p>Möchtest du lieber den dunklen oder den hellen Modus?</p>
+        <p><?php echo $text['light-or-dark']; ?></p>
         <div class="btn-option">
-            <button class="btn-primary outline" id="btn1">Dunkel</button>
-            <button class="btn-primary" id="btn2">Hell</button>
+            <button class="btn-primary outline" id="btn1"><?php echo $text['dark']; ?></button>
+            <button class="btn-primary" id="btn2"><?php echo $text['light']; ?></button>
         </div>
         <div class="btn-option">
-            <button class="btn-secondary" id="btn_next">Weiter</button>
+            <button class="btn-secondary" id="btn_next"><?php echo $text['next']; ?></button>
         </div>
     </div>
 

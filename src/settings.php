@@ -8,7 +8,7 @@
         <h2><?php echo $text['settings']; ?></h2>
         <div class="setting">
             <div class="text">
-                <p><?php echo $text['mode']; ?></p>
+                <p><?php echo $text['mode']; ?>:</p>
             </div>
             <div class="btn-option">
                 <button class="btn-primary <?php if($_SESSION['settings']['theme'] == 1) {echo("outline");} ?>" id="btn1"><?php echo $text['dark']; ?></button>
@@ -19,7 +19,7 @@
             <input type="hidden" name="theme" id="theme_field" value="<?php echo($_SESSION['settings']['theme']); ?>">
             <div class="setting">
                 <div class="text">
-                    <p><?php echo $text['awake-time']; ?></p>
+                    <p><?php echo $text['awake-time']; ?>:</p>
                 </div>
                 <div class="btn-option time">
                     <input type="time" name="wake_up_time" id="wake_up" value="<?php echo($_SESSION['settings']['wake_up_time']); ?>">

@@ -38,11 +38,11 @@ $text =
 
 
     'settings' => 'Settings',
-    'mode' => 'Mode:',
+    'mode' => 'Mode',
     'dark' => 'Dark',
     'light' => 'Light',
 
-    'awake-time' => 'Awake Time:',
+    'awake-time' => 'Awake Time',
 
     'information-mail' => 'Information via e-mail:',
 
@@ -102,4 +102,16 @@ $text =
     'contact' => 'Contact',
     'logout' => 'Logout',
     'start-tutorial' => 'Start tutorial',
+
+    'welcome' => 'Welcome',
+    'thank-you-register' => 'Thank you for registering!',
+    'light-or-dark' => 'Do you prefer light or dark theme?',
+    'awake-question' => 'When are you normally awake?',
+    'awake-desc' => 'This information is used to better display your charts.',
+    'next' => 'Next',
+    'news' => 'News',
+    'news-question' => 'Would you like to be notified about news?',
+    'receive-mail' => 'I\'d like to receive news.',
+    'tutorial-desc' => 'You can repeat this tutorial at any time by going to "Start tutorial" in the side menu.',
+    'start' => 'Start',
 ];

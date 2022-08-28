@@ -5,17 +5,17 @@ includeToastify();
 ?>
 
     <div class="onboarding-screen">
-        <h2>Tageszeit</h2>
+        <h2><?php echo $text['awake-time']; ?></h2>
         <img src="assets/img/onboarding-awake.svg" alt="">
-        <p>Wann bist du nomalerweise wach?</p>
+        <p><?php echo $text['awake-question']; ?></p>
         <div class="btn-option">
             <input type="time" name="" id="wake_up" value="06:00">
             -
             <input type="time" name="" id="bed" value="22:30">
         </div>
-        <p>Diese Information wird für die bessere Darstellung der Diagramme verwendet.</p>
+        <p><?php echo $text['awake-desc']; ?></p>
         <div class="btn-option">
-            <button class="btn-secondary" id="btn_next">Weiter</button>
+            <button class="btn-secondary" id="btn_next"><?php echo $text['next']; ?></button>
         </div>
     </div>
 

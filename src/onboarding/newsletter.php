@@ -5,14 +5,14 @@ includeToastify();
 ?>
 
     <div class="onboarding-screen">
-        <h2>Informationen</h2>
+        <h2><?php echo $text['news']; ?></h2>
         <img src="assets/img/onboarding-mail.svg" alt="">
-        <p>Möchtest du über Neuigkeiten von Fatigue Diary informiert werden?</p>
+        <p><?php echo $text['news-question']; ?></p>
         <div class="btn-option">
-            <input type="checkbox" name="newsletter" id="newsletter_check" checked> <label for="newsletter"> Ich möchte Informationen erhalten.</label>
+            <input type="checkbox" name="newsletter" id="newsletter_check" checked> <label for="newsletter"> <?php echo $text['receive-mail']; ?></label>
         </div>
         <div class="btn-option">
-            <button class="btn-secondary" id="btn_next">Weiter</button>
+            <button class="btn-secondary" id="btn_next"><?php echo $text['next']; ?></button>
         </div>
     </div>
 
