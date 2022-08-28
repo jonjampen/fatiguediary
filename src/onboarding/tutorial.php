@@ -1,6 +1,6 @@
 <?php
 print_head(array('<title>Onboarding | Fatigue Diary</title>'), false);
-print_body();
+print_body_top_nav_only();
 includeToastify();
 ?>
 

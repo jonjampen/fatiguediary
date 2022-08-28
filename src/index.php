@@ -162,6 +162,10 @@ function print_body($onload = "") {
     include("app/includes/topNavbar.php");
     include("app/includes/bottomNavbar.php");
 }
+function print_body_top_nav_only() {
+    echo('<body>' . "\n");
+    include("app/includes/topNavbar.php");
+}
 
 function includeToastify() {
     echo('<script type="text/javascript" src="assets/js/toastify.js"></script>');
