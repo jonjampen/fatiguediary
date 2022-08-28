@@ -242,14 +242,14 @@ function loadSettings () {
 }
 function loadSettingsDB () {
     global $conn;
-    $stmt = $conn->prepare("SELECT theme, wake_up_time, bed_time, newsletter FROM settings WHERE user_id=?");
+    $stmt = $conn->prepare("SELECT language, theme, wake_up_time, bed_time, newsletter FROM settings WHERE user_id=?");
     $stmt->bind_param("i", $_SESSION['id']);
     $stmt->execute();
-    $stmt->bind_result($theme, $wake_up_time, $bed_time, $newsletter);
+    $stmt->bind_result($lang, $theme, $wake_up_time, $bed_time, $newsletter);
     $settings = null;
     
     while ($stmt->fetch()) {
-        $settings = array("theme" => $theme, "wake_up_time" => $wake_up_time, "bed_time" => $bed_time, "newsletter" => $newsletter);
+        $settings = array("language" => $lang, "theme" => $theme, "wake_up_time" => $wake_up_time, "bed_time" => $bed_time, "newsletter" => $newsletter);
     }
     $stmt->close();
     return $settings;
