@@ -15,8 +15,10 @@ $pages = [
 include("app/database/db.php");
 include("app/database/connection.php");
 
-$_SESSION['language'] = substr($_SERVER['HTTP_ACCEPT_LANGUAGE'], 0, 2);
-include("assets/languages/" . $_SESSION['language'] . ".php");
+if (empty($_SESSION['id'])) {
+    $_SESSION['settings']['language'] = substr($_SERVER['HTTP_ACCEPT_LANGUAGE'], 0, 2);
+}
+include("assets/languages/" . $_SESSION['settings']['language'] . ".php");
 
 //Setting default page
 $page = "app";

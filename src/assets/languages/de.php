@@ -116,4 +116,5 @@ $text =
     'receive-mail' => 'Ich möchte Informationen erhalten.',
     'tutorial-desc' => 'Du kannst diese Tour jederzeit wiederholen, gehe dazu einfach im Seiten-Menu auf "Tutorial starten".',
     'start' => 'Starten',
+    'language' => 'Sprache',
 ];

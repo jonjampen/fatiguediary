@@ -8,6 +8,15 @@
         <h2><?php echo $text['settings']; ?></h2>
         <div class="setting">
             <div class="text">
+                <p><?php echo $text['language']; ?>:</p>
+            </div>
+            <div class="btn-option">
+                <button class="btn-primary <?php if($_SESSION['settings']['language'] == "en") {echo("outline");} ?>" id="lang_btn1">Deutsch</button>
+                <button class="btn-primary <?php if($_SESSION['settings']['language'] == "de") {echo("outline");} ?>" id="lang_btn2">English</button>
+            </div>
+        </div>
+        <div class="setting">
+            <div class="text">
                 <p><?php echo $text['mode']; ?>:</p>
             </div>
             <div class="btn-option">
@@ -16,6 +25,7 @@
             </div>
         </div>
         <form action="<?php echo("index.php?page=set-settings"); ?>" method="post">
+            <input type="text" name="lang" id="lang_field" value="<?php echo($_SESSION['settings']['language']); ?>">
             <input type="hidden" name="theme" id="theme_field" value="<?php echo($_SESSION['settings']['theme']); ?>">
             <div class="setting">
                 <div class="text">
@@ -62,4 +72,22 @@
             }
         }
 
+        // Language
+        var lang_btn1 = document.getElementById("lang_btn1");
+        var lang_btn2 = document.getElementById("lang_btn2");
+        lang_btn1.addEventListener("click", function() { changeOptionLang(1)});
+        lang_btn2.addEventListener("click", function() { changeOptionLang(2)});
+        lang_field = document.getElementById("lang_field");
+
+        function changeOptionLang(option) {
+            if (option === 1) {
+                lang_btn1.classList.remove("outline");
+                lang_btn2.classList.add("outline");
+                lang_field.value = "de";
+            } else if (option === 2) {
+                lang_btn2.classList.remove("outline");
+                lang_btn1.classList.add("outline");
+                lang_field.value = "en";
+            }
+        }
     </script>

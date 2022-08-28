@@ -10,7 +10,7 @@ includeToastify();
         <img src="assets/img/onboarding-language.svg" alt="">
         <p><?php echo $text['language-question']; ?></p>
         <div class="btn-option">
-            <?php if ($_SESSION['language'] == 'en'): ?>
+            <?php if ($_SESSION['settings']['language'] == 'en'): ?>
                 <button class="btn-primary outline" id="btn1">Deutsch</button>
                 <button class="btn-primary" id="btn2">English</button>
             <?php else: ?>
@@ -28,7 +28,7 @@ includeToastify();
         var btn1 = document.getElementById("btn1");
         var btn2 = document.getElementById("btn2");
         var btn_next = document.getElementById("btn_next");
-        var lang = "<?php echo $_SESSION['language']; ?>";
+        var lang = "<?php echo $_SESSION['settings']['language']; ?>";
 
         btn1.addEventListener("click", function() { changeOption(1)});
         btn2.addEventListener("click", function() { changeOption(2)});

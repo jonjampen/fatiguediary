@@ -10,11 +10,12 @@ if (isset($_POST['set-settings'])) {
         $newsletter = $_GET['n'];
     }
     else {
+        $lang = $_POST['lang'];
         $theme = $_POST['theme'];
         $wake_up_time = $_POST['wake_up_time'];
         $bed_time = $_POST['bed_time'];
         if (isset($_POST['newsletter'])) {
-            $newsletter = 1; 
+            $newsletter = 1;
         }
         else {
             $newsletter = 0;

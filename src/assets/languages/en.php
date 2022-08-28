@@ -116,4 +116,5 @@ $text =
     'receive-mail' => 'I\'d like to receive news.',
     'tutorial-desc' => 'You can repeat this tutorial at any time by going to "Start tutorial" in the side menu.',
     'start' => 'Start',
+    'language' => 'Language',
 ];
