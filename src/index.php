@@ -145,6 +145,9 @@ function print_head($page_head, $public) {
         '<link rel="icon" type="image/x-icon" href="assets/img/logo.svg">',
         '<link rel="stylesheet" type="text/css" href="assets/css/toastify.min.css">'
     );
+    if (isset($_SERVER['SERVER_NAME']) && $_SERVER['SERVER_NAME'] == 'dev.fatiguediary.ch') {
+        $head[] = '<meta name="robots" content="noindex,nofollow">';
+    }
 
     foreach ($head as $head_line) {
         echo($head_line."\n");
