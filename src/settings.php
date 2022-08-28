@@ -25,7 +25,7 @@
             </div>
         </div>
         <form action="<?php echo("index.php?page=set-settings"); ?>" method="post">
-            <input type="text" name="lang" id="lang_field" value="<?php echo($_SESSION['settings']['language']); ?>">
+            <input type="hidden" name="lang" id="lang_field" value="<?php echo($_SESSION['settings']['language']); ?>">
             <input type="hidden" name="theme" id="theme_field" value="<?php echo($_SESSION['settings']['theme']); ?>">
             <div class="setting">
                 <div class="text">
