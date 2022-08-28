@@ -15,10 +15,10 @@ $pages = [
 include("app/database/db.php");
 include("app/database/connection.php");
 
-if (empty($_SESSION['id'])) {
+if (empty($_SESSION['settings']['language'])) {
     $_SESSION['settings']['language'] = substr($_SERVER['HTTP_ACCEPT_LANGUAGE'], 0, 2);
 }
-include("assets/languages/" . $_SESSION['settings']['language'] . ".php");
+updateLanguage();
 
 //Setting default page
 $page = "app";
@@ -177,4 +177,9 @@ function print_body_top_nav_only() {
 function includeToastify() {
     echo('<script type="text/javascript" src="assets/js/toastify.js"></script>');
     include("app/includes/messages.php");
+}
+
+function updateLanguage() {
+    global $text;
+    include("assets/languages/" . $_SESSION['settings']['language'] . ".php");
 }

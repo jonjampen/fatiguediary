@@ -225,8 +225,8 @@ function loadSettings () {
     $start_onboarding = false;
     if (!$settings) {
         global $conn;
-        $stmt = $conn->prepare("INSERT INTO settings (user_id) VALUES(?)");
-        $stmt->bind_param("i", $_SESSION['id']);
+        $stmt = $conn->prepare("INSERT INTO settings (user_id, language) VALUES(?, ?)");
+        $stmt->bind_param("is", $_SESSION['id'], $_SESSION['settings']['language']);
         $stmt->execute();
         $stmt->close();
 

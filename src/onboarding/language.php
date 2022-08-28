@@ -1,7 +1,11 @@
 <?php
+if (isset($_GET['l'])) {
+    $_SESSION['settings']['language'] = $_GET['l'];
+}
 print_head(array('<title>Onboarding | Fatigue Diary</title>'), false);
 print_body_top_nav_only();
 includeToastify();
+updateLanguage();
 ?>
 
     <div class="onboarding-screen">
@@ -45,6 +49,7 @@ includeToastify();
                 btn1.classList.add("outline");
                 lang = "en";
             }
+            window.location.href = "index.php?page=onboarding&l=" + lang;
         }
 
         function redirect() {
