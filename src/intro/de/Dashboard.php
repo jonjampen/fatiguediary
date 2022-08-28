@@ -893,7 +893,7 @@ calculateBorderColor(4, border[4]);
               {
                   text: 'Tour überspringen',
                   action: function () {
-                    window.location.href = '../index.php';
+                    window.location.href = '../../index.php';
                   }
               },
               {

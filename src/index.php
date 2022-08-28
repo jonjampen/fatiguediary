@@ -14,7 +14,9 @@ $pages = [
 //db.php with $servername, $username, $password (gitignore)
 include("app/database/db.php");
 include("app/database/connection.php");
-include("assets/languages/de.php");
+
+$_SESSION['language'] = substr($_SERVER['HTTP_ACCEPT_LANGUAGE'], 0, 2);
+include("assets/languages/" . $_SESSION['language'] . ".php");
 
 //Setting default page
 $page = "app";
