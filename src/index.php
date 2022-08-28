@@ -1,7 +1,7 @@
 <?php
 $pages = [
     //user
-    "login", "register", "users", "reset-password", "logout", "onboarding", "onboarding02", "onboarding03", "onboarding04",
+    "login", "register", "users", "reset-password", "logout", "onboarding", "onboarding01", "onboarding02", "onboarding03", "onboarding04",
     //app
     "dashboard", "add-new", "entries", "settings",
     //information
@@ -106,6 +106,9 @@ else {
         include("chart" . $chart . ".php");
     }
     if ($page == "onboarding") {
+        include("onboarding/language.php");
+    }
+    if ($page == "onboarding01") {
         include("onboarding/theme.php");
     }
     if ($page == "onboarding02") {

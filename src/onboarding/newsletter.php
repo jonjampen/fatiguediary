@@ -19,6 +19,7 @@ includeToastify();
 
     <script>
         var btn_next = document.getElementById("btn_next");
+        var lang = "<?php echo $_GET['l']; ?>";
         var theme = <?php echo($_GET['t']); ?>;
         var wake_up_time  = "<?php echo($_GET['w']); ?>";
         var bed_time  = "<?php echo($_GET['b']); ?>";
@@ -34,7 +35,7 @@ includeToastify();
             } else {
                 newsletter = 0;
             }
-            window.location.href = "index.php?page=onboarding04&t=" + theme + "&w=" + wake_up_time + "&b=" + bed_time + "&n=" + newsletter;
+            window.location.href = "index.php?page=onboarding04&l=" + lang + "&t=" + theme + "&w=" + wake_up_time + "&b=" + bed_time + "&n=" + newsletter;
         }
     </script>
 </body>

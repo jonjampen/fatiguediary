@@ -22,6 +22,7 @@ includeToastify();
 
     <script>
         var btn_next = document.getElementById("btn_next");
+        var lang = "<?php echo $_GET['l']; ?>";
         var theme = <?php echo($_GET['t']); ?>;
         var wake_up_time  = "06:00";
         var bed_time  = "22:30";
@@ -31,7 +32,7 @@ includeToastify();
         function redirect() {
             wake_up_time = wake_up.value;
             bed_time = bed.value;
-            window.location.href = "index.php?page=onboarding03&t=" + theme + "&w=" + wake_up_time + "&b=" + bed_time;
+            window.location.href = "index.php?page=onboarding03&l=" + lang + "&t=" + theme + "&w=" + wake_up_time + "&b=" + bed_time;
         }
     </script>
 </body>

@@ -106,6 +106,7 @@ $text =
 
     'welcome' => 'Willkommen',
     'thank-you-register' => 'Vielen Dank fürs Registrieren!',
+    'language-question' => 'Wähle deine Sprache.',
     'light-or-dark' => 'Möchtest du lieber den hellen oder dunklen Modus?',
     'awake-question' => 'Wann bist du nomalerweise wach?',
     'awake-desc' => 'Diese Information wird für die bessere Darstellung der Diagramme verwendet.',

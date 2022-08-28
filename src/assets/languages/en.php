@@ -38,7 +38,7 @@ $text =
 
 
     'settings' => 'Settings',
-    'mode' => 'Mode',
+    'mode' => 'Theme',
     'dark' => 'Dark',
     'light' => 'Light',
 
@@ -103,8 +103,10 @@ $text =
     'logout' => 'Logout',
     'start-tutorial' => 'Start tutorial',
 
+
     'welcome' => 'Welcome',
     'thank-you-register' => 'Thank you for registering!',
+    'language-question' => 'Choose your language.',
     'light-or-dark' => 'Do you prefer light or dark theme?',
     'awake-question' => 'When are you normally awake?',
     'awake-desc' => 'This information is used to better display your charts.',
