@@ -39,7 +39,7 @@
             <input type="password" name="passwordConf" placeholder="<?php echo $text['enter-repeat-pw']; ?>">
 
             <div class="btn-center">
-                <button class="btn-primary" type="submit" name="reset-pw"><?php echo $text['change-pw']; ?></button>
+                <button class="btn-primary" type="submit" name="reset-password"><?php echo $text['change-pw']; ?></button>
             </div>
         </form>
     </div>
