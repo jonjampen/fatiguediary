@@ -5,7 +5,7 @@ $pages = [
     //app
     "dashboard", "add-new", "entries", "settings",
     //information
-    //"app",
+    "app",
     "contact",
     // controllers
     "mail", "ajax"
@@ -47,7 +47,7 @@ if ($page == "users") {
 }
 
 if ($page == "app") {
-    header("location: index.php?page=dashboard");
+    include("app.php");
 }
 if ($page == "contact") {
     include("contact_temp.php");
@@ -172,7 +172,12 @@ function print_body($onload = "") {
     include("app/includes/topNavbar.php");
     include("app/includes/bottomNavbar.php");
 }
+function print_public_body() {
+    echo('<body>' . "\n");
+    // include("app/includes/publicNavbar.php");
+}
 function print_body_top_nav_only() {
+    global $text;
     echo('<body>' . "\n");
     include("app/includes/topNavbar.php");
 }

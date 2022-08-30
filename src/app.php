@@ -1,52 +1,41 @@
 <?php
     print_head(array('<title>Fatigue Diary</title>'), true);
+    
+    print_public_body();
 ?>
-<body class="public">
-    <?php include("app/includes/publicNavbar.php"); ?>
-    <section class="one left-right">
-        <div class="text">
-            <h1 id="title"></h1>
-            <p id="title-desc"></p>
-            <button class="btn-secondary" id="use-for-free" onclick="location.href='index.php?page=register'"></button>
-        </div>
-        <img src="assets/img/screenshots/add.png" alt="">
-    </section>
-    
-    
-    <section class="two">
-        <h2>Features</h2>
-        <div class="features">
-            <div class="container">
-                <div class="icon"><span class="material-icons">menu_book</span></div>
-                <h3 id="feature1-title"></h3>
-                <p class="description" id="feature1-desc"></p>
-            </div>
-            <div class="container">
-                <div class="icon"><span class="material-icons">query_stats</span></div>
-                <h3 id="feature2-title"></h3>
-                <p class="description" id="feature2-desc"></p>
-            </div>
-            <div class="container">
-                <div class="icon"><span class="material-icons">lightbulb</span></div>
-                <h3 id="feature3-title"></h3>
-                <p class="description" id="feature3-desc"></p>
-            </div>
-        </div>
-    </section>
+<section class="top">
+    <div class="left">
+        <h1>Eine Web-App, die dir mit deiner Fatigue hilft.</h1>
+        <h4>Wenn du an chronischer Fatigue (ME/CFS, Long COVID) leidest, kann dich diese Web-App in deinem Alltag unterstützen.</h4>
+        <button class="btn-secondary">Gratis benutzen</button>
+    </div>
+    <img src="assets/img/screenshots/screenshot.svg" alt="">
+</section>
 
-    <section class="five left-right">
-        <div class="text">
-            <h2 style="color:white;" id="section5-title"></h2>
-            <p style="color: white;" id="section5-desc"></p>
+<section class="features">
+    <h2>Features</h2>
+    <div class="containers">
+        <div class="feature">
+            <h3 class="title">Aktivitäten Tracken</h3>
+            <div class="icon"><span class="material-icons">directions_walk</span></div>
+            <p>Trage ein, wann du welche Aktivitäten gemacht hast und wie du dich danach fühlst. Dies kann dir mit Pacing sehr helfen.</p>
         </div>
-        <img src="assets/img/avatar.svg" alt="">
-    </section>
+        <div class="feature">
+            <h3 class="title">Pacing</h3>
+            <div class="icon"><span class="material-icons">bed</span></div>
+            <p>Pacing ist extrem wichtig. Lerne also deinen Körper besser kennen und bemerke, wann du eine Pause brauchst. Dabei unterstützt dich Fatigue Diary.</p>
+        </div>
+        <div class="feature">
+            <h3 class="title">Analyse</h3>
+            <div class="icon"><span class="material-icons">insights</span></div>
+            <p>Alle Daten, die du einträgst, werden dir in verschiedensten Diagrammen dargestellt und analysiert. <br>Vergleiche verschiedene Tage, Wochen oder Monate miteinander oder sehe, welche Aktivitäten deine Fatigue verschlechtern.</p>
+        </div>
+    </div>
+</section>
 
-    <section class="footer">
-        <p><a href="https://www.fatiguediary.ch/">www.fatiuediary.ch</a> | Developed by <a href="index.php?page=about">Jon Jampen</a></p>
-    </section>
+<section class="screenshots">
+    <h2>Screenshots</h2>
+
+</section>
+
 </body>
-<script src="assets/languages/de.js"></script>
-<script src="assets/languages/en.js"></script>
-<script src="assets/js/language-manager.js"></script>
-</html>
