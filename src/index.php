@@ -47,6 +47,7 @@ if ($page == "users") {
 }
 
 if ($page == "app") {
+    include("app/includes/publicNavbar.php");
     include("app.php");
 }
 if ($page == "contact") {

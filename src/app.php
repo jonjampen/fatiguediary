@@ -7,7 +7,7 @@
     <div class="left">
         <h1>Eine Web-App, die dir mit deiner Fatigue hilft.</h1>
         <h4>Wenn du an chronischer Fatigue (ME/CFS, Long COVID) leidest, kann dich diese Web-App in deinem Alltag unterstützen.</h4>
-        <button class="btn-secondary">Gratis benutzen</button>
+        <button class="btn-secondary" onclick="window.location.href='index.php?page=register'">Gratis Registrieren</button>
     </div>
     <img src="assets/img/screenshots/screenshot.svg" alt="">
 </section>
@@ -38,7 +38,7 @@
     <div class="glide">
         <div class="glide__arrows" data-glide-el="controls">
             <button class="glide__arrow glide__arrow--left" data-glide-dir="<">
-                Prev
+                <
             </button>
         </div>
         <div class="glide__track" data-glide-el="track">
@@ -55,7 +55,7 @@
         </div>
         <div class="glide__arrows" data-glide-el="controls">
           <button class="glide__arrow glide__arrow--right" data-glide-dir=">">
-            Next
+            >
           </button>
         </div>
     </div>
@@ -65,13 +65,13 @@
 
 <script>
   var glide = new Glide('.glide', {
-    type: 'slider',
+    type: 'carousel',
     startAt: 1,
     focusAt: 'center',
-    autoplay: 4000,
+    autoplay: 3000,
     perView: 4,
-    rewind: true,
   });
+
   glide.mount();
   
 </script>

@@ -1,3 +1,7 @@
+* {
+    font-size: 16px;
+}
+
 section.top {
     height: 100vh;
     background: linear-gradient(109.74deg, rgba(74, 131, 180, 0.46) 6.65%, rgba(74, 131, 180, 0) 68.44%);
@@ -57,7 +61,7 @@ p {
     cursor: pointer;
 }
 .btn-secondary {
-    width: 140px;
+    width: 150px;
     height: 50px;
     background: transparent;
     color: white;
@@ -94,4 +98,92 @@ p {
 }
 .features p {
     text-align: justify;
+}
+
+.logo img{
+    height: 48px;
+}
+
+#open {
+    display: block;
+}
+#close {
+    display: none;
+}
+
+nav ul {
+    list-style: none;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: white;
+    height: 64px;
+    padding-right: 64px;
+}
+.desktop-nav .right {
+    width: 45%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.desktop-nav .right a {
+    text-decoration: none;
+}
+nav .language {
+    width: 10%;
+    display: flex;
+    justify-content: center;
+}
+.desktop-nav left {
+    width: 45%;
+}
+.mobile-nav {
+    display: none;
+}
+a {
+    text-decoration: none;
+}
+
+/*Sidenavbar*/
+.sidenav {
+    height: 100%;
+    width: 250px;
+    display: none;
+    z-index: 2;
+    position: fixed;
+    right: 0;
+    background: var(--background);
+}
+.sidenav ul {
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    gap: 30px;
+}
+.sidenav ul li {
+    margin-top: 0px;
+    list-style-type: none;
+    transition: 1s;
+}
+.sidenav a {
+    color: var(--text);
+    font-size: 25px;
+    overflow-x: hidden;
+    transition: 0.4s;
+}
+.sidenav a:hover {
+    color: var(--secondary);
+}
+.sidenav .logout {
+    color: rgb(172, 0, 0);
+}
+
+@media only screen and (max-width: 1000px){
+    .mobile-nav {
+        display: block;
+    }
+    .desktop-nav {
+        display: none;
+    }
 }
