@@ -1,5 +1,5 @@
 <?php
-    print_head(array('<title>Fatigue Diary</title>'), true);
+    print_head(array('<title>Fatigue Diary</title>', '<link rel="stylesheet" href="assets/carousel/glide.core.min.css">', '<link rel="stylesheet" href="assets/carousel/glide.theme.css">'), true);
     
     print_public_body();
 ?>
@@ -35,7 +35,44 @@
 
 <section class="screenshots">
     <h2>Screenshots</h2>
-
+    <div class="glide">
+        <div class="glide__arrows" data-glide-el="controls">
+            <button class="glide__arrow glide__arrow--left" data-glide-dir="<">
+                Prev
+            </button>
+        </div>
+        <div class="glide__track" data-glide-el="track">
+            <ul class="glide__slides">
+                <li class="glide__slide"><img src="assets/img/screenshots/screenshot.svg" alt=""></li>
+                <li class="glide__slide"><img src="assets/img/screenshots/screenshot.svg" alt=""></li>
+                <li class="glide__slide"><img src="assets/img/screenshots/screenshot.svg" alt=""></li>
+                <li class="glide__slide"><img src="assets/img/screenshots/screenshot.svg" alt=""></li>
+                <li class="glide__slide"><img src="assets/img/screenshots/screenshot.svg" alt=""></li>
+                <li class="glide__slide"><img src="assets/img/screenshots/screenshot.svg" alt=""></li>
+                <li class="glide__slide"><img src="assets/img/screenshots/screenshot.svg" alt=""></li>
+                <li class="glide__slide"><img src="assets/img/screenshots/screenshot.svg" alt=""></li>
+            </ul>
+        </div>
+        <div class="glide__arrows" data-glide-el="controls">
+          <button class="glide__arrow glide__arrow--right" data-glide-dir=">">
+            Next
+          </button>
+        </div>
+    </div>
 </section>
 
+<script src="assets/carousel/glide.min.js"></script>
+
+<script>
+  var glide = new Glide('.glide', {
+    type: 'slider',
+    startAt: 1,
+    focusAt: 'center',
+    autoplay: 4000,
+    perView: 4,
+    rewind: true,
+  });
+  glide.mount();
+  
+</script>
 </body>
