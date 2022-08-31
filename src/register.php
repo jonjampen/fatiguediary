@@ -4,7 +4,7 @@
     isset($_GET['email']) ? $email = $_GET['email'] : $email = '';
     
     print_head(array('<title>Registrieren | Fatigue Diary</title>'), false);
-    print_body();
+    print_body_top_nav_only();
     includeToastify();
 ?>
 
