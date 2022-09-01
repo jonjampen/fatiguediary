@@ -134,12 +134,17 @@ if (!in_array($page, $pages)) {
 function print_head($page_head, $public) {
     $head = array(
         '<!DOCTYPE html>',
-        '<html lang="en">',
+        '<html lang="' . $_SESSION['settings']['language'] . '">',
         '<head>',
         '<meta charset="UTF-8">',
         '<meta http-equiv="X-UA-Compatible" content="IE=edge">',
         '<meta name="viewport" content="width=device-width, initial-scale=1.0">',
         '<meta property="og:image" content="assets/img/logo.svg" />',
+
+        '<meta name="description" content="A web app that supports you with your chronic fatigue (ME/CFS, long COVID, ...).">',
+        '<meta name="keywords" content="fatigue, Chronic Fatigue Syndrome, chronic fatigue, me/cfs, CFS, ME, long COVID, post covid, post covid-19, covid long hauler, pacing, activity tracking, energy management, diary, log">',
+        '<meta name="author" content="Jon Jampen">',
+
         '<link rel="stylesheet" href="assets/fonts/materialicons.css">',
         '<link rel="stylesheet" href="assets/css/general.php">',
         '<link rel="icon" type="image/x-icon" href="assets/img/logo.svg">',
