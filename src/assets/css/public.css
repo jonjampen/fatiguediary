@@ -135,7 +135,8 @@ nav ul {
 nav .language {
     width: 10%;
     display: flex;
-    justify-content: flex-end;
+    justify-content: center;
+    align-items: center;
 }
 .desktop-nav left {
     width: 45%;
@@ -181,6 +182,7 @@ a {
     color: rgb(172, 0, 0);
 }
 
+
 @media only screen and (max-width: 1000px){
     .mobile-nav {
         display: block;
@@ -217,5 +219,8 @@ a {
     .features .containers {
         flex-direction: column;
         row-gap: 32px;
+    }
+    .language {
+        min-width:200px;
     }
 }
