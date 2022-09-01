@@ -47,7 +47,6 @@ if ($page == "users") {
 }
 
 if ($page == "app") {
-    include("app/includes/publicNavbar.php");
     include("app.php");
 }
 if ($page == "contact") {
@@ -175,7 +174,7 @@ function print_body($onload = "") {
 }
 function print_public_body() {
     echo('<body>' . "\n");
-    // include("app/includes/publicNavbar.php");
+    include("app/includes/publicNavbar.php");
 }
 function print_body_top_nav_only() {
     global $text;

@@ -11,8 +11,12 @@
         <div class="right">
             <li><a href="index.php?page=app" id="nav-app">Fatigue Diary</a></li>
             <li><a href="index.php?page=contact" id="nav-contact">Kontakt</a></li>
-            <li><a href="index.php?page=login" id="nav-login">Login</a></li>
-            <button class="btn-primary" id="nav-signup"onclick="location.href='index.php?page=register'">Registrieren</button>
+            <?php if(isset($_SESSION['id'])): ?>
+                <button class="btn-primary" id="nav-signup"onclick="location.href='index.php?page=register'">Zur Web-App</button>
+            <?php else: ?>
+                <li><a href="index.php?page=login" id="nav-login">Login</a></li>
+                <button class="btn-primary" id="nav-signup"onclick="location.href='index.php?page=register'">Registrieren</button>
+            <?php endif; ?>
         </div>
     </ul>
 </nav>
@@ -34,8 +38,12 @@
         <ul>
             <li><a href="index.php?page=app" id="nav-app">Fatigue Diary</a></li>
             <li><a href="index.php?page=contact" id="nav-contact">Kontakt</a></li>
-            <li><a href="index.php?page=login" id="nav-login">Login</a></li>
-            <button class="btn-primary" id="nav-signup">Registrieren</button>
+            <?php if(isset($_SESSION['id'])): ?>
+                <button class="btn-primary" id="nav-signup"onclick="location.href='index.php?page=register'">Zur Web-App</button>
+            <?php else: ?>
+                <li><a href="index.php?page=login" id="nav-login">Login</a></li>
+                <button class="btn-primary" id="nav-signup"onclick="location.href='index.php?page=register'">Registrieren</button>
+            <?php endif; ?>
         </ul>
     </div>
 </div>
@@ -45,12 +53,16 @@
 function openNav() {
   document.getElementById("sidenav").style.display = "block";
   document.getElementById("open").style.display = "none";
+  document.getElementsByTagName("body")[0].style.height = "100%";
+  document.getElementsByTagName("body")[0].style.overflow = "hidden";
   document.getElementById("close").style.display = "inline";
 }
 
 function closeNav() {
     document.getElementById("sidenav").style.display = "none";
     document.getElementById("open").style.display = "inline";
+    document.getElementsByTagName("body")[0].style.height = "auto";
+    document.getElementsByTagName("body")[0].style.overflow = "visible";
     document.getElementById("close").style.display = "none";
 }
 </script>
