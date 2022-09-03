@@ -24,13 +24,18 @@
 <div class="mobile-nav">
     <nav>
         <ul class="nav_items">
-            <li class="logo"><a href="index.php?page=app"><img src="assets/img/logo.svg" alt=""></a></li>
-            <div class="language">
-                <li class="active" id="en_mobile">EN</li>
-                <li>&nbsp; | &nbsp;</li>
-                <li id="de_mobile">DE</li>
+            <div class="left">
+                <li class="logo"><a href="index.php?page=app"><img src="assets/img/logo.svg" alt=""></a></li>
             </div>
-            <li><a href="javascript:void(0)" onclick="openNav()"><span class="material-icons" id="open">menu</span></i></a> <a href="javascript:void(0)" onclick="closeNav()"><span class="material-icons" id="close">close</span></a></li>
+            <div class="language">
+                <li <?php if ($_SESSION['settings']['language'] == 'en') { echo ('class="active"');} ?> id="en_mobile">EN</li>
+                <li>&nbsp; | &nbsp;</li>
+                <li <?php if ($_SESSION['settings']['language'] == 'de') { echo ('class="active"');} ?> id="de_mobile">DE</li>
+                
+            </div>
+            <div class="right">
+                <li><a href="javascript:void(0)" onclick="openNav()"><span class="material-icons" id="open">menu</span></i></a> <a href="javascript:void(0)" onclick="closeNav()"><span class="material-icons" id="close">close</span></a></li>
+                </div>
         </ul>
     </nav>
 
@@ -68,6 +73,8 @@ function closeNav() {
 
 document.getElementById("en").addEventListener("click", function(){ changeLang('en')});
 document.getElementById("de").addEventListener("click", function(){ changeLang('de')});
+document.getElementById("en_mobile").addEventListener("click", function(){ changeLang('en')});
+document.getElementById("de_mobile").addEventListener("click", function(){ changeLang('de')});
 function changeLang(lang) {
     window.location.href = "index.php?page=app&l="+lang;
 }
