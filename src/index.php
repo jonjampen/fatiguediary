@@ -5,7 +5,7 @@ $pages = [
     //app
     "dashboard", "add-new", "entries", "settings",
     //information
-    //"app",
+    "app",
     "contact",
     // controllers
     "mail", "ajax"
@@ -47,7 +47,7 @@ if ($page == "users") {
 }
 
 if ($page == "app") {
-    header("location: index.php?page=dashboard");
+    include("app.php");
 }
 if ($page == "contact") {
     include("contact_temp.php");
@@ -134,12 +134,17 @@ if (!in_array($page, $pages)) {
 function print_head($page_head, $public) {
     $head = array(
         '<!DOCTYPE html>',
-        '<html lang="en">',
+        '<html lang="' . $_SESSION['settings']['language'] . '">',
         '<head>',
         '<meta charset="UTF-8">',
         '<meta http-equiv="X-UA-Compatible" content="IE=edge">',
         '<meta name="viewport" content="width=device-width, initial-scale=1.0">',
         '<meta property="og:image" content="assets/img/logo.svg" />',
+
+        '<meta name="description" content="A web app that supports you with your chronic fatigue (ME/CFS, long COVID, ...) by tracking your energy level after each activity.">',
+        '<meta name="keywords" content="fatigue, Chronic Fatigue Syndrome, chronic fatigue, me/cfs, CFS, ME, long COVID, post covid, post covid-19, covid long hauler, pacing, activity tracking, energy management, app, diary, log, energy, level, energy level">',
+        '<meta name="author" content="Jon Jampen">',
+
         '<link rel="stylesheet" href="assets/fonts/materialicons.css">',
         '<link rel="stylesheet" href="assets/css/general.php">',
         '<link rel="icon" type="image/x-icon" href="assets/img/logo.svg">',
@@ -172,7 +177,14 @@ function print_body($onload = "") {
     include("app/includes/topNavbar.php");
     include("app/includes/bottomNavbar.php");
 }
+function print_public_body() {
+    global $text;
+    echo('<body>' . "\n");
+    updateLanguage();
+    include("app/includes/publicNavbar.php");
+}
 function print_body_top_nav_only() {
+    global $text;
     echo('<body>' . "\n");
     include("app/includes/topNavbar.php");
 }
