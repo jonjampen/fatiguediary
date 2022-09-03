@@ -137,6 +137,7 @@ nav .language {
     display: flex;
     justify-content: center;
     align-items: center;
+    cursor: pointer;
 }
 .desktop-nav left {
     width: 45%;
@@ -148,6 +149,36 @@ a {
     text-decoration: none;
 }
 
+section.about {
+    height: auto;
+    background: linear-gradient(5.59deg, rgba(74, 131, 180, 0.46) 13.46%, rgba(74, 131, 180, 0) 74.28%);
+    padding-left: 64px;
+    padding-right: 64px;
+    padding-top: 64px;
+    padding-bottom: 8px;
+}
+.about .content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+h2.side-title {
+    text-align: left;
+    max-width: 60%;
+}
+.about p {
+    margin-top: 64px;
+    text-align: center;
+    bottom: 0;
+}
+.about img {
+    max-width: 40%;
+}
+
+
+.active {
+    color: var(--secondary);
+}
 /*Sidenavbar*/
 .sidenav {
     height: 100%;
@@ -222,5 +253,28 @@ a {
     }
     .language {
         min-width:200px;
+    }
+
+    section.about {
+        padding-left: 16px;
+        padding-right: 16px;
+        padding-top: 16px;
+        padding-bottom: 8px;
+    }
+    .about .content {
+        flex-direction: column;
+        text-align: center;
+    }
+    h2.side-title {
+        max-width: 100%;
+        text-align: center;
+    }
+    .about p {
+        margin-top: 64px;
+        text-align: center;
+        bottom: 0;
+    }
+    .about img {
+        max-width: 100%;
     }
 }

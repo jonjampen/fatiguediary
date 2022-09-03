@@ -178,6 +178,7 @@ function print_body($onload = "") {
     include("app/includes/bottomNavbar.php");
 }
 function print_public_body() {
+    global $text;
     echo('<body>' . "\n");
     include("app/includes/publicNavbar.php");
 }

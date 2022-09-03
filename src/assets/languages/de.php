@@ -119,4 +119,22 @@ $text =
     'language' => 'Sprache',
 
     'all-entries' => 'Alle Einträge',
+
+
+
+    'info-title' => 'Eine Web-App, die dir mit deiner Fatigue hilft.',
+    'info-description' => 'Wenn du an chronischer Fatigue (ME/CFS, Long COVID) leidest, kann dich diese Web-App in deinem Alltag unterstützen.',
+    'info-btn' => 'Jetzt Starten',
+    'to-the-app' => 'Zur App',
+    'screenshots' => 'Screenshots',
+    'features' => 'Features',
+    'track-activities' => 'Aktivitäten Tracken',
+    'track-desc' => 'Trage ein, wann du welche Aktivitäten gemacht hast und wie du dich danach fühlst. Dies kann dir mit Pacing sehr helfen.',
+    'pacing' => 'Pacing',
+    'pacing-desc' => 'Pacing ist extrem wichtig. Lerne also deinen Körper besser kennen und bemerke, wann du eine Pause brauchst. Dabei unterstützt dich Fatigue Diary.',
+    'analysis' => 'Analyse',
+    'analysis-desc' => 'Alle Daten, die du einträgst, werden dir in verschiedensten Diagrammen dargestellt und analysiert. <br>Vergleiche verschiedene Tage, Wochen oder Monate miteinander oder sehe, welche Aktivitäten deine Fatigue verschlechtern.',
+    'about-title' => 'Entwickelt von einem Fatigue Patienten',
+    'about-desc' => 'Hallo, ich bin Jon Jampen. Ich bin an chronischer Fatigue erkrankt und möchte mit dieser Web-App anderen PatientInnen zeigen, was mir hilft. <br> Diese App ist meine Maturaarbeit.',
+    'copy' => 'Alle Rechte vorbehalten. Gestaltet und entwickelt von Jon Jampen.',
 ];

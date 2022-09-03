@@ -4,18 +4,18 @@
             <li class="logo"><a href="index.php?page=app"><img src="assets/img/logo.svg" alt=""></a></li>
         </div>
         <div class="language">
-            <li class="active" id="en">EN</li>
+            <li <?php if ($_SESSION['settings']['language'] == 'en') { echo ('class="active"');} ?> id="en">EN</li>
             <li>&nbsp; | &nbsp;</li>
-            <li class="" id="de">DE</li>
+            <li <?php if ($_SESSION['settings']['language'] == 'de') { echo ('class="active"');} ?> id="de">DE</li>
             </div>
         <div class="right">
             <li><a href="index.php?page=app" id="nav-app">Fatigue Diary</a></li>
-            <li><a href="index.php?page=contact" id="nav-contact">Kontakt</a></li>
+            <li><a href="index.php?page=contact" id="nav-contact"><?php echo $text['contact']; ?></a></li>
             <?php if(isset($_SESSION['id'])): ?>
-                <button class="btn-primary" id="nav-signup"onclick="location.href='index.php?page=register'">Zur Web-App</button>
+                <button class="btn-primary" id="nav-signup"onclick="location.href='index.php?page=register'"><?php echo $text['to-the-app']; ?></button>
             <?php else: ?>
-                <li><a href="index.php?page=login" id="nav-login">Login</a></li>
-                <button class="btn-primary" id="nav-signup"onclick="location.href='index.php?page=register'">Registrieren</button>
+                <li><a href="index.php?page=login" id="nav-login"><?php echo $text['login']; ?></a></li>
+                <button class="btn-primary" id="nav-signup"onclick="location.href='index.php?page=register'"><?php echo $text['signup']; ?></button>
             <?php endif; ?>
         </div>
     </ul>
@@ -37,12 +37,12 @@
     <div class="sidenav" id="sidenav">
         <ul>
             <li><a href="index.php?page=app" id="nav-app">Fatigue Diary</a></li>
-            <li><a href="index.php?page=contact" id="nav-contact">Kontakt</a></li>
+            <li><a href="index.php?page=contact" id="nav-contact"><?php echo $text['contact']; ?></a></li>
             <?php if(isset($_SESSION['id'])): ?>
-                <button class="btn-primary" id="nav-signup"onclick="location.href='index.php?page=register'">Zur Web-App</button>
+                <button class="btn-primary" id="nav-signup"onclick="location.href='index.php?page=register'"><?php echo $text['to-the-app']; ?></button>
             <?php else: ?>
-                <li><a href="index.php?page=login" id="nav-login">Login</a></li>
-                <button class="btn-primary" id="nav-signup"onclick="location.href='index.php?page=register'">Registrieren</button>
+                <li><a href="index.php?page=login" id="nav-login"><?php echo $text['login']; ?></a></li>
+                <button class="btn-primary" id="nav-signup"onclick="location.href='index.php?page=register'"><?php echo $text['signup']; ?></button>
             <?php endif; ?>
         </ul>
     </div>
@@ -64,5 +64,11 @@ function closeNav() {
     document.getElementsByTagName("body")[0].style.height = "auto";
     document.getElementsByTagName("body")[0].style.overflow = "visible";
     document.getElementById("close").style.display = "none";
+}
+
+document.getElementById("en").addEventListener("click", function(){ changeLang('en')});
+document.getElementById("de").addEventListener("click", function(){ changeLang('de')});
+function changeLang(lang) {
+    window.location.href = "index.php?page=app&l="+lang;
 }
 </script>
