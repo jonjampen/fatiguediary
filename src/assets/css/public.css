@@ -25,7 +25,6 @@ h2 {
     font-size: 48px;
     font-weight: 500;
     margin-bottom: 32px;
-    margin-top: 64px;
 }
 h3 {
     color: #1E1F1F;
@@ -72,7 +71,6 @@ p {
     cursor: pointer;
     font-size: 16px;
 }
-
 .features .containers {
     display: flex;
     align-items: center;
@@ -84,7 +82,7 @@ p {
     height: 350px;
     border-radius: 32px;
     background-color: #DBE6F0;
-   padding: 16px;
+    padding: 16px;
 }
 .features .icon {
     display: flex;
@@ -150,17 +148,18 @@ a {
 }
 
 section.about {
+    margin-top: 96px;
     height: auto;
     background: linear-gradient(5.59deg, rgba(74, 131, 180, 0.46) 13.46%, rgba(74, 131, 180, 0) 74.28%);
     padding-left: 64px;
     padding-right: 64px;
-    padding-top: 64px;
+    padding-top: 74px;
     padding-bottom: 8px;
 }
 .about .content {
     display: flex;
     justify-content: space-between;
-    align-items: center;
+    align-items: flex-start;
 }
 h2.side-title {
     text-align: left;
@@ -173,7 +172,7 @@ h2.side-title {
 }
 .about img {
     max-width: 40%;
-    max-height: 400px;
+    max-height: 300px;
 }
 
 
@@ -226,8 +225,8 @@ h2.side-title {
         min-height: 100vh;
         height: auto;
         background: linear-gradient(158.18deg, rgba(74, 131, 180, 0.46) 14.24%, rgba(74, 131, 180, 0) 57.38%);
-        display: flex;
         flex-direction: column;
+        justify-content: flex-start;
         padding: 16px;
         text-align: center;
     }
@@ -245,9 +244,11 @@ h2.side-title {
     .top img {
         height: 500px;
         margin-top: 64px;
-        margin-right: 16px;
+        margin-right:0;
     }
-
+    section.features {
+        margin-top: 78px;
+    }
     .features .containers {
         flex-direction: column;
         row-gap: 32px;
@@ -264,6 +265,7 @@ h2.side-title {
     }
     .about .content {
         flex-direction: column;
+        align-items: center;
         text-align: center;
     }
     h2.side-title {
