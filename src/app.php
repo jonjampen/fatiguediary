@@ -12,7 +12,7 @@
         <h4><?php echo $text['info-description']; ?></h4>
         <button class="btn-secondary" onclick="window.location.href='index.php?page=register'"><?php if(isset($_SESSION['id'])) {echo $text['to-the-app'];} else { echo $text['info-btn']; } ?></button>
     </div>
-    <img src="assets/img/screenshots/screenshot.svg" alt="">
+    <img src="assets/img/screenshots/dashboard_top.png" alt="">
 </section>
 
 <section class="features">
