@@ -130,7 +130,29 @@ nav .material-icons:hover {
 .center-title {
     text-align: center;
 }
-
+.contact-content {
+    margin-top: 32px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+}
+.contact-content .info {
+    margin-top: 64px;
+}
+.contact-content img {
+    max-width: 90%;
+}
+.contact-content .icon-text {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 16px;
+    margin-bottom: 16px;
+}
+.contact-content span {
+    color: var(--secondary);
+}
 /*navbar*/
 nav {
     width: 100%;
