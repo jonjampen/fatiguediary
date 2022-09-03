@@ -180,6 +180,7 @@ function print_body($onload = "") {
 function print_public_body() {
     global $text;
     echo('<body>' . "\n");
+    updateLanguage();
     include("app/includes/publicNavbar.php");
 }
 function print_body_top_nav_only() {
