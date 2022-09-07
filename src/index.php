@@ -144,6 +144,7 @@ function print_head($page_head, $public) {
         '<meta name="description" content="A web app that supports you with your chronic fatigue (ME/CFS, long COVID, ...) by tracking your energy level after each activity.">',
         '<meta name="keywords" content="fatigue, Chronic Fatigue Syndrome, chronic fatigue, me/cfs, CFS, ME, long COVID, post covid, post covid-19, covid long hauler, pacing, activity tracking, energy management, app, diary, log, energy, level, energy level">',
         '<meta name="author" content="Jon Jampen">',
+        '<link rel="canonical" href="https://www.fatiguediary.ch', // main page
 
         '<link rel="stylesheet" href="assets/fonts/materialicons.css">',
         '<link rel="stylesheet" href="assets/css/general.php">',
