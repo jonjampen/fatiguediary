@@ -15,8 +15,15 @@ $pages = [
 include("app/database/db.php");
 include("app/database/connection.php");
 
-if (empty($_SESSION['settings']['language'])) {
-    $_SESSION['settings']['language'] = substr($_SERVER['HTTP_ACCEPT_LANGUAGE'], 0, 2);
+if (empty($_SESSION['settings']['language'])) {    
+    if (empty($_SERVER['HTTP_ACCEPT_LANGUAGE'])) {
+        $browserLang = "en";
+    }
+    else {
+        $browserLang = $_SERVER['HTTP_ACCEPT_LANGUAGE'];
+    }
+    
+    $_SESSION['settings']['language'] = substr($browserLang, 0, 2);
 }
 updateLanguage();
 
