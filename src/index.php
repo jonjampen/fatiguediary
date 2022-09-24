@@ -113,6 +113,7 @@ else {
         $chart = $_GET['chart'];
         include("app/controllers/get-energy.php");
         include("app/controllers/display-activities.php");
+        include("app/controllers/daily-avg.php");
         include("app/controllers/calculate-charts.php");
         include("chart" . $chart . ".php");
     }

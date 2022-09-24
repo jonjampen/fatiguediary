@@ -6,7 +6,7 @@ $endDatetime = strtotime($startDate . " +6 days");
 $endDate = date("Y-m-d", $endDatetime);
 
 
-$energylevels = calculateDailyAvg($startDatetime, $endDatetime);
+$energylevels = calculateDailyAvg1($startDatetime, $endDatetime);
 
 
 print<<<EOF
