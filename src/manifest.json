@@ -5,7 +5,7 @@
     "background_color": "#1E1F1F",
     "display": "standalone",
     "scope": "/",
-    "start_url": "http://localhost/fatigue-diary/src/index.php?page=dashboard",
+    "start_url": "https://dev.fatiguediary.ch/index.php?page=dashboard",
     "description": "A web app that supports you with your chronic fatigue (ME/CFS, long COVID, ...) by tracking your energy level after each activity.",
     "orientation": "any",
     "icons": [
