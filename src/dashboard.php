@@ -90,39 +90,40 @@ $todayDate = date("Y-m-d");
     <script>
         var border = document.getElementsByClassName("border_color");
         <?php
-            $j = 0;
-            $i = 0;
-            $value = 0;
-            $worst = end($goodActivities);
-            $best = array_values($goodActivities)[0];
-            $segment = ($best - $worst) / 3;
-            
-            foreach ($goodActivities as $name=>$avg) {
-                for ($factor = 1; $factor <= 3; $factor++) {
-                    if ($avg <= $worst + ($segment * $factor)) {
-                        $value = 7 - (4 - $factor);
-                        break;
+            $activityBoxCounter = 0;
+            if (!empty($goodActivities)) {
+                $value = 0;
+                $worst = end($goodActivities);
+                $best = array_values($goodActivities)[0];
+                $segment = ($best - $worst) / 3;
+                
+                foreach ($goodActivities as $name=>$avg) {
+                    for ($factor = 1; $factor <= 3; $factor++) {
+                        if ($avg <= $worst + ($segment * $factor)) {
+                            $value = 7 - (4 - $factor);
+                            break;
+                        }
                     }
+                    echo("calculateBorderColor(" . $value . ", border[" . $activityBoxCounter . "]); \n");
+                    $activityBoxCounter++;
                 }
-                echo("calculateBorderColor(" . $value . ", border[" . $j . "]); \n");
-                $j++;
             }
             
-            
-            $i = 0;
-            $worst = array_values($badActivities)[0];
-            $best = end($badActivities);
-            $segment = (abs($worst) - abs($best)) / 3;
+            if (!empty($badActivities)) {
+                $worst = array_values($badActivities)[0];
+                $best = end($badActivities);
+                $segment = (abs($worst) - abs($best)) / 3;
 
-            foreach ($badActivities as $name=>$avg) {
-                for ($factor = 1; $factor <= 3; $factor++) {
-                    if (abs($avg) >= abs($worst + ($segment * $factor))) {
-                        $value = $factor - 1;
-                        break;
+                foreach ($badActivities as $name=>$avg) {
+                    for ($factor = 1; $factor <= 3; $factor++) {
+                        if (abs($avg) >= abs($worst + ($segment * $factor))) {
+                            $value = $factor - 1;
+                            break;
+                        }
                     }
+                    echo("calculateBorderColor(" . $value . ", border[" . $activityBoxCounter . "]); \n");
+                    $activityBoxCounter++;
                 }
-                echo("calculateBorderColor(" . $value . ", border[" . $j . "]); \n");
-                $j++;
             }
         ?>
 
