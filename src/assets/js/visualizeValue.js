@@ -21,11 +21,11 @@ function calculateBorderColor(value, border, background = true) {
         border.style.backgroundColor = transparency;
         
     } else {
-        value = Math.floor(value/3*2);
-    }
+        if (value == 0) {
+            return;
+        }
 
-    if (value == 0) {
-        return;
+        value = Math.floor(value/3*2);
     }
 
     color = colors[value];
