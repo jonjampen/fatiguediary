@@ -5,7 +5,7 @@ $startDate = date("Y-m-d", $startDatetime);
 $endDatetime = strtotime($startDate . " +6 days");
 $endDate = date("Y-m-d", $endDatetime);
 
-$energylevels = calculateDailyAvg1($startDatetime, $endDatetime);
+$energylevels = getDayChartValues($startDatetime, $endDatetime);
 
 
 print<<<EOF

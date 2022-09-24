@@ -1,6 +1,6 @@
 <?php
 
-function calculateDailyAvg1($startDatetime, $endDatetime) {
+function getDayChartValues($startDatetime, $endDatetime) {
     $energylevels = array();
 
     // for every day

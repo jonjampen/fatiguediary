@@ -5,7 +5,7 @@ $startDate = date("Y-m-d", $startDatetime);
 $endDatetime = strtotime(date("Y-m-t", strtotime($_GET['date'])));
 $endDate = date("Y-m-d", $endDatetime);
 
-$energylevels = calculateDailyAvg1($startDatetime, $endDatetime);
+$energylevels = getDayChartValues($startDatetime, $endDatetime);
 
 
 print<<<EOF
