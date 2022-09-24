@@ -84,7 +84,7 @@
 
         var border = document.getElementsByClassName("border_color");
         for (var i = 0; i < averageValue.length; i++) {
-            calculateBorderColor(averageValue[i].textContent, border[i]);
+            calculateBorderColor(averageValue[i].textContent, border[i], false);
         }
 
         function redirectToEdit(id) {

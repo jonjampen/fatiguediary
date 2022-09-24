@@ -15,10 +15,20 @@ function calculateColor(value, text) {
 }
 
 
-function calculateBorderColor(value, border) {
-        color = colors[value];
+function calculateBorderColor(value, border, background = true) {
+    if (background) {
         transparency = transparencies[value];
-        
-        border.style.borderColor = color;
         border.style.backgroundColor = transparency;
+        
+    } else {
+        value = Math.floor(value/3*2);
+    }
+
+    if (value == 0) {
+        return;
+    }
+
+    color = colors[value];
+    
+    border.style.borderColor = color;
 }
