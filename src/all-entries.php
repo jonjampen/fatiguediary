@@ -11,16 +11,9 @@
                 $date = date_sub(new DateTime(), date_interval_create_from_date_string($day_counter . ' day')); // subtract i days from date
                 $entries = getEnergyLevelsByDate($date->format("Y-m-d"));
 
-                // calculate daily energy average
-                $sum = 0;
-                $counter = 0;
-                $average = null;
-                foreach ($entries as $entry) {
-                    $sum += $entry['energylevel'];
-                    $counter++;
-                }
-                if ($counter != 0) {
-                    $average = round(($sum/$counter) * 2) / 2; //round to 0.5
+                $average = calculateDailyAvg($entries);
+                if ($average) {
+                    $average = round($average, 1);
                 }
             ?>
 

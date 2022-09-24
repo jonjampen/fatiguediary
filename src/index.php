@@ -102,6 +102,7 @@ else {
     if ($page == "entries") {
         include("app/controllers/get-energy.php");
         include("app/controllers/display-activities.php");
+        include("app/controllers/daily-avg.php");
         include("all-entries.php");
     }
     if ($page == "settings") {
