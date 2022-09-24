@@ -12,7 +12,7 @@ function calculateActivities() {
     }
     
     // get all entries from user
-    $stmt = $conn->prepare("SELECT id, energylevel FROM energy WHERE user_id = ?");
+    $stmt = $conn->prepare("SELECT id, energylevel FROM energy WHERE user_id = ? AND datetime >= DATE(NOW() - INTERVAL 30 DAY)");
     $stmt->bind_param("i", $_SESSION['id']);
     $stmt->execute();
     $stmt->bind_result($energy_id, $energylevel);
