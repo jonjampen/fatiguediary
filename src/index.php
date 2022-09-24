@@ -159,7 +159,10 @@ function print_head($page_head, $public) {
         '<link rel="stylesheet" href="assets/fonts/materialicons.css">',
         '<link rel="stylesheet" href="assets/css/general.php">',
         '<link rel="icon" type="image/x-icon" href="assets/img/logo.svg">',
-        '<link rel="stylesheet" type="text/css" href="assets/css/toastify.min.css">'
+        '<link rel="stylesheet" type="text/css" href="assets/css/toastify.min.css">',
+
+        '<link rel="manifest" href="manifest.json">',
+        '<script src="app.js"></script>'
     );
     if (isset($_SERVER['SERVER_NAME']) && $_SERVER['SERVER_NAME'] == 'dev.fatiguediary.ch') {
         $head[] = '<meta name="robots" content="noindex,nofollow">';
