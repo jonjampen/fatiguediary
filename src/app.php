@@ -11,6 +11,7 @@
         <h1><?php echo $text['info-title']; ?></h1>
         <h4><?php echo $text['info-description']; ?></h4>
         <button class="btn-secondary" onclick="window.location.href='index.php?page=register'"><?php if(isset($_SESSION['id'])) {echo $text['to-the-app'];} else { echo $text['info-btn']; } ?></button>
+        <button class="btn-secondary" id="installApp">Install</button>
     </div>
     <img src="assets/img/screenshots/dashboard_top.png" alt="">
 </section>
@@ -55,6 +56,25 @@
 </section>
 <script>
 
+let deferredPrompt;
+
+window.addEventListener('beforeinstallprompt', (e) => {
+    deferredPrompt = e;
+});
+
+
+
+const installApp = document.getElementById('installApp');
+
+installApp.addEventListener('click', async () => {
+    if (deferredPrompt !== null) {
+        deferredPrompt.prompt();
+        const { outcome } = await deferredPrompt.userChoice;
+        if (outcome === 'accepted') {
+            deferredPrompt = null;
+        }
+    }
+});
   
 </script>
 </body>

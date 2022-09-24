@@ -4,3 +4,4 @@ if ('serviceWorker' in navigator) {
     .then((reg) => console.log('service worker registered', reg))
     .catch((error) => console.log('error', error));
 }
+
