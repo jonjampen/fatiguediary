@@ -38,13 +38,13 @@
 1. Onboarding und Tutorial ✔
 1. Auswertung schlechte / gute Aktivitäten (✔ wird noch verbessert)
 - Mehrsprachig (Deutsch und Englisch) ✔
-- Informationsseiten
+- Informationsseiten ✔
 - (Symptome erfassen)
 
 
 ## Weiteres
 - Domain bei Google Search registrieren ✔
-- Auf Social Media teilen (Fatiuge-Foren)
+- Auf Social Media teilen (Fatiuge-Foren) ✔
 
 ## Projektbeschrieb
 
