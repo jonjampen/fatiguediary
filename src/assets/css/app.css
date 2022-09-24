@@ -425,12 +425,22 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     justify-content: space-between;
     column-gap: 8px;
 }
-
-.rated-activities {
+.title-row {
     display: flex;
-    flex: 1 1 0px;
+    justify-content: space-between;
+    align-items: top;
+}
+.title-row span {
+    cursor: pointer;
+}
+.container .rated-activities {
+    display: flex;
+    flex-wrap: wrap;
     column-gap: 8px;
     justify-content: space-between;
+}
+.rated-activity.hidden {
+    display: none;
 }
 .rated-activity {
     border: 2px solid var(--primary);
@@ -441,6 +451,7 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     padding-right: 4px;
     padding-top: 16px;
     padding-bottom: 16px;
+    margin-bottom: 8px;
     display: flex;
     align-items: center;
     justify-content: center;
