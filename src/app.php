@@ -56,11 +56,6 @@
 </section>
 <script>
 
-let deferredPrompt;
-
-window.addEventListener('beforeinstallprompt', (e) => {
-    deferredPrompt = e;
-});
 
 const installApp = document.getElementById('installApp');
 

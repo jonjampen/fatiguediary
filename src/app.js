@@ -5,3 +5,8 @@ if ('serviceWorker' in navigator) {
     .catch((error) => console.log('error', error));
 }
 
+let deferredPrompt;
+
+window.addEventListener('beforeinstallprompt', (e) => {
+    deferredPrompt = e;
+});
