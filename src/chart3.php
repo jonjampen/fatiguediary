@@ -5,7 +5,7 @@ $startDate = date("Y-m-d", $startDatetime);
 $endDatetime = strtotime(date("Y-12-31", strtotime($_GET['date'])));
 $endDate = date("Y-m-d", $endDatetime);
 
-$dayAvgEnergylevels = calculateDailyAvg($startDatetime, $endDatetime);
+$dayAvgEnergylevels = calculateDailyAvg1($startDatetime, $endDatetime);
 $monthAvgEnergylevels = calculateMonthAvg($dayAvgEnergylevels, $startDatetime);
 
 

@@ -14,7 +14,19 @@ function calculateDailyAvg($entries) {
     $lastTime = strtotime(end($entries)['datetime']);
     $firstTime = strtotime($entries[0]['datetime']);
     $totalTime = ($lastTime - $firstTime) / 60;
-    
+
+    // only entries at same time -> normal avg
+    if ($totalTime == 0) {
+        $sum = 0;
+        $counter = 0;
+
+        foreach ($entries as $key=>$entry) {
+            $sum += $entry['energylevel'];
+            $counter++;
+        }            
+        return ($sum / $counter) / 2;
+    }
+
     // avg of two entries
     foreach ($entries as $key=>$entry) {
         // skip last
