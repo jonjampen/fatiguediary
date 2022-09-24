@@ -2,7 +2,6 @@
 
 function calculateActivities() {
     global $conn;
-
     // get all activities
     $stmt = $conn->prepare("SELECT name FROM activities WHERE user_id = ?");
     $stmt->bind_param("i", $_SESSION['id']);
@@ -18,6 +17,7 @@ function calculateActivities() {
     $stmt->execute();
     $stmt->bind_result($energy_id, $energylevel);
     
+    $entries = array();
     while ($stmt->fetch()) {
         $entries[] = array("id" => $energy_id, "energylevel" => $energylevel);
     }
@@ -43,45 +43,48 @@ function calculateActivities() {
         else {
             $difference = 0;
         }
-        
         foreach ($activity_entry as $activity) {
             $activities[$activity][] = $difference;
         }
     }    
     
-    foreach ($activities as $activity=>$differences) {
-        $sum = 0;
-        $counter = 0;
-
-        foreach ($differences as $difference) {
-            $sum += $difference;
-            $counter++;
-        }
-
-        if (!$counter == 0) {
-            $avg = $sum / $counter;
-        }
-
-        $activities[$activity]['avg'] = $avg;
-    }
+    if (!empty($activities)) {
+        foreach ($activities as $activity=>$differences) {
+            $sum = 0;
+            $counter = 0;
+            $avg = 0;
     
-    $goodBad = array("good" => array(), "bad" => array());
-    foreach ($activities as $activity=>$array) {
-        if ($array['avg'] > 0) {
-            $goodBad['good'][$activity] = $array['avg'];
+            foreach ($differences as $difference) {
+                $sum += $difference;
+                $counter++;
+            }
+    
+            if (!$counter == 0) {
+                $avg = $sum / $counter;
+            }
+    
+            $activities[$activity]['avg'] = $avg;
         }
-        else if ($array['avg'] < 0) {
-            $goodBad['bad'][$activity] = $array['avg'];
+        
+        $goodBad = array("good" => array(), "bad" => array());
+        foreach ($activities as $activity=>$array) {
+            if ($array['avg'] > 0) {
+                $goodBad['good'][$activity] = $array['avg'];
+            }
+            else if ($array['avg'] < 0) {
+                $goodBad['bad'][$activity] = $array['avg'];
+            }
+    
         }
-
+        
+        // sort
+        asort($goodBad['good']);
+        asort($goodBad['bad']);
+        
+    } else {
+        $goodBad = array("good" => array(), "bad" => array());
     }
-
-    // sort
-    arsort($goodBad['good']);
-    asort($goodBad['bad']);
 
     return($goodBad);
     // @return array("good" => array(#activity_names), "bad" => array(#activity_names));
-    
-
 }

@@ -1,52 +1,60 @@
 <?php
     print_head(array('<title>Fatigue Diary</title>'), true);
+    if (isset($_GET['l'])) {
+        $_SESSION['settings']['language'] = $_GET['l'];
+    }
+    print_public_body();
+    updateLanguage();
 ?>
-<body class="public">
-    <?php include("app/includes/publicNavbar.php"); ?>
-    <section class="one left-right">
-        <div class="text">
-            <h1 id="title"></h1>
-            <p id="title-desc"></p>
-            <button class="btn-secondary" id="use-for-free" onclick="location.href='index.php?page=register'"></button>
-        </div>
-        <img src="assets/img/screenshots/add.png" alt="">
-    </section>
-    
-    
-    <section class="two">
-        <h2>Features</h2>
-        <div class="features">
-            <div class="container">
-                <div class="icon"><span class="material-icons">menu_book</span></div>
-                <h3 id="feature1-title"></h3>
-                <p class="description" id="feature1-desc"></p>
-            </div>
-            <div class="container">
-                <div class="icon"><span class="material-icons">query_stats</span></div>
-                <h3 id="feature2-title"></h3>
-                <p class="description" id="feature2-desc"></p>
-            </div>
-            <div class="container">
-                <div class="icon"><span class="material-icons">lightbulb</span></div>
-                <h3 id="feature3-title"></h3>
-                <p class="description" id="feature3-desc"></p>
-            </div>
-        </div>
-    </section>
+<section class="top">
+    <div class="left">
+        <h1><?php echo $text['info-title']; ?></h1>
+        <h4><?php echo $text['info-description']; ?></h4>
+        <button class="btn-secondary" onclick="window.location.href='index.php?page=register'"><?php if(isset($_SESSION['id'])) {echo $text['to-the-app'];} else { echo $text['info-btn']; } ?></button>
+    </div>
+    <img src="assets/img/screenshots/dashboard_top.png" alt="">
+</section>
 
-    <section class="five left-right">
-        <div class="text">
-            <h2 style="color:white;" id="section5-title"></h2>
-            <p style="color: white;" id="section5-desc"></p>
+<section class="features">
+    <h2><?php echo $text['features']; ?></h2>
+    <div class="containers">
+        <div class="feature">
+            <h3 class="title"><?php echo $text['track-activities']; ?></h3>
+            <div class="icon"><span class="material-icons">directions_walk</span></div>
+            <p><?php echo $text['track-desc']; ?></p>
+        </div>
+        <div class="feature">
+            <h3 class="title"><?php echo $text['pacing']; ?></h3>
+            <div class="icon"><span class="material-icons">bed</span></div>
+            <p><?php echo $text['pacing-desc']; ?></p>
+        </div>
+        <div class="feature">
+            <h3 class="title"><?php echo $text['analysis']; ?></h3>
+            <div class="icon"><span class="material-icons">insights</span></div>
+            <p><?php echo $text['analysis-desc']; ?></p>
+        </div>
+    </div>
+</section>
+<!-- 
+<section class="screenshots">
+    <h2><?php echo $text['screenshots']; ?></h2>
+    
+</section> -->
+
+<section class="about">
+    <div class="content">
+        <div class="left">
+            <h2 class="side-title"><?php echo $text['about-title']; ?></h2>
+            <h4><?php echo $text['about-desc']; ?></h4>
         </div>
         <img src="assets/img/avatar.svg" alt="">
-    </section>
+    </div>
+    <p>&copy;2022 <?php echo $text['copy']; ?></p>
+</section>
+<section class="footer">
+</section>
+<script>
 
-    <section class="footer">
-        <p><a href="https://www.fatiguediary.ch/">www.fatiuediary.ch</a> | Developed by <a href="index.php?page=about">Jon Jampen</a></p>
-    </section>
+  
+</script>
 </body>
-<script src="assets/languages/de.js"></script>
-<script src="assets/languages/en.js"></script>
-<script src="assets/js/language-manager.js"></script>
-</html>

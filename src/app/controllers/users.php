@@ -21,7 +21,7 @@ if (isset($_POST['register'])) {
         $stmt->bind_param("sss", $name, $email, $hashed_password); //"sss" for data type
         $stmt->execute();
         $stmt->close();
-        $_SESSION['success'][] = "Du hast dich erfolgreich registriert.";
+        $_SESSION['success'][] = $text['register-success'];
         login($email, null, $remember);
     }
     else {
@@ -48,7 +48,7 @@ if (isset($_POST['login'])) {
     $errors = validateLoginUser($email, $hashed_password);
     
     if (empty($errors)) {
-        $_SESSION['success'][] = "Du hast dich erfolgreich angemeldet.";
+        $_SESSION['success'][] = $text['login-success'];
         login($email, null, $remember);
     }
     else {
@@ -80,8 +80,8 @@ if (isset($_POST['reset-password-send'])) {
         $link = "https://www.fatiguediary.ch/index.php?page=reset-password&token=".$token;
     
         $to = $email;
-        $subject = "Passwort Zurücksetzen - Fatigue Diary";
-        $message = "Hallo $user_name" . "\n\n" . "Klicke auf den Link, um  dein Passwort zurückzusetzen: " . $link;
+        $subject = $text['subject-reset-pw'];
+        $message = $text['hello'] . $user_name . "\n\n" . $text['content-reset-pw'] . $link;
     
         $headers = "MIME-Version: 1.0" . "\n";
         $headers .= "Content-type:text/plain;charset=UTF-8" . "\n";
@@ -92,7 +92,7 @@ if (isset($_POST['reset-password-send'])) {
     }
 
     
-    $_SESSION['success'][] = "E-Mail wurde gesendet";
+    $_SESSION['success'][] = $text['email-success'];
     header("location: index.php?page=reset-password");
 }
 
@@ -225,8 +225,8 @@ function loadSettings () {
     $start_onboarding = false;
     if (!$settings) {
         global $conn;
-        $stmt = $conn->prepare("INSERT INTO settings (user_id) VALUES(?)");
-        $stmt->bind_param("i", $_SESSION['id']);
+        $stmt = $conn->prepare("INSERT INTO settings (user_id, language) VALUES(?, ?)");
+        $stmt->bind_param("is", $_SESSION['id'], $_SESSION['settings']['language']);
         $stmt->execute();
         $stmt->close();
 
@@ -242,14 +242,14 @@ function loadSettings () {
 }
 function loadSettingsDB () {
     global $conn;
-    $stmt = $conn->prepare("SELECT theme, wake_up_time, bed_time, newsletter FROM settings WHERE user_id=?");
+    $stmt = $conn->prepare("SELECT language, theme, wake_up_time, bed_time, newsletter FROM settings WHERE user_id=?");
     $stmt->bind_param("i", $_SESSION['id']);
     $stmt->execute();
-    $stmt->bind_result($theme, $wake_up_time, $bed_time, $newsletter);
+    $stmt->bind_result($lang, $theme, $wake_up_time, $bed_time, $newsletter);
     $settings = null;
     
     while ($stmt->fetch()) {
-        $settings = array("theme" => $theme, "wake_up_time" => $wake_up_time, "bed_time" => $bed_time, "newsletter" => $newsletter);
+        $settings = array("language" => $lang, "theme" => $theme, "wake_up_time" => $wake_up_time, "bed_time" => $bed_time, "newsletter" => $newsletter);
     }
     $stmt->close();
     return $settings;
