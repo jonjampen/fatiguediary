@@ -1,4 +1,5 @@
-colors = ["#F74649", "#E88E82", "#F3722C", "#F8A949", "#F9C446", "#A4BE6D", "#69A455"];
+colors = ["#F74649", "#F87048", "#F89A47", "#F9C446", "#C9B94B", "#99AF50", "#69A455"];
+transparencies = ["rgba(247, 70, 73, 0.1)", "rgba(248, 112, 72, 0.1)", "rgba(248, 154, 71, 0.1)", "rgba(249, 196, 70, 0.1)", "rgba(201, 185, 75, 0.1)", "rgba(153, 175, 80, 0.1)", "rgba(105, 164, 85, 0.1)"];
 emojis = ["&#128564", "&#128560", "&#128552", "&#128528", "&#128512", "&#128522", "&#128514"];
 
 //get value icon
@@ -16,5 +17,8 @@ function calculateColor(value, text) {
 
 function calculateBorderColor(value, border) {
         color = colors[value];
+        transparency = transparencies[value];
+        
         border.style.borderColor = color;
+        border.style.backgroundColor = transparency;
 }

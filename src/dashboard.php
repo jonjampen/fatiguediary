@@ -60,7 +60,7 @@ $todayDate = date("Y-m-d");
             <?php
                 $i = 0;
                 foreach ($badActivities as $name=>$avg) {
-                    if ($i<=4) {
+                    if ($i<3) {
                         echo('<p class="rated-activity border_color">' . $name . '</p>');
                     }
                     $i++;
@@ -98,21 +98,20 @@ $todayDate = date("Y-m-d");
                 }
                 $i++;
             }
-
-
+            
+            
             $i = 0;
             $worst = array_values($badActivities)[0];
             $best = end($badActivities);
             $segment = (abs($worst) - abs($best)) / 3;
 
             foreach ($badActivities as $name=>$avg) {
-                if ($i<=4) {
+                if ($i<3) {
                     for ($factor = 1; $factor <= 3; $factor++) {
                         if (abs($avg) >= abs($worst + ($segment * $factor))) {
-                            $value = $factor;
+                            $value = $factor - 1;
                             break;
                         }
-                        log_a(abs($avg) . " " . abs($worst + ($segment * $factor)) . "=>" . $factor);
                     }
                     echo("calculateBorderColor(" . $value . ", border[" . $j . "]); \n");
                     $j++;
