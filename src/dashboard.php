@@ -233,11 +233,6 @@ $todayDate = date("Y-m-d");
         expire.setDate(date.getDate() + 30);
         document.cookie = "installPopup=1; expires=" + expire.toUTCString();;
     }
-
-
-    // const installApp = document.getElementById('installApp');
-    // installApp.addEventListener('click', async () => {
-    // });
     </script>
 
 </body>
