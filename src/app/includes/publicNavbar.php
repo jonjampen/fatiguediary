@@ -12,10 +12,10 @@
             <li><a href="index.php?page=app" id="nav-app">Fatigue Diary</a></li>
             <li><a href="index.php?page=contact" id="nav-contact"><?php echo $text['contact']; ?></a></li>
             <?php if(isset($_SESSION['id'])): ?>
-                <button class="btn-primary" id="nav-signup"onclick="location.href='index.php?page=register'"><?php echo $text['to-the-app']; ?></button>
+                <button class="btn-primary nav" id="nav-signup"onclick="location.href='index.php?page=register'"><?php echo $text['to-the-app']; ?></button>
             <?php else: ?>
                 <li><a href="index.php?page=login" id="nav-login"><?php echo $text['login']; ?></a></li>
-                <button class="btn-primary" id="nav-signup"onclick="location.href='index.php?page=register'"><?php echo $text['signup']; ?></button>
+                <button class="btn-primary nav" id="nav-signup"onclick="location.href='index.php?page=register'"><?php echo $text['signup']; ?></button>
             <?php endif; ?>
         </div>
     </ul>
