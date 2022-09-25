@@ -560,3 +560,21 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 .settings-screen .setting .time {
     display: flex;
 }
+
+
+.how-screen {
+    padding: 16px;
+    text-align: justify;
+}
+.how-screen .part {
+    margin-bottom: 32px;
+}
+.how-screen .img-container {
+    display: flex;
+    justify-content: space-between;
+    gap: 4px;
+    padding-right: 8px;
+}
+.how-screen img {
+    max-width: 50%;
+}

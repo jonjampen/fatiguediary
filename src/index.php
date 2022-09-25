@@ -7,6 +7,8 @@ $pages = [
     //information
     "app",
     "contact",
+    "how",
+    "install",
     // controllers
     "mail", "ajax"
 ];
@@ -77,6 +79,12 @@ if(!isset($_SESSION['id'])) {
     if ($page == "dashboard" || $page == "profile" || $page == "entries" || $page == "add-new" || $page == "tricks" || $page == "logout") {
         header("location: index.php?page=login");
     }
+    if ($page == "how") {
+        include("how-it-works.php");
+    }
+    if ($page == "install") {
+        include("install.php");
+    }
 }
 //only if logged in
 else {
@@ -108,6 +116,12 @@ else {
     if ($page == "settings") {
         include("app/controllers/set-settings.php");
         include("settings.php");
+    }
+    if ($page == "how") {
+        include("how-it-works.php");
+    }
+    if ($page == "install") {
+        include("install.php");
     }
     if ($page == "ajax") {
         $chart = $_GET['chart'];

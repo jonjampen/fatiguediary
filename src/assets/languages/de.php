@@ -99,6 +99,7 @@ $text =
     'content-reset-pw' => 'Klicke auf den Link, um  dein Passwort zurückzusetzen: ',
 
     'whats-new' => 'Was ist neu?',
+    'how-it-works' => 'So funktioniert\'s',
     'contact' => 'Kontakt',
     'logout' => 'Abmelden',
     'start-tutorial' => 'Tutorial starten',
@@ -137,4 +138,15 @@ $text =
     'about-title' => 'Entwickelt von einem Fatigue Patienten',
     'about-desc' => 'Hallo, ich bin Jon Jampen. Ich bin an chronischer Fatigue erkrankt und möchte mit dieser Web-App anderen PatientInnen zeigen, was mir hilft. <br> Diese App ist meine Maturaarbeit.',
     'copy' => 'Alle Rechte vorbehalten. Gestaltet und entwickelt von Jon Jampen.',
+
+
+    'how-fd-text' => 'Fatigue Diary funktioniert im Browser oder kann <a href="index.php?page=install">hier</a> installiert werden. Eine ausführliche Anleitung, wie Fatigue Diary funktioniert, finden Sie <a href="intro/' . $_SESSION['settings']['language'] . '/Dashboard.php">hier</a>. <br> Fatigue Diary dient als Tagebuch für Fatigue-PatientInnen und hilft ihnen dabei, die Pacing-Methode zu erlernen. <br> Tragen Sie nach jeder Aktivität Ihr Energie-Level zusammen mit den gemachten Aktivitäten ein. Die App erstellt dann Diagramme, die den Tagesverlauf darstellen, oder es ermöglichen, mehrere Tage/Monate miteinander zu vergleichen. <br>Die App wurde von Jon Jampen, einem Fatigue-Patienten, im Rahmen eines schulischen Projektes entwickelt.',
+    'how-avg-title' => 'Tagesdurchschnitt',
+    'how-avg-text' => 'Der Tagesdurchschnitt ist nicht das arithmetische Mittel aus allen Einträgen, sondern wird in Abhängigkeit der Zeit berechnet. Zwei Einträge haben also denselben Einfluss auf den Durchschnitt, wie ganz viele Einträge, sofern die Zeitspanne gleich ist. <br>Im folgenden Beispiel starten beide Tage mit einem Energie-Level von 10 und enden mit 5. Der Unterschied ist, dass im linken Diagramm das Energie-Level viel früher auf 5 geht, als im rechten Diagramm. Der arithmetische Durchschnitt wäre bei beiden gleich (6.7), aber es ist klar, dass der rechte Tag besser war, als der linke. Deshalb wird die Zeit in die Berechnung miteinbezogen.',
+    'how-activities-title' => 'Aktivitäten auswerten',
+    'how-activities-text' => 'Die energiegebenden und -nehmenden Aktivitäten werden aus den Daten der letzten 30 Tagen berechnet. Es wird nur der dirkete Einfluss der Aktivität auf das Energielevel beachtet. <br> Aktivitäten, die im Durchschnitt eine positive Auswirkung haben, werden in absteigender Reihenfolge bei den energiegebenden Aktivitäten aufgelistet. Dabei wird jeder Aktivität eine von drei Farben zugeteilt. Die beste Aktivität hat immer die grüne Farbe, die schlechteste immer die gelbe. Die restlichen Aktivitäten werden anhand ihrer Auswirkung auf die drei Farben aufgeteilt. <br>Dasselbe wird auch mit den energieraubenden Aktivitäten gemacht.',
+    
+
+    'install-fd' => 'Fatigue Diary Installieren',
+    'install-text' => 'Bald wird es möglich, Fatigue Diary zu installieren.',
 ];
