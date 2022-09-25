@@ -17,9 +17,9 @@ async function installPWA(modal = false) {
         const { outcome } = await deferredPrompt.userChoice;
         if (outcome === 'accepted') {
             deferredPrompt = null;
+            if (modal) {
+                closeModal();
+            }
         }
-    }
-    if (modal) {
-        closeModal();
     }
 }
