@@ -137,4 +137,10 @@ $text =
     'about-title' => 'Developed by a fatigue patient',
     'about-desc' => 'Hi, I\'m Jon Jampen. I am suffering from chronic fatigue myself and I have built this web app to show others what is helping me. This app is my matura project.',
     'copy' => 'All rights reserved. Designed and developed by Jon Jampen.',
+
+
+    'install' => 'Install',
+    'not-now' => 'Not Now',
+    'news-pwa-title' => 'Install Fatigue Diary',
+    'news-pwa-text' => 'You can now install Fatigue Diary <br> to your device.',
 ];

@@ -81,13 +81,33 @@ $todayDate = date("Y-m-d");
         </div>
     </div>
 
+    <button id="modalOpen">Open modal</button>
+
+    <div class="modal-box" id="modal">
+        <div class="container news">
+            <img src="assets/img/news/pwa.svg" alt="">
+            <h3><?php echo $text['news-pwa-title']; ?></h3>
+            <p><?php echo $text['news-pwa-text']; ?></p>
 
 
+            <div class="modal-buttons">
+                <button class="btn-primary" name="add-activity" id="add_activity_btn" onclick="installPWA()"><?php echo $text['install']; ?></button>
+                <button class="btn-secondary outline" type="reset" id="modalClose"><?php echo $text['not-now']; ?></button>
+            </div>
+        </div>
+    </div>
+
+    <script src="assets/js/modal.js"></script>
+    <script src="assets/js/app.js"></script>
     <script src="assets/chart/moment.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
     <script src="assets/js/visualizeValue.js"></script>
 
     <script>
+        var modalOpen = document.getElementById("modalOpen");
+        modalOpen.addEventListener('click', openModal, false);
+
+
         var border = document.getElementsByClassName("border_color");
         <?php
             $activityBoxCounter = 0;
@@ -209,6 +229,12 @@ $todayDate = date("Y-m-d");
             element.innerHTML = "expand_more";
             console.log("collapse");
         }
+    }
+
+
+    if (!(window.matchMedia('(display-mode: standalone)').matches)) {
+        //show popup to ask for download
+        openModal();
     }
     </script>
 
