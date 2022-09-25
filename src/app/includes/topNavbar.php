@@ -27,7 +27,7 @@
         <?php endif; ?>
     </ul>
 </div>
-
+<script src="app.js"></script>
 <script>
 function openNav() {
     document.getElementById("sidenav").style.display = "block";
