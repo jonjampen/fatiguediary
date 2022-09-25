@@ -89,7 +89,7 @@ $todayDate = date("Y-m-d");
 
 
             <div class="modal-buttons">
-                <button class="btn-primary" name="add-activity" id="installApp" onclick="installPWA()"><?php echo $text['install']; ?></button>
+                <button class="btn-primary" name="add-activity" id="installApp" onclick="installPWA(); closeModal()"><?php echo $text['install']; ?></button>
                 <button class="btn-secondary outline" type="reset" id="modalClose"><?php echo $text['not-now']; ?></button>
             </div>
         </div>
