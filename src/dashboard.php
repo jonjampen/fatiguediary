@@ -234,15 +234,7 @@ $todayDate = date("Y-m-d");
         document.cookie = "installPopup=1; expires=" + expire.toUTCString();;
     }
 
-    async function installPWA() {
-        if (deferredPrompt !== null) {
-            deferredPrompt.prompt();
-            const { outcome } = await deferredPrompt.userChoice;
-            if (outcome === 'accepted') {
-                deferredPrompt = null;
-            }
-        }
-    }
+
     // const installApp = document.getElementById('installApp');
     // installApp.addEventListener('click', async () => {
     // });
