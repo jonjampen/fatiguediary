@@ -139,6 +139,10 @@ $text =
     'about-desc' => 'Hallo, ich bin Jon Jampen. Ich bin an chronischer Fatigue erkrankt und möchte mit dieser Web-App anderen PatientInnen zeigen, was mir hilft. <br> Diese App ist meine Maturaarbeit.',
     'copy' => 'Alle Rechte vorbehalten. Gestaltet und entwickelt von Jon Jampen.',
 
+    'install' => 'Installieren',
+    'not-now' => 'Nicht Jetzt',
+    'news-pwa-title' => 'Fatigue Diary Installieren',
+    'news-pwa-text' => 'Du kannst jetzt Fatigue Diary auf <br> deinem Gerät installieren.',
 
     'how-fd-text' => 'Fatigue Diary funktioniert im Browser oder kann <a href="index.php?page=install">hier</a> installiert werden. Eine ausführliche Anleitung, wie Fatigue Diary funktioniert, finden Sie <a href="intro/' . $_SESSION['settings']['language'] . '/Dashboard.php">hier</a>. <br> Fatigue Diary dient als Tagebuch für Fatigue-PatientInnen und hilft ihnen dabei, die Pacing-Methode zu erlernen. <br> Tragen Sie nach jeder Aktivität Ihr Energie-Level zusammen mit den gemachten Aktivitäten ein. Die App erstellt dann Diagramme, die den Tagesverlauf darstellen, oder es ermöglichen, mehrere Tage/Monate miteinander zu vergleichen. <br>Die App wurde von Jon Jampen, einem Fatigue-Patienten, im Rahmen eines schulischen Projektes entwickelt.',
     'how-avg-title' => 'Tagesdurchschnitt',

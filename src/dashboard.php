@@ -91,7 +91,7 @@ $todayDate = date("Y-m-d");
 
 
             <div class="modal-buttons">
-                <button class="btn-primary" name="add-activity" id="add_activity_btn" onclick="installPWA()"><?php echo $text['install']; ?></button>
+                <button class="btn-primary" name="add-activity" id="installApp" onclick="installPWA()"><?php echo $text['install']; ?></button>
                 <button class="btn-secondary outline" type="reset" id="modalClose"><?php echo $text['not-now']; ?></button>
             </div>
         </div>
@@ -236,6 +236,18 @@ $todayDate = date("Y-m-d");
         //show popup to ask for download
         openModal();
     }
+
+
+    const installApp = document.getElementById('installApp');
+    installApp.addEventListener('click', async () => {
+        if (deferredPrompt !== null) {
+            deferredPrompt.prompt();
+            const { outcome } = await deferredPrompt.userChoice;
+            if (outcome === 'accepted') {
+                deferredPrompt = null;
+            }
+        }
+    });
     </script>
 
 </body>
