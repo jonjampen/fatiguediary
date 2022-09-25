@@ -81,8 +81,6 @@ $todayDate = date("Y-m-d");
         </div>
     </div>
 
-    <button id="modalOpen">Open modal</button>
-
     <div class="modal-box" id="modal">
         <div class="container news">
             <img src="assets/img/news/pwa.svg" alt="">
@@ -104,10 +102,6 @@ $todayDate = date("Y-m-d");
     <script src="assets/js/visualizeValue.js"></script>
 
     <script>
-        var modalOpen = document.getElementById("modalOpen");
-        modalOpen.addEventListener('click', openModal, false);
-
-
         var border = document.getElementsByClassName("border_color");
         <?php
             $activityBoxCounter = 0;
@@ -232,9 +226,12 @@ $todayDate = date("Y-m-d");
     }
 
 
-    if (!(window.matchMedia('(display-mode: standalone)').matches)) {
+    if (!(window.matchMedia('(display-mode: standalone)').matches) && document.cookie.indexOf('installPopup=') == -1) {
         //show popup to ask for download
         openModal();
+        let expire = new Date();
+        expire.setDate(date.getDate() + 30);
+        document.cookie = "installPopup=1; expires=" + expire.toUTCString();;
     }
 
 
