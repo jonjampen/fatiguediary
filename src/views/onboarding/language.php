@@ -11,7 +11,7 @@ updateLanguage();
     <div class="onboarding-screen">
         <h2><?php echo $text['welcome']; ?></h2>
         <h3><?php echo $text['thank-you-register']; ?></h3>
-        <img src="assets/img/onboarding-language.svg" alt="">
+        <img src="assets/img/illustrations/onboarding-language.svg" alt="">
         <p><?php echo $text['language-question']; ?></p>
         <div class="btn-option">
             <?php if ($_SESSION['settings']['language'] == 'en'): ?>

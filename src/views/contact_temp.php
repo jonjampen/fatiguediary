@@ -12,7 +12,7 @@ $todayDate = date("Y-m-d");
     <div class="container">
         <h2 class="container-title">Kontakt</h2>
         <div class="contact-content">
-            <img src="assets/img/contact.svg" alt="">
+            <img src="assets/img/illustrations/contact.svg" alt="">
             <div class="info">
                 <div class="icon-text">
                     <span class="material-icons">person</span><p>Jon Jampen</p>

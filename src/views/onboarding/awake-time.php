@@ -6,7 +6,7 @@ includeToastify();
 
     <div class="onboarding-screen">
         <h2><?php echo $text['awake-time']; ?></h2>
-        <img src="assets/img/onboarding-awake.svg" alt="">
+        <img src="assets/img/illustrations/onboarding-awake.svg" alt="">
         <p><?php echo $text['awake-question']; ?></p>
         <div class="btn-option">
             <input type="time" name="" id="wake_up" value="06:00">

@@ -6,7 +6,7 @@ includeToastify();
 
     <div class="onboarding-screen">
         <h2><?php echo $text['news']; ?></h2>
-        <img src="assets/img/onboarding-mail.svg" alt="">
+        <img src="assets/img/illustrations/onboarding-mail.svg" alt="">
         <p><?php echo $text['news-question']; ?></p>
         <div class="btn-option">
             <input type="checkbox" name="newsletter" id="newsletter_check" checked> <label for="newsletter"> <?php echo $text['receive-mail']; ?></label>

@@ -9,7 +9,7 @@ includeToastify();
 
     <div class="onboarding-screen">
         <h2><?php echo $text['mode']; ?></h2>
-        <img src="assets/img/onboarding-theme.svg" alt="">
+        <img src="assets/img/illustrations/onboarding-theme.svg" alt="">
         <p><?php echo $text['light-or-dark']; ?></p>
         <div class="btn-option">
             <button class="btn-primary <?php if($_SESSION['settings']['theme'] == 1){echo("outline");} ?>" id="btn1"><?php echo $text['dark']; ?></button>

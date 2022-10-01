@@ -48,7 +48,7 @@
             <h2 class="side-title"><?php echo $text['about-title']; ?></h2>
             <h4><?php echo $text['about-desc']; ?></h4>
         </div>
-        <img src="assets/img/avatar.svg" alt="">
+        <img src="assets/img/illustrations/avatar.svg" alt="">
     </div>
     <p>&copy;2022 <?php echo $text['copy']; ?></p>
 </section>

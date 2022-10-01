@@ -22,7 +22,7 @@
                 </form>
             </div>
             <div class="container info">
-                <img src="assets/img/contact.svg" alt="">
+                <img src="assets/img/illustrations/contact.svg" alt="">
                 <div class="links">
                     <div class="contact-method"><span class="material-icons">email</span> <a href="mailto:info@fatiguediary.ch">info@fatiguediary.ch</a></div>
                     <div class="contact-method"><span class="material-icons">reviews</span> <a href="https://www.fatiguediary.ch/feedback/">Feedback Formular</a></div>
