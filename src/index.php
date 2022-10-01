@@ -202,24 +202,24 @@ function print_body($onload = "") {
         $onload = ' onload="' . $onload . '"';
     }
     echo('<body'. $onload . '>' . "\n");
-    include("app/includes/topNavbar.php");
-    include("app/includes/bottomNavbar.php");
+    include("views/includes/topNavbar.php");
+    include("views/includes/bottomNavbar.php");
 }
 function print_public_body() {
     global $text;
     echo('<body>' . "\n");
     updateLanguage();
-    include("app/includes/publicNavbar.php");
+    include("views/includes/publicNavbar.php");
 }
 function print_body_top_nav_only() {
     global $text;
     echo('<body>' . "\n");
-    include("app/includes/topNavbar.php");
+    include("views/includes/topNavbar.php");
 }
 
 function includeToastify() {
     echo('<script type="text/javascript" src="assets/js/toastify.js"></script>');
-    include("app/includes/messages.php");
+    include("views/includes/messages.php");
 }
 
 function updateLanguage() {

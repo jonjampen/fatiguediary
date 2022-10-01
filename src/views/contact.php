@@ -2,7 +2,7 @@
     print_head(array('<title>Kontakt | Fatigue Diary</title>'), true);
 ?>
 <body class="contact">
-<?php include("app/includes/publicNavbar.php"); ?>
+<?php include("views/includes/publicNavbar.php"); ?>
     <div class="block">
         <section>
             <div class="container form">
