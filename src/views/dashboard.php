@@ -96,6 +96,7 @@ $todayDate = date("Y-m-d");
     </div>
 
     <script src="assets/js/modal.js"></script>
+    <script src="assets/js/app.js"></script>
     <script src="assets/chart/moment.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
     <script src="assets/js/visualizeValue.js"></script>
