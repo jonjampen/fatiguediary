@@ -142,7 +142,7 @@ $text =
     'install' => 'Installieren',
     'not-now' => 'Nicht Jetzt',
     'news-pwa-title' => 'Fatigue Diary Installieren',
-    'news-pwa-text' => 'Du kannst jetzt Fatigue Diary auf <br> deinem Gerät installieren.',
+    'news-pwa-text' => 'Du kannst jetzt Fatigue Diary auf <br> deinem Gerät installieren.<br> (Brauchst du hilfe? Kontaktiere mich <a href="index.php?page=contact">hier</a>).',
 
     'how-fd-text' => 'Fatigue Diary funktioniert im Browser oder kann <a href="index.php?page=install">hier</a> installiert werden. Eine ausführliche Anleitung, wie Fatigue Diary funktioniert, finden Sie <a href="intro/' . $_SESSION['settings']['language'] . '/Dashboard.php">hier</a>. <br> Fatigue Diary dient als Tagebuch für Fatigue-PatientInnen und hilft ihnen dabei, die Pacing-Methode zu erlernen. <br> Tragen Sie nach jeder Aktivität Ihr Energie-Level zusammen mit den gemachten Aktivitäten ein. Die App erstellt dann Diagramme, die den Tagesverlauf darstellen, oder es ermöglichen, mehrere Tage/Monate miteinander zu vergleichen. <br>Die App wurde von Jon Jampen, einem Fatigue-Patienten, im Rahmen eines schulischen Projektes entwickelt.',
     'how-avg-title' => 'Tagesdurchschnitt',
@@ -152,5 +152,5 @@ $text =
     
 
     'install-fd' => 'Fatigue Diary Installieren',
-    'install-text' => 'Bald wird es möglich, Fatigue Diary zu installieren.',
+    'install-text' => 'Du kannst jetzt Fatigue Diary auf deinem Gerät installieren. Klicke dafür einfach auf den "Installieren"-Knopf. Ein Popup-Fenster wird sich öffnen. Klicke noch einmal auf "Installieren" und die App wird installiert. <br> Brauchst du Hilfe? Kontaktiere mich <a href="index.php?page=contact">hier</a>.',
 ];

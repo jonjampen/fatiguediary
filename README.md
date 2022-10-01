@@ -45,6 +45,7 @@
 ## Weiteres
 - Domain bei Google Search registrieren ✔
 - Auf Social Media teilen (Fatiuge-Foren) ✔
+- PWA ✔
 
 ## Projektbeschrieb
 

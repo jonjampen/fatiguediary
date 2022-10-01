@@ -143,7 +143,7 @@ $text =
     'install' => 'Install',
     'not-now' => 'Not Now',
     'news-pwa-title' => 'Install Fatigue Diary',
-    'news-pwa-text' => 'You can now install Fatigue Diary <br> to your device.',
+    'news-pwa-text' => 'You can now install Fatigue Diary <br> to your device. <br> (Need help? Contact me <a href="index.php?page=contact">here</a>.)',
     
     'how-fd-text' => 'Fatigue Diary works in your Browser or can be installed <a href="index.php?page=install">here</a>. A detailed tutorial on how to use Fatigue Diary is available <a href="intro/' . $_SESSION['settings']['language'] . '/Dashboard.php">here</a>. <br> Fatigue Diary can be used as a diary for patients with Fatigue and can help them with pacing. <br> Enter your energy level after every activity and the app will create a chart that displays your energy throughout the day. Other charts help you to compare days or months with each other. <br> This app was created by Jon Jampen - a fatigue patient - as a project for school.',
     'how-avg-title' => 'Daily Average',
@@ -153,5 +153,5 @@ $text =
 
 
     'install-fd' => 'Install Fatigue Diary',
-    'install-text' => 'You will soon be able to install Fatigue Diary.',
+    'install-text' => 'You can now install Fatigue Diary to your device. Just click on the install button. A popup window will open. Click "install" again and you are done. <br> Need help? Contact me <a href="index.php?page=contact">here</a>.',
 ];
