@@ -132,19 +132,19 @@ else {
         include("views/charts/chart" . $chart . ".php");
     }
     if ($page == "onboarding") {
-        include("onboarding/language.php");
+        include("views/onboarding/language.php");
     }
     if ($page == "onboarding01") {
-        include("onboarding/theme.php");
+        include("views/onboarding/theme.php");
     }
     if ($page == "onboarding02") {
-        include("onboarding/awake-time.php");
+        include("views/onboarding/awake-time.php");
     }
     if ($page == "onboarding03") {
-        include("onboarding/newsletter.php");
+        include("views/onboarding/newsletter.php");
     }
     if ($page == "onboarding04") {
-        include("onboarding/tutorial.php");
+        include("views/onboarding/tutorial.php");
     }
     if ($page == "set-settings") {
         include("app/controllers/set-settings.php");
