@@ -56,10 +56,10 @@ if ($page == "users") {
 }
 
 if ($page == "app") {
-    include("app.php");
+    include("views/app.php");
 }
 if ($page == "contact") {
-    include("contact_temp.php");
+    include("views/contact_temp.php");
 }
 if ($page == "mail") {
     include("app/controllers/mail.php");
@@ -68,22 +68,22 @@ if ($page == "mail") {
 //only if not logged in
 if(!isset($_SESSION['id'])) {
     if ($page == "register") {
-        include("register.php");
+        include("views/register.php");
     }
     elseif ($page == "login") {
-        include("login.php");
+        include("views/login.php");
     }
     elseif ($page == "reset-password") {
-        include("reset-password.php");
+        include("views/reset-password.php");
     }
     if ($page == "dashboard" || $page == "profile" || $page == "entries" || $page == "add-new" || $page == "tricks" || $page == "logout") {
         header("location: index.php?page=login");
     }
     if ($page == "how") {
-        include("how-it-works.php");
+        include("views/how-it-works.php");
     }
     if ($page == "install") {
-        include("install.php");
+        include("views/install.php");
     }
 }
 //only if logged in
@@ -95,7 +95,7 @@ else {
         include("testing/debug.php");
         include("app/controllers/get-energy.php");
         include("app/controllers/calculate-activities.php");
-        include("dashboard.php");
+        include("views/dashboard.php");
     }
     if ($page == "logout") {
         include("app/controllers/users.php");
@@ -105,23 +105,23 @@ else {
         include("app/controllers/get-energy.php");
         include("app/controllers/display-activities.php");
         include("app/controllers/energy.php");
-        include("addnew.php");
+        include("views/addnew.php");
     }
     if ($page == "entries") {
         include("app/controllers/get-energy.php");
         include("app/controllers/display-activities.php");
         include("app/controllers/daily-avg.php");
-        include("all-entries.php");
+        include("views/all-entries.php");
     }
     if ($page == "settings") {
         include("app/controllers/set-settings.php");
-        include("settings.php");
+        include("views/settings.php");
     }
     if ($page == "how") {
-        include("how-it-works.php");
+        include("views/how-it-works.php");
     }
     if ($page == "install") {
-        include("install.php");
+        include("views/install.php");
     }
     if ($page == "ajax") {
         $chart = $_GET['chart'];
@@ -129,7 +129,7 @@ else {
         include("app/controllers/display-activities.php");
         include("app/controllers/daily-avg.php");
         include("app/controllers/calculate-charts.php");
-        include("chart" . $chart . ".php");
+        include("views/charts/chart" . $chart . ".php");
     }
     if ($page == "onboarding") {
         include("onboarding/language.php");
@@ -152,7 +152,7 @@ else {
 }
 
 if (!in_array($page, $pages)) {
-    include("not-found.php");
+    include("views/not-found.php");
 }
 
 function print_head($page_head, $public) {
