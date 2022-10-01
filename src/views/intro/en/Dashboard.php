@@ -743,15 +743,15 @@ function closeNav() {
 </nav><script type="text/javascript" src="Dashboard-Dateien/toastify.js"></script>
 
     <div class="welcome-text">
-        <h6>Hi Max Mustermann</h6>
-        <h3>Dein Dashboard</h3>
+        <h6>Hi John Doe</h6>
+        <h3>Your Dashboard</h3>
     </div>
     <div class="date-tour">
       <div class="date-range">
-          <p id="range_d" class="range-item active">Tag</p>
-          <p id="range_w" class="range-item">Woche</p>
-          <p id="range_m" class="range-item">Monat</p>
-          <p id="range_y" class="range-item">Jahr</p>
+          <p id="range_d" class="range-item active">day</p>
+          <p id="range_w" class="range-item">week</p>
+          <p id="range_m" class="range-item">month</p>
+          <p id="range_y" class="range-item">year</p>
       </div>
       <div class="date-picker">
           <span class="material-icons" id="nextDay">chevron_left</span>
@@ -761,7 +761,7 @@ function closeNav() {
     </div>
     
     <div class="container chart">
-        <h3 class="center-title">Energie</h3>
+        <h3 class="center-title">Energy</h3>
         <div id="energylevel_area" style="min-height: 265px;"><div id="apexchartsbj3re0d7g" class="apexcharts-canvas apexchartsbj3re0d7g apexcharts-theme-light" style="width: 342px; height: 250px;"><svg id="SvgjsSvg1272" width="342" height="250" xmlns="http://www.w3.org/2000/svg" version="1.1" xlink="http://www.w3.org/1999/xlink" svgjs="http://svgjs.dev" class="apexcharts-svg apexcharts-zoomable" xmlns:data="ApexChartsNS" transform="translate(0, 0)" style="background: transparent none repeat scroll 0% 0%;"><g id="SvgjsG1274" class="apexcharts-inner apexcharts-graphical" transform="translate(55.54998779296875, 30)"><defs id="SvgjsDefs1273"><clipPath id="gridRectMaskbj3re0d7g"><rect id="SvgjsRect1281" width="284.45001220703125" height="189.8" x="-4" y="-2" rx="0" ry="0" opacity="1" stroke-width="0" stroke="none" stroke-dasharray="0" fill="#fff"></rect></clipPath><clipPath id="forecastMaskbj3re0d7g"></clipPath><clipPath id="nonForecastMaskbj3re0d7g"></clipPath><clipPath id="gridRectMarkerMaskbj3re0d7g"><rect id="SvgjsRect1282" width="280.45001220703125" height="189.8" x="-2" y="-2" rx="0" ry="0" opacity="1" stroke-width="0" stroke="none" stroke-dasharray="0" fill="#fff"></rect></clipPath><linearGradient id="SvgjsLinearGradient1287" x1="0" y1="0" x2="0" y2="1"><stop id="SvgjsStop1288" stop-opacity="0.65" stop-color="rgba(245,91,83,0.65)" offset="0"></stop><stop id="SvgjsStop1289" stop-opacity="0.5" stop-color="rgba(250,173,169,0.5)" offset="1"></stop><stop id="SvgjsStop1290" stop-opacity="0.5" stop-color="rgba(250,173,169,0.5)" offset="1"></stop></linearGradient></defs><line id="SvgjsLine1280" x1="0" y1="0" x2="0" y2="185.8" stroke="#b6b6b6" stroke-dasharray="3" stroke-linecap="butt" class="apexcharts-xcrosshairs" x="0" y="0" width="1" height="185.8" fill="#b1b9c4" filter="none" fill-opacity="0.9" stroke-width="1"></line><g id="SvgjsG1293" class="apexcharts-xaxis" transform="translate(0, 0)"><g id="SvgjsG1294" class="apexcharts-xaxis-texts-g" transform="translate(0, -4)"><text id="SvgjsText1296" font-family="Helvetica, Arial, sans-serif" x="0" y="214.8" text-anchor="middle" dominant-baseline="auto" font-size="12px" font-weight="400" fill="#7d8082" class="apexcharts-text apexcharts-xaxis-label " style="font-family: Helvetica, Arial, sans-serif;"><tspan id="SvgjsTspan1297">06:00</tspan><title>06:00</title></text><text id="SvgjsText1299" font-family="Helvetica, Arial, sans-serif" x="55.29000244140626" y="214.8" text-anchor="middle" dominant-baseline="auto" font-size="12px" font-weight="400" fill="#7d8082" class="apexcharts-text apexcharts-xaxis-label " style="font-family: Helvetica, Arial, sans-serif;"><tspan id="SvgjsTspan1300">09:24</tspan><title>09:24</title></text><text id="SvgjsText1302" font-family="Helvetica, Arial, sans-serif" x="110.5800048828125" y="214.8" text-anchor="middle" dominant-baseline="auto" font-size="12px" font-weight="400" fill="#7d8082" class="apexcharts-text apexcharts-xaxis-label " style="font-family: Helvetica, Arial, sans-serif;"><tspan id="SvgjsTspan1303">12:48</tspan><title>12:48</title></text><text id="SvgjsText1305" font-family="Helvetica, Arial, sans-serif" x="165.87000732421873" y="214.8" text-anchor="middle" dominant-baseline="auto" font-size="12px" font-weight="400" fill="#7d8082" class="apexcharts-text apexcharts-xaxis-label " style="font-family: Helvetica, Arial, sans-serif;"><tspan id="SvgjsTspan1306">16:12</tspan><title>16:12</title></text><text id="SvgjsText1308" font-family="Helvetica, Arial, sans-serif" x="221.16000976562498" y="214.8" text-anchor="middle" dominant-baseline="auto" font-size="12px" font-weight="400" fill="#7d8082" class="apexcharts-text apexcharts-xaxis-label " style="font-family: Helvetica, Arial, sans-serif;"><tspan id="SvgjsTspan1309">19:36</tspan><title>19:36</title></text><text id="SvgjsText1311" font-family="Helvetica, Arial, sans-serif" x="276.45001220703125" y="214.8" text-anchor="middle" dominant-baseline="auto" font-size="12px" font-weight="400" fill="#7d8082" class="apexcharts-text apexcharts-xaxis-label " style="font-family: Helvetica, Arial, sans-serif;"><tspan id="SvgjsTspan1312"></tspan><title></title></text></g><line id="SvgjsLine1313" x1="0" y1="186.8" x2="276.45001220703125" y2="186.8" stroke="#e0e0e0" stroke-dasharray="0" stroke-width="1" stroke-linecap="butt"></line></g><g id="SvgjsG1334" class="apexcharts-grid"><g id="SvgjsG1335" class="apexcharts-gridlines-horizontal"><line id="SvgjsLine1343" x1="0" y1="0" x2="276.45001220703125" y2="0" stroke="#7d8082" stroke-dasharray="0" stroke-linecap="butt" class="apexcharts-gridline"></line><line id="SvgjsLine1344" x1="0" y1="37.160000000000004" x2="276.45001220703125" y2="37.160000000000004" stroke="#7d8082" stroke-dasharray="0" stroke-linecap="butt" class="apexcharts-gridline"></line><line id="SvgjsLine1345" x1="0" y1="74.32000000000001" x2="276.45001220703125" y2="74.32000000000001" stroke="#7d8082" stroke-dasharray="0" stroke-linecap="butt" class="apexcharts-gridline"></line><line id="SvgjsLine1346" x1="0" y1="111.48000000000002" x2="276.45001220703125" y2="111.48000000000002" stroke="#7d8082" stroke-dasharray="0" stroke-linecap="butt" class="apexcharts-gridline"></line><line id="SvgjsLine1347" x1="0" y1="148.64000000000001" x2="276.45001220703125" y2="148.64000000000001" stroke="#7d8082" stroke-dasharray="0" stroke-linecap="butt" class="apexcharts-gridline"></line><line id="SvgjsLine1348" x1="0" y1="185.8" x2="276.45001220703125" y2="185.8" stroke="#7d8082" stroke-dasharray="0" stroke-linecap="butt" class="apexcharts-gridline"></line></g><g id="SvgjsG1336" class="apexcharts-gridlines-vertical"></g><line id="SvgjsLine1337" x1="0" y1="186.8" x2="0" y2="192.8" stroke="#e0e0e0" stroke-dasharray="0" stroke-linecap="butt" class="apexcharts-xaxis-tick"></line><line id="SvgjsLine1338" x1="55.29000244140625" y1="186.8" x2="55.29000244140625" y2="192.8" stroke="#e0e0e0" stroke-dasharray="0" stroke-linecap="butt" class="apexcharts-xaxis-tick"></line><line id="SvgjsLine1339" x1="110.5800048828125" y1="186.8" x2="110.5800048828125" y2="192.8" stroke="#e0e0e0" stroke-dasharray="0" stroke-linecap="butt" class="apexcharts-xaxis-tick"></line><line id="SvgjsLine1340" x1="165.87000732421876" y1="186.8" x2="165.87000732421876" y2="192.8" stroke="#e0e0e0" stroke-dasharray="0" stroke-linecap="butt" class="apexcharts-xaxis-tick"></line><line id="SvgjsLine1341" x1="221.160009765625" y1="186.8" x2="221.160009765625" y2="192.8" stroke="#e0e0e0" stroke-dasharray="0" stroke-linecap="butt" class="apexcharts-xaxis-tick"></line><line id="SvgjsLine1342" x1="276.45001220703125" y1="186.8" x2="276.45001220703125" y2="192.8" stroke="#e0e0e0" stroke-dasharray="0" stroke-linecap="butt" class="apexcharts-xaxis-tick"></line><line id="SvgjsLine1350" x1="0" y1="185.8" x2="276.45001220703125" y2="185.8" stroke="transparent" stroke-dasharray="0" stroke-linecap="butt"></line><line id="SvgjsLine1349" x1="0" y1="1" x2="0" y2="185.8" stroke="transparent" stroke-dasharray="0" stroke-linecap="butt"></line></g><g id="SvgjsG1283" class="apexcharts-area-series apexcharts-plot-series"><g id="SvgjsG1284" class="apexcharts-series" seriesName="Energie" data:longestSeries="true" rel="1" data:realIndex="0"><path id="SvgjsPath1291" d="M 8.130882711971507 185.8L 8.130882711971507 37.16C 13.822500610351563 37.16 18.701030237534468 55.74000000000001 24.392648135914524 55.74000000000001C 43.36470779718137 55.74000000000001 59.62647322112439 102.19 78.59853288239124 102.19C 79.83171676037358 102.19 80.88873151292988 74.32 82.12191539091222 74.32C 86.10604791977826 74.32 89.5210186588063 120.77000000000001 93.50515118767234 120.77000000000001C 106.78559295055913 120.77000000000001 118.16882874731925 120.77000000000001 131.44927051020605 120.77000000000001C 131.44927051020605 120.77000000000001 131.44927051020605 120.77000000000001 131.44927051020605 185.8M 131.44927051020605 120.77000000000001z" fill="url(#SvgjsLinearGradient1287)" fill-opacity="1" stroke-opacity="1" stroke-linecap="butt" stroke-width="0" stroke-dasharray="0" class="apexcharts-area" index="0" clip-path="url(#gridRectMaskbj3re0d7g)" pathTo="M 8.130882711971507 185.8L 8.130882711971507 37.16C 13.822500610351563 37.16 18.701030237534468 55.74000000000001 24.392648135914524 55.74000000000001C 43.36470779718137 55.74000000000001 59.62647322112439 102.19 78.59853288239124 102.19C 79.83171676037358 102.19 80.88873151292988 74.32 82.12191539091222 74.32C 86.10604791977826 74.32 89.5210186588063 120.77000000000001 93.50515118767234 120.77000000000001C 106.78559295055913 120.77000000000001 118.16882874731925 120.77000000000001 131.44927051020605 120.77000000000001C 131.44927051020605 120.77000000000001 131.44927051020605 120.77000000000001 131.44927051020605 185.8M 131.44927051020605 120.77000000000001z" pathFrom="M -1 185.8L -1 185.8L 24.392648135914524 185.8L 78.59853288239124 185.8L 82.12191539091222 185.8L 93.50515118767234 185.8L 131.44927051020605 185.8"></path><path id="SvgjsPath1292" d="M 8.130882711971507 37.16C 13.822500610351563 37.16 18.701030237534468 55.74000000000001 24.392648135914524 55.74000000000001C 43.36470779718137 55.74000000000001 59.62647322112439 102.19 78.59853288239124 102.19C 79.83171676037358 102.19 80.88873151292988 74.32 82.12191539091222 74.32C 86.10604791977826 74.32 89.5210186588063 120.77000000000001 93.50515118767234 120.77000000000001C 106.78559295055913 120.77000000000001 118.16882874731925 120.77000000000001 131.44927051020605 120.77000000000001" fill="none" fill-opacity="1" stroke="#f55b53" stroke-opacity="1" stroke-linecap="butt" stroke-width="4" stroke-dasharray="0" class="apexcharts-area" index="0" clip-path="url(#gridRectMaskbj3re0d7g)" pathTo="M 8.130882711971507 37.16C 13.822500610351563 37.16 18.701030237534468 55.74000000000001 24.392648135914524 55.74000000000001C 43.36470779718137 55.74000000000001 59.62647322112439 102.19 78.59853288239124 102.19C 79.83171676037358 102.19 80.88873151292988 74.32 82.12191539091222 74.32C 86.10604791977826 74.32 89.5210186588063 120.77000000000001 93.50515118767234 120.77000000000001C 106.78559295055913 120.77000000000001 118.16882874731925 120.77000000000001 131.44927051020605 120.77000000000001" pathFrom="M -1 185.8L -1 185.8L 24.392648135914524 185.8L 78.59853288239124 185.8L 82.12191539091222 185.8L 93.50515118767234 185.8L 131.44927051020605 185.8"></path><g id="SvgjsG1285" class="apexcharts-series-markers-wrap" data:realIndex="0"><g class="apexcharts-series-markers"><circle id="SvgjsCircle1356" r="0" cx="0" cy="0" class="apexcharts-marker wn5hjyus7 no-pointer-events" stroke="#ffffff" fill="#f55b53" fill-opacity="1" stroke-width="2" stroke-opacity="0.9" default-marker-size="0"></circle></g></g></g><g id="SvgjsG1286" class="apexcharts-datalabels" data:realIndex="0"></g></g><line id="SvgjsLine1351" x1="0" y1="0" x2="276.45001220703125" y2="0" stroke="#b6b6b6" stroke-dasharray="0" stroke-width="1" stroke-linecap="butt" class="apexcharts-ycrosshairs"></line><line id="SvgjsLine1352" x1="0" y1="0" x2="276.45001220703125" y2="0" stroke-dasharray="0" stroke-width="0" stroke-linecap="butt" class="apexcharts-ycrosshairs-hidden"></line><g id="SvgjsG1353" class="apexcharts-yaxis-annotations"></g><g id="SvgjsG1354" class="apexcharts-xaxis-annotations"></g><g id="SvgjsG1355" class="apexcharts-point-annotations"></g><rect id="SvgjsRect1357" width="0" height="0" x="0" y="0" rx="0" ry="0" opacity="1" stroke-width="0" stroke="none" stroke-dasharray="0" fill="#fefefe" class="apexcharts-zoom-rect"></rect><rect id="SvgjsRect1358" width="0" height="0" x="0" y="0" rx="0" ry="0" opacity="1" stroke-width="0" stroke="none" stroke-dasharray="0" fill="#fefefe" class="apexcharts-selection-rect"></rect></g><rect id="SvgjsRect1279" width="0" height="0" x="0" y="0" rx="0" ry="0" opacity="1" stroke-width="0" stroke="none" stroke-dasharray="0" fill="#fefefe"></rect><g id="SvgjsG1314" class="apexcharts-yaxis" rel="0" transform="translate(25.54998779296875, 0)"><g id="SvgjsG1315" class="apexcharts-yaxis-texts-g"><text id="SvgjsText1317" font-family="Helvetica, Arial, sans-serif" x="20" y="31.5" text-anchor="end" dominant-baseline="auto" font-size="11px" font-weight="400" fill="#7d8082" class="apexcharts-text apexcharts-yaxis-label " style="font-family: Helvetica, Arial, sans-serif;"><tspan id="SvgjsTspan1318">10.0</tspan><title>10.0</title></text><text id="SvgjsText1320" font-family="Helvetica, Arial, sans-serif" x="20" y="68.66" text-anchor="end" dominant-baseline="auto" font-size="11px" font-weight="400" fill="#7d8082" class="apexcharts-text apexcharts-yaxis-label " style="font-family: Helvetica, Arial, sans-serif;"><tspan id="SvgjsTspan1321">8.0</tspan><title>8.0</title></text><text id="SvgjsText1323" font-family="Helvetica, Arial, sans-serif" x="20" y="105.82" text-anchor="end" dominant-baseline="auto" font-size="11px" font-weight="400" fill="#7d8082" class="apexcharts-text apexcharts-yaxis-label " style="font-family: Helvetica, Arial, sans-serif;"><tspan id="SvgjsTspan1324">6.0</tspan><title>6.0</title></text><text id="SvgjsText1326" font-family="Helvetica, Arial, sans-serif" x="20" y="142.98" text-anchor="end" dominant-baseline="auto" font-size="11px" font-weight="400" fill="#7d8082" class="apexcharts-text apexcharts-yaxis-label " style="font-family: Helvetica, Arial, sans-serif;"><tspan id="SvgjsTspan1327">4.0</tspan><title>4.0</title></text><text id="SvgjsText1329" font-family="Helvetica, Arial, sans-serif" x="20" y="180.14" text-anchor="end" dominant-baseline="auto" font-size="11px" font-weight="400" fill="#7d8082" class="apexcharts-text apexcharts-yaxis-label " style="font-family: Helvetica, Arial, sans-serif;"><tspan id="SvgjsTspan1330">2.0</tspan><title>2.0</title></text><text id="SvgjsText1332" font-family="Helvetica, Arial, sans-serif" x="20" y="217.29999999999998" text-anchor="end" dominant-baseline="auto" font-size="11px" font-weight="400" fill="#7d8082" class="apexcharts-text apexcharts-yaxis-label " style="font-family: Helvetica, Arial, sans-serif;"><tspan id="SvgjsTspan1333">0.0</tspan><title>0.0</title></text></g></g><g id="SvgjsG1275" class="apexcharts-annotations"></g></svg><div class="apexcharts-legend" style="max-height: 125px;"></div><div class="apexcharts-tooltip apexcharts-theme-light"><div class="apexcharts-tooltip-title" style="font-family: Helvetica, Arial, sans-serif; font-size: 12px;"></div><div class="apexcharts-tooltip-series-group" style="order: 1;"><span class="apexcharts-tooltip-marker" style="background-color: rgb(245, 91, 83);"></span><div class="apexcharts-tooltip-text" style="font-family: Helvetica, Arial, sans-serif; font-size: 12px;"><div class="apexcharts-tooltip-y-group"><span class="apexcharts-tooltip-text-y-label"></span><span class="apexcharts-tooltip-text-y-value"></span></div><div class="apexcharts-tooltip-goals-group"><span class="apexcharts-tooltip-text-goals-label"></span><span class="apexcharts-tooltip-text-goals-value"></span></div><div class="apexcharts-tooltip-z-group"><span class="apexcharts-tooltip-text-z-label"></span><span class="apexcharts-tooltip-text-z-value"></span></div></div></div></div><div class="apexcharts-xaxistooltip apexcharts-xaxistooltip-bottom apexcharts-theme-light"><div class="apexcharts-xaxistooltip-text" style="font-family: Helvetica, Arial, sans-serif; font-size: 12px;"></div></div><div class="apexcharts-yaxistooltip apexcharts-yaxistooltip-0 apexcharts-yaxistooltip-left apexcharts-theme-light"><div class="apexcharts-yaxistooltip-text"></div></div><div class="apexcharts-toolbar" style="top: 0px; right: 3px;"><div class="apexcharts-zoomin-icon" title="Zoom In"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
     <path d="M0 0h24v24H0z" fill="none"></path>
     <path d="M13 7h-2v4H7v2h4v4h2v-4h4v-2h-4V7zm-1-5C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z"></path>
@@ -795,14 +795,14 @@ function closeNav() {
     
     
     <div class="container good-activities-tour">
-        <h3 class="center-title">Aktivitäten, die dir Energie geben.</h3>
+        <h3 class="center-title">Energy boosting activities</h3>
         <div class="rated-activities">
-        <p class="rated-activity border_color" style="border-color: rgb(105, 164, 85);">Schlafen</p><p class="rated-activity border_color" style="border-color: rgb(164, 190, 109);">Ausruhen</p><p class="rated-activity border_color" style="border-color: rgb(249, 196, 70);">Duschen</p>        </div>
+        <p class="rated-activity border_color" style="border-color: rgb(105, 164, 85);">Sleep</p><p class="rated-activity border_color" style="border-color: rgb(164, 190, 109);">Rest</p><p class="rated-activity border_color" style="border-color: rgb(249, 196, 70);">Shower</p>        </div>
     </div>
     <div class="container bad-activities-tour">
-        <h3 class="center-title">Aktivitäten, die dir Energie rauben.</h3>
+        <h3 class="center-title">Energy draining activities.</h3>
         <div class="rated-activities">
-            <p class="rated-activity border_color" style="border-color: rgb(232, 142, 130);">Arbeiten</p><p class="rated-activity border_color" style="border-color: rgb(243, 114, 44);">Therapie</p>        </div>
+            <p class="rated-activity border_color" style="border-color: rgb(232, 142, 130);">Work</p><p class="rated-activity border_color" style="border-color: rgb(243, 114, 44);">Therapy</p>        </div>
     </div>
     
     
@@ -885,33 +885,33 @@ calculateBorderColor(4, border[4]);
 
     <?php if (!isset($_GET['intro'])) : ?>
       tour.addStep({
-          text: 'Dies ist ein Tutorial für Fatigue Diary. <br> Willkommen zu deinem Dashboard.',
+          text: 'This is a tutorial for fatigue diary. <br> Welcome to your dashboard.',
           attachTo: {
               on: 'center'
           },
           buttons: [
               {
-                  text: 'Tour überspringen',
+                  text: 'Skip tour',
                   action: function () {
-                    window.location.href = '../../index.php';
+                    window.location.href = '../../../index.php';
                   }
               },
               {
-                text: 'Weiter',
+                text: 'Next',
                 action: tour.next
               }
           ]
       });
       
       tour.addStep({
-        text: 'Mit einem Klick auf das Plus-Icon fügst du einen Eintrag hinzu. Füge wenn möglich nach jeder Aktivität einen eigenen Eintrag hinzu.',
+        text: 'By clicking on the Plus-Icon you can add a new entry. If possible, add a new entry after every activity.',
         attachTo: {
             element: '.add',
             on: 'top'
         },
         buttons: [
           {
-            text: 'Weiter',
+            text: 'Next',
             action: function () {
               window.location.href = 'addnew.php';
             }
@@ -921,81 +921,81 @@ calculateBorderColor(4, border[4]);
     
     <?php else: ?>
       tour.addStep({
-          text: 'Hier siehst du deinen Tagesverlauf.',
+          text: 'Here is your daily overview',
           attachTo: {
               element: '.container.chart',
               on: 'top'
           },
           buttons: [
               {
-                text: 'Weiter',
+                text: 'Next',
                 action: tour.next
               }
           ]
       });
       
       tour.addStep({
-        text: 'Du kannst auch den dargestellten Bereich und das Datum ändern.',
+        text: 'You can change the view and the date here.',
         attachTo: {
             element: '.date-tour',
             on: 'top'
         },
         buttons: [
           {
-            text: 'Weiter',
+            text: 'Next',
             action: tour.next
           }
         ]
       });
       tour.addStep({
-        text: 'Hier werden Aktivitäten berechnet, die dir Energie geben.',
+        text: 'Here we calculate activities that boost your energy.',
         attachTo: {
             element: '.good-activities-tour',
             on: 'top'
         },
         buttons: [
           {
-            text: 'Weiter',
+            text: 'Next',
             action: tour.next
           }
         ]
       });
       tour.addStep({
-        text: 'Hier werden Aktivitäten berechnet, die dir Energie rauben. Beachte aber, dass nur die kurzfristige Änderung und nicht der langfristige Einfluss einer Aktivität miteinbezogen wird.',
+        text: 'Here we calculate activities that drain your energy. But be aware that only the short term changes are take in to account not the longterm influence.',
         attachTo: {
             element: '.bad-activities-tour',
             on: 'top'
         },
         buttons: [
           {
-            text: 'Weiter',
+            text: 'Next',
             action: tour.next
           }
         ]
       });
 
       tour.addStep({
-        text: 'Im Menu findet du noch weitere Informationen und Einstellungsmöglichkeiten zur App.',
+        text: 'Up here you can find more settings for the app.',
         attachTo: {
             element: '.menu-tour',
             on: 'top'
         },
         buttons: [
           {
-            text: 'Weiter',
+            text: 'Next',
             action: tour.next
           }
         ]
       });
 
       tour.addStep({
-        text: 'Dies waren Beispiel-Daten, nun bringe ich dich zu deinem eigenen Dashboard.',
+        text: 'This was only an example. Let\'s get you to your own dashboard.',
         attachTo: {
             on: 'center'
         },
         buttons: [
           {
-            text: 'Tour beenden',
+            text: 'End Tutorial',
             action: function () {
               window.location.href = '../../index.php';
             }

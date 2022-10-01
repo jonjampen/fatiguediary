@@ -16,7 +16,7 @@
         <li><a href="index.php?page=app">Fatigue Diary</a></li>
         <li><a href="index.php?page=contact"><?php echo $text['contact']; ?></a></li>
         <li><a href="index.php?page=how"><?php echo $text['how-it-works']; ?></a></li>
-        <li><a href="intro/<?php echo $_SESSION['settings']['language']; ?>/Dashboard.php"><?php echo $text['start-tutorial']; ?></a></li>
+        <li><a href="views/intro/<?php echo $_SESSION['settings']['language']; ?>/Dashboard.php"><?php echo $text['start-tutorial']; ?></a></li>
         <button class="btn-primary" name="add-activity" id="installApp" onclick="installPWA()"><?php echo $text['install']; ?></button>
         <?php if(isset($_SESSION['id'])): ?>
             <li><a href="index.php?page=logout" class="logout"><i class="fa-solid fa-arrow-right-from-bracket"></i> <?php echo $text['logout']; ?></a></li>
