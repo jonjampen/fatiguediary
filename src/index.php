@@ -176,7 +176,7 @@ function print_head($page_head, $public) {
         '<link rel="stylesheet" type="text/css" href="assets/css/toastify.min.css">',
 
         '<link rel="manifest" href="manifest.json">',
-        '<script src="app.js"></script>'
+        '<script src="assets/js/app.js"></script>'
     );
     if (isset($_SERVER['SERVER_NAME']) && $_SERVER['SERVER_NAME'] == 'dev.fatiguediary.ch') {
         $head[] = '<meta name="robots" content="noindex,nofollow">';
