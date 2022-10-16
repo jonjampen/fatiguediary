@@ -101,6 +101,25 @@ $todayDate = date("Y-m-d");
     <script src="assets/js/visualizeValue.js"></script>
 
     <script>
+        let deferredPrompt;
+
+    window.addEventListener('beforeinstallprompt', (e) => {
+        deferredPrompt = e;
+    });
+
+    async function installPWA(modal = false) {
+        if (deferredPrompt !== null) {
+            deferredPrompt.prompt();
+            const { outcome } = await deferredPrompt.userChoice;
+            if (outcome === 'accepted') {
+                deferredPrompt = null;
+                if (modal) {
+                    closeModal();
+                }
+            }
+        }
+    }
+
         var border = document.getElementsByClassName("border_color");
         <?php
             $activityBoxCounter = 0;
