@@ -12,15 +12,14 @@ window.addEventListener('beforeinstallprompt', (e) => {
 });
 
 async function installPWA(modal = false) {
-    window.location.href = "index.php?page=install";
-    // if (deferredPrompt) {
-    //     deferredPrompt.prompt();
-    //     const { outcome } = await deferredPrompt.userChoice;
-    //     if (outcome === 'accepted') {
-    //         deferredPrompt = null;
-    //         if (modal) {
-    //             closeModal();
-    //         }
-    //     }
-    // }
+    if (deferredPrompt) {
+        deferredPrompt.prompt();
+        const { outcome } = await deferredPrompt.userChoice;
+        if (outcome === 'accepted') {
+            deferredPrompt = null;
+            if (modal) {
+                closeModal();
+            }
+        }
+    }
 }
