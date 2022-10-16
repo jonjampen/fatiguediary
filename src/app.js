@@ -5,21 +5,21 @@ if ('serviceWorker' in navigator) {
     .catch((error) => console.log('error', error));
 }
 
-// let deferredPrompt;
+let deferredPrompt;
 
-// window.addEventListener('beforeinstallprompt', (e) => {
-//     deferredPrompt = e;
-// });
+window.addEventListener('beforeinstallprompt', (e) => {
+    deferredPrompt = e;
+});
 
-// async function installPWA(modal = false) {
-//     if (deferredPrompt != null) {
-//         deferredPrompt.prompt();
-//         const { outcome } = await deferredPrompt.userChoice;
-//         if (outcome === 'accepted') {
-//             deferredPrompt = null;
-//             if (modal) {
-//                 closeModal();
-//             }
-//         }
-//     }
-// }
+async function installPWA(modal = false) {
+    if (deferredPrompt) {
+        deferredPrompt.prompt();
+        const { outcome } = await deferredPrompt.userChoice;
+        if (outcome === 'accepted') {
+            deferredPrompt = null;
+            if (modal) {
+                closeModal();
+            }
+        }
+    }
+}
