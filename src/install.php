@@ -9,13 +9,13 @@ includeToastify();
     <img src="assets/img/news/pwa.svg" alt="">
     <br>
     <br>
-    <button class="btn-primary" style="width:auto" name="add-activity" id="installApp" onclick="installPWA(false);">Chrome/Edge/Opera installieren</button>
+    <button class="btn-primary" style="width:auto" name="add-activity" id="installApp" onclick="installPWA(false);"><?php echo $text['install-rest']; ?></button>
     <br>
     <br>
-    <h3>Für andere Browser:</h3>
-    <p>Safari: Klicke auf <span class="material-icons">ios_share</span> und dann auf "Zum Home-Bildschirm" klicken.</p>
+    <h3><?php echo $text['install-other']; ?></h3>
+    <p><?php echo $text['install-safari']; ?></p>
     <br>
-    <p>Firefox: Klicke auf die drei Punkte unten rechts und anschliessend auf "Installieren".</p>
+    <p><?php echo $text['install-firefox']; ?></p>
     <br>
 
 </div>

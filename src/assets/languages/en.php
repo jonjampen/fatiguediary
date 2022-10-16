@@ -154,4 +154,9 @@ $text =
 
     'install-fd' => 'Install Fatigue Diary',
     'install-text' => 'You can now install Fatigue Diary to your device. Just click on the install button. A popup window will open. Click "install" again and you are done. <br> Need help? Contact me <a href="index.php?page=contact">here</a>.',
+
+    'install-safari' => 'Safari: Click on <span class="material-icons">ios_share</span> and then on "Add to Home Screen"',
+    'install-firefox' => 'Firefox: Click on the three dots on the bottom right and then on "Install".',
+    'install-rest' => 'Chrome/Edge/Opera install',
+    'install-other' => 'Other browsers:',
 ];

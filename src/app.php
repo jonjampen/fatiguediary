@@ -10,7 +10,7 @@
     <div class="left">
         <h1><?php echo $text['info-title']; ?></h1>
         <h4><?php echo $text['info-description']; ?></h4>
-        <button class="btn-secondary nav" id="installApp">Install</button>
+        <!-- <button class="btn-secondary nav" id="installApp">Install</button> -->
         <button class="btn-primary" onclick="window.location.href='index.php?page=register'"><?php if(isset($_SESSION['id'])) {echo $text['to-the-app'];} else { echo $text['info-btn']; } ?></button>
     </div>
     <img src="assets/img/screenshots/dashboard_top.png" alt="">
