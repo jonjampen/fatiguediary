@@ -15,13 +15,12 @@ async function installPWA(modal = false) {
     if (deferredPrompt) {
         deferredPrompt.prompt();
         const { outcome } = await deferredPrompt.userChoice;
+        window.location.href = "index.php?page=install";
         if (outcome === 'accepted') {
             deferredPrompt = null;
             if (modal) {
                 closeModal();
             }
-        } else {
-            window.location.href = "index.php?page=install";
         }
     }
 }
