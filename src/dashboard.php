@@ -225,7 +225,8 @@ $todayDate = date("Y-m-d");
     }
 
 
-    if (!(window.matchMedia('(display-mode: standalone)').matches) && document.cookie.indexOf('installPopup=') == -1) {
+    // if (!(window.matchMedia('(display-mode: standalone)').matches) && document.cookie.indexOf('installPopup=') == -1) {
+    if (false) { //disables popup
         //show popup to ask for download
         openModal();
         let expire = new Date();
