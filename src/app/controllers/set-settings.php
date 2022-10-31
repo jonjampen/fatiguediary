@@ -33,7 +33,7 @@ if (isset($_POST['set-settings'])) {
     $_SESSION['settings'] = $settings;
 
     if (isset($_GET['w'])) {
-        header("location: intro/". $_SESSION['settings']['language'] . "/Dashboard.php");
+        header("location: views/intro/". $_SESSION['settings']['language'] . "/Dashboard.php");
     }
     else {
         header("location: index.php");

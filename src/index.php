@@ -56,10 +56,10 @@ if ($page == "users") {
 }
 
 if ($page == "app") {
-    include("app.php");
+    include("views/app.php");
 }
 if ($page == "contact") {
-    include("contact_temp.php");
+    include("views/contact_temp.php");
 }
 if ($page == "mail") {
     include("app/controllers/mail.php");
@@ -68,22 +68,22 @@ if ($page == "mail") {
 //only if not logged in
 if(!isset($_SESSION['id'])) {
     if ($page == "register") {
-        include("register.php");
+        include("views/register.php");
     }
     elseif ($page == "login") {
-        include("login.php");
+        include("views/login.php");
     }
     elseif ($page == "reset-password") {
-        include("reset-password.php");
+        include("views/reset-password.php");
     }
     if ($page == "dashboard" || $page == "profile" || $page == "entries" || $page == "add-new" || $page == "tricks" || $page == "logout") {
         header("location: index.php?page=login");
     }
     if ($page == "how") {
-        include("how-it-works.php");
+        include("views/how-it-works.php");
     }
     if ($page == "install") {
-        include("install.php");
+        include("views/install.php");
     }
 }
 //only if logged in
@@ -92,10 +92,9 @@ else {
         header("location: index.php?page=dashboard");
     }
     if ($page == "dashboard") {
-        include("testing/debug.php");
         include("app/controllers/get-energy.php");
         include("app/controllers/calculate-activities.php");
-        include("dashboard.php");
+        include("views/dashboard.php");
     }
     if ($page == "logout") {
         include("app/controllers/users.php");
@@ -105,23 +104,23 @@ else {
         include("app/controllers/get-energy.php");
         include("app/controllers/display-activities.php");
         include("app/controllers/energy.php");
-        include("addnew.php");
+        include("views/addnew.php");
     }
     if ($page == "entries") {
         include("app/controllers/get-energy.php");
         include("app/controllers/display-activities.php");
         include("app/controllers/daily-avg.php");
-        include("all-entries.php");
+        include("views/all-entries.php");
     }
     if ($page == "settings") {
         include("app/controllers/set-settings.php");
-        include("settings.php");
+        include("views/settings.php");
     }
     if ($page == "how") {
-        include("how-it-works.php");
+        include("views/how-it-works.php");
     }
     if ($page == "install") {
-        include("install.php");
+        include("views/install.php");
     }
     if ($page == "ajax") {
         $chart = $_GET['chart'];
@@ -129,22 +128,22 @@ else {
         include("app/controllers/display-activities.php");
         include("app/controllers/daily-avg.php");
         include("app/controllers/calculate-charts.php");
-        include("chart" . $chart . ".php");
+        include("views/charts/chart" . $chart . ".php");
     }
     if ($page == "onboarding") {
-        include("onboarding/language.php");
+        include("views/onboarding/language.php");
     }
     if ($page == "onboarding01") {
-        include("onboarding/theme.php");
+        include("views/onboarding/theme.php");
     }
     if ($page == "onboarding02") {
-        include("onboarding/awake-time.php");
+        include("views/onboarding/awake-time.php");
     }
     if ($page == "onboarding03") {
-        include("onboarding/newsletter.php");
+        include("views/onboarding/newsletter.php");
     }
     if ($page == "onboarding04") {
-        include("onboarding/tutorial.php");
+        include("views/onboarding/tutorial.php");
     }
     if ($page == "set-settings") {
         include("app/controllers/set-settings.php");
@@ -152,7 +151,7 @@ else {
 }
 
 if (!in_array($page, $pages)) {
-    include("not-found.php");
+    include("views/not-found.php");
 }
 
 function print_head($page_head, $public) {
@@ -176,7 +175,7 @@ function print_head($page_head, $public) {
         '<link rel="stylesheet" type="text/css" href="assets/css/toastify.min.css">',
 
         '<link rel="manifest" href="manifest.json">',
-        '<script src="app.js"></script>'
+        '<script src="assets/js/app.js"></script>'
     );
     if (isset($_SERVER['SERVER_NAME']) && $_SERVER['SERVER_NAME'] == 'dev.fatiguediary.ch') {
         $head[] = '<meta name="robots" content="noindex,nofollow">';
@@ -202,24 +201,24 @@ function print_body($onload = "") {
         $onload = ' onload="' . $onload . '"';
     }
     echo('<body'. $onload . '>' . "\n");
-    include("app/includes/topNavbar.php");
-    include("app/includes/bottomNavbar.php");
+    include("views/includes/topNavbar.php");
+    include("views/includes/bottomNavbar.php");
 }
 function print_public_body() {
     global $text;
     echo('<body>' . "\n");
     updateLanguage();
-    include("app/includes/publicNavbar.php");
+    include("views/includes/publicNavbar.php");
 }
 function print_body_top_nav_only() {
     global $text;
     echo('<body>' . "\n");
-    include("app/includes/topNavbar.php");
+    include("views/includes/topNavbar.php");
 }
 
 function includeToastify() {
     echo('<script type="text/javascript" src="assets/js/toastify.js"></script>');
-    include("app/includes/messages.php");
+    include("views/includes/messages.php");
 }
 
 function updateLanguage() {
