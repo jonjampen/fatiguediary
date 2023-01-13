@@ -50,7 +50,7 @@
         </div>
         <img src="assets/img/illustrations/avatar.svg" alt="">
     </div>
-    <p>&copy;2022 <?php echo $text['copy']; ?></p>
+    <p>&copy;2023 <?php echo $text['copy']; ?></p>
 </section>
 <section class="footer">
 </section>
