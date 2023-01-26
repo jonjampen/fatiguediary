@@ -90,7 +90,7 @@ if(isset($_GET['id'])) {
             <div class="container">
                 <h3><?php echo $text['add-activity']; ?></h3>
 
-                <input type="text" name="activity_name" id="activity_name" placeholder="<?php echo $text['enter-activity']; ?>" value="">
+                <input type="text" name="activity_name" id="activity_name" autocomplete="off" placeholder="<?php echo $text['enter-activity']; ?>" value="">
 
                 <div class="modal-buttons">
                     <button class="btn-primary" name="add-activity" id="add_activity_btn" onclick="addActivity()"><?php echo $text['add']; ?></button>
