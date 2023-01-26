@@ -997,7 +997,7 @@ calculateBorderColor(4, border[4]);
           {
             text: 'Tour beenden',
             action: function () {
-              window.location.href = '../../index.php';
+              window.location.href = '../../../index.php';
             }
           }
         ]
