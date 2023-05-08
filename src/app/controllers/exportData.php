@@ -67,7 +67,6 @@
 <?php 
 function sendMail($FILENAME) {
     $bodytext = ' 
-        <h3>Your Exported Data from Fatigue Diary</h3> 
         <p>Hey!</p>
         <p>You have requested your data from <a href="https://www.fatiguediary.ch">Fatigue Diary</a>. You can find it in the attachment.</p>
         <p>If you have any questions, feel free to contact me!</p>
@@ -81,6 +80,7 @@ function sendMail($FILENAME) {
     $email->SetFrom('info@fatiguediary.ch', 'Jon from Fatigue Diary'); //Name is optional
     $email->Subject   = 'Exported Data from Fatigue Diary';
     $email->Body      = $bodytext;
+    $email->IsHTML(true);
     $email->AddAddress($_SESSION['email']);
 
     $file_to_attach = '../exports/' . $FILENAME . '.csv';
