@@ -44,7 +44,7 @@
         <?php endfor; ?>
         <?php        
             // Open a file in write mode ('w')
-            $filename = $_SESSION['id'] .'-'. date("Y-M-D-Gis");
+            $filename = $_SESSION['id'] .'-'. date("Y-m-d-Gis");
             $fp = fopen('../exports/' . $filename . '.csv', 'w');
 
             fputcsv($fp, array_keys($allData[0])); // Add the keys as the column headers
@@ -55,6 +55,7 @@
             }
             
             fclose($fp);
+            print($filename);
             sendMail($filename);
         ?>
 </div>
