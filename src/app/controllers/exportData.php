@@ -55,7 +55,6 @@
             }
             
             fclose($fp);
-            print($filename);
             sendMail($filename);
         ?>
 </div>
