@@ -95,8 +95,9 @@ $body = '
     <p>You have requested your data from <a href="https://www.fatiguediary.ch">Fatigue Diary</a>. You can find it in the attachment.</p>
     <p>If you have any questions, feel free to contact me!</p>
     <p>Kind regards, <br>
-    Jon Jampen</p>
-    <p>Creator of <a href="https://www.fatiguediary.ch">Fatigue Diary</a></p>
+    Jon Jampen <br>
+    Creator of <a href="https://www.fatiguediary.ch">Fatigue Diary</a>
+    </p>
     <i>This email was sent automatically from </i><a href="https://www.fatiguediary.ch">www.fatiguediary.ch</a>
 '; 
  
