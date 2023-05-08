@@ -9,7 +9,7 @@
 <div class="entries-screen">
     <h2><?php echo $text['export']; ?></h2>
     <p>Exporting...</p>
-    <p>Your data will be sent to you by email shortly.</p>
+    <p>Your data will be sent to you by email (<?php echo $_SESSION['email']; ?>) shortly.</p>
     <?php for ($day_counter = 0; $day_counter < 350; $day_counter++): //for each day of the past week ?>
         <?php
 
@@ -65,8 +65,6 @@
             // }
             
             fclose($fp);
-                echo($_SESSION['email'])
-
         ?>
         </div>
 
@@ -94,8 +92,7 @@ $file = "export.csv";
 // Email body content 
 $body = ' 
     <h3>Your Exported Data from Fatigue Diary</h3> 
-    <p>
-    Hey!
+    <p>Hey!</p>
     <p>You have requested your data from <a href="https://www.fatiguediary.ch>Fatigue Diary</a>. You can find it in the attachment.</p>
     <p>If you have any questions, feel free to contact me!</p>
     <p>Kind regards,</p>
