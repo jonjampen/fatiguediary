@@ -3,7 +3,7 @@
     print_body();
     includeToastify();
     $allData = array(); // fill with ["datetime" => "01.01.2020", "energylevel" => 5, "activities" => ["school", "tv"]]
-    $activity_names=array();
+    $activity_names = array();
     ?>
 
 <div class="entries-screen">
@@ -16,15 +16,10 @@
                 $date = date_sub(new DateTime(), date_interval_create_from_date_string($day_counter . ' day')); // subtract i days from date
                 $entries = getEnergyLevelsByDate($date->format("Y-m-d"));
 
-                $average = calculateDailyAvg($entries);
-                if ($average) {
-                    $average = round($average, 1);
-                }
-
                 foreach ($entries as $entry) {
-                    $activity_names=array();
+                    $activity_names = array();
                     
-                    $activity_ids =  getActivitiesByEnergyId($entry['energy_id']);
+                    $activity_ids = getActivitiesByEnergyId($entry['energy_id']);
                     
                     foreach ($activity_ids as $activity_id){
                         array_push($activity_names, getActivityNameById($activity_id['id']));
@@ -113,9 +108,9 @@ function sendMail($FILENAME) {
     $message .= "Content-Transfer-Encoding: 8bit".$eol.$eol;
     $message .= $body.$eol;
     $message .= "--".$uid.$eol;
-    $message .= "Content-Type: application/pdf; name=\"".$FILENAME."\"".$eol;
+    $message .= "Content-Type: application/csv; name=\"".$FILENAME.".csv\"".$eol;
     $message .= "Content-Transfer-Encoding: base64".$eol;
-    $message .= "Content-Disposition: attachment; FILENAME=\"".$FILENAME."\"".$eol;
+    $message .= "Content-Disposition: attachment; FILENAME=\"".$FILENAME.".csv\"".$eol;
     $message .= $content.$eol;
     $message .= "--".$uid."--";
     
