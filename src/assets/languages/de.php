@@ -45,6 +45,7 @@ $text =
     'awake-time' => 'Tageszeit',
 
     'information-mail' => 'Informationen per Mail:',
+    'export' => 'Exportieren',
 
     'save' => 'Speichern',
 

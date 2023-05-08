@@ -44,6 +44,14 @@
                     <input type="checkbox" name="newsletter" id="newsletter_check" <?php if($_SESSION['settings']['newsletter'] == 1) {echo("checked");} ?>>
                 </div>
             </div>
+            <div class="setting">
+                <div class="text">
+                    <p><?php echo $text['export']; ?></p>
+                </div>
+                <div class="btn-option">
+                    <button type="submit" class="btn-primary" name="export"><?php echo $text['export']; ?></button>
+                </div>
+            </div>
 
             <div class="btn-center">
                 <button type="submit" class="btn-secondary btn-fixed" name="set-settings"><?php echo $text['save']; ?></button>

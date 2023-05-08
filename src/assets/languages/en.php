@@ -45,6 +45,7 @@ $text =
     'awake-time' => 'Awake Time',
 
     'information-mail' => 'Information via e-mail:',
+    'export' => 'export',
 
     'save' => 'Save',
 
