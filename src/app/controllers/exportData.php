@@ -44,7 +44,7 @@
         <?php endfor; ?>
         <?php        
             // Open a file in write mode ('w')
-            $filename = $_SESSION['id'] .'-'. date("Y-m-d-Gis");
+            $filename = date("Y-m-d-Gis") . "_Export-Fatiguediary_" . str_replace(" ", "_", $_SESSION['name']);
             $fp = fopen('../exports/' . $filename . '.csv', 'w');
 
             fputcsv($fp, array_keys($allData[0])); // Add the keys as the column headers
