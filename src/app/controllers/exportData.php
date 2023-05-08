@@ -1,4 +1,11 @@
 <?php
+    use PHPMailer\PHPMailer\PHPMailer;
+    use PHPMailer\PHPMailer\Exception;
+
+    require 'assets/PHPMailer/src/Exception.php';
+    require 'assets/PHPMailer/src/PHPMailer.php';
+
+
     print_head(array('<title>' . $text['all-entries'] . ' | Fatigue Diary</title>'), false);
     print_body();
     includeToastify();
@@ -59,67 +66,16 @@
 
 <?php 
 function sendMail($FILENAME) {
-    // Recipient 
-    $to = $_SESSION['email']; 
-     
-    // Sender 
-    $from = 'info@fatiguediary.ch'; 
-    $from_name = 'Jon from Fatigue Diary'; 
-     
-    // Email subject 
-    $subject = 'Exported Data from Fatigue Diary';  
-     
-    // Attachment file 
-    $file = "../exports/" . $FILENAME . ".csv"; 
-     
-    // Email body content 
-    $body = ' 
-        <h3>Your Exported Data from Fatigue Diary</h3> 
-        <p>Hey!</p>
-        <p>You have requested your data from <a href="https://www.fatiguediary.ch">Fatigue Diary</a>. You can find it in the attachment.</p>
-        <p>If you have any questions, feel free to contact me!</p>
-        <p>Kind regards, <br>
-        Jon Jampen <br>
-        Creator of <a href="https://www.fatiguediary.ch">Fatigue Diary</a>
-        </p>
-        <i>This email was automatically sent to ' . $to . ' from </i><a href="https://www.fatiguediary.ch">www.fatiguediary.ch</a>
-    '; 
-     
-    $file_size = filesize($file);
-    $handle = fopen($file, "r");
-    $content = fread($handle, $file_size);
-    fclose($handle);
-    
-    $content = chunk_split(base64_encode($content));
-    $uid = md5(uniqid(time()));
-    $name = basename($file);
-    
-    $eol = PHP_EOL;
-    
-    // Basic headers
-    $header = "From: ".$from_name." <".$from.">".$eol;
-    $header .= "Reply-To: ".$from.$eol;
-    $header .= "MIME-Version: 1.0\r\n";
-    $header .= "Content-Type: multipart/mixed; boundary=\"".$uid."\"";
-    
-    // Put everything else in $message
-    $message = "--".$uid.$eol;
-    $message .= "Content-Type: text/html; charset=ISO-8859-1".$eol;
-    $message .= "Content-Transfer-Encoding: 8bit".$eol.$eol;
-    $message .= $body.$eol;
-    $message .= "--".$uid.$eol;
-    $message .= "Content-Type: text/csv; name=\"".$FILENAME.".csv\"".$eol;
-    $message .= "Content-Transfer-Encoding: base64".$eol;
-    $message .= "Content-Disposition: attachment; FILENAME=\"".$FILENAME.".csv\"".$eol;
-    $message .= $content.$eol;
-    $message .= "--".$uid."--";
-    
-    if (mail($to, $subject, $message, $header))
-    {
-        return "mail_success";
-    }
-    else
-    {
-        return "mail_error";
-    }
+    $bodytext = "Hello";
+    $email = new PHPMailer();
+    $email->SetFrom('info@fatiguediary.ch', 'Your Name'); //Name is optional
+    $email->Subject   = 'Message Subject';
+    $email->Body      = $bodytext;
+    $email->AddAddress( 'jon.jampen@cryptography.ch' );
+
+    $file_to_attach = '../exports/' . $FILENAME . '.csv';
+
+    $email->AddAttachment( $file_to_attach , 'NameOfFile.csv' );
+
+    return $email->Send();
 }
