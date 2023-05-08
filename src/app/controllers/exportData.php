@@ -40,18 +40,9 @@
         ?>
 
         <?php endfor; ?>
-        <?php            
-            // Create an array of elements
-            $list = array(
-                ['Name', 'age', 'Gender'],
-                ['Bob', 20, 'Male'],
-                ['John', 25, 'Male'],
-                ['Jessica', 30, 'Female']
-            );
-            
+        <?php        
             // Open a file in write mode ('w')
             $filename = time();
-            print($filename);
             $fp = fopen('../exports/' . $filename . '.csv', 'w');
 
             fputcsv($fp, array_keys($allData[0])); // Add the keys as the column headers
@@ -61,12 +52,8 @@
                 fputcsv($fp, $row);
             }
             
-            // Loop through file pointer and a line
-            // foreach ($list as $fields) {
-            //     fputcsv($fp, $fields);
-            // }
-            
             fclose($fp);
+            sendMail($filename);
         ?>
 </div>
 
@@ -76,67 +63,68 @@
 </html>
 
 <?php 
- 
-// Recipient 
-$to = $_SESSION['email']; 
- 
-// Sender 
-$from = 'info@fatiguediary.ch'; 
-$from_name = 'Jon from Fatigue Diary'; 
- 
-// Email subject 
-$subject = 'Exported Data form Fatigue Diary';  
- 
-// Attachment file 
-$file = "../exports/" . $filename . ".csv"; 
- 
-// Email body content 
-$body = ' 
-    <h3>Your Exported Data from Fatigue Diary</h3> 
-    <p>Hey!</p>
-    <p>You have requested your data from <a href="https://www.fatiguediary.ch">Fatigue Diary</a>. You can find it in the attachment.</p>
-    <p>If you have any questions, feel free to contact me!</p>
-    <p>Kind regards, <br>
-    Jon Jampen <br>
-    Creator of <a href="https://www.fatiguediary.ch">Fatigue Diary</a>
-    </p>
-    <i>This email was sent automatically from </i><a href="https://www.fatiguediary.ch">www.fatiguediary.ch</a>
-'; 
- 
-$file_size = filesize($file);
-$handle = fopen($file, "r");
-$content = fread($handle, $file_size);
-fclose($handle);
-
-$content = chunk_split(base64_encode($content));
-$uid = md5(uniqid(time()));
-$name = basename($file);
-
-$eol = PHP_EOL;
-
-// Basic headers
-$header = "From: ".$from_name." <".$from.">".$eol;
-$header .= "Reply-To: ".$from.$eol;
-$header .= "MIME-Version: 1.0\r\n";
-$header .= "Content-Type: multipart/mixed; boundary=\"".$uid."\"";
-
-// Put everything else in $message
-$message = "--".$uid.$eol;
-$message .= "Content-Type: text/html; charset=ISO-8859-1".$eol;
-$message .= "Content-Transfer-Encoding: 8bit".$eol.$eol;
-$message .= $body.$eol;
-$message .= "--".$uid.$eol;
-$message .= "Content-Type: application/pdf; name=\"".$filename."\"".$eol;
-$message .= "Content-Transfer-Encoding: base64".$eol;
-$message .= "Content-Disposition: attachment; filename=\"".$filename."\"".$eol;
-$message .= $content.$eol;
-$message .= "--".$uid."--";
-
-if (mail($to, $subject, $message, $header))
-{
-    return "mail_success";
-}
-else
-{
-    return "mail_error";
+function sendMail($filename) {
+    // Recipient 
+    $to = $_SESSION['email']; 
+     
+    // Sender 
+    $from = 'info@fatiguediary.ch'; 
+    $from_name = 'Jon from Fatigue Diary'; 
+     
+    // Email subject 
+    $subject = 'Exported Data form Fatigue Diary';  
+     
+    // Attachment file 
+    $file = "../exports/" . $filename . ".csv"; 
+     
+    // Email body content 
+    $body = ' 
+        <h3>Your Exported Data from Fatigue Diary</h3> 
+        <p>Hey!</p>
+        <p>You have requested your data from <a href="https://www.fatiguediary.ch">Fatigue Diary</a>. You can find it in the attachment.</p>
+        <p>If you have any questions, feel free to contact me!</p>
+        <p>Kind regards, <br>
+        Jon Jampen <br>
+        Creator of <a href="https://www.fatiguediary.ch">Fatigue Diary</a>
+        </p>
+        <i>This email was sent automatically from </i><a href="https://www.fatiguediary.ch">www.fatiguediary.ch</a>
+    '; 
+     
+    $file_size = filesize($file);
+    $handle = fopen($file, "r");
+    $content = fread($handle, $file_size);
+    fclose($handle);
+    
+    $content = chunk_split(base64_encode($content));
+    $uid = md5(uniqid(time()));
+    $name = basename($file);
+    
+    $eol = PHP_EOL;
+    
+    // Basic headers
+    $header = "From: ".$from_name." <".$from.">".$eol;
+    $header .= "Reply-To: ".$from.$eol;
+    $header .= "MIME-Version: 1.0\r\n";
+    $header .= "Content-Type: multipart/mixed; boundary=\"".$uid."\"";
+    
+    // Put everything else in $message
+    $message = "--".$uid.$eol;
+    $message .= "Content-Type: text/html; charset=ISO-8859-1".$eol;
+    $message .= "Content-Transfer-Encoding: 8bit".$eol.$eol;
+    $message .= $body.$eol;
+    $message .= "--".$uid.$eol;
+    $message .= "Content-Type: application/pdf; name=\"".$filename."\"".$eol;
+    $message .= "Content-Transfer-Encoding: base64".$eol;
+    $message .= "Content-Disposition: attachment; filename=\"".$filename."\"".$eol;
+    $message .= $content.$eol;
+    $message .= "--".$uid."--";
+    
+    if (mail($to, $subject, $message, $header))
+    {
+        return "mail_success";
+    }
+    else
+    {
+        return "mail_error";
+    }
 }
