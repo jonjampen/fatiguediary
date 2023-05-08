@@ -44,7 +44,7 @@
         <?php endfor; ?>
         <?php        
             // Open a file in write mode ('w')
-            $filename = time();
+            $filename = $_SESSION['id'] .'-'. time();
             $fp = fopen('../exports/' . $filename . '.csv', 'w');
 
             fputcsv($fp, array_keys($allData[0])); // Add the keys as the column headers
@@ -66,16 +66,26 @@
 
 <?php 
 function sendMail($FILENAME) {
-    $bodytext = "Hello";
+    $bodytext = ' 
+        <h3>Your Exported Data from Fatigue Diary</h3> 
+        <p>Hey!</p>
+        <p>You have requested your data from <a href="https://www.fatiguediary.ch">Fatigue Diary</a>. You can find it in the attachment.</p>
+        <p>If you have any questions, feel free to contact me!</p>
+        <p>Kind regards, <br>
+        Jon Jampen <br>
+        Creator of <a href="https://www.fatiguediary.ch">Fatigue Diary</a>
+        </p>
+        <i>This email was automatically sent to ' . $_SESSION['email'] . ' from </i><a href="https://www.fatiguediary.ch">www.fatiguediary.ch</a>
+    ';
     $email = new PHPMailer();
-    $email->SetFrom('info@fatiguediary.ch', 'Your Name'); //Name is optional
-    $email->Subject   = 'Message Subject';
+    $email->SetFrom('info@fatiguediary.ch', 'Jon from Fatigue Diary'); //Name is optional
+    $email->Subject   = 'Exported Data from Fatigue Diary';
     $email->Body      = $bodytext;
-    $email->AddAddress( 'jon.jampen@cryptography.ch' );
+    $email->AddAddress($_SESSION['email']);
 
     $file_to_attach = '../exports/' . $FILENAME . '.csv';
 
-    $email->AddAttachment( $file_to_attach , 'NameOfFile.csv' );
+    $email->AddAttachment( $file_to_attach , $FILENAME.'.csv' );
 
     return $email->Send();
 }
