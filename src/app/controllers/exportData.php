@@ -87,7 +87,7 @@ function sendMail($FILENAME) {
         Jon Jampen <br>
         Creator of <a href="https://www.fatiguediary.ch">Fatigue Diary</a>
         </p>
-        <i>This email was sent automatically to ' . $to . ' from </i><a href="https://www.fatiguediary.ch">www.fatiguediary.ch</a>
+        <i>This email was automatically sent to ' . $to . ' from </i><a href="https://www.fatiguediary.ch">www.fatiguediary.ch</a>
     '; 
      
     $file_size = filesize($file);
