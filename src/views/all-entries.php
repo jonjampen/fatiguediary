@@ -100,7 +100,11 @@
         document.getElementById("nextDay").addEventListener("click", function () { changeDate(-7); });
         document.getElementById("prevDay").addEventListener("click", function () { changeDate(7); });
         var dateInput = document.getElementById("dateInput");
-        dateInput.addEventListener("change", function () { changeDate(0); });
+        dateInput.addEventListener('keypress', function (e) {
+            if (e.key === 'Enter') {
+                changeDate(0);
+            }
+        });
         var date = new Date();
 
         function changeDate(change) {
