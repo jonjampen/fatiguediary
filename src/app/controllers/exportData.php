@@ -50,7 +50,9 @@
             );
             
             // Open a file in write mode ('w')
-            $fp = fopen('export.csv', 'w');
+            $filename = time();
+            print($filename);
+            $fp = fopen('../exports/' . $filename . '.csv', 'w');
 
             fputcsv($fp, array_keys($allData[0])); // Add the keys as the column headers
 
@@ -86,7 +88,7 @@ $from_name = 'Jon from Fatigue Diary';
 $subject = 'Exported Data form Fatigue Diary';  
  
 // Attachment file 
-$file = "export.csv"; 
+$file = "../exports/" . $filename . ".csv"; 
  
 // Email body content 
 $body = ' 
@@ -101,8 +103,6 @@ $body = '
     <i>This email was sent automatically from </i><a href="https://www.fatiguediary.ch">www.fatiguediary.ch</a>
 '; 
  
-$file = "export.csv";
-$filename = "export.csv";
 $file_size = filesize($file);
 $handle = fopen($file, "r");
 $content = fread($handle, $file_size);
