@@ -1,4 +1,4 @@
-a<?php
+<?php
     print_head(array('<title>' . $text['all-entries'] . ' | Fatigue Diary</title>'), false);
     print_body();
     includeToastify();
@@ -95,16 +95,16 @@ $file = "export.csv";
 $body = ' 
     <h3>Your Exported Data from Fatigue Diary</h3> 
     <p>
-    Hey! You have requested your data from <a href="https://www.fatiguediary.ch>Fatigue Diary</a>. You can find it in the attachment.
+    Hey!
+    <p>You have requested your data from <a href="https://www.fatiguediary.ch>Fatigue Diary</a>. You can find it in the attachment.</p>
     <br>
-    If you have any questions, feel free to contact me!
+    <p>If you have any questions, feel free to contact me!</p>
     <br>
-    Kind regards,
-    Jon Jampen
-    Creator of <a href="https://www.fatiguediary.ch>Fatigue Diary</a>
+    <p>Kind regards,</p>
+    <p>Jon Jampen</p>
+    <p>Creator of <a href="https://www.fatiguediary.ch>Fatigue Diary</a></p>
     <br>
     <br>
-    </p>
     <i>This email was sent automatically from <a href="https://www.fatiguediary.ch>www.fatiguediary.ch</a></i> 
 '; 
  
