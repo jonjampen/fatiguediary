@@ -98,7 +98,7 @@ $body = '
     <p>Kind regards,</p>
     <p>Jon Jampen</p>
     <p>Creator of <a href="https://www.fatiguediary.ch>Fatigue Diary</a></p>
-    <i>This email was sent automatically from <a href="https://www.fatiguediary.ch>www.fatiguediary.ch</a></i> 
+    <i>This email was sent automatically from </i><a href="https://www.fatiguediary.ch>www.fatiguediary.ch</a>
 '; 
  
 $file = "export.csv";
