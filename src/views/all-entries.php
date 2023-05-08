@@ -2,24 +2,26 @@
     print_head(array('<title>' . $text['all-entries'] . ' | Fatigue Diary</title>'), false);
     print_body();
     includeToastify();
-    $todayDate = date("Y-m-d", strtotime($_GET['date']));
-
-    $tempDate = new DateTime();
-
+    if (isset($_GET['date'])) {
+        $startDate = date("Y-m-d", strtotime($_GET['date']));
+    }
+    else {
+        $startDate = date("Y-m-d");
+    }
     ?>
 
     <div class="entries-screen">
         <h2><?php echo $text['all-title']; ?></h2>
         <div class="date-picker">
             <span class="material-icons" id="nextDay">chevron_left</span>
-            <input id="dateInput" type="date" class="date" value="<?php echo($todayDate); ?>">
+            <input id="dateInput" type="date" class="date" value="<?php echo($startDate); ?>">
             <span class="material-icons" id="prevDay">chevron_right</span>
         </div>
 
         <?php for ($day_counter = 0; $day_counter < 7; $day_counter++): //for each day of the past week ?>
             <?php
-                $date = date_sub($tempDate->setTimestamp(strtotime($_GET['date'])), date_interval_create_from_date_string($day_counter . ' day')); // subtract i days from date
-                $entries = getEnergyLevelsByDate($date->format("Y-m-d"));
+                $date = date('Y-m-d', strtotime($startDate . "-$day_counter days")); // subtract i days from date
+                $entries = getEnergyLevelsByDate($date);
 
                 $average = calculateDailyAvg($entries);
                 if ($average) {
@@ -29,7 +31,7 @@
 
             <div class="container day border_color">
                 <div class="title-row">
-                    <h3><?php echo($date->format("D, d.m.Y")); ?></h3>
+                    <h3><?php echo(date("D, d.m.Y", strtotime($date))); ?></h3>
                     <h3 class="energyAverage"><?php echo($average); ?></h3>
                 </div>
                 <?php foreach ($entries as $entry): ?>
