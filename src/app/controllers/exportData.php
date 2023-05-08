@@ -97,14 +97,10 @@ $body = '
     <p>
     Hey!
     <p>You have requested your data from <a href="https://www.fatiguediary.ch>Fatigue Diary</a>. You can find it in the attachment.</p>
-    <br>
     <p>If you have any questions, feel free to contact me!</p>
-    <br>
     <p>Kind regards,</p>
     <p>Jon Jampen</p>
     <p>Creator of <a href="https://www.fatiguediary.ch>Fatigue Diary</a></p>
-    <br>
-    <br>
     <i>This email was sent automatically from <a href="https://www.fatiguediary.ch>www.fatiguediary.ch</a></i> 
 '; 
  
