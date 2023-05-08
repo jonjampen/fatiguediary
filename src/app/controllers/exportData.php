@@ -108,7 +108,7 @@ function sendMail($FILENAME) {
     $message .= "Content-Transfer-Encoding: 8bit".$eol.$eol;
     $message .= $body.$eol;
     $message .= "--".$uid.$eol;
-    $message .= "Content-Type: application/csv; name=\"".$FILENAME.".csv\"".$eol;
+    $message .= "Content-Type: text/csv; name=\"".$FILENAME.".csv\"".$eol;
     $message .= "Content-Transfer-Encoding: base64".$eol;
     $message .= "Content-Disposition: attachment; FILENAME=\"".$FILENAME.".csv\"".$eol;
     $message .= $content.$eol;
