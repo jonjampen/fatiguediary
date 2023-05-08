@@ -10,7 +10,7 @@ $pages = [
     "how",
     "install",
     // controllers
-    "mail", "ajax"
+    "mail", "ajax", "exportData"
 ];
 
 //db.php with $servername, $username, $password (gitignore)
@@ -147,6 +147,12 @@ else {
     }
     if ($page == "set-settings") {
         include("app/controllers/set-settings.php");
+    }
+    if ($page == "exportData") {
+        include("app/controllers/get-energy.php");
+        include("app/controllers/display-activities.php");
+        include("app/controllers/daily-avg.php");
+        include("app/controllers/exportData.php");
     }
 }
 
