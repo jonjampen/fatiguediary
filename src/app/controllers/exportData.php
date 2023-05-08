@@ -66,8 +66,7 @@
             
             fclose($fp);
         ?>
-        </div>
-
+</div>
 
         
 
@@ -93,12 +92,12 @@ $file = "export.csv";
 $body = ' 
     <h3>Your Exported Data from Fatigue Diary</h3> 
     <p>Hey!</p>
-    <p>You have requested your data from <a href="https://www.fatiguediary.ch>Fatigue Diary</a>. You can find it in the attachment.</p>
+    <p>You have requested your data from <a href="https://www.fatiguediary.ch">Fatigue Diary</a>. You can find it in the attachment.</p>
     <p>If you have any questions, feel free to contact me!</p>
     <p>Kind regards,</p>
     <p>Jon Jampen</p>
-    <p>Creator of <a href="https://www.fatiguediary.ch>Fatigue Diary</a></p>
-    <i>This email was sent automatically from </i><a href="https://www.fatiguediary.ch>www.fatiguediary.ch</a>
+    <p>Creator of <a href="https://www.fatiguediary.ch">Fatigue Diary</a></p>
+    <i>This email was sent automatically from </i><a href="https://www.fatiguediary.ch">www.fatiguediary.ch</a>
 '; 
  
 $file = "export.csv";
