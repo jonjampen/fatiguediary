@@ -44,11 +44,16 @@
                     <input type="checkbox" name="newsletter" id="newsletter_check" <?php if($_SESSION['settings']['newsletter'] == 1) {echo("checked");} ?>>
                 </div>
             </div>
-
+            <br>
+            
             <div class="btn-center">
                 <button type="submit" class="btn-secondary btn-fixed" name="set-settings"><?php echo $text['save']; ?></button>
             </div>
         </form>
+
+        <div class="btn-center">
+            <button onclick="exportData()" class="btn-primary" name="export"><?php echo $text['export']; ?></button>
+        </div>
     </div>
 
 
@@ -89,5 +94,11 @@
                 lang_btn1.classList.add("outline");
                 lang_field.value = "en";
             }
+        }
+
+
+        function exportData() {
+            console.log("exportData")
+            window.location.href = "index.php?page=exportData";
         }
     </script>
