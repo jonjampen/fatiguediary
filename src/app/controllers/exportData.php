@@ -63,7 +63,7 @@
 </html>
 
 <?php 
-function sendMail($filename) {
+function sendMail($FILENAME) {
     // Recipient 
     $to = $_SESSION['email']; 
      
@@ -72,10 +72,10 @@ function sendMail($filename) {
     $from_name = 'Jon from Fatigue Diary'; 
      
     // Email subject 
-    $subject = 'Exported Data form Fatigue Diary';  
+    $subject = 'Exported Data from Fatigue Diary';  
      
     // Attachment file 
-    $file = "../exports/" . $filename . ".csv"; 
+    $file = "../exports/" . $FILENAME . ".csv"; 
      
     // Email body content 
     $body = ' 
@@ -87,7 +87,7 @@ function sendMail($filename) {
         Jon Jampen <br>
         Creator of <a href="https://www.fatiguediary.ch">Fatigue Diary</a>
         </p>
-        <i>This email was sent automatically from </i><a href="https://www.fatiguediary.ch">www.fatiguediary.ch</a>
+        <i>This email was sent automatically to ' . $to . ' from </i><a href="https://www.fatiguediary.ch">www.fatiguediary.ch</a>
     '; 
      
     $file_size = filesize($file);
@@ -113,9 +113,9 @@ function sendMail($filename) {
     $message .= "Content-Transfer-Encoding: 8bit".$eol.$eol;
     $message .= $body.$eol;
     $message .= "--".$uid.$eol;
-    $message .= "Content-Type: application/pdf; name=\"".$filename."\"".$eol;
+    $message .= "Content-Type: application/pdf; name=\"".$FILENAME."\"".$eol;
     $message .= "Content-Transfer-Encoding: base64".$eol;
-    $message .= "Content-Disposition: attachment; filename=\"".$filename."\"".$eol;
+    $message .= "Content-Disposition: attachment; FILENAME=\"".$FILENAME."\"".$eol;
     $message .= $content.$eol;
     $message .= "--".$uid."--";
     
