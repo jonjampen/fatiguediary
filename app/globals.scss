@@ -78,3 +78,12 @@
 a {
     color: hsl(var(--accent-foreground)) !important;
 }
+
+body {
+    width: 100%;
+    min-height: 100vh;
+}
+
+* {
+    box-sizing: border-box;
+}
