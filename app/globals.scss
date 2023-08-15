@@ -74,3 +74,7 @@
         @apply bg-background text-foreground;
     }
 }
+
+a {
+    color: hsl(var(--accent-foreground)) !important;
+}
