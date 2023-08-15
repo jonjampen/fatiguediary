@@ -8,8 +8,9 @@ import {
     CardHeader,
     CardTitle,
 } from "@/components/ui/card"
+import LabelInput from "@/components/LabelInput"
 
-export default function Form({ title, description, info, link, linkText, children }) {
+export default function Form({ title, description, fields, info, link, linkText }) {
     return (
         <div className="flex h-full justify-center items-center">
             <Card className="w-[350px]">
@@ -20,7 +21,11 @@ export default function Form({ title, description, info, link, linkText, childre
                 <CardContent>
                     <form>
                         <div className="grid w-full items-center gap-4">
-                            {children}
+                            {fields.map(field => {
+                                return (
+                                    <LabelInput key={fields.name} title={field.title} placeholder={field.placeholder} name={field.name} type={field.type} />
+                                )
+                            })}
                         </div>
                     </form>
                 </CardContent>

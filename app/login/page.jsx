@@ -1,12 +1,23 @@
 import React from 'react'
 import Form from '@/components/Form'
-import LabelInput from "@/components/LabelInput"
 
 export default function Login() {
+    let fields = [
+        {
+            title: "Email",
+            placeholder: "Email",
+            name: "email",
+            type: "email",
+        },
+        {
+            title: "Password",
+            placeholder: "Password",
+            name: "password",
+            type: "password",
+        },
+
+    ]
     return (
-        <Form title="Login" description="Enter your email and password to continue" info="Don't have an account yet?" link="/signup" linkText="Signup">
-            <LabelInput title="Email" placeholder="Email" name="email" type="email" />
-            <LabelInput title="Password" placeholder="Password" name="password" type="password" />
-        </Form >
+        <Form title="Login" description="Enter your email and password to continue" fields={fields} info="Don't have an account yet?" link="/signup" linkText="Signup" />
     )
 }
