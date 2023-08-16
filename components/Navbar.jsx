@@ -32,14 +32,14 @@ export default function Navbar() {
   }
 
   return (
-    <nav className="w-full flex flex-col items-start md:flex-row md:items-center justify-between mb-6 px-3">
+    <nav className="w-full flex flex-col items-start md:flex-row md:items-center justify-between mb-6 px-3  border-b">
 
       {/* Top Bar */}
       <div className="w-full md:w-auto flex items-center justify-between h-16">
         <img src="/logo.svg" alt="" className="h-10" />
 
         <Button variant="outline" size="icon" onClick={toggleMenu} className="md:hidden" >
-          <img src="/icons/menu.svg" alt="open menu" className="h-4 w-4" id="menu-icon" />
+          <img src="/icons/menu.svg" alt="open menu" className="h-4 w-4 icon" id="menu-icon" />
         </Button>
       </div>
 

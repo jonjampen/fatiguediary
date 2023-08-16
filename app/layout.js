@@ -14,7 +14,7 @@ export default function RootLayout({ children }) {
     <html lang="en" className="dark">
       <body className={inter.className}>
         <Navbar />
-        <main className="h-[calc(100vh-64px-24px)]">
+        <main className="h-[calc(100vh-64px-24px-1px)]"> {/* -nav-margintop-navborder */}
           {children}
         </main>
       </body>
