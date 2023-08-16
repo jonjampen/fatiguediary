@@ -31,7 +31,7 @@ export default function Form({ title, description, fields, info, link, linkText 
                 </CardContent>
                 <CardFooter className="flex-col items-center">
                     <Button className="w-full">{title}</Button>
-                    <CardDescription className="mt-2">{info} <a href={link}>{linkText}</a></CardDescription>
+                    <CardDescription className="mt-2">{info} <a href={link} className="link">{linkText}</a></CardDescription>
                 </CardFooter>
             </Card>
         </div >
