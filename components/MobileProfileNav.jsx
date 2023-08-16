@@ -1,6 +1,7 @@
 import React from 'react'
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import { links } from "@/lib/navbarLinks"
+import NavItem from './NavItem'
 
 export default function MobileProfileNav() {
     return (
@@ -20,7 +21,7 @@ export default function MobileProfileNav() {
                 <ul>
                     {links.profile.map((item, id) => {
                         return (
-                            <a href={item.link} key={id}><li className="py-2 px-1 md:py-0 md:px-0 w-ful">{item.name}</li></a>
+                            <NavItem link={item.link} name={item.name} key={id} />
                         )
                     })}
                 </ul>
