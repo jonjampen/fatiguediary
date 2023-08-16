@@ -7,6 +7,7 @@ import MobileProfileNav from './MobileProfileNav'
 import DesktopProfileNav from './DesktopProfileNav'
 import LoginNavButtons from './LoginNavButtons'
 import NavItem from './NavItem'
+import { Menu } from 'lucide-react'
 
 export default function Navbar() {
   let isLoggedIn = true;
@@ -39,7 +40,7 @@ export default function Navbar() {
         <img src="/logo.svg" alt="" className="h-10" />
 
         <Button variant="outline" size="icon" onClick={toggleMenu} className="md:hidden" >
-          <img src="/icons/menu.svg" alt="open menu" className="h-4 w-4 icon" id="menu-icon" />
+          <Menu className="h-4 w-4" />
         </Button>
       </div>
 
