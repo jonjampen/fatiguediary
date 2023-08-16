@@ -65,8 +65,6 @@ export default function Navbar() {
     ],
   }
 
-  let menuIcon = document.getElementById("menu-icon");
-
   function toggleMenu() {
     let menuItems = document.getElementById("menu-items");
     menuItems.classList.toggle("hidden")
@@ -74,24 +72,23 @@ export default function Navbar() {
 
   return (
     <nav className="w-full flex flex-col items-start md:flex-row md:items-center justify-between mb-6 px-3">
-      <div className="w-full flex items-center justify-between h-16">
+      <div className="w-full md:w-auto flex items-center justify-between h-16">
         <img src="/logo.svg" alt="" className="h-10" />
 
         <Button variant="outline" size="icon" onClick={toggleMenu} className="md:hidden" >
           <img src="/icons/menu.svg" alt="open menu" className="h-4 w-4" id="menu-icon" />
         </Button>
       </div>
-      <ul className="hidden md:flex items-center gap-5 px-3 md:px-0 w-full" id="menu-items">
+      <ul className="hidden md:flex items-center gap-8 px-3  md:w-auto md:px-0 w-full" id="menu-items">
         {links.main.map((item, id) => {
           return (
-            <li key={id} className="py-2 px-1 md:py-0 md:px-0"><a href={item.link}>{item.name}</a></li>
+            <a href={item.link} key={id}><li className="py-2 px-1 md:py-0 md:px-0 w-full">{item.name}</li></a>
           )
         })}
         <li className="hidden md:block relative">
           <DropdownMenu>
             <DropdownMenuTrigger>
               <Avatar>
-                {/* <AvatarImage src="https://github.com/shadcn.png" /> */}
                 <AvatarFallback className="bg-secondary">JJ</AvatarFallback>
               </Avatar>
             </DropdownMenuTrigger>
@@ -104,7 +101,7 @@ export default function Navbar() {
               <DropdownMenuSeparator />
               {links.profile.map((item, id) => {
                 return (
-                  <DropdownMenuItem key={id}><a href={item.link}>{item.name}</a></DropdownMenuItem>
+                  <a href={item.link} key={id}><DropdownMenuItem className="cursor-pointer">{item.name}</DropdownMenuItem></a>
                 )
               })}
             </DropdownMenuContent>
@@ -114,7 +111,6 @@ export default function Navbar() {
         <li className="md:hidden mb-3">
           <div className="flex gap-3 py-3">
             <Avatar>
-              {/* <AvatarImage src="https://github.com/shadcn.png" /> */}
               <AvatarFallback className="bg-secondary">JJ</AvatarFallback>
             </Avatar>
             <div className="">
@@ -122,11 +118,13 @@ export default function Navbar() {
               <p className="text-muted-foreground text-xs font-extralight mt-[2px]">info@fatiguediary.ch</p>
             </div>
           </div>
-          {links.profile.map((item, id) => {
-            return (
-              <li key={id} className="py-2 px-1 md:py-0 md:px-0"><a href={item.link}>{item.name}</a></li>
-            )
-          })}
+          <ul>
+            {links.profile.map((item, id) => {
+              return (
+                <a href={item.link} key={id}><li className="py-2 px-1 md:py-0 md:px-0 w-ful">{item.name}</li></a>
+              )
+            })}
+          </ul>
         </li>
       </ul>
     </nav>
