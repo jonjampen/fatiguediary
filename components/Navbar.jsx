@@ -1,57 +1,28 @@
 "use client"
 import React from 'react'
 import { Button } from '@/components/ui/button'
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuLabel,
-  DropdownMenuSeparator,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu"
 
+import { links } from "@/lib/navbarLinks"
+import MobileProfileNav from './MobileProfileNav'
+import DesktopProfileNav from './DesktopProfileNav'
+import LoginNavButtons from './LoginNavButtons'
 
 export default function Navbar() {
-  const links = {
-    main: [
-      {
-        name: 'Information',
-        link: '/',
-      },
-      {
-        name: 'App',
-        link: '/user',
-      },
-      {
-        name: 'Instructions',
-        link: '/instructions',
-      },
-      {
-        name: 'Contact',
-        link: '/contact',
-      },
-    ],
-    profile: [
-      {
-        name: 'Your Account',
-        link: '/account',
-      },
-      {
-        name: 'Settings',
-        link: '/settings',
-      },
-      {
-        name: 'Sign Out',
-        link: '/logout',
-      },
-    ],
-    new: [
-      {
-        name: 'Login',
-        link: '/login',
-      }
-    ],
+  let isLoggedIn = true;
+
+  function renderProfileNav() {
+    if (isLoggedIn) {
+      return (
+        <>
+          <DesktopProfileNav />
+          <MobileProfileNav />
+        </>
+      )
+    }
+
+    return (
+      <LoginNavButtons />
+    )
   }
 
   function toggleMenu() {
@@ -80,50 +51,7 @@ export default function Navbar() {
           )
         })}
 
-        {/* Desktop Profile */}
-        <li className="hidden md:block relative">
-          <DropdownMenu>
-            <DropdownMenuTrigger>
-              <Avatar>
-                <AvatarFallback className="bg-secondary">JJ</AvatarFallback>
-              </Avatar>
-            </DropdownMenuTrigger>
-            <DropdownMenuContent className="mr-2">
-              <DropdownMenuLabel>
-                Jon Jampen
-                <p className="text-muted-foreground text-xs font-extralight mt-[2px]">info@fatiguediary.ch</p>
-              </DropdownMenuLabel>
-              {/* email */}
-              <DropdownMenuSeparator />
-              {links.profile.map((item, id) => {
-                return (
-                  <a href={item.link} key={id}><DropdownMenuItem className="cursor-pointer">{item.name}</DropdownMenuItem></a>
-                )
-              })}
-            </DropdownMenuContent>
-          </DropdownMenu>
-        </li>
-
-        {/* Mobile Profile */}
-        <hr className="h-px my-3 bg-gray-200 border-0 dark:bg-gray-700 md:hidden" />
-        <li className="md:hidden mb-3">
-          <div className="flex gap-3 py-3 items-center">
-            <Avatar>
-              <AvatarFallback className="bg-secondary">JJ</AvatarFallback>
-            </Avatar>
-            <div className="flex flex-col items-start justify-center">
-              <p>Jon Jampen</p>
-              <p className="text-muted-foreground text-xs font-extralight mt-[2px]">info@fatiguediary.ch</p>
-            </div>
-          </div>
-          <ul>
-            {links.profile.map((item, id) => {
-              return (
-                <a href={item.link} key={id}><li className="py-2 px-1 md:py-0 md:px-0 w-ful">{item.name}</li></a>
-              )
-            })}
-          </ul>
-        </li>
+        {renderProfileNav()}
       </ul>
     </nav>
   )
