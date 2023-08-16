@@ -73,19 +73,21 @@ export default function Navbar() {
   }
 
   return (
-    <nav className="w-full flex items-center justify-between mb-6 h-16 px-3">
-      <img src="/logo.svg" alt="" className="h-10" />
+    <nav className="w-full flex flex-col items-start md:flex-row md:items-center justify-between mb-6 px-3">
+      <div className="w-full flex items-center justify-between h-16">
+        <img src="/logo.svg" alt="" className="h-10" />
 
-      <Button variant="outline" size="icon" onClick={toggleMenu} className="block md:hidden h-4 w-4" >
-        <img src="/icons/menu.svg" alt="open menu" id="menu-icon" />
-      </Button>
-      <ul className="hidden md:flex items-center gap-5" id="menu-items">
+        <Button variant="outline" size="icon" onClick={toggleMenu} className="md:hidden" >
+          <img src="/icons/menu.svg" alt="open menu" className="h-4 w-4" id="menu-icon" />
+        </Button>
+      </div>
+      <ul className="hidden md:flex items-center gap-5 px-3 md:px-0 w-full" id="menu-items">
         {links.main.map((item, id) => {
           return (
-            <li key={id}><a href={item.link}>{item.name}</a></li>
+            <li key={id} className="py-2 px-1 md:py-0 md:px-0"><a href={item.link}>{item.name}</a></li>
           )
         })}
-        <li className="relative">
+        <li className="hidden md:block relative">
           <DropdownMenu>
             <DropdownMenuTrigger>
               <Avatar>
@@ -107,6 +109,24 @@ export default function Navbar() {
               })}
             </DropdownMenuContent>
           </DropdownMenu>
+        </li>
+        <hr className="h-px my-3 bg-gray-200 border-0 dark:bg-gray-700" />
+        <li className="md:hidden mb-3">
+          <div className="flex gap-3 py-3">
+            <Avatar>
+              {/* <AvatarImage src="https://github.com/shadcn.png" /> */}
+              <AvatarFallback className="bg-secondary">JJ</AvatarFallback>
+            </Avatar>
+            <div className="">
+              <p>Jon Jampen</p>
+              <p className="text-muted-foreground text-xs font-extralight mt-[2px]">info@fatiguediary.ch</p>
+            </div>
+          </div>
+          {links.profile.map((item, id) => {
+            return (
+              <li key={id} className="py-2 px-1 md:py-0 md:px-0"><a href={item.link}>{item.name}</a></li>
+            )
+          })}
         </li>
       </ul>
     </nav>
