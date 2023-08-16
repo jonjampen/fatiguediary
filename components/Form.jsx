@@ -12,7 +12,7 @@ import LabelInput from "@/components/LabelInput"
 
 export default function Form({ title, description, fields, info, link, linkText }) {
     return (
-        <div className="flex h-full justify-center items-center">
+        <div className="flex h-full justify-center items-start md:items-center">
             <Card className="w-[350px]">
                 <CardHeader className="flex-col items-center">
                     <CardTitle>{title}</CardTitle>
