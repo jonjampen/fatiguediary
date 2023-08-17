@@ -70,7 +70,7 @@ export function SettingsForm() {
                             />
                             <FormField
                                 control={form.control}
-                                name="marketing_emails"
+                                name="theme"
                                 render={({ field }) => (
                                     <FormItem className="flex flex-row items-center justify-between rounded-lg border p-4">
                                         <div className="space-y-0.5">
@@ -79,6 +79,28 @@ export function SettingsForm() {
                                             </FormLabel>
                                             <FormDescription>
                                                 Enable the dark theme.
+                                            </FormDescription>
+                                        </div>
+                                        <FormControl>
+                                            <Switch
+                                                checked={field.value}
+                                                onCheckedChange={field.onChange}
+                                            />
+                                        </FormControl>
+                                    </FormItem>
+                                )}
+                            />
+                            <FormField
+                                control={form.control}
+                                name="awake-time"
+                                render={({ field }) => (
+                                    <FormItem className="flex flex-row items-center justify-between rounded-lg border p-4">
+                                        <div className="space-y-0.5">
+                                            <FormLabel className="text-base">
+                                                Awake Time
+                                            </FormLabel>
+                                            <FormDescription>
+                                                When are you awake?
                                             </FormDescription>
                                         </div>
                                         <FormControl>
