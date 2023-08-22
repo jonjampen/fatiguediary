@@ -11,7 +11,7 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en" className="dark">
+    <html lang="en" className="darkk">
       <body className={inter.className}>
         <Navbar />
         <main className="h-[calc(100vh-64px-24px-1px)]"> {/* -nav-margintop-navborder */}
