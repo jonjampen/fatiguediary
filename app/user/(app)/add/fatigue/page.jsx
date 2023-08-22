@@ -21,12 +21,13 @@ import {
 } from "@/components/ui/dialog"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
+import { Textarea } from "@/components/ui/textarea"
 
 export default function AddFatigue() {
     const [energyLevel, setEnergyLevel] = useState(5);
 
     return (
-        <section className="mx-4 flex flex-col gap-6 justify-center">
+        <section className="mx-4 mb-4 flex flex-col gap-6 justify-center">
             <h1>Add Energy Level</h1>
             {/* Date & Time picker */}
             <Card>
@@ -76,10 +77,9 @@ export default function AddFatigue() {
             <Card>
                 <CardHeader>
                     <CardTitle>Notes</CardTitle>
-                    <CardDescription>Add your notes here.</CardDescription>
                 </CardHeader>
                 <CardContent>
-                    {/* input */}
+                    <Textarea placeholder="Notes..." />
                 </CardContent>
             </Card>
             <Button>Add Entry</Button>
