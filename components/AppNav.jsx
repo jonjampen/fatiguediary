@@ -11,7 +11,7 @@ export default function AppNav() {
     return (
         <div className="w-full flex justify-center fixed bottom-0">
 
-            <nav className="max-w-[400px] w-full h-16 rounded flex items-center justify-between px-8 border">
+            <nav className="max-w-[400px] w-full h-16 rounded flex items-center justify-between px-8 border bg-background">
                 <Button variant="ghost" size="icon" className="" onClick={() => navigateTo("/user/dashboard")} >
                     <BarChart4 className="h-8 w-8" />
                 </Button>
