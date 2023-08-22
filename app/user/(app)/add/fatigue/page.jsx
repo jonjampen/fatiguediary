@@ -27,10 +27,10 @@ export default function AddFatigue() {
     const [energyLevel, setEnergyLevel] = useState(5);
 
     return (
-        <section className="mx-4 mb-4 flex flex-col gap-6 justify-center">
+        <section className="mx-4 mb-4 flex flex-col gap-6 justify-center items-center">
             <h1>Add Energy Level</h1>
             {/* Date & Time picker */}
-            <Card>
+            <Card className="w-full md:w-[500px]">
                 <CardHeader>
                     <CardTitle>Energy Level</CardTitle>
                     <CardDescription>Choose your current energy level.</CardDescription>
@@ -43,7 +43,7 @@ export default function AddFatigue() {
                     <p>😂</p>
                 </CardFooter>
             </Card>
-            <Card>
+            <Card className="w-full md:w-[500px]">
                 <CardHeader>
                     <CardTitle>Activities</CardTitle>
                     <CardDescription>Mark the activities that you have just done.</CardDescription>
@@ -74,7 +74,7 @@ export default function AddFatigue() {
                     </Dialog>
                 </CardContent>
             </Card>
-            <Card>
+            <Card className="w-full md:w-[500px]">
                 <CardHeader>
                     <CardTitle>Notes</CardTitle>
                 </CardHeader>
