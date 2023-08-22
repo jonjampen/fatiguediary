@@ -67,8 +67,9 @@ export default function AddFatigue() {
                                     <Input id="activityName" placeholder="Reading" className="col-span-3" />
                                 </div>
                             </div>
-                            <DialogFooter>
-                                <Button type="submit">Add Activity</Button>
+                            <DialogFooter className="flex flex-row justify-between">
+                                <Button variant="outline">Cancel</Button>
+                                <Button type="submit">Create Activity</Button>
                             </DialogFooter>
                         </DialogContent>
                     </Dialog>
