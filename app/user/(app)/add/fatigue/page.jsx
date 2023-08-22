@@ -1,4 +1,5 @@
-import React from 'react'
+"use client"
+import React, { useState } from 'react'
 import {
     Card,
     CardContent,
@@ -11,6 +12,8 @@ import { Button } from '@/components/ui/button'
 import { Slider } from "@/components/ui/slider"
 
 export default function AddFatigue() {
+    const [energyLevel, setEnergyLevel] = useState(5);
+
     return (
         <section className="mx-4 flex flex-col gap-6 justify-center">
             <h1>Add Energy Level</h1>
@@ -21,11 +24,10 @@ export default function AddFatigue() {
                     <CardDescription>Choose your current energy level.</CardDescription>
                 </CardHeader>
                 <CardContent>
-                    <Slider defaultValue={[10]} max={10} step={0.5} />
-
+                    <Slider defaultValue={[energyLevel]} max={10} step={0.5} onValueChange={(newValue) => setEnergyLevel(newValue)} />
                 </CardContent>
-                <CardFooter>
-                    <p>10</p>
+                <CardFooter className="flex justify-between text-2xl">
+                    <p className="font-semibold">{energyLevel}</p>
                     <p>😂</p>
                 </CardFooter>
             </Card>
