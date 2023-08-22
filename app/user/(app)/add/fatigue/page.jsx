@@ -8,6 +8,7 @@ import {
     CardTitle,
 } from "@/components/ui/card"
 import { Button } from '@/components/ui/button'
+import { Slider } from "@/components/ui/slider"
 
 export default function AddFatigue() {
     return (
@@ -20,7 +21,8 @@ export default function AddFatigue() {
                     <CardDescription>Choose your current energy level.</CardDescription>
                 </CardHeader>
                 <CardContent>
-                    {/* slider */}
+                    <Slider defaultValue={[10]} max={10} step={0.5} />
+
                 </CardContent>
                 <CardFooter>
                     <p>10</p>
