@@ -4,6 +4,9 @@
 
 Matura project by Jon Jampen
 
+---
+`Note: This project is currently being rebuilt with Next.js `
+
 ## Description
 📝 [Project Description (Matura Paper)](https://github.com/jonjampen/fatigue-diary/blob/dev/docs/maturapaper/matura_paper_jon_jampen.pdf)
 
