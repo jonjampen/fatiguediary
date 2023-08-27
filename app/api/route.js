@@ -13,12 +13,16 @@ export async function POST(request) {
 
     let query = 'SELECT * FROM `energy` WHERE `user_id` = ?';
     let params = [1]
+    try {
 
-    if (type === "selectUserByEmail") {
-        query = 'SELECT * FROM `users` WHERE `email` = ?';
-        params = [body.email]
+        if (type === "selectUserByEmail") {
+            query = 'SELECT * FROM `users` WHERE `email` = ?';
+            params = [body.email]
+
+        }
+    } catch (error) {
+        console.log("ERROR:" + error)
     }
-
     const [rows] = await connection.execute(query, params);
 
     return NextResponse.json({ data: rows }, { status: 200 });
