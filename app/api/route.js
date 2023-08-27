@@ -21,5 +21,5 @@ export async function POST(request) {
 
     const [rows] = await connection.execute(query, params);
 
-    return NextResponse.json({ body: rows }, { status: 200 });
+    return NextResponse.json({ data: rows }, { status: 200 });
 }
