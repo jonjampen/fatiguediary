@@ -9,7 +9,9 @@ import {
     CardHeader,
     CardTitle,
 } from "@/components/ui/card"
-
+import Entry from '@/components/Entry'
+import BorderStyle from '@/components/BorderStyle'
+import EnergyValue from '@/components/EnergyValue'
 
 export default function Dashboard() {
     return (
@@ -19,57 +21,20 @@ export default function Dashboard() {
                 <DatePicker />
             </div>
             <div className="w-full flex flex-col items-center justify-between gap-4 mt-6">
-                <Card className="w-full">
+                <BorderStyle avg={8} className="w-full">
                     <CardHeader className="">
                         <CardTitle className="flex justify-between items-center ">
                             <p>Sun, 27.08.2023</p>
-                            <span>8</span>
+                            <EnergyValue avg={8}>
+                                <span>8</span>
+                            </EnergyValue>
                         </CardTitle>
                         {/* <CardDescription>Day Summary (TK)</CardDescription> */}
                     </CardHeader>
                     <CardContent className="">
-                        <div className="w-full border-b flex justify-between items-center py-2">
-                            <div className="flex flex-col">
-                                <p className="text-xs text-gray-500">09:47</p>
-                                <p>Reading, Eating</p>
-                                <p>Reading 100 pages.</p>
-                            </div>
-                            <div className="">
-                                <span>8</span>
-                            </div>
-                        </div>
-                        <div className="w-full border-b flex justify-between items-center py-2">
-                            <div className="flex flex-col">
-                                <p className="text-xs text-gray-500">09:47</p>
-                                <p>Reading, Eating</p>
-                                <p>Reading 100 pages.</p>
-                            </div>
-                            <div className="">
-                                <span>8</span>
-                            </div>
-                        </div>
-                        <div className="w-full border-b flex justify-between items-center py-2">
-                            <div className="flex flex-col">
-                                <p className="text-xs text-gray-500">09:47</p>
-                                <p>Reading, Eating</p>
-                                <p>Reading 100 pages.</p>
-                            </div>
-                            <div className="">
-                                <span>8</span>
-                            </div>
-                        </div>
-                        <div className="w-full border-b flex justify-between items-center py-2">
-                            <div className="flex flex-col">
-                                <p className="text-xs text-gray-500">09:47</p>
-                                <p>Reading, Eating</p>
-                                <p>Reading 100 pages.</p>
-                            </div>
-                            <div className="">
-                                <span>8</span>
-                            </div>
-                        </div>
+                        <Entry />
                     </CardContent>
-                </Card>
+                </BorderStyle>
             </div>
         </section>
     )
