@@ -11,9 +11,14 @@ import {
 } from "@/components/ui/card"
 import LabelInput from "@/components/LabelInput"
 import { signIn } from "next-auth/react"
-// import { providers, signIn, getSession, csrfToken } from "next-auth/client";
+import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert"
+import { useSearchParams } from 'next/navigation'
+
 
 export default function Form({ title, description, fields, info, link, linkText }) {
+    const searchParams = useSearchParams()
+    let currentError = searchParams.get('error')
+
     let userInput = {
         "name": "",
         "email": "",
@@ -21,7 +26,6 @@ export default function Form({ title, description, fields, info, link, linkText 
         "passwordConf": "",
     }
     async function handleSubmit(e) {
-        console.log(userInput.email, userInput.password)
         e.preventDefault();
         let response = await signIn("credentials", {
             email: userInput.email,
@@ -40,6 +44,16 @@ export default function Form({ title, description, fields, info, link, linkText 
                 <CardHeader className="flex-col items-center">
                     <CardTitle>{title}</CardTitle>
                     <CardDescription>{description}</CardDescription>
+                    {currentError ? (
+                        <Alert variant="destructive">
+                            {/* <Terminal className="h-4 w-4" /> */}
+                            <AlertTitle>Login Failed</AlertTitle>
+                            <AlertDescription>
+                                Username or password wrong, please try again or  <a href="/signup">create a new account</a>.
+
+                            </AlertDescription>
+                        </Alert>) : null}
+
                 </CardHeader>
                 <form method="post" onSubmit={handleSubmit}>
                     <CardContent>
