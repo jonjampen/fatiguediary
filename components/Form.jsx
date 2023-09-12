@@ -100,9 +100,22 @@ export default function Form({ title, description, fields, info, link, linkText 
                     <CardDescription>{description}</CardDescription>
                     {currentError ? (
                         <Alert variant="destructive">
-                            <AlertTitle>Login Failed</AlertTitle>
+                            <AlertTitle>{title} Failed</AlertTitle>
                             <AlertDescription>
-                                Username or password wrong, please try again or  <a href="/signup">create a new account</a>.
+                                {(() => {
+                                    if (currentError === "passwordNotMatch") {
+                                        return <>Your passwords do not match.</>
+                                    }
+                                    else if (currentError === "emailExists") {
+                                        return <>A user with this email already exists. Try again or <a href="/login">log in</a>.</>
+                                    }
+                                    else if (currentError === "emailExists") {
+                                        return <>Username or password wrong, please try again or  <a href="/signup">create a new account</a>.</>
+                                    }
+                                    else {
+                                        return <>There was an error logging you in. Please try again or contact support.</>
+                                    }
+                                })()}
 
                             </AlertDescription>
                         </Alert>) : null}
