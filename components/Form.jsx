@@ -126,7 +126,7 @@ export default function Form({ title, description, fields, info, link, linkText 
                         <div className="grid w-full items-center gap-4">
                             {fields.map(field => {
                                 return (
-                                    <LabelInput key={fields.name} title={field.title} placeholder={field.placeholder} name={field.name} type={field.type} change={handleChange} />
+                                    <LabelInput key={field.name} title={field.title} placeholder={field.placeholder} name={field.name} type={field.type} change={handleChange} />
                                 )
                             })}
                         </div>
