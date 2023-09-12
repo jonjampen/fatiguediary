@@ -16,25 +16,25 @@ import { Instagram, Mail } from 'lucide-react'
 
 export default function Contact() {
     async function sendEmail(e) {
-            let formData = new FormData();
-            formData.append("name", e.target.name.value);
-            formData.append("email", e.target.email.value);
-            formData.append("message", e.target.message.value);
-    
-            let res = await fetch("/sendEmail.php", {
-                method: "POST",
-                body: formData,
-            });
-            // Show success message
-            alert("Message sent successfully. You will receive a confirmation email shortly.");
-            document.getElementById("form").reset();
+        let formData = new FormData();
+        formData.append("name", e.target.name.value);
+        formData.append("email", e.target.email.value);
+        formData.append("message", e.target.message.value);
+
+        let res = await fetch("/sendEmail.php", {
+            method: "POST",
+            body: formData,
+        });
+        // Show success message
+        alert("Message sent successfully. You will receive a confirmation email shortly.");
+        document.getElementById("form").reset();
     }
 
     return (
-        <section className="mx-6 flex flex-col items-center ">
+        <section className="mx-6 flex flex-col items-center mb-4">
             <h1>Contact</h1>
-            <div className="flex justify-between items-start w-full">
-                <Card className="w-1/2">
+            <div className="flex flex-col md:flex-row justify-between items-start w-full gap-8">
+                <Card className="w-full md:w-1/2">
                     <form className="w-full" onSubmit={sendEmail}>
                         <CardHeader className="text-center">
                             <CardTitle>Contact Form</CardTitle>
@@ -73,15 +73,15 @@ export default function Contact() {
 
                 <div className="flex flex-col gap-8 h-full justify-start">
 
-                    <Card className="w-[400px]">
+                    <Card className="w-full md:w-[400px]">
                         <CardHeader>
                             <CardTitle>About</CardTitle>
                         </CardHeader>
                         <CardContent>
-                            <p>I'm Jon Jampen and I developed Fatigue Diary as part of my Matura project. Feel free to contact me with any questions or issues!</p>
+                            <p>I'm Jon Jampen and I developed Fatigue Diary as part of my Matura project. Feel free to contact me with any questions or issues! <br /> Follow Fatigue Diary on <a href="https://instagram.com/fatiguediary.ch">Instagram</a> to get the latest news.</p>
                         </CardContent>
                     </Card>
-                    <Card className="w-[400px]">
+                    <Card className="w-full md:w-[400px]">
                         <CardHeader>
                             <CardTitle>Contact Information</CardTitle>
                         </CardHeader>
