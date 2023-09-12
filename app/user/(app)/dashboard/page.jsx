@@ -15,7 +15,6 @@ import { options } from '@/app/api/auth/[...nextauth]/options';
 
 export default async function Dashboard() {
     const session = await getServerSession(options)
-    console.log(session)
 
     return (
         <section className="mx-4">
