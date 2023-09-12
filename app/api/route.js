@@ -1,6 +1,15 @@
 import { NextResponse } from "next/server";
 import mysql from "mysql2/promise"
 
+async function executeQuery(query, params) {
+    const connection = await mysql.createConnection({
+        host: 'localhost',
+        user: 'root',
+        database: 'fatigue-diary'
+    });
+    return await connection.execute(query, params);
+}
+
 export async function POST(request) {
     const connection = await mysql.createConnection({
         host: 'localhost',
@@ -38,7 +47,7 @@ export async function POST(request) {
             body.activities.map(async (activity) => {
                 let queryT = 'INSERT INTO `energy_activities` (user_id, energy_id, activity_id) VALUES (?, ?, ?)';
                 let paramsT = [userid, energyid, activity]
-                await connection.execute(queryT, paramsT)
+                await executeQuery(queryT, paramsT)
             })
         }
     } catch (error) {
