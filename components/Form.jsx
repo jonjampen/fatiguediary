@@ -36,10 +36,31 @@ export default function Form({ title, description, fields, info, link, linkText 
             await loginUser(userInput.email, userInput.password, false);
         } else if (title === "Signup") {
             // Register user
+            // do passwords match
+            if (userInput.password != userInput.passwordConf) {
+                window.location.href = "/signup?error=passwordNotMatch"
+                return;
+            }
+            // does user already exist
+            let res = await fetch(URL + "/api", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                    "type": "selectUserByEmail",
+                    "email": userInput.email,
+                }),
+            });
 
+            let userExists = await res.json()
+            if (userExists.data[0]) {
+                window.location.href = "/signup?error=emailExists"
+                return;
+            }
 
             // create user
-            let res = await fetch(URL + "/api", {
+            res = await fetch(URL + "/api", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
