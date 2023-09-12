@@ -9,25 +9,18 @@ import {
     CardHeader,
     CardTitle,
 } from "@/components/ui/card"
+import { getServerSession } from 'next-auth';
+import { options } from '@/app/api/auth/[...nextauth]/options';
 
 
 export default async function Dashboard() {
-    let res = await fetch(process.env.URL + "/api", {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-            "type": "selectUserByEmail",
-            "email": "jane@doe.com",
-        }),
-    });
-    let name = await res.json().then(a => a.body[0].name)
+    const session = await getServerSession(options)
+    console.log(session)
 
     return (
         <section className="mx-4">
             <div className="w-full flex flex-col justify-start text-left mb-4">
-                <h5 className="text-gray-600">Hi, {name}</h5>
+                <h5 className="text-gray-600">Hi, {session.user.name}</h5>
                 <h1 className="text-left text-2xl">Your Dashboard</h1>
             </div>
             <div className="w-full flex flex-col items-center justify-between gap-4">

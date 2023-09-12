@@ -33,7 +33,19 @@ export const options = {
     callbacks: {
         async session({ session, token }) {
             // Send properties to the client, like an access_token and user id from a provider.
-            session.user.id = 1
+            let res = await fetch(process.env.URL + "/api", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                    "type": "selectUserByEmail",
+                    "email": session.user.email,
+                }),
+            })
+            res = await res.json();
+
+            session.user.id = res.data[0].id
 
             return session
         }
