@@ -27,6 +27,8 @@ import { Plus } from 'lucide-react'
 
 export default function AddFatigue() {
     const [energyLevel, setEnergyLevel] = useState([5]);
+    const [selectedActivities, setSelectedActivities] = useState([]);
+
     let activities = [
         {
             "id": 1,
@@ -83,12 +85,12 @@ export default function AddFatigue() {
                     <CardContent className="sm:max-w-[425px]">
                         <ul className="activities">
                             {activities.map(activity => {
-                                return <ActivityItem activityId={activity.id}>{activity.name}</ActivityItem>
+                                return <ActivityItem activityId={activity.id} selectedActivities={selectedActivities} setSelectedActivities={setSelectedActivities}>{activity.name}</ActivityItem>
                             })}
 
                             <Dialog>
                                 <DialogTrigger>
-                                    <ActivityItem><Plus /></ActivityItem>
+                                <li className="border rounded h-11 flex items-center justify-center text-center cursor-pointer"><Plus/></li>
                                 </DialogTrigger>
                                 <DialogContent>
                                     <DialogHeader>
