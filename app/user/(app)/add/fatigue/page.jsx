@@ -28,7 +28,6 @@ export default function AddFatigue() {
 
     async function addEnergy(e) {
         e.preventDefault();
-
         let URL = "http://localhost:3000"
         let res = await fetch(URL + "/api", {
             method: "POST",
@@ -38,7 +37,7 @@ export default function AddFatigue() {
             body: JSON.stringify({
                 "type": "addEnergylevel",
                 "energylevel": energyLevel[0],
-                "notes": "energyLevel",
+                "notes": e.target.notes.value,
             }),
         });
     }
@@ -98,7 +97,7 @@ export default function AddFatigue() {
                         <CardTitle>Notes</CardTitle>
                     </CardHeader>
                     <CardContent>
-                        <Textarea placeholder="Notes..." />
+                        <Textarea placeholder="Notes..." id="notes" />
                     </CardContent>
                 </Card>
                 <Button type="submit">Add Entry</Button>
