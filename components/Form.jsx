@@ -80,7 +80,6 @@ export default function Form({ title, description, fields, info, link, linkText 
     }
 
     async function loginUser(email, password, newUser) {
-        console.log(email, password, newUser)
         await signIn("credentials", {
             email: email,
             password: password,
