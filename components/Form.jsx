@@ -18,6 +18,10 @@ import { useSearchParams } from 'next/navigation'
 export default function Form({ title, description, fields, info, link, linkText }) {
     const searchParams = useSearchParams()
     let currentError = searchParams.get('error')
+    const URL = "http://localhost:3000"
+
+    // let form = document.getElementById("form");
+    // console.log(form)
 
     let userInput = {
         "name": "",
@@ -25,11 +29,40 @@ export default function Form({ title, description, fields, info, link, linkText 
         "password": "",
         "passwordConf": "",
     }
+
     async function handleSubmit(e) {
         e.preventDefault();
-        let response = await signIn("credentials", {
-            email: userInput.email,
-            password: userInput.password,
+        if (title === "Login") {
+            await loginUser(userInput.email, userInput.password, false);
+        } else if (title === "Signup") {
+            // Register user
+
+
+            // create user
+            let res = await fetch(URL + "/api", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                    "type": "createNewUser",
+                    "name": userInput.name,
+                    "email": userInput.email,
+                    "password": userInput.password,
+                    "passwordConf": userInput.passwordConf,
+                }),
+            });
+
+            // login user
+            await loginUser(userInput.email, userInput.password, true);
+        }
+    }
+
+    async function loginUser(email, password, newUser) {
+        console.log(email, password, newUser)
+        await signIn("credentials", {
+            email: email,
+            password: password,
             callbackUrl: "/user/dashboard"
         })
     }
@@ -46,7 +79,6 @@ export default function Form({ title, description, fields, info, link, linkText 
                     <CardDescription>{description}</CardDescription>
                     {currentError ? (
                         <Alert variant="destructive">
-                            {/* <Terminal className="h-4 w-4" /> */}
                             <AlertTitle>Login Failed</AlertTitle>
                             <AlertDescription>
                                 Username or password wrong, please try again or  <a href="/signup">create a new account</a>.
@@ -55,7 +87,7 @@ export default function Form({ title, description, fields, info, link, linkText 
                         </Alert>) : null}
 
                 </CardHeader>
-                <form method="post" onSubmit={handleSubmit}>
+                <form method="post" onSubmit={handleSubmit} id="form">
                     <CardContent>
                         <div className="grid w-full items-center gap-4">
                             {fields.map(field => {

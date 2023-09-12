@@ -40,6 +40,7 @@ export const options = {
     },
     pages: {
         signIn: '/login',
+        error: '/login',
     }
 }
 

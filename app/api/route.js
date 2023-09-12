@@ -11,13 +11,18 @@ export async function POST(request) {
     const body = await request.json()
     const { type } = body
 
-    let query = 'SELECT * FROM `energy` WHERE `user_id` = ?';
+    let query = '';
     let params = [1]
     try {
 
         if (type === "selectUserByEmail") {
             query = 'SELECT * FROM `users` WHERE `email` = ?';
             params = [body.email]
+
+        }
+        else if (type === "createNewUser") {
+            query = 'INSERT INTO `users` (name, email, password) VALUES (?, ?, ?)';
+            params = [body.name, body.email, body.password]
 
         }
     } catch (error) {
