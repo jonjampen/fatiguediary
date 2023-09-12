@@ -33,20 +33,20 @@ export default function Contact() {
     return (
         <section className="mx-6 flex flex-col items-center mb-4">
             <h1>Contact</h1>
-            <div className="flex flex-col md:flex-row justify-between items-start w-full gap-8">
-                <Card className="w-full md:w-1/2">
+            <div className="flex flex-col md:flex-row justify-center items-start w-full gap-8">
+                <Card className="w-full md:w-[700px]">
                     <form className="w-full" onSubmit={sendEmail}>
                         <CardHeader className="text-center">
                             <CardTitle>Contact Form</CardTitle>
-                            <CardDescription>
-                                <div className="flex gap-2 w-full justify-center">
-                                    <Button variant="ghost" size="icon" onClick={() => window.open("https://instagram.com/fatiguediary.ch", "_blank")}>
-                                        <Instagram className="h-6 w-6" />
-                                    </Button>
-                                    <Button variant="ghost" size="icon" onClick={() => window.open("mailto:info@fatiguediary.ch", "_blank")}>
-                                        <Mail className="h-6 w-6" />
-                                    </Button>
-                                </div>
+                            <CardDescription className="flex gap-2 w-full justify-center">
+
+                                <Button variant="ghost" size="icon" onClick={() => window.open("https://instagram.com/fatiguediary.ch", "_blank")}>
+                                    <Instagram className="h-6 w-6" />
+                                </Button>
+                                <Button variant="ghost" size="icon" onClick={() => window.open("mailto:info@fatiguediary.ch", "_blank")}>
+                                    <Mail className="h-6 w-6" />
+                                </Button>
+
                             </CardDescription>
                         </CardHeader>
                         <CardContent>
