@@ -32,6 +32,14 @@ export async function POST(request) {
             query = 'INSERT INTO `energy` (user_id, energylevel, notes) VALUES (?, ?, ?)';
             params = [userid, body.energylevel, body.notes]
             console.log("complete")
+
+            let energyid = 1
+
+            body.activities.map(async (activity) => {
+                let queryT = 'INSERT INTO `energy_activities` (user_id, energy_id, activity_id) VALUES (?, ?, ?)';
+                let paramsT = [userid, energyid, activity]
+                await connection.execute(queryT, paramsT)
+            })
         }
     } catch (error) {
         console.log("ERROR:" + error)

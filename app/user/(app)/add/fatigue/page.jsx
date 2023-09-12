@@ -55,6 +55,7 @@ export default function AddFatigue() {
                 "type": "addEnergylevel",
                 "energylevel": energyLevel[0],
                 "notes": e.target.notes.value,
+                "activities": selectedActivities,
             }),
         });
     }
@@ -90,7 +91,7 @@ export default function AddFatigue() {
 
                             <Dialog>
                                 <DialogTrigger>
-                                <li className="border rounded h-11 flex items-center justify-center text-center cursor-pointer"><Plus/></li>
+                                    <li className="border rounded h-11 flex items-center justify-center text-center cursor-pointer"><Plus /></li>
                                 </DialogTrigger>
                                 <DialogContent>
                                     <DialogHeader>
