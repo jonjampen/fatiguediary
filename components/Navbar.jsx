@@ -12,6 +12,14 @@ import { Menu } from 'lucide-react'
 export default function Navbar() {
   let isLoggedIn = true;
 
+  async function shareIt() {
+    await navigator.share({
+      title: "Fatigue Diary",
+      text: "A Web app that helps you with your fatigue.",
+      url: "https://www.fatiguediary.ch",
+    });
+  }
+
   function renderProfileNav() {
     if (isLoggedIn) {
       return (
@@ -48,11 +56,16 @@ export default function Navbar() {
 
         {/* Links */}
         {links.main.map((item, id) => {
-          return (
-            <NavItem link={item.link} name={item.name} key={id} />
-          )
+          if (!item.loginRequired || isLoggedIn) {
+            return (
+              <NavItem link={item.link} name={item.name} key={id} />
+            )
+          }
         })}
-
+        {isLoggedIn ?
+          <button className="w-full text-start md:w-auto md:text-auto hover:text-accent" onClick={shareIt} key={99}><li className="py-2 px-1 md:py-0 md:px-0 w-full">Share this app</li></button>
+          : ""
+        }
         {renderProfileNav()}
       </ul>
     </nav>
