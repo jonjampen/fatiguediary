@@ -1,21 +1,18 @@
 import { NextResponse } from "next/server";
 import mysql from "mysql2/promise"
 
+const connection = await mysql.createConnection({
+    host: 'localhost',
+    user: 'root',
+    database: 'fatigue-diary'
+});
+
 async function executeQuery(query, params) {
-    const connection = await mysql.createConnection({
-        host: 'localhost',
-        user: 'root',
-        database: 'fatigue-diary'
-    });
-    return await connection.execute(query, params);
+    let [values] = await connection.execute(query, params);
+    return values
 }
 
 export async function POST(request) {
-    const connection = await mysql.createConnection({
-        host: 'localhost',
-        user: 'root',
-        database: 'fatigue-diary'
-    });
     const body = await request.json()
     const { type } = body
 
@@ -25,22 +22,26 @@ export async function POST(request) {
 
     let userid = 1;
 
+    let rows;
     try {
 
         if (type === "selectUserByEmail") {
             query = 'SELECT * FROM `users` WHERE `email` = ?';
             params = [body.email]
+            rows = await executeQuery(query, params);
 
         }
         else if (type === "createNewUser") {
             query = 'INSERT INTO `users` (name, email, password) VALUES (?, ?, ?)';
             params = [body.name, body.email, body.password]
+            rows = await executeQuery(query, params);
 
         }
         else if (type === "addEnergylevel") {
             query = 'INSERT INTO `energy` (user_id, energylevel, notes) VALUES (?, ?, ?)';
             params = [userid, body.energylevel, body.notes]
             console.log("complete")
+            rows = await executeQuery(query, params);
 
             let energyid = 1
 
@@ -53,15 +54,18 @@ export async function POST(request) {
         else if (type === "getActivities") {
             query = 'SELECT * FROM `activities` WHERE `user_id` = ?';
             params = [userid]
+            rows = await executeQuery(query, params);
+
         }
         else if (type === "createActivity") {
             query = 'INSERT INTO `activities` (user_id, name) VALUES (?, ?)';
             params = [userid, body.name]
+            rows = await executeQuery(query, params);
+
         }
     } catch (error) {
         console.log("ERROR:" + error)
     }
-    const [rows] = await connection.execute(query, params);
 
     return NextResponse.json({ data: rows }, { status: 200 });
 }
