@@ -19,6 +19,8 @@ import {
     DialogTitle,
     DialogTrigger,
     DialogFooter,
+    DialogClose,
+    dialogClose,
 } from "@/components/ui/dialog"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
@@ -26,14 +28,17 @@ import { Textarea } from "@/components/ui/textarea"
 import ActivityItem from '@/components/ActivityItem'
 import { Plus } from 'lucide-react'
 
-export default function AddForm({ activities }) {
+export default function AddForm({ startActivities, fetchActivities }) {
     const [energyLevel, setEnergyLevel] = useState([5]);
     const [selectedActivities, setSelectedActivities] = useState([]);
-    // add entry
+    const [activities, setActivities] = useState(startActivities);
+
+    let URL = "http://localhost:3000"
+    let res;
+
     async function addEnergy(e) {
-        let URL = "http://localhost:3000"
         e.preventDefault();
-        let res = await fetch(URL + "/api", {
+        res = await fetch(URL + "/api", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -45,6 +50,21 @@ export default function AddForm({ activities }) {
                 "activities": selectedActivities,
             }),
         });
+    }
+    async function createActivity() {
+        let activityName = document.getElementById("activityName").value
+        res = await fetch(URL + "/api", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+                "type": "createActivity",
+                "name": activityName,
+            }),
+        });
+        setActivities(await fetchActivities());
+        dialogClose();
     }
 
     return (
@@ -86,7 +106,7 @@ export default function AddForm({ activities }) {
                                 <DialogHeader>
                                     <DialogTitle className="text-left">Create new Activity</DialogTitle>
                                     <DialogDescription className="text-left">
-                                        Once created, activities cannot be deleted. However, they can be hidden by going to the settings.
+                                        Once created, activities cannot be deleted. However, they can be hidden or edited from the settings.
                                     </DialogDescription>
                                 </DialogHeader>
                                 <div className="grid gap-4 py-4">
@@ -98,8 +118,10 @@ export default function AddForm({ activities }) {
                                     </div>
                                 </div>
                                 <DialogFooter className="flex flex-row justify-between">
-                                    <Button variant="outline">Cancel</Button>
-                                    <Button type="submit">Create Activity</Button>
+                                    <DialogClose asChild>
+                                        <Button variant="outline">Cancel</Button>
+                                    </DialogClose>
+                                    <Button onClick={createActivity}>Create Activity</Button>
                                 </DialogFooter>
                             </DialogContent>
                         </Dialog>

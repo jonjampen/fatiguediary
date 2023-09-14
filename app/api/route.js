@@ -54,6 +54,10 @@ export async function POST(request) {
             query = 'SELECT * FROM `activities` WHERE `user_id` = ?';
             params = [userid]
         }
+        else if (type === "createActivity") {
+            query = 'INSERT INTO `activities` (user_id, name) VALUES (?, ?)';
+            params = [userid, body.name]
+        }
     } catch (error) {
         console.log("ERROR:" + error)
     }
