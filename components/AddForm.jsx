@@ -26,7 +26,8 @@ import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Textarea } from "@/components/ui/textarea"
 import ActivityItem from '@/components/ActivityItem'
-import { Plus } from 'lucide-react'
+import { Calendar, Clock, Plus } from 'lucide-react'
+import { IconInput } from './ui/iconInput'
 
 export default function AddForm({ startActivities, fetchActivities }) {
     const [energyLevel, setEnergyLevel] = useState([5]);
@@ -71,6 +72,10 @@ export default function AddForm({ startActivities, fetchActivities }) {
         <form onSubmit={addEnergy} className="mx-4 mb-4 flex flex-col gap-6 justify-center items-center" >
             <h1>Add Energy Level</h1>
             {/* Date & Time picker */}
+            <div className="w-full md:w-[500px] flex items-center justify-between gap-8 md:gap-16">
+                <IconInput type="date" name="date" id="dateInput" icon={<Calendar />} />
+                <IconInput type="time" name="time" id="timeInput" icon={<Clock />} />
+            </div>
             <Card className="w-full md:w-[500px]">
                 {selectedActivities.map(activity => {
                     return activity.id

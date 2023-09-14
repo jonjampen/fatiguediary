@@ -101,6 +101,16 @@ h2 {
     margin-top: 16px;
 }
 
+input[type="time"]::-webkit-calendar-picker-indicator {
+    background: none;
+    display: none;
+}
+
+input[type="date"]::-webkit-calendar-picker-indicator {
+    background: none;
+    display: none;
+}
+
 .activities {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
