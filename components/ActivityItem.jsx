@@ -17,6 +17,6 @@ export default function ActivityItem({ children, activityId, selectedActivities,
     }
 
     return (
-        <li className="border rounded h-11 flex items-center justify-center text-center cursor-pointer select-none" onClick={selectActivity}>{children}</li>
+        <li className="border rounded min-h-[44px] flex items-center justify-center text-center cursor-pointer select-none px-1" onClick={selectActivity}>{children}</li>
     )
 }

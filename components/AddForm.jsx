@@ -100,10 +100,10 @@ export default function AddForm({ startActivities, fetchActivities }) {
                     <CardTitle>Activities</CardTitle>
                     <CardDescription>Mark the activities that you have just done.</CardDescription>
                 </CardHeader>
-                <CardContent className="sm:max-w-[425px]">
-                    <ul className="activities">
+                <CardContent className="w-full">
+                    <ul className="activities w-full">
                         {activities.map(activity => {
-                            return <ActivityItem key={activity.id} activityId={activity.id} selectedActivities={selectedActivities} setSelectedActivities={setSelectedActivities}>{activity.name}</ActivityItem>
+                            return <ActivityItem key={activity.id} activityId={activity.id} selectedActivities={selectedActivities} setSelectedActivities={setSelectedActivities}><p className="break-words" style={{ 'word-break': 'break-all;' }}>{activity.name}</p></ActivityItem>
                         })}
 
                         <Dialog>
