@@ -50,6 +50,10 @@ export async function POST(request) {
                 await executeQuery(queryT, paramsT)
             })
         }
+        else if (type === "getActivities") {
+            query = 'SELECT * FROM `activities` WHERE `user_id` = ?';
+            params = [userid]
+        }
     } catch (error) {
         console.log("ERROR:" + error)
     }
