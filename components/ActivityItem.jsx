@@ -4,7 +4,7 @@ export default function ActivityItem({ children, activityId, selectedActivities,
     function selectActivity(e) {
         e.target.classList.toggle("bg-primary");
 
-        let selectedActivitiesTemp = selectedActivities;
+        let selectedActivitiesTemp = [...selectedActivities];
 
         if (selectedActivitiesTemp.includes(activityId)) {
             selectedActivitiesTemp.splice(selectedActivitiesTemp.indexOf(activityId), 1)

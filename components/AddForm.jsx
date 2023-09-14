@@ -26,10 +26,26 @@ import { Textarea } from "@/components/ui/textarea"
 import ActivityItem from '@/components/ActivityItem'
 import { Plus } from 'lucide-react'
 
-export default function AddForm({ activities, addEnergy }) {
+export default function AddForm({ activities }) {
     const [energyLevel, setEnergyLevel] = useState([5]);
     const [selectedActivities, setSelectedActivities] = useState([]);
-
+    // add entry
+    async function addEnergy(e) {
+        let URL = "http://localhost:3000"
+        e.preventDefault();
+        let res = await fetch(URL + "/api", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+                "type": "addEnergylevel",
+                "energylevel": energyLevel[0],
+                "notes": e.target.notes.value,
+                "activities": selectedActivities,
+            }),
+        });
+    }
 
     return (
         <form onSubmit={addEnergy} className="mx-4 mb-4 flex flex-col gap-6 justify-center items-center" >
