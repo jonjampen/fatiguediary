@@ -29,6 +29,8 @@ import ActivityItem from '@/components/ActivityItem'
 import { Calendar, Clock, Plus } from 'lucide-react'
 import { IconInput } from './ui/iconInput'
 import moment from 'moment';
+import { calculateColor } from '@/app/lib/calculateColor'
+import { calculateEmoji } from '@/app/lib/calculateEmoji'
 
 export default function AddForm({ startActivities, fetchActivities }) {
     const [energyLevel, setEnergyLevel] = useState([5]);
@@ -72,6 +74,8 @@ export default function AddForm({ startActivities, fetchActivities }) {
         dialogClose();
     }
 
+    let emoji = calculateEmoji(energyLevel);
+
     return (
         <form onSubmit={addEnergy} className="mx-4 mb-4 flex flex-col gap-6 justify-center items-center" >
             <h1>Add Energy Level</h1>
@@ -91,8 +95,8 @@ export default function AddForm({ startActivities, fetchActivities }) {
                     <Slider defaultValue={energyLevel} max={10} step={0.5} onValueChange={(newValue) => setEnergyLevel(newValue)} />
                 </CardContent>
                 <CardFooter className="flex justify-between text-2xl">
-                    <p className="font-semibold">{energyLevel}</p>
-                    <p>😂</p>
+                    <p className="font-semibold" style={{ 'color': calculateColor(energyLevel) }}>{energyLevel}</p>
+                    <p>{emoji}</p>
                 </CardFooter>
             </Card>
             <Card className="w-full md:w-[500px]">
