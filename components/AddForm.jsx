@@ -28,17 +28,20 @@ import { Textarea } from "@/components/ui/textarea"
 import ActivityItem from '@/components/ActivityItem'
 import { Calendar, Clock, Plus } from 'lucide-react'
 import { IconInput } from './ui/iconInput'
+import moment from 'moment';
 
 export default function AddForm({ startActivities, fetchActivities }) {
     const [energyLevel, setEnergyLevel] = useState([5]);
     const [selectedActivities, setSelectedActivities] = useState([]);
     const [activities, setActivities] = useState(startActivities);
-
+    const [date, setDate] = useState(moment().format("YYYY-MM-DD"));
+    const [time, setTime] = useState(moment().format("hh:mm"));
     let URL = "http://localhost:3000"
     let res;
 
     async function addEnergy(e) {
         e.preventDefault();
+        let datetime = date + " " + time
         res = await fetch(URL + "/api", {
             method: "POST",
             headers: {
@@ -49,6 +52,7 @@ export default function AddForm({ startActivities, fetchActivities }) {
                 "energylevel": energyLevel[0],
                 "notes": e.target.notes.value,
                 "activities": selectedActivities,
+                "datetime": datetime,
             }),
         });
     }
@@ -71,10 +75,9 @@ export default function AddForm({ startActivities, fetchActivities }) {
     return (
         <form onSubmit={addEnergy} className="mx-4 mb-4 flex flex-col gap-6 justify-center items-center" >
             <h1>Add Energy Level</h1>
-            {/* Date & Time picker */}
             <div className="w-full md:w-[500px] flex items-center justify-between gap-8 md:gap-16">
-                <IconInput type="date" name="date" id="dateInput" icon={<Calendar />} />
-                <IconInput type="time" name="time" id="timeInput" icon={<Clock />} />
+                <IconInput type="date" name="date" id="dateInput" icon={<Calendar />} value={date} onValueChange={setDate} />
+                <IconInput type="time" name="time" id="timeInput" icon={<Clock />} value={time} onValueChange={setTime} />
             </div>
             <Card className="w-full md:w-[500px]">
                 {selectedActivities.map(activity => {

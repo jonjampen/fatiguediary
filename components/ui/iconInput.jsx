@@ -3,7 +3,7 @@ import * as React from "react"
 import { cn } from "@/lib/utils"
 import { Button } from "./button";
 
-const IconInput = React.forwardRef(({ className, type, icon, ...props }, ref) => {
+const IconInput = React.forwardRef(({ className, type, icon, onValueChange, ...props }, ref) => {
     return (
         (<div className="relative">
             <input
@@ -13,6 +13,7 @@ const IconInput = React.forwardRef(({ className, type, icon, ...props }, ref) =>
                     className
                 )}
                 ref={ref}
+                onChange={(e) => onValueChange(e.target.value)}
                 {...props} />
             <div className="absolute left-0 top-0 h-10 w-10 flex items-center justify-center">
                 {icon}

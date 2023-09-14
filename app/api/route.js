@@ -34,8 +34,8 @@ export async function POST(request) {
             rows = await executeQuery(query, params);
         }
         else if (type === "addEnergylevel") {
-            query = 'INSERT INTO `energy` (user_id, energylevel, notes) VALUES (?, ?, ?)';
-            params = [userid, body.energylevel, body.notes]
+            query = 'INSERT INTO `energy` (user_id, energylevel, notes, datetime) VALUES (?, ?, ?, ?)';
+            params = [userid, body.energylevel, body.notes, body.datetime]
             console.log("complete")
             rows = await executeQuery(query, params);
 
