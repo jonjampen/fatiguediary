@@ -32,6 +32,7 @@ import moment from 'moment';
 import { calculateColor } from '@/app/lib/calculateColor'
 import { calculateEmoji } from '@/app/lib/calculateEmoji'
 import { useRouter } from 'next/navigation';
+import { LoaderButton } from './ui/loaderButton'
 
 export default function AddForm({ startActivities, fetchActivities }) {
     const [energyLevel, setEnergyLevel] = useState([5]);
@@ -152,7 +153,9 @@ export default function AddForm({ startActivities, fetchActivities }) {
                     <Textarea placeholder="Notes..." id="notes" />
                 </CardContent>
             </Card>
-            <Button type="submit">Add Entry</Button>
+            <LoaderButton type="submit">
+                Add Entry
+            </LoaderButton>
         </form>
     )
 }
