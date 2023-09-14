@@ -1,6 +1,6 @@
 "use client"
 import React from 'react'
-import { Button } from "@/components/ui/button"
+import { LoaderButton } from "@/components/ui/loaderButton"
 import {
     Card,
     CardContent,
@@ -131,7 +131,7 @@ export default function Form({ title, description, fields, info, link, linkText 
                         </div>
                     </CardContent>
                     <CardFooter className="flex-col items-center">
-                        <Button className="w-full" type="submit">{title}</Button>
+                        <LoaderButton className="w-full" type="submit">{title}</LoaderButton>
                         <CardDescription className="mt-2">{info} <a href={link} className="link">{linkText}</a></CardDescription>
                     </CardFooter>
                 </form>
