@@ -1,6 +1,6 @@
 import React from 'react'
 
-export default function ActivityItem({ children, activityId, selectedActivities, setSelectedActivities }) {
+export default function ActivityItem({ children, activityId, selectedActivities, setSelectedActivities, style }) {
     function selectActivity(e) {
         e.target.classList.toggle("bg-primary");
 
@@ -17,6 +17,6 @@ export default function ActivityItem({ children, activityId, selectedActivities,
     }
 
     return (
-        <li className="border rounded min-h-[44px] flex items-center justify-center text-center cursor-pointer select-none px-1" onClick={selectActivity}>{children}</li>
+        <li className="border rounded min-h-[44px] flex items-center justify-center text-center cursor-pointer select-none px-1" style={style} onClick={selectActivity}>{children}</li>
     )
 }

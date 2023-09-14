@@ -31,6 +31,7 @@ import { IconInput } from './ui/iconInput'
 import moment from 'moment';
 import { calculateColor } from '@/app/lib/calculateColor'
 import { calculateEmoji } from '@/app/lib/calculateEmoji'
+import { useRouter } from 'next/navigation';
 
 export default function AddForm({ startActivities, fetchActivities }) {
     const [energyLevel, setEnergyLevel] = useState([5]);
@@ -40,6 +41,7 @@ export default function AddForm({ startActivities, fetchActivities }) {
     const [time, setTime] = useState(moment().format("hh:mm"));
     let URL = "http://localhost:3000"
     let res;
+    const { push } = useRouter();
 
     async function addEnergy(e) {
         e.preventDefault();
@@ -57,7 +59,9 @@ export default function AddForm({ startActivities, fetchActivities }) {
                 "datetime": datetime,
             }),
         });
+        push('/user/dashboard');
     }
+
     async function createActivity() {
         let activityName = document.getElementById("activityName").value
         res = await fetch(URL + "/api", {
@@ -107,7 +111,7 @@ export default function AddForm({ startActivities, fetchActivities }) {
                 <CardContent className="w-full">
                     <ul className="activities w-full">
                         {activities.map(activity => {
-                            return <ActivityItem key={activity.id} activityId={activity.id} selectedActivities={selectedActivities} setSelectedActivities={setSelectedActivities}><p className="break-words" style={{ 'word-break': 'break-all;' }}>{activity.name}</p></ActivityItem>
+                            return <ActivityItem key={activity.id} activityId={activity.id} selectedActivities={selectedActivities} setSelectedActivities={setSelectedActivities} style={{ 'word-break': 'break-all;' }}>{activity.name}</ActivityItem>
                         })}
 
                         <Dialog>
