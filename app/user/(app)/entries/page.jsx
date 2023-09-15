@@ -40,6 +40,12 @@ export default async function Dashboard() {
             }
             groupedEntries[formattedDate].push(entry);
         })
+
+        // reverse sub-array order (Asc day but Desc week)
+        Object.entries(groupedEntries).map(([date, dayEntries]) => {
+            groupEntries[date] = dayEntries.reverse()
+        })
+
         return groupedEntries
     }
 
@@ -67,9 +73,7 @@ export default async function Dashboard() {
                             <CardContent className="">
                                 {dayEntries.map(entry => {
                                     return (
-                                        <>
-                                            <Entry entry={entry} />
-                                        </>
+                                        <Entry entry={entry} />
                                     )
                                 })}
                             </CardContent>
