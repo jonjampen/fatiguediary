@@ -1,18 +1,21 @@
 import React from 'react'
 
 import AddForm from '@/components/AddForm'
+import { headers, cookies } from 'next/headers'
 
 export default async function AddFatigue() {
     let URL = "http://localhost:3000"
-
+    console.log(headers().get("cookie"))
     async function fetchActivities() {
         "use server"
         // get activities
         let res = await fetch(URL + "/api", {
             method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-            },
+            // credentials: "include",
+            // headers: {
+            // "cookie": headers().get("cookie"),
+            // },
+            headers: { Cookie: cookies().toString() },
             body: JSON.stringify({
                 "type": "getActivities",
             }),

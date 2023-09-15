@@ -1,5 +1,7 @@
 import { NextResponse } from "next/server";
 import mysql from "mysql2/promise"
+import { getServerSession } from 'next-auth';
+import { options } from '@/app/api/auth/[...nextauth]/options';
 
 const connection = await mysql.createConnection({
     host: 'localhost',
@@ -16,11 +18,20 @@ export async function POST(request) {
     const body = await request.json()
     const { type } = body
 
+    const session = await getServerSession(options)
+    let userid;
+    if (session) {
+        userid = session.user.id;
+    }
+    console.log(type)
+    console.log(session)
+    console.log(request)
+    console.log("---")
+
     let rows;
     let query = '';
     let params = [1];
 
-    let userid = 1;
 
     try {
         if (type === "selectUserByEmail") {
@@ -36,7 +47,6 @@ export async function POST(request) {
         else if (type === "addEnergylevel") {
             query = 'INSERT INTO `energy` (user_id, energylevel, notes, datetime) VALUES (?, ?, ?, ?)';
             params = [userid, body.energylevel, body.notes, body.datetime]
-            console.log("complete")
             rows = await executeQuery(query, params);
 
             let energyid = 1
@@ -59,7 +69,7 @@ export async function POST(request) {
         }
     }
     catch (error) {
-        console.log("ERROR:" + error)
+        console.log("ERROR:" + error, "type: " + type)
     }
 
     return NextResponse.json({ data: rows }, { status: 200 });
