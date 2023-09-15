@@ -13,6 +13,7 @@ import Entry from '@/components/Entry'
 import BorderStyle from '@/components/BorderStyle'
 import EnergyValue from '@/components/EnergyValue'
 import { headers, cookies } from 'next/headers'
+import moment from "moment"
 
 export default async function Dashboard() {
 
@@ -30,8 +31,19 @@ export default async function Dashboard() {
         return res.data
     }
 
-    let entries = await fetchEntries();
-    console.log(entries)
+    function groupEntries(entries) {
+        let groupedEntries = {};
+        entries.map(entry => {
+            let formattedDate = moment(entry.datetime).format("YYYY-MM-DD");
+            if (!groupedEntries[formattedDate]) {
+                groupedEntries[formattedDate] = []
+            }
+            groupedEntries[formattedDate].push(entry);
+        })
+        return groupedEntries
+    }
+
+    let entries = groupEntries(await fetchEntries());
 
     return (
         <section className="mx-4">
@@ -39,26 +51,32 @@ export default async function Dashboard() {
             <div className="w-full flex flex-col items-center justify-between gap-4">
                 <DatePicker />
             </div>
-            <div className="w-full flex flex-col items-center justify-between gap-4 mt-6">
-                <BorderStyle avg={8} className="w-full">
-                    <CardHeader className="">
-                        <CardTitle className="flex justify-between items-center ">
-                            <p>Sun, 27.08.2023</p>
-                            <EnergyValue avg={8}>
-                                <span>8</span>
-                            </EnergyValue>
-                        </CardTitle>
-                        {/* <CardDescription>Day Summary (TK)</CardDescription> */}
-                    </CardHeader>
-                    <CardContent className="">
-                        {entries.map(entry => {
-                            return (
-                                <Entry entry={entry} />
-                            )
-                        })}
-                    </CardContent>
-                </BorderStyle>
-            </div>
-        </section>
+            {Object.entries(entries).map(([date, dayEntries]) => {
+                return (
+                    <div className="w-full flex flex-col items-center justify-between gap-4 mt-6">
+                        <BorderStyle avg={8} className="w-full">
+                            <CardHeader className="">
+                                <CardTitle className="flex justify-between items-center ">
+                                    <p>{moment(date).format("ddd, DD.MM.YYYY")}</p>
+                                    <EnergyValue avg={8}>
+                                        <span>8</span>
+                                    </EnergyValue>
+                                </CardTitle>
+                                {/* <CardDescription>Day Summary (TK)</CardDescription> */}
+                            </CardHeader>
+                            <CardContent className="">
+                                {dayEntries.map(entry => {
+                                    return (
+                                        <>
+                                            <Entry entry={entry} />
+                                        </>
+                                    )
+                                })}
+                            </CardContent>
+                        </BorderStyle >
+                    </div >
+                )
+            })}
+        </section >
     )
 }

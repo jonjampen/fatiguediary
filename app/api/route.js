@@ -64,7 +64,7 @@ export async function POST(request) {
             rows = await executeQuery(query, params);
         }
         else if (type === "getEntriesByUserId") {
-            query = 'SELECT * FROM `energy` WHERE `user_id` = ?';
+            query = 'SELECT * FROM `energy` WHERE `user_id` = ? ORDER BY datetime DESC';
             params = [userid]
             rows = await executeQuery(query, params);
         }

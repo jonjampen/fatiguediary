@@ -1,6 +1,7 @@
 import React from 'react'
 import EnergyValue from '@/components/EnergyValue'
 import moment from "moment"
+
 export default function Entry({ entry }) {
     return (
         <div className="w-full border-b flex justify-between items-center py-2">
