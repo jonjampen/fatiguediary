@@ -12,8 +12,27 @@ import {
 import Entry from '@/components/Entry'
 import BorderStyle from '@/components/BorderStyle'
 import EnergyValue from '@/components/EnergyValue'
+import { headers, cookies } from 'next/headers'
 
-export default function Dashboard() {
+export default async function Dashboard() {
+
+    let URL = "http://localhost:3000"
+    async function fetchEntries() {
+        "use server"
+        let res = await fetch(URL + "/api", {
+            method: "POST",
+            headers: { Cookie: cookies().toString() },
+            body: JSON.stringify({
+                "type": "getEntriesByUserId",
+            }),
+        })
+        res = await res.json()
+        return res.data
+    }
+
+    let entries = await fetchEntries();
+    console.log(entries)
+
     return (
         <section className="mx-4">
             <h1>Your Entries</h1>
@@ -32,7 +51,11 @@ export default function Dashboard() {
                         {/* <CardDescription>Day Summary (TK)</CardDescription> */}
                     </CardHeader>
                     <CardContent className="">
-                        <Entry />
+                        {entries.map(entry => {
+                            return (
+                                <Entry entry={entry} />
+                            )
+                        })}
                     </CardContent>
                 </BorderStyle>
             </div>

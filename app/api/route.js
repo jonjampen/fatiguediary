@@ -28,7 +28,7 @@ export async function POST(request) {
     let query = '';
     let params = [1];
 
-
+    console.log(type)
     try {
         if (type === "selectUserByEmail") {
             query = 'SELECT * FROM `users` WHERE `email` = ?';
@@ -61,6 +61,11 @@ export async function POST(request) {
         else if (type === "createActivity") {
             query = 'INSERT INTO `activities` (user_id, name) VALUES (?, ?)';
             params = [userid, body.name]
+            rows = await executeQuery(query, params);
+        }
+        else if (type === "getEntriesByUserId") {
+            query = 'SELECT * FROM `energy` WHERE `user_id` = ?';
+            params = [userid]
             rows = await executeQuery(query, params);
         }
     }
