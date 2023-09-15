@@ -23,10 +23,6 @@ export async function POST(request) {
     if (session) {
         userid = session.user.id;
     }
-    console.log(type)
-    console.log(session)
-    console.log(request)
-    console.log("---")
 
     let rows;
     let query = '';
