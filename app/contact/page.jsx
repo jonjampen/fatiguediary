@@ -87,9 +87,9 @@ export default function Contact() {
                         </CardHeader>
                         <CardContent>
                             <ul>
-                                <li>Jon Jampen</li>
+                                <li><a href="https://jonjampen.ch" target="_blank">Jon Jampen</a></li>
                                 <li><a href="mailto:info@fatiguediary.ch">info@fatiguediary.ch</a></li>
-                                <li><a href="https://www.fatiguediary.ch">www.fatiguediary.ch</a></li>
+                                <li><a href="https://www.fatiguediary.ch" target="_blank">www.fatiguediary.ch</a></li>
                                 <li><a href="/feedback">Feedback Form</a></li>
                             </ul>
                         </CardContent>
