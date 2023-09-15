@@ -45,7 +45,7 @@ export async function POST(request) {
             params = [userid, body.energylevel, body.notes, body.datetime]
             rows = await executeQuery(query, params);
 
-            let energyid = 1
+            let energyid = rows.insertId
 
             body.activities.map(async (activity) => {
                 let queryT = 'INSERT INTO `energy_activities` (user_id, energy_id, activity_id) VALUES (?, ?, ?)';
