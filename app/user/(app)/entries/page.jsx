@@ -20,10 +20,10 @@ export default function Dashboard() {
     let URL = "http://localhost:3000"
 
     async function fetchEntries(date = null) {
-        date = typeof date != null ? date : moment()
+        date = date != null ? date : moment()
         let startDate = moment(date).subtract(6, "days").format("YYYY-MM-DD HH:mm:ss")
         let endDate = moment(date).add(1, "day").format("YYYY-MM-DD HH:mm:ss")
-        
+
         let res = await fetch(URL + "/api", {
             method: "POST",
             body: JSON.stringify({
