@@ -39,11 +39,10 @@ export default function AddForm({ startActivities, fetchActivities }) {
     const [selectedActivities, setSelectedActivities] = useState([]);
     const [activities, setActivities] = useState(startActivities);
     const [date, setDate] = useState(moment().format("YYYY-MM-DD"));
-    const [time, setTime] = useState(moment().format("HHw:mm"));
+    const [time, setTime] = useState(moment().format("HH:mm"));
     let URL = "http://localhost:3000"
     let res;
     const { push } = useRouter();
-
     async function addEnergy(e) {
         e.preventDefault();
         let datetime = date + " " + time
