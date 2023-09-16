@@ -19,11 +19,17 @@ export default function Dashboard() {
     const [entries, setEntries] = useState({})
     let URL = "http://localhost:3000"
 
-    async function fetchEntries() {
+    async function fetchEntries(date = null) {
+        date = typeof date != null ? date : moment()
+        let startDate = moment(date).subtract(6, "days").format("YYYY-MM-DD HH:mm:ss")
+        let endDate = moment(date).add(1, "day").format("YYYY-MM-DD HH:mm:ss")
+        
         let res = await fetch(URL + "/api", {
             method: "POST",
             body: JSON.stringify({
                 "type": "getEntriesByUserId",
+                "startDate": startDate,
+                "endDate": endDate,
             }),
         })
         res = await res.json()
@@ -49,8 +55,7 @@ export default function Dashboard() {
     }
 
     async function updateEntries(date = null) {
-        setEntries(groupEntries(await fetchEntries()));
-        console.log(date)
+        setEntries(groupEntries(await fetchEntries(date)));
     }
 
     useEffect(() => {
