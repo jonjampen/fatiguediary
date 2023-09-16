@@ -19,10 +19,11 @@ export default function Dashboard() {
     const [entries, setEntries] = useState({})
     let URL = "http://localhost:3000"
 
-    async function fetchEntries(date = null) {
-        date = date != null ? date : moment()
-        let startDate = moment(date).subtract(6, "days").format("YYYY-MM-DD HH:mm:ss")
-        let endDate = moment(date).add(1, "day").format("YYYY-MM-DD HH:mm:ss")
+    async function fetchEntries(date) {
+
+        let startDate = moment(date).set({ hour: 0, minute: 0, second: 0, millisecond: 0 }).subtract(6, "days").format("YYYY-MM-DD HH:mm:ss")
+        let endDate = moment(date).set({ hour: 0, minute: 0, second: 0, millisecond: 0 }).add(1, "day").format("YYYY-MM-DD HH:mm:ss")
+        console.log(startDate, endDate)
 
         let res = await fetch(URL + "/api", {
             method: "POST",
@@ -54,12 +55,12 @@ export default function Dashboard() {
         return groupedEntries
     }
 
-    async function updateEntries(date = null) {
+    async function updateEntries(date) {
         setEntries(groupEntries(await fetchEntries(date)));
     }
 
     useEffect(() => {
-        updateEntries()
+        updateEntries(moment().toDate())
     }, [])
 
     return (
