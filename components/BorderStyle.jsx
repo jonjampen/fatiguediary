@@ -14,7 +14,7 @@ export default function BorderStyle({ children, avg }) {
     let color = calculateColor(avg);
     return (
         <Card id='container' className="w-full" style={{
-            "border-left": "2px solid" + color + "!important"
+            "borderLeft": "2px solid" + color + "!important"
         }}>
             {children}
         </Card >

@@ -17,6 +17,7 @@ import moment from "moment"
 
 export default function Dashboard() {
     const [entries, setEntries] = useState({})
+    const [averages, setAverages] = useState({})
     let URL = "http://localhost:3000"
 
     async function fetchEntries(date) {
@@ -75,7 +76,7 @@ export default function Dashboard() {
             </div>
             {Object.entries(entries).map(([date, dayEntries]) => {
                 return (
-                    <div className="w-full flex flex-col items-center justify-between gap-4 mt-6">
+                    <div key={date} className="w-full flex flex-col items-center justify-between gap-4 mt-6">
                         <BorderStyle avg={8} className="w-full">
                             <CardHeader className="">
                                 <CardTitle className="flex justify-between items-center ">
@@ -89,7 +90,7 @@ export default function Dashboard() {
                             <CardContent className="">
                                 {dayEntries.map(entry => {
                                     return (
-                                        <Entry entry={entry} />
+                                        <Entry key={entry.id} entry={entry} />
                                     )
                                 })}
                             </CardContent>
