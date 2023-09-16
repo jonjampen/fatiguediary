@@ -34,17 +34,21 @@ export default function Dashboard() {
             }),
         })
         res = await res.json()
-        return res.data
+        return [res.data, startDate, endDate]
     }
 
-    function groupEntries(entries) {
+    function groupEntries(ungroupedEntries, startDate, endDate) {
         let groupedEntries = {};
-        entries.map(entry => {
+        for (let counter = moment(endDate).subtract(1, "day"); counter.isSameOrAfter(moment(startDate)); counter.subtract(1, "day").clone()) {
+            let formattedDate = counter.format("YYYY-MM-DD")
+            groupedEntries[formattedDate] = []
+        }
+        ungroupedEntries.map(entry => {
             let formattedDate = moment(entry.datetime).format("YYYY-MM-DD");
-            if (!groupedEntries[formattedDate]) {
-                groupedEntries[formattedDate] = []
+            if (groupedEntries[formattedDate]) {
+                // groupedEntries[formattedDate] = []
+                groupedEntries[formattedDate].push(entry);
             }
-            groupedEntries[formattedDate].push(entry);
         })
 
         // reverse sub-array order (Asc day but Desc week)
@@ -56,7 +60,8 @@ export default function Dashboard() {
     }
 
     async function updateEntries(date) {
-        setEntries(groupEntries(await fetchEntries(date)));
+        const [ungroupedEntries, startDate, endDate] = await fetchEntries(date);
+        setEntries(groupEntries(ungroupedEntries, startDate, endDate));
     }
 
     useEffect(() => {
