@@ -68,6 +68,21 @@ export default function Dashboard() {
         updateEntries(moment().toDate())
     }, [])
 
+    useEffect(() => {
+        let averagesCopy = structuredClone(averages)
+        Object.entries(entries).map(([iterationDate, dayEntries]) => {
+            let counter = 0;
+            let sum = 0;
+
+            dayEntries.map(entry => {
+                sum += entry.energylevel;
+                counter++;
+            })
+            averagesCopy[iterationDate] = counter != 0 ? sum / counter : ""
+        })
+        setAverages(averagesCopy)
+    }, [entries])
+
     return (
         <section className="mx-4">
             <h1>Your Entries</h1>
@@ -77,12 +92,12 @@ export default function Dashboard() {
             {Object.entries(entries).map(([date, dayEntries]) => {
                 return (
                     <div key={date} className="w-full flex flex-col items-center justify-between gap-4 mt-6">
-                        <BorderStyle avg={8} className="w-full">
+                        <BorderStyle avg={averages[date]} className="w-full">
                             <CardHeader className="">
                                 <CardTitle className="flex justify-between items-center ">
                                     <p>{moment(date).format("ddd, DD.MM.YYYY")}</p>
-                                    <EnergyValue avg={8}>
-                                        <span>8</span>
+                                    <EnergyValue avg={averages[date]}>
+                                        <span>{averages[date]}</span>
                                     </EnergyValue>
                                 </CardTitle>
                                 {/* <CardDescription>Day Summary (TK)</CardDescription> */}
