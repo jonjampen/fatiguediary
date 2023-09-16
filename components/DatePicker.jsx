@@ -1,6 +1,7 @@
 "use client"
 
 import * as React from "react"
+import { useEffect, useState } from "react"
 import { format } from "date-fns"
 import { Calendar as CalendarIcon } from "lucide-react"
 
@@ -14,14 +15,19 @@ import {
 } from "@/components/ui/popover"
 import { ChevronLeft, ChevronRight } from "lucide-react"
 
-export default function DatePicker() {
-    const [date, setDate] = React.useState()
+
+export default function DatePicker({ updateEntries }) {
+    const [date, setDate] = useState()
+    useEffect(() => {
+        updateEntries(date)
+    }, [date])
 
     return (
         <div className="flex gap-2">
             <Button variant="outline" size="icon" className="" >
                 <ChevronLeft className="h-4 w-4" />
             </Button>
+
             <Popover>
                 <PopoverTrigger asChild>
                     <Button
@@ -44,6 +50,7 @@ export default function DatePicker() {
                     />
                 </PopoverContent>
             </Popover>
+
             <Button variant="outline" size="icon" className="" >
                 <ChevronRight className="h-4 w-4" />
             </Button>

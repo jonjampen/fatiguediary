@@ -1,6 +1,7 @@
+"use client"
 import DatePicker from '@/components/DatePicker'
 import RangePicker from '@/components/RangePicker'
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import {
     Card,
     CardContent,
@@ -12,17 +13,15 @@ import {
 import Entry from '@/components/Entry'
 import BorderStyle from '@/components/BorderStyle'
 import EnergyValue from '@/components/EnergyValue'
-import { headers, cookies } from 'next/headers'
 import moment from "moment"
 
-export default async function Dashboard() {
-
+export default function Dashboard() {
+    const [entries, setEntries] = useState({})
     let URL = "http://localhost:3000"
+
     async function fetchEntries() {
-        "use server"
         let res = await fetch(URL + "/api", {
             method: "POST",
-            headers: { Cookie: cookies().toString() },
             body: JSON.stringify({
                 "type": "getEntriesByUserId",
             }),
@@ -49,13 +48,20 @@ export default async function Dashboard() {
         return groupedEntries
     }
 
-    let entries = groupEntries(await fetchEntries());
+    async function updateEntries(date = null) {
+        setEntries(groupEntries(await fetchEntries()));
+        console.log(date)
+    }
+
+    useEffect(() => {
+        updateEntries()
+    }, [])
 
     return (
         <section className="mx-4">
             <h1>Your Entries</h1>
             <div className="w-full flex flex-col items-center justify-between gap-4">
-                <DatePicker />
+                <DatePicker updateEntries={updateEntries} />
             </div>
             {Object.entries(entries).map(([date, dayEntries]) => {
                 return (
