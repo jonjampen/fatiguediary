@@ -23,7 +23,6 @@ export default function Dashboard() {
 
         let startDate = moment(date).set({ hour: 0, minute: 0, second: 0, millisecond: 0 }).subtract(6, "days").format("YYYY-MM-DD HH:mm:ss")
         let endDate = moment(date).set({ hour: 0, minute: 0, second: 0, millisecond: 0 }).add(1, "day").format("YYYY-MM-DD HH:mm:ss")
-        console.log(startDate, endDate)
 
         let res = await fetch(URL + "/api", {
             method: "POST",

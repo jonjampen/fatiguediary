@@ -20,7 +20,6 @@ import moment from "moment"
 export default function DatePicker({ updateEntries }) {
     const [date, setDate] = useState(moment().toDate())
     useEffect(() => {
-        console.log(date)
         updateEntries(date)
     }, [date])
 
