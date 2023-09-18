@@ -5,7 +5,6 @@ import { headers, cookies } from 'next/headers'
 
 export default async function AddFatigue() {
     let URL = "http://localhost:3000"
-    console.log(headers().get("cookie"))
     async function fetchActivities() {
         "use server"
         // get activities

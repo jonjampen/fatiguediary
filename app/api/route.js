@@ -28,7 +28,7 @@ export async function POST(request) {
     let query = '';
     let params = [1];
 
-    console.log(type)
+    // console.log(type)
     try {
         if (type === "selectUserByEmail") {
             query = 'SELECT * FROM `users` WHERE `email` = ?';
@@ -58,6 +58,25 @@ export async function POST(request) {
             params = [userid]
             rows = await executeQuery(query, params);
         }
+        else if (type === 'getActivitiesById') {
+            query = "SELECT e.id as energyId, e.datetime as datetime, a.name as activityName, a.id as activityId FROM `activities` AS a, energy_activities AS ea, energy as e WHERE e.id = ea.energy_id AND ea.activity_id = a.id AND e.user_id = ? AND (e.datetime BETWEEN ? AND ?)";
+            // const query = 'SELECT * FROM `energy_activities` WHERE `user_id` = ? AND `energy_id` = ?';
+            params = [userid, body.startDate, body.endDate];
+            rows = await executeQuery(query, params);
+
+            // const promises = results.map(async (row) => {
+            //     const query2 = 'SELECT * FROM `activities` WHERE `user_id` = ? AND `id` = ?';
+            //     const params2 = [userid, row.activity_id];
+            //     const [x] = await executeQuery(query2, params2);
+            //     console.log('x', x);
+            //     return x;
+            // });
+
+            // rows = await Promise.all(promises);
+            // console.log('---');
+
+
+        }
         else if (type === "createActivity") {
             query = 'INSERT INTO `activities` (user_id, name) VALUES (?, ?)';
             params = [userid, body.name]
@@ -72,6 +91,8 @@ export async function POST(request) {
     catch (error) {
         console.log("ERROR:" + error, "type: " + type)
     }
-
+    // if (type === "getActivitiesById" && typeof rows != "undefined") {
+    //     console.log("rows low", rows)
+    // }
     return NextResponse.json({ data: rows }, { status: 200 });
 }

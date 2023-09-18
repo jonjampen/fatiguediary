@@ -17,6 +17,7 @@ import moment from "moment"
 
 export default function Dashboard() {
     const [entries, setEntries] = useState({})
+    const [activities, setActivities] = useState({})
     const [averages, setAverages] = useState({})
     let URL = "http://localhost:3000"
 
@@ -35,6 +36,22 @@ export default function Dashboard() {
         })
         res = await res.json()
         return [res.data, startDate, endDate]
+    }
+
+    async function getActivities(date) {
+        let startDate = moment(date).set({ hour: 0, minute: 0, second: 0, millisecond: 0 }).subtract(6, "days").format("YYYY-MM-DD HH:mm:ss")
+        let endDate = moment(date).set({ hour: 0, minute: 0, second: 0, millisecond: 0 }).add(1, "day").format("YYYY-MM-DD HH:mm:ss")
+
+        let res = await fetch(URL + "/api", {
+            method: "POST",
+            body: JSON.stringify({
+                "type": "getActivitiesById",
+                "startDate": startDate,
+                "endDate": endDate,
+            }),
+        })
+        res = await res.json()
+        return res.data
     }
 
     function groupEntries(ungroupedEntries, startDate, endDate) {
@@ -62,6 +79,7 @@ export default function Dashboard() {
     async function updateEntries(date) {
         const [ungroupedEntries, startDate, endDate] = await fetchEntries(date);
         setEntries(groupEntries(ungroupedEntries, startDate, endDate));
+        setActivities(await getActivities(date));
     }
 
     useEffect(() => {
@@ -83,6 +101,7 @@ export default function Dashboard() {
         setAverages(averagesCopy)
     }, [entries])
 
+
     return (
         <section className="mx-4">
             <h1>Your Entries</h1>
@@ -103,9 +122,11 @@ export default function Dashboard() {
                                 {/* <CardDescription>Day Summary (TK)</CardDescription> */}
                             </CardHeader>
                             <CardContent className="">
-                                {dayEntries.map(entry => {
+                                {dayEntries.map((entry) => {
+                                    // let activities = await getActivities(entry.id)
+                                    // console.log(activities)
                                     return (
-                                        <Entry key={entry.id} entry={entry} />
+                                        <Entry key={entry.id} entry={entry} activities={activities} />
                                     )
                                 })}
                             </CardContent>
