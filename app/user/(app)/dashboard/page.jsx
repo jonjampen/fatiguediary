@@ -12,6 +12,7 @@ import {
 } from "@/components/ui/card"
 import { useSession } from 'next-auth/react';
 import moment from "moment"
+import DayChart from "@/components/DayChart"
 
 export default function Dashboard() {
     const { data: session, status } = useSession()
@@ -52,31 +53,9 @@ export default function Dashboard() {
         return res.data
     }
 
-    function groupEntries(ungroupedEntries, startDate, endDate) {
-        let groupedEntries = {};
-        for (let counter = moment(endDate).subtract(1, "day"); counter.isSameOrAfter(moment(startDate)); counter.subtract(1, "day").clone()) {
-            let formattedDate = counter.format("YYYY-MM-DD")
-            groupedEntries[formattedDate] = []
-        }
-        ungroupedEntries.map(entry => {
-            let formattedDate = moment(entry.datetime).format("YYYY-MM-DD");
-            if (groupedEntries[formattedDate]) {
-                // groupedEntries[formattedDate] = []
-                groupedEntries[formattedDate].push(entry);
-            }
-        })
-
-        // reverse sub-array order (Asc day but Desc week)
-        Object.entries(groupedEntries).map(([date, dayEntries]) => {
-            groupEntries[date] = dayEntries.reverse()
-        })
-
-        return groupedEntries
-    }
-
     async function updateEntries(date) {
         const [ungroupedEntries, startDate, endDate] = await fetchEntries(date);
-        setEntries(groupEntries(ungroupedEntries, startDate, endDate));
+        setEntries(ungroupedEntries);
         setActivities(await getActivities(date));
     }
 
@@ -101,7 +80,7 @@ export default function Dashboard() {
                         <CardDescription>Card Description</CardDescription>
                     </CardHeader>
                     <CardContent>
-                        <p>Chart</p>
+                        <DayChart entries={entries} activities={activities} />
                     </CardContent>
                 </Card>
                 <Card className="w-full">
