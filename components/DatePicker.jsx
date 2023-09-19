@@ -17,10 +17,10 @@ import { ChevronLeft, ChevronRight } from "lucide-react"
 import moment from "moment"
 
 
-export default function DatePicker({ updateEntries }) {
+export default function DatePicker({ updateValues }) {
     const [date, setDate] = useState(moment().toDate())
     useEffect(() => {
-        updateEntries(date)
+        updateValues(date)
     }, [date])
 
     return (

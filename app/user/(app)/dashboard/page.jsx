@@ -1,6 +1,7 @@
+"use client"
 import DatePicker from '@/components/DatePicker'
 import RangePicker from '@/components/RangePicker'
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import {
     Card,
     CardContent,
@@ -9,21 +10,23 @@ import {
     CardHeader,
     CardTitle,
 } from "@/components/ui/card"
-import { getServerSession } from 'next-auth';
-import { options } from '@/app/api/auth/[...nextauth]/options';
+import { useSession } from 'next-auth/react';
 
+export default function Dashboard() {
+    const { data: session, status } = useSession()
 
-export default async function Dashboard() {
-    const session = await getServerSession(options)
+    function updateEntries() {
+        console.log("hy")
+    }
 
     return (
         <section className="mx-4">
             <div className="w-full flex flex-col justify-start text-left mb-4">
-                <h5 className="text-gray-600">Hi, {session.user.name}</h5>
+                <h5 className="text-gray-600">Hi, {session ? session.user.name : ""}</h5>
                 <h1 className="text-left text-2xl">Your Dashboard</h1>
             </div>
             <div className="w-full flex flex-col items-center justify-between gap-4">
-                <DatePicker />
+                <DatePicker updateValues={updateEntries} />
                 <RangePicker />
             </div>
             <div className="w-full flex flex-col items-center justify-between gap-4 mt-6">
