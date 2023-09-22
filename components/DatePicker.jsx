@@ -18,14 +18,14 @@ import moment from "moment"
 
 
 export default function DatePicker({ updateValues }) {
-    const [date, setDate] = useState(moment().toDate())
+    const [date, setDate] = useState(moment().startOf("day").toDate())
     useEffect(() => {
         updateValues(date)
     }, [date])
 
     return (
         <div className="flex gap-2">
-            <Button variant="outline" size="icon" className="" onClick={() => setDate(moment(date).subtract(7, "day").toDate())}>
+            <Button variant="outline" size="icon" className="" onClick={() => setDate(moment(date).startOf("day").subtract(7, "day").toDate())}>
                 <ChevronLeft className="h-4 w-4" />
             </Button>
 
@@ -52,7 +52,7 @@ export default function DatePicker({ updateValues }) {
                 </PopoverContent>
             </Popover>
 
-            <Button variant="outline" size="icon" className="" onClick={() => setDate(moment(date).add(7, "day").toDate())}>
+            <Button variant="outline" size="icon" className="" onClick={() => setDate(moment(date).startOf("day").add(7, "day").toDate())}>
                 <ChevronRight className="h-4 w-4" />
             </Button>
         </div>

@@ -1,7 +1,8 @@
 import React from 'react'
-import Chart from 'react-apexcharts'
+import Chart from 'react-apexcharts';
+import moment from 'moment';
 
-export default function DayChart({ entries, activities }) {
+export default function DayChart({ entries, activities, startDate, endDate }) {
     let data = [];
 
     Object.entries(entries).map(([key, entry]) => {
@@ -18,12 +19,12 @@ export default function DayChart({ entries, activities }) {
         })
     })
 
-    console.log(activities)
+    // console.log(activities)
 
     let state = {
         options: {
             chart: {
-                id: 'apexchart-example',
+                // id: 'apexchart-example',
                 height: 250,
                 toolbar: {
                     show: true,
@@ -60,8 +61,8 @@ export default function DayChart({ entries, activities }) {
             },
             xaxis: {
                 type: 'datetime',
-                // min: new Date("{$startDate} {$wakeUpTime}").getTime(),
-                // max: new Date("{$endDate} {$bedTime}").getTime(),
+                min: moment(startDate).toDate().getTime(),
+                max: moment(endDate).toDate().getTime(),
                 labels: {
                     datetimeFormatter: {
                         year: 'YYYY',

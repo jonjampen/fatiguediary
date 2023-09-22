@@ -16,15 +16,18 @@ import DayChart from "@/components/DayChart"
 
 export default function Dashboard() {
     const { data: session, status } = useSession()
-    const [entries, setEntries] = useState({})
+    const [entries, setEntries] = useState([])
+    const [startDate, setStartDate] = useState(moment().startOf('day').format("YYYY-MM-DD HH:mm:ss"))
+    const [endDate, setEndDate] = useState(moment().endOf("day").format("YYYY-MM-DD HH:mm:ss"))
+    const [range, setRange] = useState("day")
     const [activities, setActivities] = useState({})
     let URL = "http://localhost:3000"
 
 
-    async function fetchEntries(date) {
-        let startDate = moment(date).set({ hour: 0, minute: 0, second: 0, millisecond: 0 }).subtract(6, "days").format("YYYY-MM-DD HH:mm:ss")
-        let endDate = moment(date).set({ hour: 0, minute: 0, second: 0, millisecond: 0 }).add(1, "day").format("YYYY-MM-DD HH:mm:ss")
-
+    async function fetchEntries() {
+        // let startDate = moment(date).set({ hour: 0, minute: 0, second: 0, millisecond: 0 }).subtract(6, "days").format("YYYY-MM-DD HH:mm:ss")
+        // let endDate = moment(date).set({ hour: 0, minute: 0, second: 0, millisecond: 0 }).add(1, "day").format("YYYY-MM-DD HH:mm:ss")
+        console.log(startDate, endDate)
         let res = await fetch(URL + "/api", {
             method: "POST",
             body: JSON.stringify({
@@ -34,13 +37,10 @@ export default function Dashboard() {
             }),
         })
         res = await res.json()
-        return [res.data, startDate, endDate]
+        return res.data
     }
 
-    async function getActivities(date) {
-        let startDate = moment(date).set({ hour: 0, minute: 0, second: 0, millisecond: 0 }).subtract(6, "days").format("YYYY-MM-DD HH:mm:ss")
-        let endDate = moment(date).set({ hour: 0, minute: 0, second: 0, millisecond: 0 }).add(1, "day").format("YYYY-MM-DD HH:mm:ss")
-
+    async function getActivities() {
         let res = await fetch(URL + "/api", {
             method: "POST",
             body: JSON.stringify({
@@ -53,15 +53,17 @@ export default function Dashboard() {
         return res.data
     }
 
-    async function updateEntries(date) {
-        const [ungroupedEntries, startDate, endDate] = await fetchEntries(date);
+    async function updateEntries() {
+        const ungroupedEntries = await fetchEntries();
         setEntries(ungroupedEntries);
-        setActivities(await getActivities(date));
+        setActivities(await getActivities());
     }
 
     useEffect(() => {
-        updateEntries(moment().toDate())
-    }, [])
+        // let newEndDate = moment(startDate).startOf("day").subtract
+        console.log(range)
+        updateEntries()
+    }, [startDate, range])
 
     return (
         <section className="mx-4">
@@ -70,8 +72,8 @@ export default function Dashboard() {
                 <h1 className="text-left text-2xl">Your Dashboard</h1>
             </div>
             <div className="w-full flex flex-col items-center justify-between gap-4">
-                <DatePicker updateValues={updateEntries} />
-                <RangePicker />
+                <DatePicker updateValues={setStartDate} />
+                <RangePicker setRange={setRange} />
             </div>
             <div className="w-full flex flex-col items-center justify-between gap-4 mt-6">
                 <Card className="w-full">
@@ -80,7 +82,7 @@ export default function Dashboard() {
                         <CardDescription>Card Description</CardDescription>
                     </CardHeader>
                     <CardContent>
-                        <DayChart entries={entries} activities={activities} />
+                        <DayChart entries={entries} activities={activities} startDate={startDate} endDate={endDate} />
                     </CardContent>
                 </Card>
                 <Card className="w-full">
