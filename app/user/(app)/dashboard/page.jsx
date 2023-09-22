@@ -26,7 +26,6 @@ export default function Dashboard() {
 
 
     async function fetchEntries() {
-        console.log(startDate, endDate)
         let res = await fetch(URL + "/api", {
             method: "POST",
             body: JSON.stringify({
@@ -57,30 +56,14 @@ export default function Dashboard() {
         setActivities(await getActivities());
     }
 
+    function updateDate(date) {
+        setStartDate(moment(date).startOf(range).toDate())
+        setEndDate(moment(date).endOf(range).toDate())
+    }
+
     useEffect(() => {
-        // let newEndDate = moment(startDate).startOf("day").subtract
-        // setEndDate(newEndDate)
         updateEntries()
     }, [startDate, endDate])
-
-    function updateDate(date) {
-        if (range === "day") {
-            setStartDate(date)
-            setEndDate(moment(date).endOf("day").toDate())
-        }
-        else if (range === "week") {
-            setStartDate(moment(date).startOf("isoWeek").toDate())
-            setEndDate(moment(date).endOf("isoWeek").toDate())
-        }
-        else if (range === "month") {
-            setStartDate(moment(date).startOf("month").toDate())
-            setEndDate(moment(date).endOf("month").toDate())
-        }
-        else if (range === "year") {
-            setStartDate(moment(date).startOf("year").toDate())
-            setEndDate(moment(date).endOf("year").toDate())
-        }
-    }
 
     useEffect(() => {
         updateDate(selectedDate)
