@@ -19,13 +19,13 @@ export default function Dashboard() {
     const [entries, setEntries] = useState([])
     const [startDate, setStartDate] = useState(moment().startOf('day').format("YYYY-MM-DD HH:mm:ss"))
     const [endDate, setEndDate] = useState(moment().endOf("day").format("YYYY-MM-DD HH:mm:ss"))
+    const [selectedDate, setSelectedDate] = useState(moment().startOf("day").toDate())
     const [range, setRange] = useState("day")
     const [activities, setActivities] = useState({})
     let URL = "http://localhost:3000"
 
 
     async function fetchEntries() {
-
         console.log(startDate, endDate)
         let res = await fetch(URL + "/api", {
             method: "POST",
@@ -61,12 +61,22 @@ export default function Dashboard() {
         // let newEndDate = moment(startDate).startOf("day").subtract
         // setEndDate(newEndDate)
         updateEntries()
-    }, [startDate, endDate, range])
+    }, [startDate, endDate])
 
-    function updateDatePicker(date) {
-        setEndDate(moment(date).endOf("day").toDate())
-        setStartDate(date)
+    function updateDate(date) {
+        if (range === "day") {
+            setStartDate(date)
+            setEndDate(moment(date).endOf("day").toDate())
+        }
+        else if (range === "week") {
+            setStartDate(moment(date).startOf("isoWeek").toDate())
+            setEndDate(moment(date).endOf("isoWeek").toDate())
+        }
     }
+
+    useEffect(() => {
+        updateDate(selectedDate)
+    }, [selectedDate, range])
 
     return (
         <section className="mx-4">
@@ -75,7 +85,7 @@ export default function Dashboard() {
                 <h1 className="text-left text-2xl">Your Dashboard</h1>
             </div>
             <div className="w-full flex flex-col items-center justify-between gap-4">
-                <DatePicker updateValues={updateDatePicker} />
+                <DatePicker updateValues={setSelectedDate} />
                 <RangePicker setRange={setRange} />
             </div>
             <div className="w-full flex flex-col items-center justify-between gap-4 mt-6">
