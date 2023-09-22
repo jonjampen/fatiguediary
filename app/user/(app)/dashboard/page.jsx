@@ -25,8 +25,7 @@ export default function Dashboard() {
 
 
     async function fetchEntries() {
-        // let startDate = moment(date).set({ hour: 0, minute: 0, second: 0, millisecond: 0 }).subtract(6, "days").format("YYYY-MM-DD HH:mm:ss")
-        // let endDate = moment(date).set({ hour: 0, minute: 0, second: 0, millisecond: 0 }).add(1, "day").format("YYYY-MM-DD HH:mm:ss")
+
         console.log(startDate, endDate)
         let res = await fetch(URL + "/api", {
             method: "POST",
@@ -54,16 +53,20 @@ export default function Dashboard() {
     }
 
     async function updateEntries() {
-        const ungroupedEntries = await fetchEntries();
-        setEntries(ungroupedEntries);
+        setEntries(await fetchEntries());
         setActivities(await getActivities());
     }
 
     useEffect(() => {
         // let newEndDate = moment(startDate).startOf("day").subtract
-        console.log(range)
+        // setEndDate(newEndDate)
         updateEntries()
-    }, [startDate, range])
+    }, [startDate, endDate, range])
+
+    function updateDatePicker(date) {
+        setEndDate(moment(date).endOf("day").toDate())
+        setStartDate(date)
+    }
 
     return (
         <section className="mx-4">
@@ -72,7 +75,7 @@ export default function Dashboard() {
                 <h1 className="text-left text-2xl">Your Dashboard</h1>
             </div>
             <div className="w-full flex flex-col items-center justify-between gap-4">
-                <DatePicker updateValues={setStartDate} />
+                <DatePicker updateValues={updateDatePicker} />
                 <RangePicker setRange={setRange} />
             </div>
             <div className="w-full flex flex-col items-center justify-between gap-4 mt-6">
