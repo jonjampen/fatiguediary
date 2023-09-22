@@ -72,6 +72,14 @@ export default function Dashboard() {
             setStartDate(moment(date).startOf("isoWeek").toDate())
             setEndDate(moment(date).endOf("isoWeek").toDate())
         }
+        else if (range === "month") {
+            setStartDate(moment(date).startOf("month").toDate())
+            setEndDate(moment(date).endOf("month").toDate())
+        }
+        else if (range === "year") {
+            setStartDate(moment(date).startOf("year").toDate())
+            setEndDate(moment(date).endOf("year").toDate())
+        }
     }
 
     useEffect(() => {
