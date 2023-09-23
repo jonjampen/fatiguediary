@@ -86,7 +86,7 @@ export default function Dashboard() {
                         <CardDescription>Card Description</CardDescription>
                     </CardHeader>
                     <CardContent>
-                        <DayChart entries={entries} activities={activities} startDate={startDate} endDate={endDate} />
+                        <DayChart entries={entries} activities={activities} startDate={startDate} endDate={endDate} range={range} />
                     </CardContent>
                 </Card>
                 <Card className="w-full">
