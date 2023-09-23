@@ -12,7 +12,10 @@ import {
 } from "@/components/ui/card"
 import { useSession } from 'next-auth/react';
 import moment from "moment"
-import DayChart from "@/components/DayChart"
+import DayChart from "@/components/charts/DayChart"
+import WeekChart from "@/components/charts/WeekChart"
+import MonthChart from "@/components/charts/MonthChart"
+import YearChart from "@/components/charts/YearChart"
 
 export default function Dashboard() {
     const { data: session, status } = useSession()
@@ -86,7 +89,21 @@ export default function Dashboard() {
                         <CardDescription>Card Description</CardDescription>
                     </CardHeader>
                     <CardContent>
-                        <DayChart entries={entries} activities={activities} startDate={startDate} endDate={endDate} range={range} />
+                        {(() => {
+                            if (range === "day") {
+                                return (<DayChart entries={entries} activities={activities} startDate={startDate} endDate={endDate} range={range} />)
+                            }
+                            else if (range === "isoWeek") {
+                                return (<WeekChart entries={entries} activities={activities} startDate={startDate} endDate={endDate} range={range} />)
+                            }
+                            else if (range === "month") {
+                                return (<MonthChart entries={entries} activities={activities} startDate={startDate} endDate={endDate} range={range} />)
+                            }
+                            else if (range === "year") {
+                                return (<YearChart entries={entries} activities={activities} startDate={startDate} endDate={endDate} range={range} />)
+                            }
+                        })()}
+
                     </CardContent>
                 </Card>
                 <Card className="w-full">
