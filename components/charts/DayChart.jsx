@@ -4,7 +4,7 @@ import moment from 'moment';
 import formatChartData from '@/app/lib/formatChartData';
 
 export default function DayChart({ entries, activities, startDate, endDate, range }) {
-    let data = formatChartData(entries, activities)
+    let data = formatChartData(entries, activities, range, startDate, endDate)
 
     let state = {
         options: {
