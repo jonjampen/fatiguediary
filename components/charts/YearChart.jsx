@@ -44,21 +44,12 @@ export default function YearChart({ entries, activities, startDate, endDate, ran
                 },
             },
             xaxis: {
-                type: 'datetime',
-                min: moment(startDate).toDate().getTime(),
-                max: moment(endDate).toDate().getTime(),
-                tickAmount: 7,
+                type: 'category',
+                categories: data.categories,
                 labels: {
-                    datetimeFormatter: {
-                        year: 'YYYY',
-                        month: 'MMM',
-                        day: 'ddd',
-                        hour: 'HH:mm'
-                    },
                     style: {
                         colors: 'hsl(var(--muted-foreground))',
                     },
-                    datetimeUTC: false, // Do not convert to UTC
                 },
             },
             yaxis: {
@@ -105,7 +96,7 @@ export default function YearChart({ entries, activities, startDate, endDate, ran
         },
         series: [{
             name: 'Energylevel',
-            data: data,
+            data: data.data,
         }],
         type: "bar",
     }

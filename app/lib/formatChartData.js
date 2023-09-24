@@ -24,20 +24,36 @@ export default function formatChartData(entries, activities, range, startDate, e
         if (range === "year") {
             let groupedEntries = groupByDay(entries, startDate, endDate)
 
-            console.log(groupedEntries)
-            Object.entries(groupedEntries).map(([date, entries]) => {
+            for (let month = 0; month <= 11; month++) {
                 let average = 0, count = 0, sum = 0;
-                entries.map((entry) => {
-                    count++;
-                    sum += entry.energylevel
-                })
+                Object.entries(groupedEntries).map(([date, entries]) => {
+                    if (moment(date).month() === month) {
+                        entries.map((entry) => {
+                            count++;
+                            sum += entry.energylevel
+                        })
 
+                    }
+                })
                 average = count != 0 ? sum / count : null;
                 data.push({
-                    x: date,
+                    x: moment((month + 1).toString(), "MM").format("MMMM"),
                     y: average,
                 })
+            }
+            let values = []
+            let categories = []
+            data.map(x => {
+                values.push(x.y)
             })
+            data.map(x => {
+                categories.push(x.x)
+            })
+            data = {
+                "categories": categories,
+                "data": values,
+            }
+            console.log(data)
         }
         else {
             let groupedEntries = groupByDay(entries, startDate, endDate)
