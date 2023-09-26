@@ -53,7 +53,6 @@ export default function formatChartData(entries, activities, range, startDate, e
                 "categories": categories,
                 "data": values,
             }
-            console.log(data)
         }
         else {
             let groupedEntries = groupByDay(entries, startDate, endDate)
