@@ -28,7 +28,7 @@ export default async function AddFatigue({ params }) {
 
     return (
         <section>
-            <AddForm startActivities={activities} fetchActivities={fetchActivities} />
+            <AddForm startActivities={activities} fetchActivities={fetchActivities} id={parseInt(params.id)} />
         </section>
     )
 }

@@ -1,6 +1,6 @@
 "use client"
 
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import {
     Card,
     CardContent,
@@ -34,7 +34,7 @@ import { calculateEmoji } from '@/app/lib/calculateEmoji'
 import { useRouter } from 'next/navigation';
 import { LoaderButton } from './ui/loaderButton'
 
-export default function AddForm({ startActivities, fetchActivities }) {
+export default function AddForm({ startActivities, fetchActivities, id }) {
     const [energyLevel, setEnergyLevel] = useState([5]);
     const [selectedActivities, setSelectedActivities] = useState([]);
     const [activities, setActivities] = useState(startActivities);
@@ -43,6 +43,23 @@ export default function AddForm({ startActivities, fetchActivities }) {
     let URL = "http://localhost:3000"
     let res;
     const { push } = useRouter();
+
+    async function getEnergy() {
+        let res = await fetch(URL + "/api", {
+            method: "POST",
+            body: JSON.stringify({
+                "type": "getEntryById",
+                "energyid": id,
+            }),
+        })
+        res = await res.json()
+        res = res.data[0]
+        setEnergyLevel(res.energylevel)
+        setDate(moment(res.datetime).format("YYYY-MM-DD"))
+        setTime(moment(res.datetime).format("HH:mm"))
+        document.getElementById("notes").value = res.notes
+    }
+
     async function addEnergy(e) {
         e.preventDefault();
         let datetime = date + " " + time
@@ -80,9 +97,13 @@ export default function AddForm({ startActivities, fetchActivities }) {
 
     let emoji = calculateEmoji(energyLevel);
 
+    useEffect(() => {
+        if (id) getEnergy()
+    }, [])
+
     return (
         <form onSubmit={addEnergy} className="mx-4 mb-4 flex flex-col gap-6 justify-center items-center" >
-            <h1>Add Energy Level</h1>
+            <h1>{id ? "Edit" : "Add"} Energy Level</h1>
             <div className="w-full md:w-[500px] flex items-center justify-between gap-8 md:gap-16">
                 <IconInput type="date" name="date" id="dateInput" icon={<Calendar />} value={date} onValueChange={setDate} />
                 <IconInput type="time" name="time" id="timeInput" icon={<Clock />} value={time} onValueChange={setTime} />

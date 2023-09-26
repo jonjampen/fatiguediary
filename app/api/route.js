@@ -87,6 +87,11 @@ export async function POST(request) {
             params = [userid, body.startDate, body.endDate]
             rows = await executeQuery(query, params);
         }
+        else if (type === "getEntryById") {
+            query = 'SELECT * FROM `energy` WHERE `user_id` = ? AND `id` = ?';
+            params = [userid, body.energyid]
+            rows = await executeQuery(query, params);
+        }
     }
     catch (error) {
         console.log("ERROR:" + error, "type: " + type)
