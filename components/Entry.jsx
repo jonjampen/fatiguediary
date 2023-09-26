@@ -16,6 +16,7 @@ import { useRouter } from 'next/navigation'
 
 export default function Entry({ entry, activities }) {
     const { push } = useRouter();
+    let index = 0;
 
     return (
         <DropdownMenu>
@@ -25,15 +26,26 @@ export default function Entry({ entry, activities }) {
                     <ul className="flex gap-2">
                         {Object.entries(activities).map(([key, activity]) => {
                             if (activity.energyId === entry.id) {
-                                return (<>
-                                    <li className='text-muted-foreground'>
-                                        •
-                                    </li>
-                                    <li className="list-none" key={activity.activityId}>
-                                        {activity.activityName}
-                                    </li>
-                                </>
-                                );
+                                index++
+                                if (index != 1) {
+                                    return (<>
+                                        <li className='text-muted-foreground'>
+                                            •
+                                        </li>
+                                        <li className="list-none" key={activity.activityId}>
+                                            {activity.activityName}
+                                        </li>
+                                    </>
+                                    );
+                                }
+                                else {
+                                    return (<>
+                                        <li className="list-none" key={activity.activityId}>
+                                            {activity.activityName}
+                                        </li>
+                                    </>
+                                    );
+                                }
                             }
                         })}
                     </ul>
