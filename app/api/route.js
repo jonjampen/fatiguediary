@@ -58,11 +58,9 @@ export async function POST(request) {
             params = [userid, body.energylevel, body.notes, body.datetime, userid, body.energyid]
             rows = await executeQuery(query, params);
 
-            // let energyid = rows.insertId
-
             // body.activities.map(async (activity) => {
             //     let queryT = 'INSERT INTO `energy_activities` (user_id, energy_id, activity_id) VALUES (?, ?, ?)';
-            //     let paramsT = [userid, energyid, activity]
+            //     let paramsT = [userid, body.energyid, activity]
             //     await executeQuery(queryT, paramsT)
             // })
         }
@@ -78,22 +76,8 @@ export async function POST(request) {
         }
         else if (type === 'getActivitiesById') {
             query = "SELECT e.id as energyId, e.datetime as datetime, a.name as activityName, a.id as activityId FROM `activities` AS a, energy_activities AS ea, energy as e WHERE e.id = ea.energy_id AND ea.activity_id = a.id AND e.user_id = ? AND (e.datetime BETWEEN ? AND ?)";
-            // const query = 'SELECT * FROM `energy_activities` WHERE `user_id` = ? AND `energy_id` = ?';
             params = [userid, body.startDate, body.endDate];
             rows = await executeQuery(query, params);
-
-            // const promises = results.map(async (row) => {
-            //     const query2 = 'SELECT * FROM `activities` WHERE `user_id` = ? AND `id` = ?';
-            //     const params2 = [userid, row.activity_id];
-            //     const [x] = await executeQuery(query2, params2);
-            //     console.log('x', x);
-            //     return x;
-            // });
-
-            // rows = await Promise.all(promises);
-            // console.log('---');
-
-
         }
         else if (type === "createActivity") {
             query = 'INSERT INTO `activities` (user_id, name) VALUES (?, ?)';

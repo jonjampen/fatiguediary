@@ -134,7 +134,7 @@ export default function AddForm({ startActivities, fetchActivities, id }) {
                     <CardDescription>Choose your current energy level.</CardDescription>
                 </CardHeader>
                 <CardContent>
-                    <Slider defaultValue={energyLevel} max={10} step={0.5} onValueChange={(newValue) => setEnergyLevel(newValue)} />
+                    <input type="range" value={energyLevel} max={10} step={0.5} onChange={(e) => setEnergyLevel(e.target.value)} className="w-full" />
                 </CardContent>
                 <CardFooter className="flex justify-between text-2xl">
                     <p className="font-semibold" style={{ 'color': calculateColor(energyLevel) }}>{energyLevel}</p>
