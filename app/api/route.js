@@ -53,13 +53,26 @@ export async function POST(request) {
                 await executeQuery(queryT, paramsT)
             })
         }
+        else if (type === "updateEnergylevel") {
+            query = 'UPDATE `energy` SET user_id=?, energylevel = ?, notes = ?, datetime = ? WHERE user_id = ? AND id = ?';
+            params = [userid, body.energylevel, body.notes, body.datetime, userid, body.energyid]
+            rows = await executeQuery(query, params);
+
+            // let energyid = rows.insertId
+
+            // body.activities.map(async (activity) => {
+            //     let queryT = 'INSERT INTO `energy_activities` (user_id, energy_id, activity_id) VALUES (?, ?, ?)';
+            //     let paramsT = [userid, energyid, activity]
+            //     await executeQuery(queryT, paramsT)
+            // })
+        }
         else if (type === "getActivities") {
             query = 'SELECT * FROM `activities` WHERE `user_id` = ?';
             params = [userid]
             rows = await executeQuery(query, params);
         }
         else if (type === "getActivitiesByEnergyId") {
-            query = "SELECT ae.id, a.id as activity_id, a.name, ae.energy_id FROM `activities` AS a, `energy_activities` as ae WHERE a.user_id = 1 AND ae.energy_id = 92 AND a.id = ae.activity_id"
+            query = "SELECT ae.id, a.id as activity_id, a.name, ae.energy_id FROM `activities` AS a, `energy_activities` as ae WHERE a.user_id = ? AND ae.energy_id = ? AND a.id = ae.activity_id"
             params = [userid, body.energyid]
             rows = await executeQuery(query, params);
         }

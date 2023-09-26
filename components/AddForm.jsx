@@ -85,11 +85,12 @@ export default function AddForm({ startActivities, fetchActivities, id }) {
                 "Content-Type": "application/json",
             },
             body: JSON.stringify({
-                "type": "addEnergylevel",
+                "type": id ? "updateEnergylevel" : "addEnergylevel",
                 "energylevel": energyLevel[0],
                 "notes": e.target.notes.value,
                 "activities": selectedActivities,
                 "datetime": datetime,
+                "energyid": id ?? "",
             }),
         });
         push('/user/dashboard');
