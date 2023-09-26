@@ -58,6 +58,11 @@ export async function POST(request) {
             params = [userid]
             rows = await executeQuery(query, params);
         }
+        else if (type === "getActivitiesByEnergyId") {
+            query = "SELECT ae.id, a.id as activity_id, a.name, ae.energy_id FROM `activities` AS a, `energy_activities` as ae WHERE a.user_id = 1 AND ae.energy_id = 92 AND a.id = ae.activity_id"
+            params = [userid, body.energyid]
+            rows = await executeQuery(query, params);
+        }
         else if (type === 'getActivitiesById') {
             query = "SELECT e.id as energyId, e.datetime as datetime, a.name as activityName, a.id as activityId FROM `activities` AS a, energy_activities AS ea, energy as e WHERE e.id = ea.energy_id AND ea.activity_id = a.id AND e.user_id = ? AND (e.datetime BETWEEN ? AND ?)";
             // const query = 'SELECT * FROM `energy_activities` WHERE `user_id` = ? AND `energy_id` = ?';

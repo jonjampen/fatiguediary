@@ -45,19 +45,35 @@ export default function AddForm({ startActivities, fetchActivities, id }) {
     const { push } = useRouter();
 
     async function getEnergy() {
-        let res = await fetch(URL + "/api", {
+        let energy = await fetch(URL + "/api", {
             method: "POST",
             body: JSON.stringify({
                 "type": "getEntryById",
                 "energyid": id,
             }),
         })
-        res = await res.json()
-        res = res.data[0]
-        setEnergyLevel(res.energylevel)
-        setDate(moment(res.datetime).format("YYYY-MM-DD"))
-        setTime(moment(res.datetime).format("HH:mm"))
-        document.getElementById("notes").value = res.notes
+        energy = await energy.json()
+        energy = energy.data[0]
+
+        let energyActivities = await fetch(URL + "/api", {
+            method: "POST",
+            body: JSON.stringify({
+                "type": "getActivitiesByEnergyId",
+                "energyid": id,
+            }),
+        })
+        energyActivities = await energyActivities.json()
+        energyActivities = energyActivities.data
+        let formattedActivities = []
+        energyActivities.map(energyActivity => {
+            formattedActivities.push(energyActivity.activity_id)
+        })
+
+        setEnergyLevel(energy.energylevel)
+        setDate(moment(energy.datetime).format("YYYY-MM-DD"))
+        setTime(moment(energy.datetime).format("HH:mm"))
+        document.getElementById("notes").value = energy.notes
+        setSelectedActivities(formattedActivities)
     }
 
     async function addEnergy(e) {
@@ -132,7 +148,7 @@ export default function AddForm({ startActivities, fetchActivities, id }) {
                 <CardContent className="w-full">
                     <ul className="activities w-full">
                         {activities.map(activity => {
-                            return <ActivityItem key={activity.id} activityId={activity.id} selectedActivities={selectedActivities} setSelectedActivities={setSelectedActivities} style={{ 'word-break': 'break-all;' }}>{activity.name}</ActivityItem>
+                            return <ActivityItem key={activity.id} activityId={activity.id} selectedActivities={selectedActivities} setSelectedActivities={setSelectedActivities} style={{ 'word-break': 'break-all;', "backgroundColor": (selectedActivities.includes(activity.id)) ? "hsl(var(--primary))" : "transparent" }}>{activity.name}</ActivityItem>
                         })}
 
                         <Dialog>
@@ -174,7 +190,7 @@ export default function AddForm({ startActivities, fetchActivities, id }) {
                 </CardContent>
             </Card>
             <LoaderButton type="submit">
-                Add Entry
+                Save Entry
             </LoaderButton>
         </form>
     )

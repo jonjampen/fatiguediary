@@ -2,8 +2,6 @@ import React from 'react'
 
 export default function ActivityItem({ children, activityId, selectedActivities, setSelectedActivities, style }) {
     function selectActivity(e) {
-        e.target.classList.toggle("bg-primary");
-
         let selectedActivitiesTemp = [...selectedActivities];
 
         if (selectedActivitiesTemp.includes(activityId)) {
