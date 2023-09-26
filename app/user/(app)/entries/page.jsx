@@ -123,8 +123,6 @@ export default function Dashboard() {
                             </CardHeader>
                             <CardContent className="">
                                 {dayEntries.map((entry) => {
-                                    // let activities = await getActivities(entry.id)
-                                    // console.log(activities)
                                     return (
                                         <Entry key={entry.id} entry={entry} activities={activities} />
                                     )

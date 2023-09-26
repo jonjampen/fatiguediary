@@ -3,7 +3,7 @@ import React from 'react'
 import AddForm from '@/components/AddForm'
 import { headers, cookies } from 'next/headers'
 
-export default async function AddFatigue() {
+export default async function AddFatigue({ params }) {
     let URL = "http://localhost:3000"
     async function fetchActivities() {
         "use server"
