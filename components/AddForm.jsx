@@ -35,7 +35,7 @@ import { LoaderButton } from './ui/loaderButton'
 import { useRouter } from 'next/navigation'
 
 export default function AddForm({ startActivities, fetchActivities, id }) {
-    const [energyLevel, setEnergyLevel] = useState([5]);
+    const [energyLevel, setEnergyLevel] = useState(5);
     const [selectedActivities, setSelectedActivities] = useState([]);
     const [activities, setActivities] = useState(startActivities);
     const [date, setDate] = useState(moment().format("YYYY-MM-DD"));
@@ -86,7 +86,7 @@ export default function AddForm({ startActivities, fetchActivities, id }) {
             },
             body: JSON.stringify({
                 "type": id ? "updateEnergylevel" : "addEnergylevel",
-                "energylevel": energyLevel[0],
+                "energylevel": energyLevel,
                 "notes": e.target.notes.value,
                 "activities": selectedActivities,
                 "datetime": datetime,
