@@ -94,6 +94,11 @@ export async function POST(request) {
             params = [userid, body.energyid]
             rows = await executeQuery(query, params);
         }
+        else if (type === "deleteEntryById") {
+            query = 'DELETE * FROM `energy` WHERE `user_id` = ? AND `id` = ?';
+            params = [userid, body.energyid]
+            rows = await executeQuery(query, params);
+        }
     }
     catch (error) {
         console.log("ERROR:" + error, "type: " + type)

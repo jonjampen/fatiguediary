@@ -31,8 +31,8 @@ import { IconInput } from './ui/iconInput'
 import moment from 'moment';
 import { calculateColor } from '@/app/lib/calculateColor'
 import { calculateEmoji } from '@/app/lib/calculateEmoji'
-const { push } = useRouter();
 import { LoaderButton } from './ui/loaderButton'
+import { useRouter } from 'next/navigation'
 
 export default function AddForm({ startActivities, fetchActivities, id }) {
     const [energyLevel, setEnergyLevel] = useState([5]);

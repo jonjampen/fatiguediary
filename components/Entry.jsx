@@ -12,11 +12,35 @@ import {
     DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
 import { Pencil, Trash2 } from 'lucide-react';
+import {
+    Dialog,
+    DialogContent,
+    DialogDescription,
+    DialogHeader,
+    DialogTitle,
+    DialogTrigger,
+    DialogFooter,
+    DialogClose,
+    dialogClose,
+} from "@/components/ui/dialog"
+import { Button } from '@/components/ui/button'
+import { LoaderButton } from '@/components/ui/loaderButton'
 import { useRouter } from 'next/navigation'
+
 
 export default function Entry({ entry, activities }) {
     const { push } = useRouter();
     let index = 0;
+
+    async function deleteEntry() {
+        let res = await fetch(URL + "/api", {
+            method: "POST",
+            body: JSON.stringify({
+                "type": "deleteEntryById",
+                "energyid": entry.id,
+            }),
+        })
+    }
 
     return (
         <DropdownMenu>
@@ -59,10 +83,28 @@ export default function Entry({ entry, activities }) {
                 </div>
             </DropdownMenuTrigger>
             <DropdownMenuContent>
-                <DropdownMenuLabel>Edit Entry</DropdownMenuLabel>
-                <DropdownMenuSeparator />
-                <DropdownMenuItem onClick={() => push(`/user/add/fatigue/${entry.id}`)}><Pencil className="h-3 w-3" />&nbsp;Edit</DropdownMenuItem>
-                <DropdownMenuItem className="text-destructive"><Trash2 className="h-3 w-3" />&nbsp;Delete</DropdownMenuItem>
+                <Dialog>
+                    <DropdownMenuLabel>Edit Entry</DropdownMenuLabel>
+                    <DropdownMenuSeparator />
+                    <DropdownMenuItem onClick={() => push(`/user/add/fatigue/${entry.id}`)}><Pencil className="h-3 w-3" />&nbsp;Edit</DropdownMenuItem>
+                    <DialogTrigger className="w-full">
+                        <DropdownMenuItem className="text-destructive"><Trash2 className="h-3 w-3" />&nbsp;Delete</DropdownMenuItem>
+                    </DialogTrigger>
+                    <DialogContent>
+                        <DialogHeader>
+                            <DialogTitle className="text-left">Are you sure?</DialogTitle>
+                            <DialogDescription className="text-left">
+                                Do you want to delete the entry from {moment(entry.datetime).format("DD.MM.YYYY HH:mm")}? Deleting this entry cannot be undone.
+                            </DialogDescription>
+                        </DialogHeader>
+                        <DialogFooter className="flex flex-row justify-between">
+                            <DialogClose asChild>
+                                <Button variant="outline">Cancel</Button>
+                            </DialogClose>
+                            <LoaderButton onClick={deleteEntry}>Delete</LoaderButton>
+                        </DialogFooter>
+                    </DialogContent>
+                </Dialog>
             </DropdownMenuContent>
         </DropdownMenu>
     )
