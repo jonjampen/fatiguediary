@@ -65,17 +65,22 @@ export async function POST(request) {
             console.log("rows", rows)
             console.log("acti", body.activities)
             body.activities.map(async (activity) => {
-                if (!rows.some(row => row.activity_id === activity)) {
+                let deletePos = rows.findIndex(row => row.activity_id === activity)
+                if (deletePos != -1) {
+                    // remove from rows
+                    rows.splice(deletePos, 1)
+                }
+                else {
                     // add to db
                     query = 'INSERT INTO `energy_activities` (user_id, energy_id, activity_id) VALUES (?, ?, ?)';
                     params = [userid, body.energyid, activity]
                     rows = await executeQuery(query, params);
-
-                    // remove from rows
                 }
-                //     let queryT = 'INSERT INTO `energy_activities` (user_id, energy_id, activity_id) VALUES (?, ?, ?)';
-                //     let paramsT = [userid, body.energyid, activity]
-                //     await executeQuery(queryT, paramsT)
+            })
+            rows.map(async (row) => {
+                query = 'DELETE FROM `energy_activities` WHERE `user_id` = ? AND `id` = ?';
+                params = [userid, row.id]
+                rows = await executeQuery(query, params);
             })
         }
         else if (type === "getActivities") {
