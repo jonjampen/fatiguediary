@@ -58,11 +58,25 @@ export async function POST(request) {
             params = [userid, body.energylevel, body.notes, body.datetime, userid, body.energyid]
             rows = await executeQuery(query, params);
 
-            // body.activities.map(async (activity) => {
-            //     let queryT = 'INSERT INTO `energy_activities` (user_id, energy_id, activity_id) VALUES (?, ?, ?)';
-            //     let paramsT = [userid, body.energyid, activity]
-            //     await executeQuery(queryT, paramsT)
-            // })
+            query = 'SELECT * FROM `energy_activities` WHERE user_id = ? AND energy_id = ?';
+            params = [userid, body.energyid]
+            rows = await executeQuery(query, params);
+
+            console.log("rows", rows)
+            console.log("acti", body.activities)
+            body.activities.map(async (activity) => {
+                if (!rows.some(row => row.activity_id === activity)) {
+                    // add to db
+                    query = 'INSERT INTO `energy_activities` (user_id, energy_id, activity_id) VALUES (?, ?, ?)';
+                    params = [userid, body.energyid, activity]
+                    rows = await executeQuery(query, params);
+
+                    // remove from rows
+                }
+                //     let queryT = 'INSERT INTO `energy_activities` (user_id, energy_id, activity_id) VALUES (?, ?, ?)';
+                //     let paramsT = [userid, body.energyid, activity]
+                //     await executeQuery(queryT, paramsT)
+            })
         }
         else if (type === "getActivities") {
             query = 'SELECT * FROM `activities` WHERE `user_id` = ?';
