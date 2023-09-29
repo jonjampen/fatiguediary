@@ -19,13 +19,12 @@ export default function Dashboard() {
     const [entries, setEntries] = useState({})
     const [activities, setActivities] = useState({})
     const [averages, setAverages] = useState({})
+    const [startDate, setStartDate] = useState(moment().startOf('day').subtract(6, "days").format("YYYY-MM-DD HH:mm:ss"))
+    const [endDate, setEndDate] = useState(moment().startOf("day").add(1, "day").format("YYYY-MM-DD HH:mm:ss"))
+    const [selectedDate, setSelectedDate] = useState(moment().startOf("day").toDate())
     let URL = "http://localhost:3000"
 
-    async function fetchEntries(date) {
-
-        let startDate = moment(date).set({ hour: 0, minute: 0, second: 0, millisecond: 0 }).subtract(6, "days").format("YYYY-MM-DD HH:mm:ss")
-        let endDate = moment(date).set({ hour: 0, minute: 0, second: 0, millisecond: 0 }).add(1, "day").format("YYYY-MM-DD HH:mm:ss")
-
+    async function fetchEntries() {
         let res = await fetch(URL + "/api", {
             method: "POST",
             body: JSON.stringify({
@@ -35,13 +34,10 @@ export default function Dashboard() {
             }),
         })
         res = await res.json()
-        return [res.data, startDate, endDate]
+        return res.data
     }
 
-    async function getActivities(date) {
-        let startDate = moment(date).set({ hour: 0, minute: 0, second: 0, millisecond: 0 }).subtract(6, "days").format("YYYY-MM-DD HH:mm:ss")
-        let endDate = moment(date).set({ hour: 0, minute: 0, second: 0, millisecond: 0 }).add(1, "day").format("YYYY-MM-DD HH:mm:ss")
-
+    async function getActivities() {
         let res = await fetch(URL + "/api", {
             method: "POST",
             body: JSON.stringify({
@@ -54,7 +50,7 @@ export default function Dashboard() {
         return res.data
     }
 
-    function groupEntries(ungroupedEntries, startDate, endDate) {
+    function groupEntries(ungroupedEntries) {
         let groupedEntries = {};
         for (let counter = moment(endDate).subtract(1, "day"); counter.isSameOrAfter(moment(startDate)); counter.subtract(1, "day").clone()) {
             let formattedDate = counter.format("YYYY-MM-DD")
@@ -76,14 +72,19 @@ export default function Dashboard() {
         return groupedEntries
     }
 
-    async function updateEntries(date) {
-        const [ungroupedEntries, startDate, endDate] = await fetchEntries(date);
-        setEntries(groupEntries(ungroupedEntries, startDate, endDate));
-        setActivities(await getActivities(date));
+    async function updateEntries() {
+        const ungroupedEntries = await fetchEntries();
+        setEntries(groupEntries(ungroupedEntries));
+        setActivities(await getActivities());
+    }
+
+    function updateDate(date) {
+        setStartDate(moment(date).startOf("day").subtract(6, "days").toDate())
+        setEndDate(moment(date).startOf("day").add(1, "days").toDate())
     }
 
     useEffect(() => {
-        updateEntries(moment().toDate())
+        updateEntries()
     }, [])
 
     useEffect(() => {
@@ -101,12 +102,19 @@ export default function Dashboard() {
         setAverages(averagesCopy)
     }, [entries])
 
+    useEffect(() => {
+        updateEntries()
+    }, [startDate, endDate])
+
+    useEffect(() => {
+        updateDate(selectedDate)
+    }, [selectedDate])
 
     return (
         <section className="mx-4">
             <h1>Your Entries</h1>
             <div className="w-full flex flex-col items-center justify-between gap-4">
-                <DatePicker updateValues={updateEntries} />
+                <DatePicker updateValues={setSelectedDate} />
             </div>
             {Object.entries(entries).map(([date, dayEntries]) => {
                 return (

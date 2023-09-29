@@ -41,7 +41,7 @@ export default function Entry({ entry, activities, updateEntries }) {
                 "energyid": entry.id,
             }),
         })
-        // updateEntries();
+        updateEntries();
         dialogClose();
     }
 
