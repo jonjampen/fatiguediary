@@ -124,7 +124,7 @@ export default function Dashboard() {
                             <CardContent className="">
                                 {dayEntries.map((entry) => {
                                     return (
-                                        <Entry key={entry.id} entry={entry} activities={activities} />
+                                        <Entry key={entry.id} entry={entry} activities={activities} updateEntries={updateEntries} />
                                     )
                                 })}
                             </CardContent>
