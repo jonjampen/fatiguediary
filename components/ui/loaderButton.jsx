@@ -34,11 +34,12 @@ const buttonVariants = cva(
   }
 )
 
-const LoaderButton = React.forwardRef(({ className, variant, size, asChild = false, children, ...props }, ref) => {
+const LoaderButton = React.forwardRef(({ className, variant, size, asChild = false, onButtonClick = () => { }, children, ...props }, ref) => {
   const Comp = asChild ? Slot : "button"
 
   function switchLoader(e) {
     e.target.querySelector(".spinner").classList.remove("hidden")
+    onButtonClick()
   }
 
   return (

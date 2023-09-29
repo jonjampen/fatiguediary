@@ -105,9 +105,7 @@ export default function Entry({ entry, activities, updateEntries }) {
                         <DialogClose asChild>
                             <Button variant="outline">Cancel</Button>
                         </DialogClose>
-                        <form onSubmit={deleteEntry}>
-                            <LoaderButton type="submit">Delete</LoaderButton>
-                        </form>
+                        <LoaderButton onButtonClick={deleteEntry}>Delete</LoaderButton>
                     </DialogFooter>
                 </DialogContent>
             </DropdownMenu>

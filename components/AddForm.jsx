@@ -175,7 +175,7 @@ export default function AddForm({ startActivities, fetchActivities, id }) {
                                     <DialogClose asChild>
                                         <Button variant="outline">Cancel</Button>
                                     </DialogClose>
-                                    <LoaderButton onClick={createActivity}>Create Activity</LoaderButton>
+                                    <LoaderButton onButtonClick={createActivity}>Create Activity</LoaderButton>
                                 </DialogFooter>
                             </DialogContent>
                         </Dialog>
