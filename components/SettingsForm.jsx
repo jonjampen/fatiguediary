@@ -16,6 +16,9 @@ import {
 import { Switch } from "@/components/ui/switch"
 import { useToast } from "@/components/ui/use-toast"
 import { SelectLanguage } from "@/components/SelectLanguage"
+import { SelectTheme } from "@/components/SelectTheme"
+import { IconInput } from "./ui/iconInput"
+import { Clock, Moon, Sun } from "lucide-react"
 
 const FormSchema = z.object({
     marketing_emails: z.boolean().default(false).optional(),
@@ -75,17 +78,14 @@ export function SettingsForm() {
                                     <FormItem className="flex flex-row items-center justify-between rounded-lg border p-4">
                                         <div className="space-y-0.5">
                                             <FormLabel className="text-base">
-                                                Dark Theme
+                                                Theme
                                             </FormLabel>
                                             <FormDescription>
-                                                Enable the dark theme.
+                                                Choose what theme you want to use (defaults to system preference).
                                             </FormDescription>
                                         </div>
                                         <FormControl>
-                                            <Switch
-                                                checked={field.value}
-                                                onCheckedChange={field.onChange}
-                                            />
+                                            <SelectTheme />
                                         </FormControl>
                                     </FormItem>
                                 )}
@@ -100,14 +100,14 @@ export function SettingsForm() {
                                                 Awake Time
                                             </FormLabel>
                                             <FormDescription>
-                                                When are you awake?
+                                                What is your wake-up and bed time?
                                             </FormDescription>
                                         </div>
                                         <FormControl>
-                                            <Switch
-                                                checked={field.value}
-                                                onCheckedChange={field.onChange}
-                                            />
+                                            <div className="flex flex-col gap-2">
+                                                <IconInput type="time" name="time" id="timeInput" icon={<Sun />} />
+                                                <IconInput type="time" name="time" id="timeInput" icon={<Moon />} />
+                                            </div>
                                         </FormControl>
                                     </FormItem>
                                 )}
