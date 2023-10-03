@@ -118,6 +118,11 @@ export async function POST(request) {
             params = [userid, body.energyid]
             rows = await executeQuery(query, params);
         }
+        else if (type === "getUserSettings") {
+            query = 'SELECT * FROM `settings` WHERE `user_id` = ?';
+            params = [userid]
+            rows = await executeQuery(query, params);
+        }
     }
     catch (error) {
         console.log("ERROR:" + error, "type: " + type)

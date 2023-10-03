@@ -5,11 +5,42 @@ import { SelectTheme } from "@/components/SelectTheme"
 import { IconInput } from "./ui/iconInput"
 import { Moon, Sun } from "lucide-react"
 import { LoaderButton } from "./ui/loaderButton"
+import { useEffect, useState } from "react"
+import moment from "moment"
 
 export function SettingsForm() {
+    const [awakeTime, setAwakeTime] = useState("")
+    const [bedTime, setBedTime] = useState("")
+    const [theme, setTheme] = useState("Light")
+    const [language, setLanguage] = useState("English")
+
+    let URL = "http://localhost:3000"
+
+    async function getValues() {
+        // get activities
+        let res = await fetch(URL + "/api", {
+            method: "POST",
+            body: JSON.stringify({
+                "type": "getUserSettings",
+            }),
+        })
+        res = await res.json()
+        return res.data[0]
+    }
+
     function changeSettings(data) {
 
     }
+
+    useEffect(() => {
+        async function fetchData() {
+            let data = await getValues()
+            console.log(data)
+            setAwakeTime(data.wake_up_time)
+            setBedTime(data.bed_time)
+        }
+        fetchData();
+    }, [])
 
     return (
         <section className="mx-4">
@@ -20,7 +51,7 @@ export function SettingsForm() {
                             <h4 className="font-semibold text-lg">Language</h4>
                             <p className="text-muted-foreground text-sm">Choose the language of the user interface.</p>
                         </div>
-                        <SelectLanguage />
+                        <SelectLanguage setValue={setLanguage} value={language} />
                     </div>
                 </div>
                 <div className="space-y-4 w-full">
@@ -29,7 +60,7 @@ export function SettingsForm() {
                             <h4 className="font-semibold text-lg">Theme</h4>
                             <p className="text-muted-foreground text-sm">Choose what theme you want to use (defaults to system preference).</p>
                         </div>
-                        <SelectTheme />
+                        <SelectTheme setValue={setTheme} value={theme} />
                     </div>
                 </div>
                 <div className="space-y-4 w-full">
@@ -39,8 +70,8 @@ export function SettingsForm() {
                             <p className="text-muted-foreground text-sm">What is your wake-up and bed time?</p>
                         </div>
                         <div className="flex flex-col gap-2">
-                            <IconInput type="time" name="time" id="timeInput" icon={<Sun />} />
-                            <IconInput type="time" name="time" id="timeInput" icon={<Moon />} />
+                            <IconInput type="time" name="time" id="timeInput" icon={<Sun />} onValueChange={setAwakeTime} value={awakeTime} />
+                            <IconInput type="time" name="time" id="timeInput" icon={<Moon />} onValueChange={setBedTime} value={bedTime} />
                         </div>
                     </div>
                 </div>

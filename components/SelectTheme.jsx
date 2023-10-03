@@ -10,9 +10,9 @@ import {
     SelectValue,
 } from "@/components/ui/select"
 
-export function SelectTheme() {
+export function SelectTheme({ setValue, value }) {
     return (
-        <Select>
+        <Select onValueChange={value => setValue(value)} defaultValue={value}>
             <SelectTrigger className="w-[120px]">
                 <SelectValue placeholder="Theme" />
             </SelectTrigger>

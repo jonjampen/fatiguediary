@@ -10,9 +10,9 @@ import {
     SelectValue,
 } from "@/components/ui/select"
 
-export function SelectLanguage() {
+export function SelectLanguage({ setValue, value }) {
     return (
-        <Select>
+        <Select onValueChange={value => setValue(value)} defaultValue={value}>
             <SelectTrigger className="w-[120px]">
                 <SelectValue placeholder="Language" />
             </SelectTrigger>
