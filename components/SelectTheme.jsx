@@ -12,7 +12,7 @@ import {
 
 export function SelectTheme({ setValue, value }) {
     return (
-        <Select onValueChange={value => setValue(value)} defaultValue={value}>
+        <Select onValueChange={value => setValue(value)} value={value}>
             <SelectTrigger className="w-[120px]">
                 <SelectValue placeholder="Theme" />
             </SelectTrigger>
