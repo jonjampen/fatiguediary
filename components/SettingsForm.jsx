@@ -28,8 +28,21 @@ export function SettingsForm() {
         return res.data[0]
     }
 
-    function changeSettings(data) {
+    async function changeSettings(e) {
+        e.preventDefault()
 
+        let res = await fetch(URL + "/api", {
+            method: "POST",
+            body: JSON.stringify({
+                "type": "setUserSettings",
+                "theme": theme === "Dark" ? 0 : 1,
+                "awakeTime": awakeTime,
+                "bedTime": bedTime,
+                "language": language,
+            }),
+        })
+
+        window.location.href = "/user/dashboard";
     }
 
     useEffect(() => {
