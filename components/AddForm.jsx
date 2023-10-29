@@ -26,13 +26,14 @@ import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Textarea } from "@/components/ui/textarea"
 import ActivityItem from '@/components/ActivityItem'
-import { Calendar, Clock, Plus } from 'lucide-react'
+import { Calendar, Clock, Edit, Plus } from 'lucide-react'
 import { IconInput } from './ui/iconInput'
 import moment from 'moment';
 import { calculateColor } from '@/app/lib/calculateColor'
 import { calculateEmoji } from '@/app/lib/calculateEmoji'
 import { LoaderButton } from './ui/loaderButton'
 import { useRouter } from 'next/navigation'
+import { Separator } from "@/components/ui/separator"
 
 export default function AddForm({ startActivities, fetchActivities, id }) {
     const [energyLevel, setEnergyLevel] = useState(5);
@@ -40,6 +41,7 @@ export default function AddForm({ startActivities, fetchActivities, id }) {
     const [activities, setActivities] = useState(startActivities);
     const [date, setDate] = useState(moment().format("YYYY-MM-DD"));
     const [time, setTime] = useState(moment().format("HH:mm"));
+    const [isEditing, setIsEditing] = useState(false);
     let URL = "http://localhost:3000"
     let res;
     const { push } = useRouter();
@@ -118,6 +120,10 @@ export default function AddForm({ startActivities, fetchActivities, id }) {
         if (id) getEnergy()
     }, [])
 
+    async function updateActivities() {
+        setActivities(await fetchActivities())
+    }
+
     return (
         <form onSubmit={addEnergy} className="mx-4 mb-4 flex flex-col gap-6 justify-center items-center" >
             <h1>{id ? "Edit" : "Add"} Energy Level</h1>
@@ -143,14 +149,20 @@ export default function AddForm({ startActivities, fetchActivities, id }) {
             </Card>
             <Card className="w-full md:w-[500px]">
                 <CardHeader>
-                    <CardTitle>Activities</CardTitle>
-                    <CardDescription>Mark the activities that you have just done.</CardDescription>
+                    <div className="flex justify-between items-center">
+                        <CardTitle>Activities</CardTitle>
+                        {isEditing ? <button onClick={() => setIsEditing(!isEditing)}>Done</button> : <Edit onClick={() => setIsEditing(!isEditing)} style={{ cursor: "pointer" }} />}
+                    </div>
+                    <CardDescription>{isEditing ? "Click on an activity to edit/delete/hide it. Then click on save to select your preferred activities." : "Mark the activities that you have just done."}</CardDescription>
                 </CardHeader>
                 <CardContent className="w-full">
                     <ul className="activities w-full">
                         {activities.map(activity => {
-                            return <ActivityItem key={activity.id} activityId={activity.id} selectedActivities={selectedActivities} setSelectedActivities={setSelectedActivities} style={{ 'word-break': 'break-all;', "backgroundColor": (selectedActivities.includes(activity.id)) ? "hsl(var(--primary))" : "transparent" }}>{activity.name}</ActivityItem>
+                            if (!activity.hidden) {
+                                return <ActivityItem fetchActivities={updateActivities} key={activity.id} activityId={activity.id} selectedActivities={selectedActivities} setSelectedActivities={setSelectedActivities} style={{ 'wordBreak': 'break-all;', "backgroundColor": (selectedActivities.includes(activity.id)) ? "hsl(var(--primary))" : "transparent" }} isEditing={isEditing}>{activity.name}</ActivityItem>
+                            }
                         })}
+
 
                         <Dialog>
                             <DialogTrigger>
@@ -179,7 +191,25 @@ export default function AddForm({ startActivities, fetchActivities, id }) {
                                 </DialogFooter>
                             </DialogContent>
                         </Dialog>
+
                     </ul>
+                    {(() => {
+                        if (isEditing) {
+                            return <div>
+                                <Separator className="my-2" />
+                                <h6 className="text-center mb-2 text-sm">Hidden Activities</h6>
+                                <ul className="activities w-full mt-3">
+                                    {
+                                        activities.map(activity => {
+                                            if (activity.hidden) {
+                                                return <ActivityItem fetchActivities={updateActivities} key={activity.id} activityId={activity.id} selectedActivities={selectedActivities} setSelectedActivities={setSelectedActivities} style={{ 'word-break': 'break-all;', "backgroundColor": (selectedActivities.includes(activity.id)) ? "hsl(var(--primary))" : "transparent", "color": "hsl(var(--muted-foreground))" }} isEditing={isEditing} isHidden={true}>{activity.name}</ActivityItem>
+                                            }
+                                        })
+                                    }
+                                </ul>
+                            </div>
+                        }
+                    })()}
                 </CardContent>
             </Card>
             <Card className="w-full md:w-[500px]">
@@ -193,6 +223,6 @@ export default function AddForm({ startActivities, fetchActivities, id }) {
             <LoaderButton type="submit">
                 Save Entry
             </LoaderButton>
-        </form>
+        </form >
     )
 }

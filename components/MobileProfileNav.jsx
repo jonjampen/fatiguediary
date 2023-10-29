@@ -24,6 +24,7 @@ export default function MobileProfileNav() {
                             <NavItem link={item.link} name={item.name} key={id} />
                         )
                     })}
+                    <button className="w-full text-left" onClick={() => signOut({ callbackUrl: 'http://localhost:3000/login' })} ><a><li className="py-2 px-1 md:py-0 md:px-0 w-full">Sign Out</li></a></button>
                 </ul>
             </li>
         </>

@@ -9,6 +9,7 @@ import {
 } from "@/components/ui/dropdown-menu"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import { links } from "@/lib/navbarLinks"
+import { signOut } from 'next-auth/react'
 
 export default function DesktopProfileNav() {
     return (
@@ -33,9 +34,10 @@ export default function DesktopProfileNav() {
                                 <a href={item.link} key={id}><DropdownMenuItem className="cursor-pointer">{item.name}</DropdownMenuItem></a>
                             )
                         })}
+                        <button className="w-full" onClick={() => signOut({ callbackUrl: 'http://localhost:3000/login' })} ><DropdownMenuItem className="cursor-pointer">Sign Out</DropdownMenuItem></button>
                     </DropdownMenuContent>
                 </DropdownMenu>
-            </li>
+            </li >
         </>
     )
 }

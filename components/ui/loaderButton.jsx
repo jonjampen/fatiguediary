@@ -1,4 +1,5 @@
-import * as React from "react"
+"use client"
+import React, { useEffect } from "react"
 import { Slot } from "@radix-ui/react-slot"
 import { cva } from "class-variance-authority";
 
@@ -41,6 +42,10 @@ const LoaderButton = React.forwardRef(({ className, variant, size, asChild = fal
     e.target.querySelector(".spinner").classList.remove("hidden")
     onButtonClick()
   }
+
+  useEffect(() => {
+    document.getElementById("spinner").classList.add("hidden")
+  }, [])
 
   return (
     (<Comp

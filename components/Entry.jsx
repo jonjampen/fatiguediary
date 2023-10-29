@@ -86,7 +86,7 @@ export default function Entry({ entry, activities, updateEntries }) {
                         </EnergyValue>
                     </div>
                 </DropdownMenuTrigger>
-                <DropdownMenuContent>
+                <DropdownMenuContent className="mt-[-50px]">
                     <DropdownMenuLabel>Edit Entry</DropdownMenuLabel>
                     <DropdownMenuSeparator />
                     <DropdownMenuItem onClick={() => push(`/user/add/fatigue/${entry.id}`)}><Pencil className="h-3 w-3" />&nbsp;Edit</DropdownMenuItem>

@@ -128,6 +128,47 @@ export async function POST(request) {
             params = [body.theme, body.awakeTime, body.bedTime, body.language, userid]
             rows = await executeQuery(query, params);
         }
+        else if (type === "setResetToken") {
+            query = 'INSERT INTO resettoken (user_id, token) VALUES(?,?)';
+            params = [body.userid, body.token]
+            rows = await executeQuery(query, params);
+        }
+        else if (type === "updatePassword") {
+            // 1. check token and get userid
+            console.log(body.token)
+            query = 'SELECT * FROM `resettoken` WHERE `token` = ?';
+            params = [body.token[0]]
+            rows = await executeQuery(query, params);
+
+            // 2. update password
+            query = 'UPDATE `users` SET password = ? WHERE id = ?';
+            params = [body.password, rows[0].user_id]
+            rows = await executeQuery(query, params);
+        }
+        else if (type === "toggleActivityVisibility") {
+            query = 'UPDATE `activities` SET hidden = ? WHERE id = ?';
+            params = [body.state, body.activityId]
+            rows = await executeQuery(query, params);
+        }
+        else if (type === "updateActivityById") {
+            query = 'UPDATE `activities` SET name = ? WHERE id = ? AND user_id = ?';
+            params = [body.activityName, body.activityId, userid]
+            rows = await executeQuery(query, params);
+        }
+        else if (type === "deleteActivityById") {
+            query = 'DELETE FROM `activities` WHERE id = ? AND user_id = ?';
+            params = [body.activityId, userid]
+            rows = await executeQuery(query, params);
+
+            query = 'DELETE FROM `energy_activities` WHERE activity_id = ? AND user_id = ?';
+            params = [body.activityId, userid]
+            rows = await executeQuery(query, params);
+        }
+        else if (type === "getEntriesActivities") {
+            query = 'SELECT e.id as energy_id, e.user_id as user_id, e.energylevel as energylevel, e.datetime as datetime, a.id as activity_id, a.name as activity_name FROM energy as e LEFT JOIN energy_activities as ea ON e.id = ea.energy_id LEFT JOIN activities as a ON ea.activity_id = a.id WHERE e.user_id = ? ORDER BY e.datetime asc;';
+            params = [userid]
+            rows = await executeQuery(query, params);
+        }
     }
     catch (error) {
         console.log("ERROR:" + error, "type: " + type)

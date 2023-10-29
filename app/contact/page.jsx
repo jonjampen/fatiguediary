@@ -78,7 +78,7 @@ export default function Contact() {
                             <CardTitle>About</CardTitle>
                         </CardHeader>
                         <CardContent>
-                            <p>I'm Jon Jampen and I developed Fatigue Diary as part of my Matura project. Feel free to contact me with any questions or issues! <br /> Follow Fatigue Diary on <a href="https://instagram.com/fatiguediary.ch">Instagram</a> to get the latest news.</p>
+                            <p>I&apos;m Jon Jampen and I developed Fatigue Diary as part of my Matura project. Feel free to contact me with any questions or issues! <br /> Follow Fatigue Diary on <a href="https://instagram.com/fatiguediary.ch">Instagram</a> to get the latest news.</p>
                         </CardContent>
                     </Card>
                     <Card className="w-full md:w-[400px]">

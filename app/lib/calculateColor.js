@@ -4,7 +4,7 @@ let colors = ["#A60003", "#F74849", "#F86548", "#F88247", "#F9A147", "#F8BE46", 
 export function calculateColor(value) {
     let color = "transparent";
 
-    if (!value) return;
+    if (value === null || value === undefined) return;
 
     color = colors[Math.floor(value)];
 

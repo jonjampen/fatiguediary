@@ -8,9 +8,11 @@ import DesktopProfileNav from './DesktopProfileNav'
 import LoginNavButtons from './LoginNavButtons'
 import NavItem from './NavItem'
 import { Menu } from 'lucide-react'
+import { useSession } from 'next-auth/react';
 
 export default function Navbar() {
-  let isLoggedIn = true;
+  const { data: session, status } = useSession()
+  let isLoggedIn = !!session;
 
   async function shareIt() {
     await navigator.share({

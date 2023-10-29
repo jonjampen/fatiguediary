@@ -16,6 +16,7 @@ import DayChart from "@/components/charts/DayChart"
 import WeekChart from "@/components/charts/WeekChart"
 import MonthChart from "@/components/charts/MonthChart"
 import YearChart from "@/components/charts/YearChart"
+import RatedActivities from '@/components/RatedActivities'
 
 export default function Dashboard() {
     const { data: session, status } = useSession()
@@ -106,24 +107,7 @@ export default function Dashboard() {
 
                     </CardContent>
                 </Card>
-                <Card className="w-full">
-                    <CardHeader>
-                        <CardTitle>Energy boosting activities</CardTitle>
-                        <CardDescription>Card Description</CardDescription>
-                    </CardHeader>
-                    <CardContent>
-                        <p>Chart</p>
-                    </CardContent>
-                </Card>
-                <Card className="w-full">
-                    <CardHeader>
-                        <CardTitle>Energy draining activities</CardTitle>
-                        <CardDescription>Card Description</CardDescription>
-                    </CardHeader>
-                    <CardContent>
-                        <p>Chart</p>
-                    </CardContent>
-                </Card>
+                <RatedActivities />
 
             </div>
         </section>

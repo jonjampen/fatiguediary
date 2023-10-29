@@ -1,7 +1,8 @@
 import React from 'react'
-import Chart from 'react-apexcharts';
 import moment from 'moment';
 import formatChartData from '@/app/lib/formatChartData';
+import dynamic from "next/dynamic";
+const Chart = dynamic(() => import("react-apexcharts"), { ssr: false });
 
 export default function MonthChart({ entries, activities, startDate, endDate, range }) {
     let data = formatChartData(entries, activities, range, startDate, endDate)
