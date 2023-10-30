@@ -36,7 +36,7 @@ export default function Instructions() {
 
                 <h3>Dashboard and Analysis</h3>
 
-                <p>Now, let&apos;s analyze your data on the &apos;Dashboard.&apos; Select the date and the range you'd like to explore.</p>
+                <p>Now, let&apos;s analyze your data on the &apos;Dashboard.&apos; Select the date and the range you&apos;d like to explore.</p>
 
                 <p>Use the interactive charts to understand how your activities, the time of day, and other factors influence your energy levels. Below that, you&apos;ll find automated analysis with color-coded insights into how certain activities influence your energy.</p>
 
