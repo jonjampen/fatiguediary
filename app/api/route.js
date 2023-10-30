@@ -4,9 +4,9 @@ import { getServerSession } from 'next-auth';
 import { options } from '@/app/api/auth/[...nextauth]/options';
 
 const connection = await mysql.createConnection({
-    host: 'localhost',
-    user: 'root',
-    database: 'fatigue-diary'
+    host: process.env.DB_HOST,
+    user: process.env.DB_USER,
+    database: process.env.DB_NAME
 });
 
 async function executeQuery(query, params) {
