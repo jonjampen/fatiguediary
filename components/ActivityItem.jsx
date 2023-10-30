@@ -129,7 +129,7 @@ export default function ActivityItem({ children, activityId, selectedActivities,
                             <AlertDialogHeader>
                                 <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
                                 <AlertDialogDescription>
-                                    Do you want to delete the activity "{children}"? Deleting this activity will remove it from all entries that were already created. This action cannot be undone! You can also just hide the activity so it will not be removed from past entries.
+                                    Do you want to delete the activity &quot;{children}&quot;? Deleting this activity will remove it from all entries that were already created. This action cannot be undone! You can also just hide the activity so it will not be removed from past entries.
                                 </AlertDialogDescription>
                             </AlertDialogHeader>
                             <AlertDialogFooter>
