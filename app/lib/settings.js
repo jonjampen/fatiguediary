@@ -13,5 +13,11 @@ export async function getSettings() {
         }),
     })
     res = await res.json()
-    return res.data[0]
+    if (res.data) return res.data[0]
+
+    let defaultSettings = {
+        "theme": 1,
+        "language": "En",
+    }
+    return defaultSettings
 }
