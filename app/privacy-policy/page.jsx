@@ -22,6 +22,7 @@ export default function privacyPolicy() {
                 <p>The personal information that you are asked to provide, and the reasons why you are asked to provide it, will be made clear to you at the point we ask you to provide your personal information.</p>
                 <p>If you contact us directly, we may receive additional information about you such as your name, email address, phone number, the contents of the message and/or attachments you may send us, and any other information you may choose to provide.</p>
                 <p>When you register for an Account, we may ask for your contact information, including items such as name, and email address.</p>
+                <p>Furthermore, we gather data input by our users within the app, which is integral to the app's functionality. This includes information such as energy levels, entry dates and times, recorded activities, and user notes. We store this information solely to enable you to utilize the app's functionalities for tracking your energy levels and activities.</p>
 
                 <h2>How we use your information</h2>
 
