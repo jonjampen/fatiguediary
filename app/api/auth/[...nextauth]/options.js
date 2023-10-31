@@ -17,16 +17,20 @@ export const options = {
                 },
             },
             async authorize(credentials) {
-                let user = await getUserByEmail(credentials.email)
-                user = user[0][0]
-                credentials.password = credentials.password // TODO: add password encryption
-                if (credentials.email === user.email && credentials.password === user.password) {
-                    delete user.password
+                let user = await loginUser(credentials.email, credentials.password)
+                // user = user[0][0]
+                // credentials.password = credentials.password // TODO: add password encryption
+                // if (credentials.email === user.email && credentials.password === user.password) {
+                //     delete user.password
+                //     return user
+                // }
+                // else {
+                //     return null
+                // }
+                if (user) {
                     return user
                 }
-                else {
-                    return null
-                }
+                return null
             }
         })
     ],
@@ -56,18 +60,23 @@ export const options = {
     }
 }
 
-async function getUserByEmail(email) {
+async function loginUser(email, password) {
     let res = await fetch(process.env.URL + "/api", {
         method: "POST",
         headers: {
             "Content-Type": "application/json",
         },
         body: JSON.stringify({
-            "type": "selectUserByEmail",
+            "type": "loginUser",
             "email": email,
+            "password": password,
         }),
     })
     // console.log(await res.json())
-    let data = await res.json();
-    return Object.values(data);
+    res = await res.json();
+    console.log(res)
+    if (res.data) {
+        return res.data[0];
+    }
+    return null
 }

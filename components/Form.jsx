@@ -39,7 +39,9 @@ export default function Form({ title, description, fields, info, link, linkText,
         e.preventDefault();
         if (title === "Login") {
             await loginUser(userInput.email, userInput.password, false);
-        } else if (title === "Signup") {
+        }
+        
+        else if (title === "Signup") {
             // Register user
             if (!userInput.privacyPolicy) {
                 push("/signup?error=privacyPolicyMissing")
@@ -89,7 +91,9 @@ export default function Form({ title, description, fields, info, link, linkText,
 
             // login user
             await loginUser(userInput.email, userInput.password, true);
-        } else if (title === "Request Password Reset") {
+        }
+        
+        else if (title === "Request Password Reset") {
             let res = await fetch(URL + "/api", {
                 method: "POST",
                 headers: {

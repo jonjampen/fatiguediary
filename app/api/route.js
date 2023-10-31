@@ -2,6 +2,8 @@ import { NextResponse } from "next/server";
 import mysql from "mysql2/promise"
 import { getServerSession } from 'next-auth';
 import { options } from '@/app/api/auth/[...nextauth]/options';
+const bcrypt = require('bcrypt');
+const crypto = require('crypto');
 
 const connection = await mysql.createConnection({
     host: process.env.DB_HOST,
@@ -13,6 +15,30 @@ const connection = await mysql.createConnection({
 async function executeQuery(query, params) {
     let [values] = await connection.execute(query, params);
     return values
+}
+
+async function encryptPassword(password) {
+    try {
+        password = password.toString();
+        const hash = await new Promise((resolve, reject) => {
+            bcrypt.hash(password, 10, (err, hash) => {
+                if (err) {
+                    reject(err);
+                } else {
+                    resolve(hash);
+                }
+            });
+        });
+
+        return hash;
+    } catch (error) {
+        console.error(error);
+        throw error;
+    }
+}
+
+function oldEncryptPassword(password) {
+    return crypto.createHash('sha3-512').update(password, 'utf8').digest('hex')
 }
 
 export async function POST(request) {
@@ -28,6 +54,7 @@ export async function POST(request) {
     let rows;
     let query = '';
     let params = [1];
+    let encryptedPassword;
 
     // console.log(type)
     try {
@@ -37,9 +64,46 @@ export async function POST(request) {
             rows = await executeQuery(query, params);
         }
         else if (type === "createNewUser") {
+            encryptedPassword = await encryptPassword(body.password);
+
             query = 'INSERT INTO `users` (name, email, password) VALUES (?, ?, ?)';
-            params = [body.name, body.email, body.password]
+            params = [body.name, body.email, encryptedPassword]
             rows = await executeQuery(query, params);
+        }
+        if (type === "loginUser") {
+            query = 'SELECT * FROM `users` WHERE `email` = ?';
+            params = [body.email]
+            let user = await executeQuery(query, params);
+
+            if (user.length > 0) {
+                const storedHashedPassword = user[0].password;
+
+                // New password encryption
+                const isPasswordMatchBcrypt = await bcrypt.compare(body.password, storedHashedPassword);
+
+                // Old password encryption
+                const isPasswordMatchOld = (storedHashedPassword === oldEncryptPassword(body.password));
+
+                if (isPasswordMatchBcrypt || isPasswordMatchOld) {
+                    console.log("Password matches");
+                    delete user[0].password;
+                    rows = user;
+                    if (isPasswordMatchOld) {
+                        // set new encryption
+                        encryptedPassword = await encryptPassword(body.password);
+
+                        query = 'UPDATE `users` SET password = ? WHERE `id` = ?';
+                        params = [encryptedPassword, user[0].id]
+                        user = await executeQuery(query, params);
+                    }
+                } else {
+                    console.log("Password does not match");
+                    rows = null;
+                }
+            } else {
+                console.log("User not found");
+                rows = null;
+            }
         }
         else if (type === "addEnergylevel") {
             query = 'INSERT INTO `energy` (user_id, energylevel, notes, datetime) VALUES (?, ?, ?, ?)';
