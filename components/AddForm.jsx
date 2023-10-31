@@ -159,7 +159,7 @@ export default function AddForm({ startActivities, fetchActivities, id }) {
                     <ul className="activities w-full">
                         {activities.map(activity => {
                             if (!activity.hidden) {
-                                return <ActivityItem fetchActivities={updateActivities} key={activity.id} activityId={activity.id} selectedActivities={selectedActivities} setSelectedActivities={setSelectedActivities} style={{ 'wordBreak': 'break-all;', "backgroundColor": (selectedActivities.includes(activity.id)) ? "hsl(var(--primary))" : "transparent" }} isEditing={isEditing}>{activity.name}</ActivityItem>
+                                return <ActivityItem fetchActivities={updateActivities} key={activity.id} activityId={activity.id} selectedActivities={selectedActivities} setSelectedActivities={setSelectedActivities} style={{ 'wordBreak': 'break-all;', "backgroundColor": (selectedActivities.includes(activity.id)) ? "hsl(var(--primary))" : "transparent", "color": (selectedActivities.includes(activity.id)) ? "hsl(var(--primary-foreground))" : "hsl(var(--foreground))" }} isEditing={isEditing}>{activity.name}</ActivityItem>
                             }
                         })}
 
