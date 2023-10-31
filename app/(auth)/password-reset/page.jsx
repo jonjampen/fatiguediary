@@ -1,6 +1,19 @@
 import React from 'react'
 import Form from '@/components/Form'
 
+export const metadata = {
+    title: "Reset Password",
+    robots: {
+        index: false,
+        follow: false,
+        nocache: false,
+        googleBot: {
+            index: false,
+            follow: false,
+        },
+    },
+}
+
 export default function Login({ searchParams }) {
     console.log(typeof searchParams.success !== "undefined")
     let fields = [

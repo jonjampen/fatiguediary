@@ -7,6 +7,10 @@ import {
 } from "@/components/ui/accordion"
 import { MoreVertical, Share } from 'lucide-react'
 
+export const metadata = {
+    title: "Install Guide",
+}
+
 export default function install() {
     return (
         <div className="flex justify-center">

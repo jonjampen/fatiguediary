@@ -1,5 +1,9 @@
 import React from 'react'
 
+export const metadata = {
+    title: "Instructions",
+}
+
 export default function Instructions() {
     let css = `
     h3 {

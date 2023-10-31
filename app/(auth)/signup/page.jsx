@@ -1,6 +1,10 @@
 import React from 'react'
 import Form from '@/components/Form'
 
+export const metadata = {
+    title: "Signup",
+}
+
 export default function Signup() {
     let fields = [
         {

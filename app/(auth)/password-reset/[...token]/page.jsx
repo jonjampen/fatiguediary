@@ -3,6 +3,19 @@ import Form from '@/components/Form'
 import Link from 'next/link'
 import { Button } from '@/components/ui/button'
 
+export const metadata = {
+    title: "Reset Password",
+    robots: {
+        index: false,
+        follow: false,
+        nocache: false,
+        googleBot: {
+            index: false,
+            follow: false,
+        },
+    },
+}
+
 export default function Login({ params: { token }, searchParams }) {
 
     let fields = [

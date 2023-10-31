@@ -5,7 +5,6 @@ import { Instagram, Mail, Share, Share2, Youtube } from 'lucide-react'
 import { motion, stagger, useScroll, useAnimation, useInView } from "framer-motion"
 import { useEffect, useRef } from 'react'
 
-
 export default function Home() {
 
   const AnimatedButton = motion(Button)

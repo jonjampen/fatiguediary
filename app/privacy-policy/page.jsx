@@ -1,5 +1,18 @@
 import React from 'react'
 
+export const metadata = {
+    title: "Privacy Policy",
+    robots: {
+        index: false,
+        follow: false,
+        nocache: false,
+        googleBot: {
+            index: false,
+            follow: false,
+        },
+    },
+}
+
 export default function privacyPolicy() {
     return (
         <div className="flex justify-center">

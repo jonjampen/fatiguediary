@@ -14,6 +14,10 @@ import { Label } from "@/components/ui/label"
 import { Textarea } from '@/components/ui/textarea'
 import { Instagram, Mail } from 'lucide-react'
 
+export const metadata = {
+    title: "Contact",
+}
+
 export default function Contact() {
     async function sendEmail(e) {
         let formData = new FormData();

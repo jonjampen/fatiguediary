@@ -1,5 +1,18 @@
 import React from 'react'
 
+export const metadata = {
+    title: "Feedback",
+    robots: {
+        index: false,
+        follow: false,
+        nocache: false,
+        googleBot: {
+            index: false,
+            follow: false,
+        },
+    },
+}
+
 export default function feedback() {
     return (
         <div className="h-screen mb-6">
