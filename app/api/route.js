@@ -69,6 +69,11 @@ export async function POST(request) {
             query = 'INSERT INTO `users` (name, email, password) VALUES (?, ?, ?)';
             params = [body.name, body.email, encryptedPassword]
             rows = await executeQuery(query, params);
+            let id = rows.insertId
+
+            query = 'INSERT INTO `settings` (user_id, theme, wake_up_time, bed_time, newsletter, language) VALUES (?, ?, ?, ?, ?, ?)';
+            params = [id, 1, '07:00:00', '23:00:00', 1, "En"]
+            rows = await executeQuery(query, params);
         }
         if (type === "loginUser") {
             query = 'SELECT * FROM `users` WHERE `email` = ?';
