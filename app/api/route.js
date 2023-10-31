@@ -207,7 +207,7 @@ export async function POST(request) {
 
             // 2. update password
             query = 'UPDATE `users` SET password = ? WHERE id = ?';
-            params = [body.password, rows[0].user_id]
+            params = [await encryptPassword(body.password), rows[0].user_id]
             rows = await executeQuery(query, params);
         }
         else if (type === "toggleActivityVisibility") {
