@@ -1,3 +1,4 @@
+"use client"
 import React from 'react'
 import {
     DropdownMenu,
@@ -10,8 +11,11 @@ import {
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import { links } from "@/lib/navbarLinks"
 import { signOut } from 'next-auth/react'
+import { useSession } from 'next-auth/react';
 
-export default function DesktopProfileNav() {
+export default function DesktopProfileNav({ getInitials }) {
+    const { data: session, status } = useSession()
+
     return (
         <>
             {/* Desktop Profile */}
@@ -19,13 +23,13 @@ export default function DesktopProfileNav() {
                 <DropdownMenu>
                     <DropdownMenuTrigger>
                         <Avatar>
-                            <AvatarFallback className="bg-secondary">JJ</AvatarFallback>
+                            <AvatarFallback className="bg-secondary">{session.user.name ? getInitials(session.user.name) : "?"}</AvatarFallback>
                         </Avatar>
                     </DropdownMenuTrigger>
                     <DropdownMenuContent className="mr-2">
                         <DropdownMenuLabel>
-                            Jon Jampen
-                            <p className="text-muted-foreground text-xs font-extralight mt-[2px]">info@fatiguediary.ch</p>
+                            {session.user.name ?? "Loading..."}
+                            <p className="text-muted-foreground text-xs font-extralight mt-[2px]">{session.user.email ?? "Loading..."}</p>
                         </DropdownMenuLabel>
                         {/* email */}
                         <DropdownMenuSeparator />

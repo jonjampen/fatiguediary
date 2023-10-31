@@ -22,12 +22,18 @@ export default function Navbar() {
     });
   }
 
+  function getInitials(name) {
+    const words = name.split(" ");
+    if (words.length === 1) return words[0].slice(0, 2).toUpperCase();
+    if (words.length >= 2) return words.slice(0, 2).map((word) => word[0]).join("").toUpperCase();
+  }
+
   function renderProfileNav() {
     if (isLoggedIn) {
       return (
         <>
-          <DesktopProfileNav />
-          <MobileProfileNav />
+          <DesktopProfileNav getInitials={getInitials} />
+          <MobileProfileNav getInitials={getInitials} />
         </>
       )
     }

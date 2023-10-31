@@ -2,8 +2,11 @@ import React from 'react'
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import { links } from "@/lib/navbarLinks"
 import NavItem from './NavItem'
+import { useSession } from 'next-auth/react';
 
-export default function MobileProfileNav() {
+export default function MobileProfileNav({ getInitials }) {
+    const { data: session, status } = useSession()
+
     return (
         <>
             {/* Mobile Profile */}
@@ -11,11 +14,11 @@ export default function MobileProfileNav() {
             <li className="md:hidden mb-3">
                 <div className="flex gap-3 py-3 items-center">
                     <Avatar>
-                        <AvatarFallback className="bg-secondary">JJ</AvatarFallback>
+                        <AvatarFallback className="bg-secondary">{session.user.name ? getInitials(session.user.name) : "?"}</AvatarFallback>
                     </Avatar>
                     <div className="flex flex-col items-start justify-center">
-                        <p>Jon Jampen</p>
-                        <p className="text-muted-foreground text-xs font-extralight mt-[2px]">info@fatiguediary.ch</p>
+                        <p>{session.user.name ? session.user.name : "Loading..."}</p>
+                        <p className="text-muted-foreground text-xs font-extralight mt-[2px]">{session.user.email ? session.user.email : "Loading..."}</p>
                     </div>
                 </div>
                 <ul>
