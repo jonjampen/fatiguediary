@@ -1,0 +1,5 @@
+User-Agent: *
+Disallow: /
+Disallow: /user/
+
+Sitemap: https://fatiguediary.ch/sitemap.xml
