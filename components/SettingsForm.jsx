@@ -18,7 +18,7 @@ export function SettingsForm() {
 
     async function getValues() {
         // get activities
-        let res = await fetch(URL + "/api", {
+        let res = await fetch(process.env.URL + "/api", {
             method: "POST",
             body: JSON.stringify({
                 "type": "getUserSettings",
@@ -31,7 +31,7 @@ export function SettingsForm() {
     async function changeSettings(e) {
         e.preventDefault()
 
-        let res = await fetch(URL + "/api", {
+        let res = await fetch(process.env.URL + "/api", {
             method: "POST",
             body: JSON.stringify({
                 "type": "setUserSettings",

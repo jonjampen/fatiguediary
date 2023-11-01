@@ -60,7 +60,7 @@ export default function ActivityItem({ children, activityId, selectedActivities,
     async function hide() {
         let URL = "http://localhost:3000"
         // change hidden state in db
-        let res = await fetch(URL + "/api", {
+        let res = await fetch(process.env.URL + "/api", {
             method: "POST",
             body: JSON.stringify({
                 "type": "toggleActivityVisibility",
@@ -74,7 +74,7 @@ export default function ActivityItem({ children, activityId, selectedActivities,
     async function deleteActivity() {
         let URL = "http://localhost:3000"
         // change hidden state in db
-        let res = await fetch(URL + "/api", {
+        let res = await fetch(process.env.URL + "/api", {
             method: "POST",
             body: JSON.stringify({
                 "type": "deleteActivityById",
@@ -87,7 +87,7 @@ export default function ActivityItem({ children, activityId, selectedActivities,
     async function updateActivity() {
         let URL = "http://localhost:3000"
         // change hidden state in db
-        let res = await fetch(URL + "/api", {
+        let res = await fetch(process.env.URL + "/api", {
             method: "POST",
             body: JSON.stringify({
                 "type": "updateActivityById",

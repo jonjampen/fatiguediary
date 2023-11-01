@@ -8,7 +8,7 @@ export default async function AddFatigue({ params }) {
     async function fetchActivities() {
         "use server"
         // get activities
-        let res = await fetch(URL + "/api", {
+        let res = await fetch(process.env.URL + "/api", {
             method: "POST",
             // credentials: "include",
             // headers: {

@@ -47,7 +47,7 @@ export default function AddForm({ startActivities, fetchActivities, id }) {
     const { push } = useRouter();
 
     async function getEnergy() {
-        let energy = await fetch(URL + "/api", {
+        let energy = await fetch(process.env.URL + "/api", {
             method: "POST",
             body: JSON.stringify({
                 "type": "getEntryById",
@@ -57,7 +57,7 @@ export default function AddForm({ startActivities, fetchActivities, id }) {
         energy = await energy.json()
         energy = energy.data[0]
 
-        let energyActivities = await fetch(URL + "/api", {
+        let energyActivities = await fetch(process.env.URL + "/api", {
             method: "POST",
             body: JSON.stringify({
                 "type": "getActivitiesByEnergyId",
@@ -81,7 +81,7 @@ export default function AddForm({ startActivities, fetchActivities, id }) {
     async function addEnergy(e) {
         e.preventDefault();
         let datetime = date + " " + time
-        res = await fetch(URL + "/api", {
+        res = await fetch(process.env.URL + "/api", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -100,7 +100,7 @@ export default function AddForm({ startActivities, fetchActivities, id }) {
 
     async function createActivity() {
         let activityName = document.getElementById("activityName").value
-        res = await fetch(URL + "/api", {
+        res = await fetch(process.env.URL + "/api", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",

@@ -34,7 +34,7 @@ export default function Entry({ entry, activities, updateEntries }) {
 
     async function deleteEntry() {
         let URL = "http://localhost:3000"
-        let res = await fetch(URL + "/api", {
+        let res = await fetch(process.env.URL + "/api", {
             method: "POST",
             body: JSON.stringify({
                 "type": "deleteEntryById",

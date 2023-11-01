@@ -25,7 +25,7 @@ export default function Dashboard() {
     let URL = "http://localhost:3000"
 
     async function fetchEntries() {
-        let res = await fetch(URL + "/api", {
+        let res = await fetch(process.env.URL + "/api", {
             method: "POST",
             body: JSON.stringify({
                 "type": "getEntriesByUserId",
@@ -38,7 +38,7 @@ export default function Dashboard() {
     }
 
     async function getActivities() {
-        let res = await fetch(URL + "/api", {
+        let res = await fetch(process.env.URL + "/api", {
             method: "POST",
             body: JSON.stringify({
                 "type": "getActivitiesById",

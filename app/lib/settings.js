@@ -8,7 +8,7 @@ export async function getSettings() {
     if (session) {
         let URL = "http://localhost:3000"
 
-        let res = await fetch(URL + "/api", {
+        let res = await fetch(process.env.URL + "/api", {
             method: "POST",
 
             headers: { Cookie: cookies().toString() },

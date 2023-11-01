@@ -3,6 +3,9 @@ const nextConfig = {
     experimental: {
         serverActions: true,
     },
+    env: {
+        URL: process.env.URL,
+    },
 }
 
 const withPWA = require("next-pwa")({

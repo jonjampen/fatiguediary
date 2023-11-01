@@ -57,7 +57,7 @@ export default function Form({ title, description, fields, info, link, linkText,
                 return;
             }
             // does user already exist
-            let res = await fetch(URL + "/api", {
+            let res = await fetch(process.env.URL + "/api", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
@@ -75,7 +75,7 @@ export default function Form({ title, description, fields, info, link, linkText,
             }
 
             // create user
-            res = await fetch(URL + "/api", {
+            res = await fetch(process.env.URL + "/api", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
@@ -94,7 +94,7 @@ export default function Form({ title, description, fields, info, link, linkText,
         }
         
         else if (title === "Request Password Reset") {
-            let res = await fetch(URL + "/api", {
+            let res = await fetch(process.env.URL + "/api", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
@@ -108,7 +108,7 @@ export default function Form({ title, description, fields, info, link, linkText,
             let userData = await res.json()
             if (userData.data[0]) {
                 let newToken = crypto.randomBytes(40).toString('hex');
-                let res = await fetch(URL + "/api", {
+                let res = await fetch(process.env.URL + "/api", {
                     method: "POST",
                     headers: {
                         "Content-Type": "application/json",
@@ -138,7 +138,7 @@ export default function Form({ title, description, fields, info, link, linkText,
             }
         } else if (title === "Reset Your Password") {
             if (userInput.password === userInput.passwordConf) {
-                let res = await fetch(URL + "/api", {
+                let res = await fetch(process.env.URL + "/api", {
                     method: "POST",
                     headers: {
                         "Content-Type": "application/json",
