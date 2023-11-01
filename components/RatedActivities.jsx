@@ -15,7 +15,6 @@ export default function RatedActivities() {
     const [badActivities, setBadActivities] = useState()
     const [worstScore, setWorstScore] = useState()
     const [bestScore, setBestScore] = useState()
-    let URL = "http://localhost:3000"
     let activityDiffs = {};
 
     async function fetchEntries() {

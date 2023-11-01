@@ -26,8 +26,6 @@ export default function Dashboard() {
     const [selectedDate, setSelectedDate] = useState(moment().startOf("day").toDate())
     const [range, setRange] = useState("day")
     const [activities, setActivities] = useState({})
-    let URL = "http://localhost:3000"
-
 
     async function fetchEntries() {
         let res = await fetch(process.env.URL + "/api", {

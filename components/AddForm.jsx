@@ -42,7 +42,6 @@ export default function AddForm({ startActivities, fetchActivities, id }) {
     const [date, setDate] = useState(moment().format("YYYY-MM-DD"));
     const [time, setTime] = useState(moment().format("HH:mm"));
     const [isEditing, setIsEditing] = useState(false);
-    let URL = "http://localhost:3000"
     let res;
     const { push } = useRouter();
 

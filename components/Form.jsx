@@ -21,7 +21,6 @@ import crypto from "crypto"
 export default function Form({ title, description, fields, info, link, linkText, token = null }) {
     const searchParams = useSearchParams()
     let currentError = searchParams.get('error')
-    const URL = "http://localhost:3000"
     const { push } = useRouter();
 
     // let form = document.getElementById("form");
@@ -40,7 +39,7 @@ export default function Form({ title, description, fields, info, link, linkText,
         if (title === "Login") {
             await loginUser(userInput.email, userInput.password, false);
         }
-        
+
         else if (title === "Signup") {
             // Register user
             if (!userInput.privacyPolicy) {
@@ -92,7 +91,7 @@ export default function Form({ title, description, fields, info, link, linkText,
             // login user
             await loginUser(userInput.email, userInput.password, true);
         }
-        
+
         else if (title === "Request Password Reset") {
             let res = await fetch(process.env.URL + "/api", {
                 method: "POST",

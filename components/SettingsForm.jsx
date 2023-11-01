@@ -14,8 +14,6 @@ export function SettingsForm() {
     const [theme, setTheme] = useState()
     const [language, setLanguage] = useState()
 
-    let URL = "http://localhost:3000"
-
     async function getValues() {
         // get activities
         let res = await fetch(process.env.URL + "/api", {

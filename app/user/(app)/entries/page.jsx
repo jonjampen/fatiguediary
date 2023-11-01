@@ -22,7 +22,6 @@ export default function Dashboard() {
     const [startDate, setStartDate] = useState(moment().startOf('day').subtract(6, "days").format("YYYY-MM-DD HH:mm:ss"))
     const [endDate, setEndDate] = useState(moment().startOf("day").add(1, "day").format("YYYY-MM-DD HH:mm:ss"))
     const [selectedDate, setSelectedDate] = useState(moment().startOf("day").toDate())
-    let URL = "http://localhost:3000"
 
     async function fetchEntries() {
         let res = await fetch(process.env.URL + "/api", {

@@ -6,8 +6,6 @@ export async function getSettings() {
     const session = await getServerSession(options)
 
     if (session) {
-        let URL = "http://localhost:3000"
-
         let res = await fetch(process.env.URL + "/api", {
             method: "POST",
 
