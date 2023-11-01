@@ -1,3 +1,4 @@
+"use server"
 import { cookies } from "next/headers"
 import { getServerSession } from 'next-auth';
 import { options } from '@/app/api/auth/[...nextauth]/options';

@@ -1,11 +1,25 @@
-import React from 'react'
+"use client"
+import React, { useEffect, useState } from 'react'
 import moment from 'moment';
 import formatChartData from '@/app/lib/formatChartData';
 import dynamic from "next/dynamic";
+import { getSettings } from '@/app/lib/settings';
 const Chart = dynamic(() => import("react-apexcharts"), { ssr: false });
 
 export default function DayChart({ entries, activities, startDate, endDate, range }) {
     let data = formatChartData(entries, activities, range, startDate, endDate)
+    const [settings, setSettings] = useState({
+        "theme": 1,
+        "wake_up_time": "08:00:00",
+        "bed_time": "23:00:00",
+    })
+
+    useEffect(() => {
+        const getData = async () => {
+            setSettings(await getSettings());
+        }
+        getData()
+    }, [])
 
     let state = {
         options: {
@@ -46,8 +60,8 @@ export default function DayChart({ entries, activities, startDate, endDate, rang
             },
             xaxis: {
                 type: 'datetime',
-                min: moment(startDate).toDate().getTime(),
-                max: moment(endDate).toDate().getTime(),
+                min: moment(new Date(startDate).toDateString() + " " + settings.wake_up_time).toDate().getTime(),
+                max: moment(new Date(endDate).toDateString() + " " + settings.bed_time).toDate().getTime(),
                 labels: {
                     datetimeFormatter: {
                         year: 'YYYY',
@@ -86,6 +100,7 @@ export default function DayChart({ entries, activities, startDate, endDate, rang
             },
             colors: ['hsl(var(--accent))'],
             tooltip: {
+                theme: settings.theme === 0 ? "dark" : "light",
                 x: {
                     show: true,
                     format: 'dd/MM/yy HH:mm',
