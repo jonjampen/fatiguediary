@@ -4,23 +4,11 @@ import { Button } from "@/components/ui/button"
 import { Instagram, Mail, Share, Share2, Youtube } from 'lucide-react'
 import { motion, stagger, useScroll, useAnimation, useInView } from "framer-motion"
 import { useEffect, useRef } from 'react'
+import FeatureSection from '@/components/FeatureSection'
+
 
 export default function Home() {
-
   const AnimatedButton = motion(Button)
-
-  const featureOne = useRef(null)
-  const featureOneInView = useInView(featureOne)
-  let imageOneControl = useAnimation();
-
-  const featureTwo = useRef(null)
-  const featureTwoInView = useInView(featureTwo)
-  let imageTwoControl = useAnimation();
-
-  const featureThree = useRef(null)
-  const featureThreeInView = useInView(featureThree)
-  let imageThreeControl = useAnimation();
-
 
   async function shareIt() {
     await navigator.share({
@@ -30,35 +18,13 @@ export default function Home() {
     });
   }
 
-  useEffect(() => {
-    const handleInView = async () => {
-
-      if (featureOneInView) {
-        await imageOneControl.start({ opacity: 1 });
-        await imageTwoControl.start({ opacity: 0 });
-        await imageThreeControl.start({ opacity: 0 });
-      }
-      else if (featureTwoInView) {
-        await imageTwoControl.start({ opacity: 1 });
-        await imageOneControl.start({ opacity: 0 });
-        await imageThreeControl.start({ opacity: 0 });
-      }
-      else if (featureThreeInView) {
-        await imageThreeControl.start({ opacity: 1 });
-        await imageOneControl.start({ opacity: 0 });
-        await imageTwoControl.start({ opacity: 0 });
-      }
-    }
-
-    handleInView();
-  }, [featureOneInView, featureTwoInView, featureThreeInView])
-
   return (
-    <main className="mx-24 min-h-screen">
+    <main className="mx-2 min-h-screen">
+      {/* mx-24 */}
       {/* Hero */}
-      <section className="flex w-full h-[90vh] justify-between items-center">
-        <div className="max-w-2xl" >
-          <motion.h1 className="font-bold text-left text-5xl leading-tight"
+      <section className="flex w-full h-[90vh] flex-col lg:flex-row justify-between items-center">
+        <div className="w-full lg:max-w-[50%] flex flex-col items-center lg:items-start" >
+          <motion.h1 className="font-bold text-center lg:text-left text-4xl md:text-5xl leading-tight"
             initial={{ opacity: 0, scale: 0.75 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.4 }}>
@@ -67,7 +33,7 @@ export default function Home() {
               Fatigue Diary
             </span>
           </motion.h1>
-          <motion.h4 className="text-2xl"
+          <motion.h4 className="text-xl md:text-2xl text-center lg:text-left"
             initial={{ opacity: 0, scale: 0.75 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.5 }}>
@@ -88,54 +54,11 @@ export default function Home() {
       </section>
 
       {/* Features */}
-      <section>
-        <div className="features flex justify-between items-start">
-          <div className="img h-screen w-1/2 sticky top-0">
-            <motion.img src="/preview/feature/light/track.svg" className="absolute top-1/2 transform -translate-y-1/2 h-[70vh] max-w-1/2 max-h-[70vh]" alt="" animate={imageOneControl} initial={{ opacity: 1 }} transition={{ duration: 0 }} />
-            <motion.img src="/preview/feature/light/analysis.svg" className="absolute top-1/2 transform -translate-y-1/2 max-h-[70vh] max-w-1/2" alt="" animate={imageTwoControl} initial={{ opacity: 0 }} transition={{ duration: 0 }} />
-            <motion.img src="/preview/feature/light/automated-analysis.svg" className="absolute top-1/2 transform -translate-y-1/2 max-h-[70vh] max-w-1/2" alt="" animate={imageThreeControl} initial={{ opacity: 0 }} transition={{ duration: 0 }} />
-          </div>
-          <div className="text h-[300vh] w-1/2" >
-            <div className="h-screen flex items-center justify-end">
-              <motion.div className="max-w-md" ref={featureOne}
-                initial={{ opacity: 0 }}
-                whileInView={{ opacity: 1 }}
-                viewport={{ once: false }}
-                transition={{ duration: 1 }}>
-                <h2 className="font-semibold">Energy and Activity Tracking</h2>
-                <p>Log energy level and activities after every activity which can help you get started with pacing.</p>
-              </motion.div>
-            </div>
-            <div className="h-screen flex items-center justify-end">
-              <motion.div className="max-w-md" ref={featureTwo}
-                initial={{ opacity: 0 }}
-                whileInView={{ opacity: 1 }}
-                viewport={{ once: false }}
-                transition={{ duration: 1 }}>
-                <h2 className="font-semibold">Gain Deeper Insights into Your Energy Levels</h2>
-                <p>Visualize your energy trends through interactive charts to enhance your understanding of fatigue. Identify optimal times of the day and recognize potential patterns.</p>
-              </motion.div>
-            </div>
-            <div className="h-screen flex items-center justify-end">
-              <motion.div className="max-w-md" ref={featureThree}
-                initial={{ opacity: 0 }}
-                whileInView={{ opacity: 1 }}
-                viewport={{ once: false }}
-                transition={{ duration: 1 }}>
-                <h2 className="font-semibold">Automatic Activity Analysis</h2>
-                <p>Benefit from automated analysis to identify activities that promote relaxation and recovery, as well as uncover potential sources of energy depletion you may not be aware of.</p>
-              </motion.div>
-            </div>
-          </div>
-        </div>
-
-
-
-      </section >
+      <FeatureSection />
 
       {/* Developer */}
-      <section section className="mb-28" >
-        <motion.div className="max-w-md"
+      <section className="mb-28 w-full flex justify-center lg:justify-start" >
+        <motion.div className="w-full md:max-w-md"
           initial={{ opacity: 0, scale: 0.75 }}
           whileInView={{ opacity: 1, scale: 1 }}
           viewport={{ once: true }}
@@ -148,14 +71,8 @@ export default function Home() {
       </section >
 
       {/* CTA */}
-      <section section className="border rounded min-h-[80vh] mb-28 flex items-center justify-between px-10 py-10" >
-        <motion.div className="max-w-md flex flex-col gap-8"
-          initial={{ opacity: 0, scale: 0.75 }}
-          whileInView={{ opacity: 1, scale: 1 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.7 }}
-          animate={{ delay: stagger(0.3) }}
-        >
+      <section className="border rounded min-h-[80vh] mb-28 flex flex-col lg:flex-row items-center justify-start lg:justify-between px-10 py-10 gap-8">
+        <div className="max-w-md flex flex-col gap-4 lg:gap-8">
           <motion.h2 className="font-bold text-3xl"
             initial={{ opacity: 0, scale: 0.75 }}
             animate={{ opacity: 1, scale: 1 }}
@@ -168,17 +85,17 @@ export default function Home() {
             <Button>Start now</Button>
             <Button variant="accent">Instructions</Button>
           </div>
-        </motion.div>
+        </div>
         <motion.img src="/preview/circle-screenshot.svg" alt="Screenshot of Fatigue Diary"
           initial={{ opacity: 0, scale: 0.75 }}
           whileInView={{ opacity: 1, scale: 1 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.7 }} />
-      </section >
+          transition={{ duration: 0.7 }} className="" />
+      </section>
 
       {/* Footer */}
-      <section section className="flex items-start justify-between align-center" >
-        <div className="max-w-sm">
+      <section className="flex flex-col lg:flex-row items-start justify-between align-center" >
+        <div className="max-w-sm mb-16 lg:mb-0">
           <h3 className="font-bold text-2xl">Fatigue Diary</h3>
           <h4>Effortlessly monitor, analyze, and improve your energy levels and daily activities with Fatigue Diary.</h4>
           <div className="flex gap-4 items-center mt-3">
@@ -188,7 +105,7 @@ export default function Home() {
             <button className="w-full text-start md:w-auto md:text-auto hover:text-accent" onClick={shareIt}><Share2 /></button>
           </div>
         </div>
-        <div className="flex gap-20">
+        <div className="flex flex-col lg:flex-row gap-16 lg:gap-20">
           <div className="">
             <h3 className="font-bold text-2xl">HELP</h3>
             <ul>
@@ -209,11 +126,11 @@ export default function Home() {
             </ul>
           </div>
         </div>
-      </section >
+      </section>
+
       <section className="w-full mt-8 pb-3">
         <p className="text-center">&copy;2023 All rights reserved. Designed and developed by <a href="https://jonjampen.ch" target="_blank" className="text-accent">Jon Jampen</a>.</p>
       </section>
-      {/* </div> */}
     </main >
   )
 }
