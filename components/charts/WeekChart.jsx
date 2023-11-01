@@ -1,11 +1,21 @@
-import React from 'react'
+"use client"
+import React, { useEffect, useState } from 'react'
 import moment from 'moment';
 import formatChartData from '@/app/lib/formatChartData';
 import dynamic from "next/dynamic";
+import { getSettings } from '@/app/lib/settings';
 const Chart = dynamic(() => import("react-apexcharts"), { ssr: false });
 
 export default function WeekChart({ entries, activities, startDate, endDate, range }) {
     let data = formatChartData(entries, activities, range, startDate, endDate)
+    const [settings, setSettings] = useState({ "theme": 1, })
+
+    useEffect(() => {
+        const getData = async () => {
+            setSettings(await getSettings());
+        }
+        getData()
+    }, [])
 
     let state = {
         options: {
@@ -87,6 +97,7 @@ export default function WeekChart({ entries, activities, startDate, endDate, ran
             },
             colors: ['hsl(var(--accent))'],
             tooltip: {
+                theme: settings.theme === 0 ? "dark" : "light",
                 x: {
                     show: true,
                     format: 'dd/MM/yy HH:mm',
