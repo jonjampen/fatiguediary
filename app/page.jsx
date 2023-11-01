@@ -22,7 +22,7 @@ export default function Home() {
     <div className="flex flex-col  items-center justify-center">
       <div className="mx-6 sm:mx-12 max-w-[1400px] min-h-screen">
         {/* Hero */}
-        <section className="flex w-full h-[90vh] flex-col lg:flex-row justify-between items-center">
+        <section className="flex w-full h-[90vh] flex-col lg:flex-row justify-between items-center mb-8">
           <div className="w-full lg:max-w-[50%] flex flex-col items-center lg:items-start" >
             <motion.h1 className="font-bold text-center lg:text-left text-4xl md:text-5xl leading-tight"
               initial={{ opacity: 0, scale: 0.75 }}
@@ -49,8 +49,7 @@ export default function Home() {
               Start now
             </AnimatedButton>
           </div>
-          {/* <img src="/preview/app.svg" alt="Screenshot of the Fatigue Diary App" /> */}
-          <h2>image</h2>
+          <motion.img src="/preview/app.gif" alt="Screenshots of the Fatigue Diary App" className="max-h-[70vh] md:max-w-[30%]" initial={{ opacity: 0, scale: 0.75 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 0.5 }} />
         </section>
 
         {/* Features */}

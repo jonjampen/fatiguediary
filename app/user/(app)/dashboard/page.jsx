@@ -85,7 +85,6 @@ export default function Dashboard() {
                 <Card className="w-full">
                     <CardHeader>
                         <CardTitle>Energy</CardTitle>
-                        <CardDescription>Card Description</CardDescription>
                     </CardHeader>
                     <CardContent>
                         {(() => {
