@@ -38,22 +38,22 @@ const buttonVariants = cva(
 const LoaderButton = React.forwardRef(({ className, variant, size, asChild = false, onButtonClick = () => { }, children, ...props }, ref) => {
   const Comp = asChild ? Slot : "button"
 
-  function switchLoader(e) {
-    e.target.querySelector(".spinner").classList.remove("hidden")
-    onButtonClick()
-  }
+  // function switchLoader(e) {
+  //   e.target.querySelector(".spinner").classList.remove("hidden")
+  //   onButtonClick()
+  // }
 
-  useEffect(() => {
-    document.getElementById("spinner").classList.add("hidden")
-  }, [])
+  // useEffect(() => {
+  //   document.getElementById("spinner").classList.add("hidden")
+  // }, [])
 
   return (
     (<Comp
       className={cn(buttonVariants({ variant, size, className }))}
-      onClick={switchLoader}
+      onClick={onButtonClick}
       ref={ref}
       {...props}>
-      <Loader2 className="mr-2 h-4 w-4 animate-spin hidden spinner" id="spinner" />
+      {/* <Loader2 className="mr-2 h-4 w-4 animate-spin hidden spinner" id="spinner" /> */}
       {children}
     </Comp>)
   );
