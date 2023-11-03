@@ -38,7 +38,7 @@ export default function DesktopProfileNav({ getInitials }) {
                                 <a href={item.link} key={id}><DropdownMenuItem className="cursor-pointer">{item.name}</DropdownMenuItem></a>
                             )
                         })}
-                        <button className="w-full" onClick={() => signOut({ callbackUrl: 'http://localhost:3000/login' })} ><DropdownMenuItem className="cursor-pointer">Sign Out</DropdownMenuItem></button>
+                        <button className="w-full" onClick={() => signOut({ callbackUrl: process.env.URL + '/login' })} ><DropdownMenuItem className="cursor-pointer">Sign Out</DropdownMenuItem></button>
                     </DropdownMenuContent>
                 </DropdownMenu>
             </li >

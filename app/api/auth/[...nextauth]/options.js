@@ -72,9 +72,7 @@ async function loginUser(email, password) {
             "password": password,
         }),
     })
-    // console.log(await res.json())
     res = await res.json();
-    console.log(res)
     if (res.data) {
         return res.data[0];
     }

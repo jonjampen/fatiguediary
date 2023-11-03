@@ -3,6 +3,7 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import { links } from "@/lib/navbarLinks"
 import NavItem from './NavItem'
 import { useSession } from 'next-auth/react';
+import { signOut } from 'next-auth/react';
 
 export default function MobileProfileNav({ getInitials }) {
     const { data: session, status } = useSession()
@@ -27,7 +28,7 @@ export default function MobileProfileNav({ getInitials }) {
                             <NavItem link={item.link} name={item.name} key={id} />
                         )
                     })}
-                    <button className="w-full text-left" onClick={() => signOut({ callbackUrl: 'http://localhost:3000/login' })} ><a><li className="py-2 px-1 md:py-0 md:px-0 w-full">Sign Out</li></a></button>
+                    <button className="w-full text-left" onClick={() => signOut({ callbackUrl: process.env.URL + '/login' })} ><a><li className="py-2 px-1 md:py-0 md:px-0 w-full">Sign Out</li></a></button>
                 </ul>
             </li>
         </>

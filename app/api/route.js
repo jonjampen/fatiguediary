@@ -56,7 +56,6 @@ export async function POST(request) {
     let params = [1];
     let encryptedPassword;
 
-    // console.log(type)
     try {
         if (type === "selectUserByEmail") {
             query = 'SELECT * FROM `users` WHERE `email` = ?';
@@ -90,7 +89,6 @@ export async function POST(request) {
                 const isPasswordMatchOld = (storedHashedPassword === oldEncryptPassword(body.password));
 
                 if (isPasswordMatchBcrypt || isPasswordMatchOld) {
-                    console.log("Password matches");
                     delete user[0].password;
                     rows = user;
                     if (isPasswordMatchOld) {
@@ -102,11 +100,9 @@ export async function POST(request) {
                         user = await executeQuery(query, params);
                     }
                 } else {
-                    console.log("Password does not match");
                     rows = null;
                 }
             } else {
-                console.log("User not found");
                 rows = null;
             }
         }
@@ -132,8 +128,6 @@ export async function POST(request) {
             params = [userid, body.energyid]
             rows = await executeQuery(query, params);
 
-            console.log("rows", rows)
-            console.log("acti", body.activities)
             body.activities.map(async (activity) => {
                 let deletePos = rows.findIndex(row => row.activity_id === activity)
                 if (deletePos != -1) {
@@ -205,7 +199,6 @@ export async function POST(request) {
         }
         else if (type === "updatePassword") {
             // 1. check token and get userid
-            console.log(body.token)
             query = 'SELECT * FROM `resettoken` WHERE `token` = ?';
             params = [body.token[0]]
             rows = await executeQuery(query, params);
@@ -241,7 +234,7 @@ export async function POST(request) {
         }
     }
     catch (error) {
-        console.log("ERROR:" + error, "type: " + type)
+        // console.log("ERROR:" + error, "type: " + type)
     }
     return NextResponse.json({ data: rows }, { status: 200 });
 }

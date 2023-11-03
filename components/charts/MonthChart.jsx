@@ -124,7 +124,7 @@ export default function MonthChart({ entries, activities, startDate, endDate, ra
 
 
     return (
-        <Chart options={state.options} series={state.series} type={state.type} height={320} />
+        <Chart options={state.options} series={state.series} type={state.type} height={320} width="100%" />
     )
 
 }

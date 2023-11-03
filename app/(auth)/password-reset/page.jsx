@@ -15,7 +15,6 @@ export const metadata = {
 }
 
 export default function Login({ searchParams }) {
-    console.log(typeof searchParams.success !== "undefined")
     let fields = [
         {
             title: "Email",

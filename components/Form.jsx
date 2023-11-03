@@ -24,7 +24,6 @@ export default function Form({ title, description, fields, info, link, linkText,
     const { push } = useRouter();
 
     // let form = document.getElementById("form");
-    // console.log(form)
 
     let userInput = {
         "name": "",
