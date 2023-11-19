@@ -67,7 +67,7 @@ export default function Form({ title, description, fields, info, link, linkText,
             });
 
             let userExists = await res.json()
-            if (userExists.data[0]) {
+            if (typeof userExists.data[0] != "undefined") {
                 push("/signup?error=emailExists")
                 return;
             }
@@ -124,7 +124,7 @@ export default function Form({ title, description, fields, info, link, linkText,
                 formData.append("emailTo", userData.data[0].email);
                 formData.append("emailFrom", "info@fatiguediary.ch");
                 formData.append("subject", "Password Reset for Fatigue Diary");
-                formData.append("message", "Hi " + userData.data[0].name + "\n\nYou have requested to reset your Password for Fatigue Diray (https://fatiguediary.ch). Click on the link below to reset your password.\n\n" + resetLink + "\n\nIf you haven't requested to reset your password, ignore this email.\n\nBest Regards\nJon Jampen\nDeveloper of Fatigue Diray\nhttps://www.fatiguediary.ch");
+                formData.append("message", "Hi " + userData.data[0].name + "\n\nYou have requested to reset your Password for Fatigue Diary (https://fatiguediary.ch). Click on the link below to reset your password.\n\n" + resetLink + "\n\nIf you haven't requested to reset your password, ignore this email.\n\nBest Regards\nJon Jampen\nDeveloper of Fatigue Diray\nhttps://www.fatiguediary.ch");
 
                 res = await fetch("/sendGeneralEmail.php", {
                     method: "POST",
