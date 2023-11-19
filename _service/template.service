@@ -1,12 +1,12 @@
 [Unit]
-Description=FatigueDiary Beta
+Description=FatigueDiary 
 After=syslog.target network.target
 
 [Service]
 Type=simple
 Restart=on-failure
-User=fatiguediary-beta
-ExecStart=/home/fatiguediary-beta/start.sh
+User=SERVICE
+ExecStart=/home/SERVICE/start.sh
 
 [Install]
 WantedBy=multi-user.target
