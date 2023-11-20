@@ -1,0 +1,19 @@
+name: Deploy to CloudPanel
+
+on:
+  push:
+    branches:
+      - dev
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Deploy to Server
+      uses: appleboy/ssh-action@master
+      with:
+        host: ${{ secrets.HOST }}
+        username: ${{ secrets.USERNAME_BETA }}
+        key: ${{ secrets.KEY }}
+        script: fatiguediary/_service/install.sh
