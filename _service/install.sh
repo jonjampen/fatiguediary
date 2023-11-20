@@ -27,14 +27,8 @@ ${NODE_DIR}/bin/npm run build
 
 # install service
 cp -f ${HOME}/${GIT_REPO}/_service/start.sh ${HOME}/
-cp -f ${HOME}/${GIT_REPO}/_service/template.service /etc/systemd/system/${SERVICE}.service
-sed -i -e "s/SERVICE/${SERVICE}/" /etc/systemd/system/${SERVICE}.service
-systemctl daemon-reload
-systemctl enable ${SERVICE}
 
 # restart service
-systemctl stop ${SERVICE}
+sudo systemctl stop ${SERVICE}
 sleep 1
-systemctl start ${SERVICE}
-sleep 1
-systemctl status ${SERVICE}
+sudo systemctl start ${SERVICE}

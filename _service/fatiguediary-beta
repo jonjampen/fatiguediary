@@ -1,0 +1,4 @@
+# /etc/sudoers.d/fatiguediary-beta
+
+Cmnd_Alias BETA_SERVICE = /usr/bin/systemctl stop fatiguediary-beta, /usr/bin/systemctl start fatiguediary-beta
+fatiguediary-beta ALL=(ALL) NOPASSWD: BETA_SERVICE

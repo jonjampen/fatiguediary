@@ -5,8 +5,8 @@ After=syslog.target network.target
 [Service]
 Type=simple
 Restart=on-failure
-User=SERVICE
-ExecStart=/home/SERVICE/start.sh
+User=fatiguediary-beta
+ExecStart=/home/fatiguediary-beta/start.sh
 
 [Install]
 WantedBy=multi-user.target
