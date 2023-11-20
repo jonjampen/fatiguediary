@@ -21,6 +21,11 @@ git checkout -f HEAD
 git pull --rebase
 
 # build
+export PATH=${NODE_DIR}/bin:/usr/local/bin:/usr/bin:/bin
+export NVM_DIR=${HOME}/.nvm
+export NVM_INC=${NODE_DIR}/include/node
+export NVM_BIN=${NODE_DIR}/bin
+export NVM_CD_FLAGS=
 cd ${HOME}/${GIT_REPO}
 ${NODE_DIR}/bin/npm install --production
 ${NODE_DIR}/bin/npm run build
