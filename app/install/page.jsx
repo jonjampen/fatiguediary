@@ -24,7 +24,7 @@ export default function install() {
                         <AccordionContent>
                             <ol className="list-decimal" style={{ listStyleType: "decimal !important" }}>
                                 <li>1. Open Safari and go to www.fatiguediary.ch</li>
-                                <li style={{ display: "inline" }}>2. Click on the share (<Share />) icon.</li>
+                                <li class="inline-block">2. Click on the share (<Share class="inline-block h-4 w-4" />) icon.</li>
                                 <li>3. Click &quot;Add to Home Screen&quot;.</li>
                                 <li>4. Confirm the name of the app.</li>
                                 <li>5. Click &quot;Add&quot;.</li>
@@ -38,7 +38,7 @@ export default function install() {
                         <AccordionContent>
                             <ol className="list-decimal" style={{ "list-style-type": "decimal !important" }}>
                                 <li>1. Open your browser and go to www.fatiguediary.ch</li>
-                                <li className="inline-block">2. Click on the three dots (<MoreVertical />).</li>
+                                <li className="inline-block">2. Click on the three dots (<MoreVertical class="inline-block h-4 w-4" />).</li>
                                 <li>3. Click &quot;Add to Home Screen&quot;.</li>
                                 <li>4. Confirm the name of the app.</li>
                                 <li>5. Click &quot;Add&quot;.</li>
@@ -52,7 +52,7 @@ export default function install() {
                         <AccordionContent>
                             <ol className="list-decimal" style={{ "list-style-type": "decimal !important" }}>
                                 <li>1. Open Firefox and go to www.fatiguediary.ch</li>
-                                <li className="inline-block">2. Click on the three dots (<MoreVertical />).</li>
+                                <li className="inline-block">2. Click on the three dots (<MoreVertical class="inline-block h-4 w-4" />).</li>
                                 <li>3. Click &quot;Install&quot;.</li>
                                 <li>4. Confirm the name of the app.</li>
                                 <li>5. Click &quot;Add&quot;.</li>
