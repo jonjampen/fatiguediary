@@ -21,7 +21,7 @@ export default function ContactPage() {
         formData.append("email", e.target.email.value);
         formData.append("message", e.target.message.value);
 
-        let res = await fetch("/sendEmail.php", {
+        let res = await fetch(process.env.URL + "/sendEmail.php", {
             method: "POST",
             body: formData,
         });

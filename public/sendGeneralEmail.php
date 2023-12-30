@@ -2,7 +2,7 @@
 // To be tested on the server
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $emailTo = $_POST['emailTo'];
-    $emailFrom = $_POST['emailFrom'];
+    $emailFrom = "info@fatiguediary.ch";
     $subject = $_POST['subject'];
     $message = $_POST['message'];
     
