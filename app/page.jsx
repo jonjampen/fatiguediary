@@ -1,14 +1,24 @@
 "use client"
 import Image from 'next/image'
 import { Button } from "@/components/ui/button"
-import { Instagram, Mail, Share, Share2, Youtube } from 'lucide-react'
+import { Instagram, Mail, PlayCircle, Share, Share2, Youtube } from 'lucide-react'
 import { motion, stagger, useScroll, useAnimation, useInView } from "framer-motion"
-import { useEffect, useRef } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import FeatureSection from '@/components/FeatureSection'
-
+import Link from 'next/link'
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog"
 
 export default function Home() {
   const AnimatedButton = motion(Button)
+  const AnimatedDialogTrigger = motion(DialogTrigger)
+  const [displayVideoPopup, setDisplayVideoPopup] = useState("none")
 
   async function shareIt() {
     await navigator.share({
@@ -18,8 +28,9 @@ export default function Home() {
     });
   }
 
+
   return (
-    <div className="flex flex-col  items-center justify-center">
+    <div className="flex flex-col  items-center justify-center relative">
       <div className="mx-6 sm:mx-12 max-w-[1400px] min-h-screen">
         {/* Hero */}
         <section className="flex w-full h-[90vh] flex-col lg:flex-row justify-between items-center mb-8">
@@ -40,14 +51,35 @@ export default function Home() {
               Effortlessly monitor, analyze, and improve your energy levels and daily activities with Fatigue Diary.
             </motion.h4>
             <br />
-            <AnimatedButton
-              initial={{ opacity: 0, scale: 0.75 }}
-              animate={{ opacity: 1, scale: 1 }}
-              whileHover={{ scale: 1.1 }}
-              whileTap={{ scale: 0.9 }}
-              transition={{ duration: 0.3 }}>
-              Start now
-            </AnimatedButton>
+            <div className="flex gap-4">
+              <Link href="/signup">
+                <AnimatedButton
+                  initial={{ opacity: 0, scale: 0.75 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  whileHover={{ scale: 1.1 }}
+                  whileTap={{ scale: 0.9 }}
+                  transition={{ duration: 0.3 }}
+                >
+                  Start now
+                </AnimatedButton></Link>
+
+              {/* video popup */}
+              <Dialog>
+                <AnimatedDialogTrigger
+                  initial={{ opacity: 0, scale: 0.75 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  whileTap={{ scale: 0.9 }}
+                  transition={{ duration: 0.3 }}
+                  variant="outline"
+                  className="flex items-center justify-center px-2 gap-2 border rounded-lg hover:bg-secondary">
+                  <PlayCircle /> Watch Video
+                </AnimatedDialogTrigger>
+                <DialogContent className="aspect-video w-screen px-8 md:w-[580px] lg:w-[980px]">
+                  <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" frameBorder="0" width="100%" height="100%" allow="accelerometer; autoplay; fullscreen; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                </DialogContent>
+              </Dialog>
+
+            </div>
           </div>
           <motion.img src="/preview/app.gif" alt="Screenshots of the Fatigue Diary App" className="max-h-[70vh] md:max-w-[30%]" initial={{ opacity: 0, scale: 0.75 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 0.5 }} />
         </section>
@@ -81,8 +113,12 @@ export default function Home() {
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.7 }}>Effortlessly monitor, analyze, and improve your energy levels and daily activities with Fatigue Diary.</motion.p>
             <div className="flex gap-4">
-              <Button>Start now</Button>
-              <Button variant="accent">Instructions</Button>
+              <Link href="/signup">
+                <Button>Start now</Button>
+              </Link>
+              <Link href="/instructions">
+                <Button variant="accent">Instructions</Button>
+              </Link>
             </div>
           </div>
           <motion.img src="/preview/circle-screenshot.svg" alt="Screenshot of Fatigue Diary"
