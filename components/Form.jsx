@@ -157,7 +157,7 @@ export default function Form({ title, description, fields, info, link, linkText,
         await signIn("credentials", {
             email: email,
             password: password,
-            callbackUrl: "/user/dashboard"
+            callbackUrl: newUser ? "/user/onboarding/welcome" : "/user/dashboard"
         })
     }
 
@@ -165,7 +165,6 @@ export default function Form({ title, description, fields, info, link, linkText,
         let newInput = inputFields
         newInput[position] = value;
         setInputFields(newInput)
-        console.log(inputFields)
     }
 
     return (
