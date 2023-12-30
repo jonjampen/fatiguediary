@@ -48,7 +48,7 @@ export default function Home() {
               initial={{ opacity: 0, scale: 0.75 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.5 }}>
-              Effortlessly monitor, analyze, and improve your energy levels and daily activities with Fatigue Diary.
+              Effortlessly monitor, analyze, and improve your energy levels and daily activities while preventing crashes.
             </motion.h4>
             <br />
             <div className="flex gap-4">
@@ -111,7 +111,7 @@ export default function Home() {
             <motion.p className="text-xl"
               initial={{ opacity: 0, scale: 0.75 }}
               animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.7 }}>Effortlessly monitor, analyze, and improve your energy levels and daily activities with Fatigue Diary.</motion.p>
+              transition={{ duration: 0.7 }}>Effortlessly monitor, analyze, and improve your energy levels and daily activities while preventing crashes.</motion.p>
             <div className="flex gap-4">
               <Link href="/signup">
                 <Button>Start now</Button>
@@ -133,7 +133,7 @@ export default function Home() {
         <section className="flex flex-col lg:flex-row items-start justify-between align-center pt-6 border-t" >
           <div className="max-w-sm mb-16 lg:mb-0">
             <h3 className="font-bold text-2xl">Fatigue Diary</h3>
-            <h4>Effortlessly monitor, analyze, and improve your energy levels and daily activities with Fatigue Diary.</h4>
+            <h4>Effortlessly monitor, analyze, and improve your energy levels and daily activities while preventing crashes.</h4>
             <div className="flex gap-4 items-center mt-3">
               <a href="https://instagram.com/fatiguediary.ch" target="_blank"><Instagram /></a>
               {/* <a href="https://youtube.com/" target="_blank"><Youtube /></a> */}
