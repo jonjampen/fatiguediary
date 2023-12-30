@@ -47,7 +47,7 @@ export default function ContactPage() {
 
                     </CardDescription>
                 </CardHeader>
-                <form className="w-full" onSubmit={sendEmail}>
+                <form className="w-full" action="/sendMail.php">
                     <CardContent>
                         <div className="grid w-full items-center gap-4">
                             <div className="flex flex-col space-y-3">
