@@ -1,5 +1,5 @@
 "use client"
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { LoaderButton } from "@/components/ui/loaderButton"
 import {
     Card,
@@ -22,35 +22,32 @@ export default function Form({ title, description, fields, info, link, linkText,
     const searchParams = useSearchParams()
     let currentError = searchParams.get('error')
     const { push } = useRouter();
-
-    // let form = document.getElementById("form");
-
-    let userInput = {
+    const [inputFields, setInputFields] = useState({
         "name": "",
         "email": "",
         "password": "",
         "passwordConf": "",
-        "privacyPolicy": "",
-    }
+        "privacyPolicy": false,
+    })
 
     async function handleSubmit(e) {
         e.preventDefault();
         if (title === "Login") {
-            await loginUser(userInput.email, userInput.password, false);
+            await loginUser(inputFields.email, inputFields.password, false);
         }
 
         else if (title === "Signup") {
             // Register user
-            if (!userInput.privacyPolicy) {
+            if (!inputFields.privacyPolicy) {
                 push("/signup?error=privacyPolicyMissing")
                 return;
             }
-            if (!userInput.password || !userInput.passwordConf || !userInput.email || !userInput.name) {
+            if (!inputFields.password || !inputFields.passwordConf || !inputFields.email || !inputFields.name) {
                 push("/signup?error=missingInformation")
                 return;
             }
             // do passwords match
-            if (userInput.password != userInput.passwordConf) {
+            if (inputFields.password != inputFields.passwordConf) {
                 push("/signup?error=passwordNotMatch")
                 return;
             }
@@ -62,7 +59,7 @@ export default function Form({ title, description, fields, info, link, linkText,
                 },
                 body: JSON.stringify({
                     "type": "selectUserByEmail",
-                    "email": userInput.email,
+                    "email": inputFields.email,
                 }),
             });
 
@@ -80,15 +77,15 @@ export default function Form({ title, description, fields, info, link, linkText,
                 },
                 body: JSON.stringify({
                     "type": "createNewUser",
-                    "name": userInput.name,
-                    "email": userInput.email,
-                    "password": userInput.password,
-                    "passwordConf": userInput.passwordConf,
+                    "name": inputFields.name,
+                    "email": inputFields.email,
+                    "password": inputFields.password,
+                    "passwordConf": inputFields.passwordConf,
                 }),
             });
 
             // login user
-            await loginUser(userInput.email, userInput.password, true);
+            await loginUser(inputFields.email, inputFields.password, true);
         }
 
         else if (title === "Request Password Reset") {
@@ -99,7 +96,7 @@ export default function Form({ title, description, fields, info, link, linkText,
                 },
                 body: JSON.stringify({
                     "type": "selectUserByEmail",
-                    "email": userInput.email,
+                    "email": inputFields.email,
                 }),
             });
 
@@ -135,7 +132,7 @@ export default function Form({ title, description, fields, info, link, linkText,
 
             }
         } else if (title === "Reset Your Password") {
-            if (userInput.password === userInput.passwordConf) {
+            if (inputFields.password === inputFields.passwordConf) {
                 let res = await fetch(process.env.URL + "/api", {
                     method: "POST",
                     headers: {
@@ -144,7 +141,7 @@ export default function Form({ title, description, fields, info, link, linkText,
                     body: JSON.stringify({
                         "type": "updatePassword",
                         "token": token,
-                        "password": userInput.password
+                        "password": inputFields.password
                     }),
                 });
                 push("/password-reset/" + token + "?success")
@@ -165,7 +162,10 @@ export default function Form({ title, description, fields, info, link, linkText,
     }
 
     function handleChange(position, value) {
-        userInput[position] = value
+        let newInput = inputFields
+        newInput[position] = value;
+        setInputFields(newInput)
+        console.log(inputFields)
     }
 
     return (
@@ -215,7 +215,7 @@ export default function Form({ title, description, fields, info, link, linkText,
                                 if (title === "Signup") {
                                     return (
                                         <div className="flex justify-start gap-3">
-                                            <Input type={"checkbox"} name={"pp"} className="h-4 w-4" onChange={(e) => handleChange("privacyPolicy", e.target.value)} />
+                                            <Input type={"checkbox"} name={"pp"} className="h-4 w-4" onChange={(e) => handleChange("privacyPolicy", e.target.checked)} />
                                             <Label htmlFor={"pp"}>I agree to the <a href="/privacy-policy" target="_blank">privacy policy</a>.</Label>
                                         </div>
                                     )
