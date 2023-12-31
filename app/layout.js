@@ -82,9 +82,13 @@ export const metadata = {
     // },
   },
   category: 'health',
+}
 
-
-
+export const viewport = {
+  themeColor: [
+    { media: '(prefers-color-scheme: light)', color: '#F5F6FA' },
+    { media: '(prefers-color-scheme: dark)', color: '#F5F6FA' },
+  ],
 }
 
 
