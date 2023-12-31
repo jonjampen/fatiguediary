@@ -39,9 +39,8 @@ export default function install() {
                             <ol className="list-decimal" style={{ "list-style-type": "decimal !important" }}>
                                 <li>1. Open your browser and go to www.fatiguediary.ch</li>
                                 <li className="inline-block">2. Click on the three dots (<MoreVertical class="inline-block h-4 w-4" />).</li>
-                                <li>3. Click &quot;Add to Home Screen&quot;.</li>
-                                <li>4. Confirm the name of the app.</li>
-                                <li>5. Click &quot;Add&quot;.</li>
+                                <li>3. Click &quot;Install app&quot;.</li>
+                                <li>5. Click &quot;Install&quot;.</li>
                             </ol>
                         </AccordionContent>
                     </AccordionItem>
