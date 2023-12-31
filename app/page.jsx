@@ -138,7 +138,7 @@ export default function Home() {
               <a href="https://instagram.com/fatiguediary.ch" target="_blank"><Instagram /></a>
               {/* <a href="https://youtube.com/" target="_blank"><Youtube /></a> */}
               <a href="mailto:info@fatiguediary.ch" target="_blank"><Mail /></a>
-              <button className="w-full text-start md:w-auto md:text-auto hover:text-accent" onClick={shareIt}><Share2 /></button>
+              <button className="w-full text-start md:w-auto md:text-auto hover:text-accent" onClick={shareIt} name="share this app"><Share2 /></button>
             </div>
           </div>
           <div className="flex w-full gap-16 justify-between sm:justify-start lg:justify-end md:width-auto sm:gap-20">
