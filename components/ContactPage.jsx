@@ -47,20 +47,20 @@ export default function ContactPage() {
 
                     </CardDescription>
                 </CardHeader>
-                <form className="w-full" action="/sendMail.php">
+                <form className="w-full" action="https://email.fatiguediary.ch/sendEmail.php" method="POST">
                     <CardContent>
                         <div className="grid w-full items-center gap-4">
                             <div className="flex flex-col space-y-3">
                                 <Label htmlFor="name">Name</Label>
-                                <Input id="name" placeholder="John Doe" />
+                                <Input id="name" placeholder="John Doe" name="name" />
                             </div>
                             <div className="flex flex-col space-y-3">
                                 <Label htmlFor="email">Email</Label>
-                                <Input id="email" placeholder="john@doe.com" />
+                                <Input id="email" placeholder="john@doe.com" name="email" />
                             </div>
                             <div className="flex flex-col space-y-3">
                                 <Label htmlFor="message">Message</Label>
-                                <Textarea id="message" placeholder="Your message" />
+                                <Textarea id="message" placeholder="Your message" name="message" />
                             </div>
                         </div>
                     </CardContent>
