@@ -1,11 +1,11 @@
 import React from 'react'
 import { Button } from '@/components/ui/button'
 import Link from 'next/link'
-import { authOptions } from 'app/api/auth/[...nextauth]/options'
+import { options } from 'app/api/auth/[...nextauth]/options'
 import { getServerSession } from "next-auth/next"
 
 export default async function instructions() {
-    const session = await getServerSession(authOptions)
+    const session = await getServerSession(options)
 
     return (
         <>
