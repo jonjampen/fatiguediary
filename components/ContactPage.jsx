@@ -13,23 +13,12 @@ import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Textarea } from '@/components/ui/textarea'
 import { Instagram, Mail } from 'lucide-react'
+import { useSearchParams } from 'next/navigation'
+import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert"
 
 export default function ContactPage() {
-    async function sendEmail(e) {
-        let formData = new FormData();
-        formData.append("name", e.target.name.value);
-        formData.append("email", e.target.email.value);
-        formData.append("message", e.target.message.value);
-
-        let res = await fetch(process.env.URL + "/sendEmail.php", {
-            method: "POST",
-            body: formData,
-        });
-        // Show success message
-        alert("Message sent successfully. You will receive a confirmation email shortly.");
-        document.getElementById("form").reset();
-    }
-
+    const searchParams = useSearchParams()
+    let success = searchParams.get('success');
 
     return (
         <>
@@ -37,7 +26,6 @@ export default function ContactPage() {
                 <CardHeader className="text-center">
                     <CardTitle>Contact Form</CardTitle>
                     <CardDescription className="flex gap-2 w-full justify-center">
-
                         <Button variant="ghost" size="icon" onClick={() => window.open("https://instagram.com/fatiguediary.ch", "_blank")}>
                             <Instagram className="h-6 w-6" />
                         </Button>
@@ -46,6 +34,21 @@ export default function ContactPage() {
                         </Button>
 
                     </CardDescription>
+                    {success != null ? (
+                        <Alert variant={success == "true" ? "" : "destructive"}>
+                            <AlertTitle>{success === "true" ? "Message Sent!" : "Error occurred"}</AlertTitle>
+                            <AlertDescription>
+                                {(() => {
+                                    if (success === "true") {
+                                        return <>Your message was sent successfully, you'll receive a confirmation email shortly and I'll get back to you as soon as possible.</>
+                                    }
+                                    else {
+                                        return <>An error occurred while sending the email. Please contact me directly at info@fatiguediary.ch.</>
+                                    }
+                                })()}
+
+                            </AlertDescription>
+                        </Alert>) : null}
                 </CardHeader>
                 <form className="w-full" action="https://email.fatiguediary.ch/sendEmail.php" method="POST">
                     <CardContent>
@@ -68,7 +71,7 @@ export default function ContactPage() {
                         <Button type="submit" className="w-full">Send Message</Button>
                     </CardFooter>
                 </form>
-            </Card>
+            </Card >
 
             <div className="flex flex-col gap-8 h-full justify-start">
 
