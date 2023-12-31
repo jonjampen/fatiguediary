@@ -40,10 +40,10 @@ export default function ContactPage() {
                             <AlertDescription>
                                 {(() => {
                                     if (success === "true") {
-                                        return <>Your message was sent successfully, you'll receive a confirmation email shortly and I'll get back to you as soon as possible.</>
+                                        return <p>Your message was sent successfully, you&apos;ll receive a confirmation email shortly and I&apos;ll get back to you as soon as possible.</p>
                                     }
                                     else {
-                                        return <>An error occurred while sending the email. Please contact me directly at info@fatiguediary.ch.</>
+                                        return <p>An error occurred while sending the email. Please contact me directly at info@fatiguediary.ch.</p>
                                     }
                                 })()}
 
