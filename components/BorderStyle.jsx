@@ -11,7 +11,7 @@ import {
 } from "@/components/ui/card"
 
 export default function BorderStyle({ children, avg }) {
-    let color = calculateColor(avg);
+    let color = avg > 0 ? calculateColor(avg) : "hsl(var(--border))";
     return (
         <Card id='container' className="w-full" style={{
             "borderLeft": "2px solid " + color

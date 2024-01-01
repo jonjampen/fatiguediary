@@ -118,12 +118,12 @@ export default function Dashboard() {
             {Object.entries(entries).map(([date, dayEntries]) => {
                 return (
                     <div key={date} className="w-full flex flex-col items-center justify-between gap-4 mt-6">
-                        <BorderStyle avg={averages[date]} className="w-full">
+                        <BorderStyle avg={Math.round(averages[date] * 10) / 10} className="w-full">
                             <CardHeader className="">
                                 <CardTitle className="flex justify-between items-center ">
                                     <p>{moment(date).format("ddd, DD.MM.YYYY")}</p>
-                                    <EnergyValue avg={averages[date]}>
-                                        <span>{averages[date]}</span>
+                                    <EnergyValue avg={Math.round(averages[date] * 10) / 10}>
+                                        <span>{Math.round(averages[date] * 10) / 10}</span>
                                     </EnergyValue>
                                 </CardTitle>
                                 {/* <CardDescription>Day Summary (TK)</CardDescription> */}
