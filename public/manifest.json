@@ -2,7 +2,7 @@
   "name": "Fatigue Diary",
   "short_name": "Fatigue Diary",
   "description": "Effortlessly monitor, analyze, and improve your energy levels and daily activities with Fatigue Diary.",
-  "start_url": "/user/dashboard/",
+  "start_url": "/user/dashboard",
   "display": "standalone",
   "background_color": "#1B1E22",
   "theme_color": "#4A83B4",
