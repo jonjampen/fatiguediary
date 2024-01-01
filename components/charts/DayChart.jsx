@@ -72,7 +72,7 @@ export default function DayChart({ entries, activities, startDate, endDate, rang
                     style: {
                         colors: 'hsl(var(--muted-foreground))',
                     },
-                    datetimeUTC: false, // Do not convert to UTC
+                    // datetimeUTC: false, // Do not convert to UTC
                 },
             },
             yaxis: {
@@ -103,7 +103,11 @@ export default function DayChart({ entries, activities, startDate, endDate, rang
                 theme: settings.theme === 0 ? "dark" : "light",
                 x: {
                     show: true,
-                    format: 'dd/MM/yy HH:mm',
+                    format: 'dd.MM.yy HH:mm',
+                    formatter: function (value, { series, seriesIndex, dataPointIndex, w }) {
+                        return moment(value).format("DD.MM.yy HH:mm")
+                    }
+                    // datetimeUTC: false, // Do not convert to UTC
                 },
                 y: {
                     formatter: function (val) {

@@ -14,7 +14,7 @@ export default function formatChartData(entries, activities, range, startDate, e
                 }
             })
             data.push({
-                x: entry.datetime,
+                x: moment(entry.datetime).format("YYYY-MM-DD HH:mm"),
                 y: entry.energylevel,
                 z: currentActivities.join(", "),
             })
