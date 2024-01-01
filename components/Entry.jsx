@@ -49,7 +49,7 @@ export default function Entry({ entry, activities, updateEntries }) {
             <DropdownMenu>
                 <DropdownMenuTrigger className="w-full border-t flex justify-between items-center cursor-pointer py-2 px-2">
                     <div className="flex flex-col justify-start items-start">
-                        <p className="text-xs text-gray-500">{entry.datetime}, {moment(entry.datetime).format("HH:mm")}</p>
+                        <p className="text-xs text-gray-500">{moment(entry.datetime).format("HH:mm")}</p>
                         <ul className="flex gap-2">
                             {Object.entries(activities).map(([key, activity]) => {
                                 if (activity.energyId === entry.id) {
