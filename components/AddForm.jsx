@@ -79,7 +79,7 @@ export default function AddForm({ startActivities, fetchActivities, id }) {
 
     async function addEnergy(e) {
         e.preventDefault();
-        let datetime = date + " " + time
+        let datetime = moment(date + " " + time).format("YYYY-MM-DD HH:mm")
         res = await fetch(process.env.URL + "/api", {
             method: "POST",
             headers: {
