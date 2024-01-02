@@ -116,7 +116,14 @@ export default function AddForm({ startActivities, fetchActivities, id }) {
     let emoji = calculateEmoji(energyLevel);
 
     useEffect(() => {
-        if (id) getEnergy()
+        const fetchData = async () => {
+            if (id) {
+                await getEnergy();
+            }
+            setActivities(await fetchActivities());
+        };
+
+        fetchData();
     }, [])
 
     async function updateActivities() {
