@@ -80,7 +80,7 @@ export default function Entry({ entry, activities, updateEntries }) {
                         <p>{entry.notes}</p>
                     </div>
                     <div className="">
-                        <EnergyValue avg={entry.energylevel}>
+                        <EnergyValue avg={entry.energylevel} type="entry">
                             <span>{entry.energylevel}</span>
                         </EnergyValue>
                     </div>

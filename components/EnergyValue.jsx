@@ -3,14 +3,14 @@
 import React from 'react'
 import { calculateColor } from '@/app/lib/calculateColor'
 
-export default function EnergyValue({ children, avg }) {
-    let color = avg > 0 ? calculateColor(avg) : "transparent";
+export default function EnergyValue({ children, avg, type = "summary" }) {
+    let color = calculateColor(avg);
 
     return (
         <div style={{
             "color": color
         }}>
-            {children}
+            {type === "entry" || avg > 0 ? children : ""}
         </div>
     )
 }
