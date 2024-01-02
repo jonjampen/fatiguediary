@@ -155,17 +155,31 @@ export default function AddForm({ startActivities, fetchActivities, id }) {
                     <CardDescription>{isEditing ? "Click on an activity to edit/delete/hide it. Then click on save to select your preferred activities." : "Mark the activities that you have just done."}</CardDescription>
                 </CardHeader>
                 <CardContent className="w-full">
-                    <ul className="activities w-full">
+                    <ul className="flex flex-wrap gap-x-2 gap-y-2 w-full">
                         {activities.map(activity => {
                             if (!activity.hidden) {
-                                return <ActivityItem fetchActivities={updateActivities} key={activity.id} activityId={activity.id} selectedActivities={selectedActivities} setSelectedActivities={setSelectedActivities} style={{ 'wordBreak': 'break-all;', "backgroundColor": (selectedActivities.includes(activity.id)) ? "hsl(var(--primary))" : "transparent", "color": (selectedActivities.includes(activity.id)) ? "hsl(var(--primary-foreground))" : "hsl(var(--foreground))" }} isEditing={isEditing}>{activity.name}</ActivityItem>
+                                return <ActivityItem fetchActivities={updateActivities} key={activity.id} activityId={activity.id} selectedActivities={selectedActivities} setSelectedActivities={setSelectedActivities}
+                                    style={{
+                                        'wordBreak': 'break-all;',
+                                        "backgroundColor": (selectedActivities.includes(activity.id)) ? "hsl(var(--primary))" : "transparent",
+                                        "color": (selectedActivities.includes(activity.id)) ? "hsl(var(--primary-foreground))" : "hsl(var(--foreground))",
+                                        'flexBasis': 'calc(33.33% - 16px / 3)',
+                                    }}
+                                    isEditing={isEditing}>{activity.name}</ActivityItem>
                             }
                         })}
 
 
                         <Dialog>
-                            <DialogTrigger>
-                                <li className="border rounded h-11 flex items-center justify-center text-center cursor-pointer"><Plus /></li>
+                            <DialogTrigger className="flex-shrink-0" style={{
+                                'flexBasis': 'calc(33.33% - 16px / 3)',
+                            }}>
+                                <li
+                                    className="flex-shrink-0 border rounded min-h-[44px] flex items-center justify-center text-center cursor-pointer select-none px-1"
+                                    style={{
+                                        'flexBasis': 'calc(33.33% - 16px / 3)',
+                                    }}
+                                ><Plus /></li>
                             </DialogTrigger>
                             <DialogContent>
                                 <DialogHeader>
