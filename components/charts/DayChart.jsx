@@ -13,7 +13,7 @@ export default function DayChart({ entries, activities, startDate, endDate, rang
         "wake_up_time": "08:00:00",
         "bed_time": "23:00:00",
     })
-
+    // console.log(moment(new Date(endDate).toDateString() + " " + settings.bed_time).unix())
     useEffect(() => {
         const getData = async () => {
             setSettings(await getSettings());
@@ -60,8 +60,8 @@ export default function DayChart({ entries, activities, startDate, endDate, rang
             },
             xaxis: {
                 type: 'datetime',
-                min: moment(new Date(startDate).toDateString() + " " + settings.wake_up_time).toDate().getTime(),
-                max: moment(new Date(endDate).toDateString() + " " + settings.bed_time).toDate().getTime(),
+                min: moment(new Date(startDate).toDateString() + " " + settings.wake_up_time).unix() * 1000,
+                max: moment(new Date(endDate).toDateString() + " " + settings.bed_time).unix() * 1000,
                 labels: {
                     datetimeFormatter: {
                         year: 'YYYY',
@@ -72,7 +72,7 @@ export default function DayChart({ entries, activities, startDate, endDate, rang
                     style: {
                         colors: 'hsl(var(--muted-foreground))',
                     },
-                    // datetimeUTC: false, // Do not convert to UTC
+                    datetimeUTC: false, // Do not convert to UTC
                 },
             },
             yaxis: {
@@ -104,10 +104,6 @@ export default function DayChart({ entries, activities, startDate, endDate, rang
                 x: {
                     show: true,
                     format: 'dd.MM.yy HH:mm',
-                    formatter: function (value, { series, seriesIndex, dataPointIndex, w }) {
-                        return moment(value).format("DD.MM.yy HH:mm")
-                    }
-                    // datetimeUTC: false, // Do not convert to UTC
                 },
                 y: {
                     formatter: function (val) {
