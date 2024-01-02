@@ -9,12 +9,15 @@ import {
     CardHeader,
     CardTitle,
 } from "@/components/ui/card"
+import { ChevronDown, ChevronUp } from 'lucide-react'
 
 export default function RatedActivities() {
     const [goodActivities, setGoodActivities] = useState()
     const [badActivities, setBadActivities] = useState()
     const [worstScore, setWorstScore] = useState()
     const [bestScore, setBestScore] = useState()
+    const [goodOpen, setGoodOpen] = useState(false)
+    const [badOpen, setBadOpen] = useState(false)
     let activityDiffs = {};
 
     async function fetchEntries() {
@@ -107,24 +110,29 @@ export default function RatedActivities() {
     return (
         <>
             <Card className="w-full">
-                <CardHeader>
+                <CardHeader className="flex flex-row items-center justify-between">
                     <CardTitle>Energy boosting activities</CardTitle>
-                    {/* <CardDescription>Card Description</CardDescription> */}
+                    <div className="cursor-pointer" onClick={() => setGoodOpen(!goodOpen)}>
+                        {goodOpen ? <ChevronUp /> : <ChevronDown />}
+                    </div>
                 </CardHeader>
                 <CardContent>
-                    <ul className="activities w-full">
+                    <ul className="flex flex-wrap gap-x-2 gap-y-2 w-full">
                         {goodActivities != undefined ? (
                             goodActivities.map((values, key) => {
                                 let color = calculateRelativeColor(values[1])
-                                return (
-                                    <li className="border rounded min-h-[44px] flex items-center justify-center text-center cursor-pointer select-none px-1" key={key}
-                                        style={{
-                                            "border": "2px solid " + color,
-                                            'wordBreak': 'break-all'
-                                        }}>
-                                        {values[0]}
-                                    </li>
-                                )
+                                if (key < 3 || goodOpen) {
+                                    return (
+                                        <li className="flex-shrink-0 border rounded min-h-[44px] flex items-center justify-center text-center cursor-pointer select-none px-1" key={key}
+                                            style={{
+                                                'border': '2px solid ' + color,
+                                                'wordBreak': 'break-all',
+                                                'flexBasis': 'calc(33.33% - 16px / 3)',
+                                            }}>
+                                            {values[0]}
+                                        </li>
+                                    )
+                                }
                             })
 
                         ) : (
@@ -134,24 +142,29 @@ export default function RatedActivities() {
                 </CardContent>
             </Card>
             <Card className="w-full">
-                <CardHeader>
+                <CardHeader className="flex flex-row items-center justify-between">
                     <CardTitle>Energy draining activities</CardTitle>
-                    {/* <CardDescription>Card Description</CardDescription> */}
+                    <div className="cursor-pointer" onClick={() => setBadOpen(!badOpen)}>
+                        {badOpen ? <ChevronUp /> : <ChevronDown />}
+                    </div>
                 </CardHeader>
                 <CardContent>
-                    <ul className="activities w-full">
+                    <ul className="flex flex-wrap gap-x-2 gap-y-2 w-full">
                         {badActivities != undefined ? (
                             badActivities.map((values, key) => {
                                 let color = calculateRelativeColor(values[1])
-                                return (
-                                    <li className="border rounded min-h-[44px] flex items-center justify-center text-center cursor-pointer select-none px-1" key={key}
-                                        style={{
-                                            "border": "2px solid " + color,
-                                            'wordBreak': 'break-all'
-                                        }}>
-                                        {values[0]}
-                                    </li>
-                                )
+                                if (key < 3 || badOpen) {
+                                    return (
+                                        <li className="flex-shrink-0 border rounded min-h-[44px] flex items-center justify-center text-center cursor-pointer select-none px-1" key={key}
+                                            style={{
+                                                'border': '2px solid ' + color,
+                                                'wordBreak': 'break-all',
+                                                'flexBasis': 'calc(33.33% - 16px / 3)',
+                                            }}>
+                                            {values[0]}
+                                        </li>
+                                    )
+                                }
                             })
                         ) : (
                             <p>Loading...</p>
