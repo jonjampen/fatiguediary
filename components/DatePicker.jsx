@@ -17,7 +17,7 @@ import { ChevronLeft, ChevronRight } from "lucide-react"
 import moment from "moment"
 
 
-export default function DatePicker({ updateValues }) {
+export default function DatePicker({ updateValues, selectedRange }) {
     const [date, setDate] = useState(moment().startOf("day").toDate())
     useEffect(() => {
         updateValues(date)
@@ -25,7 +25,7 @@ export default function DatePicker({ updateValues }) {
 
     return (
         <div className="flex gap-2">
-            <Button variant="outline" size="icon" className="" onClick={() => setDate(moment(date).startOf("day").subtract(7, "day").toDate())}>
+            <Button variant="outline" size="icon" className="" onClick={() => setDate(moment(date).startOf("day").subtract(1, selectedRange).toDate())}>
                 <ChevronLeft className="h-4 w-4" />
             </Button>
 
@@ -52,7 +52,7 @@ export default function DatePicker({ updateValues }) {
                 </PopoverContent>
             </Popover>
 
-            <Button variant="outline" size="icon" className="" onClick={() => setDate(moment(date).startOf("day").add(7, "day").toDate())}>
+            <Button variant="outline" size="icon" className="" onClick={() => setDate(moment(date).startOf("day").add(1, selectedRange).toDate())}>
                 <ChevronRight className="h-4 w-4" />
             </Button>
         </div>

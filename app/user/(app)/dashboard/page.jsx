@@ -78,7 +78,7 @@ export default function Dashboard() {
                 <h1 className="text-left text-2xl">Your Dashboard</h1>
             </div>
             <div className="w-full flex flex-col items-center justify-between gap-4">
-                <DatePicker updateValues={setSelectedDate} />
+                <DatePicker updateValues={setSelectedDate} selectedRange={range} />
                 <RangePicker setRange={setRange} />
             </div>
             <div className="w-full flex flex-col items-center justify-between gap-4 mt-6">
