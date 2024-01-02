@@ -59,8 +59,8 @@ export default function Dashboard() {
     }
 
     function updateDate(date) {
-        setStartDate(moment(date).startOf(range).toDate())
-        setEndDate(moment(date).endOf(range).toDate())
+        setStartDate(moment(date).startOf(range).format("YYYY-MM-DD HH:mm:ss"))
+        setEndDate(moment(date).endOf(range).format("YYYY-MM-DD HH:mm:ss"))
     }
 
     useEffect(() => {
