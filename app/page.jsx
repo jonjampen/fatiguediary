@@ -164,7 +164,7 @@ export default function Home() {
           </div>
         </section>
         <section className="w-full mt-8 pb-3">
-          <p className="text-center">&copy;2023 All rights reserved. Designed and developed by <a href="https://jonjampen.ch" target="_blank" className="text-accent">Jon Jampen</a>.</p>
+          <p className="text-center">&copy;2024 All rights reserved. Designed and developed by <a href="https://jonjampen.ch" target="_blank" className="text-accent">Jon Jampen</a>.</p>
         </section>
       </div>
     </div>
