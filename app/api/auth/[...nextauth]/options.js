@@ -18,7 +18,7 @@ export const options = {
             },
             async authorize(credentials) {
                 let user = await loginUser(credentials.email, credentials.password)
-                console.log("User (nextauth options): " + user)
+                console.log("User (nextauth options): " + JSON.stringify(user))
 
                 if (user) {
                     console.log("Yes, is user! (nextauth options)")
@@ -71,10 +71,11 @@ async function loginUser(email, password) {
     res = await res.json();
     if (res && res.data && res.data.length > 0) {
         console.log("User with that email and password exists. (loginUser())")
-        console.log("Res Data: " + res.data, "res.data[0]: " + res.data[0])
+        console.log("Res Data: " + JSON.stringify(res.data))
+        console.log("res.data[0]: " + JSON.stringify(res.data[0]))
         return res.data[0];
     }
-    
+
     console.log("User with that email and password DOES NOT exists. (loginUser()); res: " + res)
     return null
 }

@@ -14,7 +14,7 @@ const connection = await mysql.createConnection({
 });
 
 async function executeQuery(query, params) {
-    let [values] = await connection.execute(query, params, function (err) {
+    let [values] = await connection.execute(query, params, function (err, results, fields) {
         console.log("Error executing query: " + err)
     });
     return values
@@ -61,6 +61,9 @@ export async function POST(request) {
 
     if (!connection) {
         console.log("ERROR with DB connection. Could not establish connection!")
+    }
+    else {
+        console.log("DB connection successful!")
     }
 
     try {
