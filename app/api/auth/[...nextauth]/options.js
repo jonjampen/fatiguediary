@@ -69,6 +69,7 @@ async function loginUser(email, password) {
         }),
     })
     res = await res.json();
+
     if (res && res.data && res.data.length > 0) {
         console.log("User with that email and password exists. (loginUser())")
         console.log("Res Data: " + JSON.stringify(res.data))

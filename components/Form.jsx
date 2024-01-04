@@ -127,7 +127,8 @@ export default function Form({ title, description, fields, info, link, linkText,
                     body: formData,
                 });
 
-                push("/password-reset/" + "?success")
+                res = await res.text();
+                push("/password-reset?success=" + res)
 
             }
         } else if (title === "Reset Your Password") {

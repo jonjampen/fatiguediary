@@ -25,8 +25,8 @@ export default function Login({ searchParams }) {
     ]
 
     let success = searchParams.success;
-
-    if (success === "true") {
+    console.log(success)
+    if (success === "success") {
         return (
             <div className="flex flex-col items-center">
                 <h1>Password Reset Request</h1>
@@ -34,7 +34,7 @@ export default function Login({ searchParams }) {
             </div>
         )
     }
-    else if (success === "false") {
+    else if (success === "error") {
         return (
             <div className="flex flex-col items-center">
                 <h1>Error!</h1>
