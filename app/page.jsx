@@ -136,7 +136,7 @@ export default function Home() {
             <h4>Effortlessly monitor, analyze, and improve your energy levels and daily activities while preventing crashes.</h4>
             <div className="flex gap-4 items-center mt-3">
               <a href="https://instagram.com/fatiguediary.ch" target="_blank"><Instagram /></a>
-              {/* <a href="https://youtube.com/" target="_blank"><Youtube /></a> */}
+              <a href="https://youtube.com/@FatigueDiary" target="_blank"><Youtube /></a>
               <a href="mailto:info@fatiguediary.ch" target="_blank"><Mail /></a>
               <button className="w-full text-start md:w-auto md:text-auto hover:text-accent" onClick={shareIt} name="share this app"><Share2 /></button>
             </div>
