@@ -18,18 +18,14 @@ export const options = {
             },
             async authorize(credentials) {
                 let user = await loginUser(credentials.email, credentials.password)
-                // user = user[0][0]
-                // credentials.password = credentials.password // TODO: add password encryption
-                // if (credentials.email === user.email && credentials.password === user.password) {
-                //     delete user.password
-                //     return user
-                // }
-                // else {
-                //     return null
-                // }
+                console.log("User (nextauth options): " + user)
+
                 if (user) {
+                    console.log("Yes, is user! (nextauth options)")
                     return user
                 }
+
+                console.log("No, is NOT user! (nextauth options)")
                 return null
             }
         })
@@ -73,8 +69,12 @@ async function loginUser(email, password) {
         }),
     })
     res = await res.json();
-    if (res.data) {
+    if (res && res.data && res.data.length > 0) {
+        console.log("User with that email and password exists. (loginUser())")
+        console.log("Res Data: " + res.data, "res.data[0]: " + res.data[0])
         return res.data[0];
     }
+    
+    console.log("User with that email and password DOES NOT exists. (loginUser()); res: " + res)
     return null
 }

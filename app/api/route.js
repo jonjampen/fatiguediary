@@ -14,7 +14,9 @@ const connection = await mysql.createConnection({
 });
 
 async function executeQuery(query, params) {
-    let [values] = await connection.execute(query, params);
+    let [values] = await connection.execute(query, params, function (err) {
+        console.log("Error executing query: " + err)
+    });
     return values
 }
 
@@ -57,6 +59,10 @@ export async function POST(request) {
     let params = [1];
     let encryptedPassword;
 
+    if (!connection) {
+        console.log("ERROR with DB connection. Could not establish connection!")
+    }
+
     try {
         if (type === "selectUserByEmail") {
             query = 'SELECT * FROM `users` WHERE `email` = ?';
@@ -76,22 +82,30 @@ export async function POST(request) {
             rows = await executeQuery(query, params);
         }
         if (type === "loginUser") {
+            console.log("Logging in user (API)")
             query = 'SELECT * FROM `users` WHERE `email` = ?';
             params = [body.email]
+            console.log("User Email:", body.email);
             let user = await executeQuery(query, params);
+            console.log("DB Return:", user);
 
             if (user.length > 0) {
+                console.log("user.length > 0; User[0]:", user[0]);
                 const storedHashedPassword = user[0].password;
+                console.log("Hashed PW:", storedHashedPassword);
 
                 // New password encryption
                 const isPasswordMatchBcrypt = await bcrypt.compare(body.password, storedHashedPassword);
 
                 // Old password encryption
                 const isPasswordMatchOld = (storedHashedPassword === oldEncryptPassword(body.password));
+                console.log("Is password match (old, new):", isPasswordMatchOld, isPasswordMatchBcrypt);
 
                 if (isPasswordMatchBcrypt || isPasswordMatchOld) {
                     delete user[0].password;
+                    console.log("User without PW:", user[0])
                     rows = user;
+                    console.log("Rows is now user; rows:", rows)
                     if (isPasswordMatchOld) {
                         // set new encryption
                         encryptedPassword = await encryptPassword(body.password);
@@ -102,9 +116,11 @@ export async function POST(request) {
                     }
                 } else {
                     rows = null;
+                    console.log("ERROR! user.length > 0; but is not a passwordMatch! rows:", rows)
                 }
             } else {
                 rows = null;
+                console.log("ERROR! user.length is not bigger than 0! rows:", rows)
             }
         }
         else if (type === "addEnergylevel") {
@@ -235,7 +251,7 @@ export async function POST(request) {
         }
     }
     catch (error) {
-        // console.log("ERROR:" + error, "type: " + type)
+        console.log("ERROR when executing API request: " + error, "type: " + type)
     }
     return NextResponse.json({ data: rows }, { status: 200 });
 }
