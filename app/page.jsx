@@ -88,7 +88,7 @@ export default function Home() {
         <FeatureSection />
 
         {/* Developer */}
-        <section className="mb-28 w-full flex justify-center lg:justify-start" >
+        <section className="mb-28 w-full flex flex-col lg:flex-row items-center justify-center lg:justify-between gap-8" >
           <motion.div className="w-full md:max-w-md"
             initial={{ opacity: 0, scale: 0.75 }}
             whileInView={{ opacity: 1, scale: 1 }}
@@ -98,7 +98,15 @@ export default function Home() {
             <p>Hello, I&apos;m Jon. Like you, I am facing chronic fatigue, and I&apos;ve created this web app to share the strategies that have helped me on my journey. This project started as my matura (high school graduation) project.</p>
             <p>Feel free to contact me if you have any questions!</p>
           </motion.div>
-          {/* <img src="" alt="" /> */}
+          <motion.img
+            src="/preview/programmer.svg"
+            alt=""
+            className="max-w-[60%] lg:max-w-[30%]"
+            initial={{ opacity: 0, scale: 0.75 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.7 }}
+          />
         </section >
 
         {/* CTA */}
