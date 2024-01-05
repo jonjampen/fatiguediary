@@ -60,8 +60,8 @@ export default function DayChart({ entries, activities, startDate, endDate, rang
             },
             xaxis: {
                 type: 'datetime',
-                min: moment(new Date(startDate).toDateString() + " " + settings.wake_up_time).unix() * 1000,
-                max: moment(new Date(endDate).toDateString() + " " + settings.bed_time).unix() * 1000,
+                min: moment(moment(startDate).format("YYYY-MM-DD") + " " + settings.wake_up_time).unix() * 1000,
+                max: moment(moment(endDate).format("YYYY-MM-DD") + " " + settings.bed_time).unix() * 1000,
                 labels: {
                     datetimeFormatter: {
                         year: 'YYYY',
@@ -96,7 +96,7 @@ export default function DayChart({ entries, activities, startDate, endDate, rang
                 enabled: false,
             },
             stroke: {
-                curve: 'smooth',
+                curve: 'straight',
             },
             colors: ['hsl(var(--accent))'],
             tooltip: {

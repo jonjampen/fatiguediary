@@ -208,7 +208,7 @@ export async function POST(request) {
             rows = await executeQuery(query, params);
         }
         else if (type === "getEntriesByUserId") {
-            query = 'SELECT * FROM `energy` WHERE `user_id` = ? AND (datetime BETWEEN ? AND ?) ORDER BY datetime DESC';
+            query = 'SELECT * FROM `energy` WHERE `user_id` = ? AND (datetime BETWEEN ? AND ?) ORDER BY datetime ASC';
             params = [userid, body.startDate, body.endDate]
             rows = await executeQuery(query, params);
         }
