@@ -96,7 +96,7 @@ export default function DayChart({ entries, activities, startDate, endDate, rang
                 enabled: false,
             },
             stroke: {
-                curve: 'straight',
+                // curve: 'straight',
             },
             colors: ['hsl(var(--accent))'],
             tooltip: {
