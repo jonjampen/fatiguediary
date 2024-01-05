@@ -13,8 +13,24 @@ const connection = await mysql.createConnection({
     dateStrings: true,
 });
 
+const pool = mysql.createPool({
+    host: process.env.DB_HOST,
+    user: process.env.DB_USER,
+    password: process.env.DB_PASSWORD,
+    database: process.env.DB_NAME,
+    waitForConnections: true,
+    connectionLimit: 10,
+    maxIdle: 0, // max idle connections, the default value is the same as `connectionLimit`
+    idleTimeout: 60000, // idle connections timeout, in milliseconds, the default value 60000
+    queueLimit: 0,
+    enableKeepAlive: true,
+    keepAliveInitialDelay: 0,
+    dateStrings: true,
+});
+
+
 async function executeQuery(query, params) {
-    let [values] = await connection.execute(query, params, function (err, results, fields) {
+    let [values] = await pool.execute(query, params, function (err, results, fields) {
         console.log("Error executing query: " + err)
     });
     return values
@@ -45,27 +61,31 @@ function oldEncryptPassword(password) {
 }
 
 export async function POST(request) {
+    // get information from request body
     const body = await request.json()
     const { type } = body
 
+    // get user id
     const session = await getServerSession(options)
     let userid;
     if (session) {
         userid = session.user.id;
     }
 
+    // prepare variables
     let rows;
     let query = '';
     let params = [1];
     let encryptedPassword;
 
-    if (!connection) {
-        console.log("ERROR with DB connection. Could not establish connection!")
+    if (!pool) {
+        console.log("ERROR with DB pool. Could not establish pool!")
     }
     else {
-        console.log("DB connection successful!")
+        console.log("DB pool successful!")
     }
 
+    // perform db request
     try {
         if (type === "selectUserByEmail") {
             query = 'SELECT * FROM `users` WHERE `email` = ?';
@@ -256,5 +276,6 @@ export async function POST(request) {
     catch (error) {
         console.log("ERROR when executing API request: " + error, "type: " + type)
     }
+
     return NextResponse.json({ data: rows }, { status: 200 });
 }
