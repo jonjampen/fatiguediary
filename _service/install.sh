@@ -21,11 +21,12 @@ git checkout -f HEAD
 git pull --rebase
 
 # customize for branch
-if [ "${USER}" == "fatiguediary-dev" ]
-then
-    rm -f ${HOME}/${GIT_REPO}/public/sitemap.xml
-    cp -f ${HOME}/${GIT_REPO}/app/robots-dev.txt ${HOME}/${GIT_REPO}/app/robots.txt
-fi
+case "${USER}" in
+    fatiguediary-dev)
+        rm -f ${HOME}/${GIT_REPO}/public/sitemap.xml
+        cp -f ${HOME}/${GIT_REPO}/app/robots-dev.txt ${HOME}/${GIT_REPO}/app/robots.txt
+        ;;
+esac
 
 # build
 export PATH=${NODE_DIR}/bin:/usr/local/bin:/usr/bin:/bin
