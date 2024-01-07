@@ -2,7 +2,7 @@
 
 set -e
 
-NODE_VERSION="v18.18.2"
+NODE_VERSION="v18.19.0"
 GIT_REPO="fatiguediary"
 
 DIR="$(cd -- "$(dirname "${0}")" > /dev/null 2>&1 ; pwd -P)"
