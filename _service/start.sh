@@ -13,4 +13,4 @@ export NVM_BIN=${NODE_DIR}/bin
 export NVM_CD_FLAGS=
 
 cd ~/${GIT_REPO}
-npm run start
+npm run start-${USER}

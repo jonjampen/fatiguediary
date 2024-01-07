@@ -6,6 +6,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
+    "start-fatiguediary": "next start -p 3000",
+    "start-fatiguediary-dev": "next start -p 3001",
     "lint": "next lint"
   },
   "dependencies": {
