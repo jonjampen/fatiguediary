@@ -14,6 +14,6 @@ jobs:
       uses: appleboy/ssh-action@master
       with:
         host: ${{ secrets.HOST }}
-        username: ${{ secrets.USERNAME_BETA }}
+        username: ${{ secrets.USERNAME_DEV }}
         key: ${{ secrets.KEY }}
         script: fatiguediary/_service/install.sh
