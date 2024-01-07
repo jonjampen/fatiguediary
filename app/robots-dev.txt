@@ -1,4 +1,5 @@
 User-Agent: *
+Disallow: /
 Disallow: /user/
 Disallow: /privacy-policy
 

@@ -20,6 +20,13 @@ cd ${HOME}/${GIT_REPO}
 git checkout -f HEAD
 git pull --rebase
 
+# customize for branch
+if [ "${USER}" == "fatiguediary-dev" ]
+then
+    rm -f ${HOME}/${GIT_REPO}/public/sitemap.xml
+    cp -f ${HOME}/${GIT_REPO}/app/robots-dev.txt ${HOME}/${GIT_REPO}/app/robots.txt
+fi
+
 # build
 export PATH=${NODE_DIR}/bin:/usr/local/bin:/usr/bin:/bin
 export NVM_DIR=${HOME}/.nvm
