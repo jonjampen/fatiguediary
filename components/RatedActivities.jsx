@@ -35,7 +35,7 @@ export default function RatedActivities() {
         let lastEntryId, lastDifference;
 
         entries.map((entry, key) => {
-            if (key === 0 || !entry.activity_name) return;
+            if (key === 0 || !entry.activity_name || entry.activity_hidden) return;
 
             if (!activityDiffs[entry.activity_name])
                 activityDiffs[entry.activity_name] = [];
