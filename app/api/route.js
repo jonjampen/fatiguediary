@@ -272,6 +272,21 @@ export async function POST(request) {
             params = [userid]
             rows = await executeQuery(query, params);
         }
+        else if (type === "getUserExports") {
+            query = 'SELECT * FROM exports WHERE user_id = ?';
+            params = [userid]
+            rows = await executeQuery(query, params);    
+        }
+        else if (type === "addUserExport") {
+            query = 'INSERT INTO exports (user_id, filename, datetime) VALUES (?, ?, ?)';
+            params = [userid, body.filepath, body.datetime]
+            rows = await executeQuery(query, params);
+        }
+        else if (type === "exportUserData") {
+            query = "SELECT e.id as energyEntryId, e.datetime as datetime, e.energylevel as energylevel, e.notes as notes, GROUP_CONCAT(a.name) as activityNames, GROUP_CONCAT(a.id) as activityIds FROM `activities` AS a JOIN energy_activities AS ea ON ea.activity_id = a.id JOIN energy as e ON e.id = ea.energy_id WHERE e.user_id = ? GROUP BY e.id";
+            params = [userid]
+            rows = await executeQuery(query, params);
+        }
     }
     catch (error) {
         console.log("ERROR when executing API request: " + error, "type: " + type)

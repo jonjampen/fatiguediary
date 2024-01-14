@@ -7,6 +7,7 @@ import { Moon, Sun } from "lucide-react"
 import { LoaderButton } from "./ui/loaderButton"
 import { useEffect, useState } from "react"
 import moment from "moment"
+import ExportItem from "./ExportItem"
 
 export function SettingsForm() {
     const [awakeTime, setAwakeTime] = useState()
@@ -54,6 +55,37 @@ export function SettingsForm() {
         fetchData();
     }, [])
 
+    async function createExport() {
+        // get data from database to export it
+        let data = await fetch(process.env.URL + "/api", {
+            method: "POST",
+            body: JSON.stringify({
+            "type": "exportUserData",
+            }),
+        })
+        data = await data.json()
+        data = data.data
+
+        let res = await fetch(process.env.URL + '/api/export', {
+            method: 'POST',
+            body: JSON.stringify({
+                "data": data,
+            }),
+        });
+
+        console.log(res)
+        res = await res.json()
+        console.log(res)
+    }
+/*     res = await fetch(process.env.URL + "/api", {
+        method: "POST",
+        body: JSON.stringify({
+            "type": "addUserExport",
+            "filePath": "SomeFileName",
+            "datetime": moment().format("YYYY-MM-DD hh:mm:ss")
+        }),
+    }) */
+
     return (
         <section className="mx-4">
             <form onSubmit={changeSettings} className="w-full space-y-6 flex flex-col items-center">
@@ -84,6 +116,19 @@ export function SettingsForm() {
                         <div className="flex flex-col gap-2">
                             <IconInput type="time" name="time" id="timeInput" icon={<Sun />} onValueChange={setAwakeTime} value={awakeTime} />
                             <IconInput type="time" name="time" id="timeInput" icon={<Moon />} onValueChange={setBedTime} value={bedTime} />
+                        </div>
+                    </div>
+                </div>
+                <div className="space-y-4 w-full">
+                    <div className="rounded-lg border p-4">
+                        <div className="space-y-0.5 mr-1">
+                            <h4 className="font-semibold text-lg">Data Export</h4>
+                        </div>
+                        <div className="flex flex-col gap-4 mt-2">
+                            <ul className="flex flex-col gap-4">
+                                <ExportItem readableFileName="2024-01-10_16-35_John-Doe" filePath="/a.png" />
+                            </ul>
+                            <Button className="w-32" type="button" onClick={createExport}>Export now</Button>
                         </div>
                     </div>
                 </div>
