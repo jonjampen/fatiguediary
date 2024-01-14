@@ -97,7 +97,7 @@ export default function ActivityItem({ children, activityId, selectedActivities,
     }
 
     if (!isEditing) {
-        return <li className="flex-shrink-0 border rounded min-h-[44px] flex items-center justify-center text-center cursor-pointer select-none px-1" style={style} onClick={selectActivity}>{children}</li>
+        return <li className="flex-shrink-0 border rounded min-h-[44px] flex items-center justify-center text-center cursor-pointer select-none px-1 wrapWords" style={style} onClick={selectActivity}>{children}</li>
     }
     else {
         return (
@@ -105,7 +105,7 @@ export default function ActivityItem({ children, activityId, selectedActivities,
                 <AlertDialog>
                     <DropdownMenu>
                         <DropdownMenuTrigger className='flex-shrink-0 ' style={style}>
-                            <li className="border rounded min-h-[44px] flex items-center justify-center text-center cursor-pointer select-none px-1" style={style} onClick={selectActivity}>{children}</li>
+                            <li className="flex-shrink-0 border rounded min-h-[44px] flex items-center justify-center text-center cursor-pointer select-none px-1 wrapWords" style={style} onClick={selectActivity}>{children}</li>
                         </DropdownMenuTrigger>
                         <DropdownMenuContent className="mt-[-20px]">
                             <DropdownMenuLabel>Edit {children}</DropdownMenuLabel>
