@@ -89,6 +89,7 @@ export default function Form({ title, description, fields, info, link, linkText,
         }
 
         else if (title === "Request Password Reset") {
+            let success = "success";
             let res = await fetch(process.env.URL + "/api", {
                 method: "POST",
                 headers: {
@@ -128,9 +129,10 @@ export default function Form({ title, description, fields, info, link, linkText,
                 });
 
                 res = await res.text();
-                push("/password-reset?success=" + res)
-
+                success = res;
             }
+            push("/password-reset?success=" + success)
+
         } else if (title === "Reset Your Password") {
             if (inputFields.password === inputFields.passwordConf) {
                 let res = await fetch(process.env.URL + "/api", {
