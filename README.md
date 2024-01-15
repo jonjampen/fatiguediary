@@ -1,6 +1,6 @@
 # Fatigue Diary
 ![](/docs/coverimage.png)
-[www.fatiguediary.ch](https://www.fatiguediary.ch) | [info@fatiguediary.ch](mailto:info@fatiguediary.ch) | Instagram: [@fatiguediary.ch](https://www.instagram.com/fatiguediary.ch/) | [YouTube](https://www.youtube.com/fatiguediary)
+[www.fatiguediary.ch](https://www.fatiguediary.ch) | [info@fatiguediary.ch](mailto:info@fatiguediary.ch) | Instagram: [@fatiguediary.ch](https://www.instagram.com/fatiguediary.ch/) | [YouTube](https://www.youtube.com/@FatigueDiary)
 
 Matura project by Jon Jampen
 

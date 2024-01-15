@@ -17,10 +17,10 @@ export default function Instructions() {
             <section className="mx-10 max-w-[750px] text-justify mb-6">
                 <h1>Instructions</h1>
 
-                {/* <p>Watch this video or read the text below to learn how to use Fatigue Diary.</p>
+                <p>Watch this video or read the text below to learn how to use Fatigue Diary.</p>
                 <div class="aspect-w-16 aspect-h-9 my-2">
-                    <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                </div> */}
+                    <iframe src="https://www.youtube.com/embed/V73Hobz1Sgw?si=iGxJFEZBx7nH8T-T" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                </div>
 
                 <h2>Written Instructions</h2>
                 <p>Welcome to Fatigue Diary. In this guide, you&apos;ll learn how to effectively manage and improve your energy levels using the app Fatigue Diary.</p>

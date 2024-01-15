@@ -75,7 +75,7 @@ export default function Home() {
                   <PlayCircle /> Watch Video
                 </AnimatedDialogTrigger>
                 <DialogContent className="aspect-video w-screen px-8 md:w-[580px] lg:w-[980px]">
-                  <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" frameBorder="0" width="100%" height="100%" allow="accelerometer; autoplay; fullscreen; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                  <iframe src="https://www.youtube.com/embed/V73Hobz1Sgw?si=iGxJFEZBx7nH8T-T" frameBorder="0" width="100%" height="100%" allow="accelerometer; autoplay; fullscreen; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                 </DialogContent>
               </Dialog>
 
