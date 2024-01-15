@@ -1,34 +1,27 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Fatigue Diary
+![](/docs/coverimage.png)
+[www.fatiguediary.ch](https://www.fatiguediary.ch) | [info@fatiguediary.ch](mailto:info@fatiguediary.ch) | Instagram: [@fatiguediary.ch](https://www.instagram.com/fatiguediary.ch/) | [YouTube](https://www.youtube.com/fatiguediary)
 
-## Getting Started
+Matura project by Jon Jampen
 
-First, run the development server:
+---
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-```
+## Description
+📝 [Project Description (Matura Paper)](https://github.com/jonjampen/fatiguediary/blob/main/docs/maturapaper/matura_paper_jon_jampen.pdf)
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+<!-- 📅 [Schedule and Features](https://github.com/jonjampen/fatiguediary/blob/main/docs/schedule-features.md) -->
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+Fatigue Diary is a web app for people suffering from chronic fatigue (ME/CFS, MS, Long COVID, ...). Fatigue patients often keep track of their energy level on a paper chart to plan their day and schedule enough rest time. The goal of this project was to find out whether I can create a web app that makes it more comfortable to use than the chart on paper. My web app allows users to enter their energy level after every activity and to display different charts showing the energy level throughout the day, week, month, or year. Additionally, the web app rates the activities based on their impact on the energy level which is calculated using all the user’s entered data from the past month. The web app was tested by about 15 therapists who were referred to me by my therapist and about as many patients who found my web app on social media. The few feedbacks I received from therapists and patients, as well as my own experience show that the web app offers a more efficient and practical way of tracking one’s energy. 
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+## Technologies
+Version 2 (current version) was built with Next.Js, React, JavaScript, TailwindCSS, and a MySQL database.
 
-## Learn More
+Libraries:
+- ShadCn/ui
+- NextAuth
+- Apexcharts
+- Lucide Icons
+- MySQL2
+- next-pwa
 
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+`Originally it was built using HTML, CSS, and JavaScript for frontend. For the backend I used PHP and a MySQL database. (Libraries: Shepherd, Toastify, Apexcharts)`
