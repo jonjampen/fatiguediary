@@ -37,7 +37,7 @@ export function SettingsForm() {
                 "theme": theme === "Dark" ? 0 : 1,
                 "awakeTime": awakeTime,
                 "bedTime": bedTime,
-                "language": language === "German" ? "De" : "En",
+                "language": language === "German" ? "de" : "en",
             }),
         })
 
@@ -50,7 +50,7 @@ export function SettingsForm() {
             setAwakeTime(data.wake_up_time)
             setBedTime(data.bed_time)
             setTheme(data.theme === 0 ? "Dark" : "Light")
-            setLanguage(data.language === "De" ? "German" : "English")
+            setLanguage(data.language === "de" ? "German" : "English")
         }
         fetchData();
     }, [])

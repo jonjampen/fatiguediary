@@ -101,7 +101,7 @@ export async function POST(request) {
             let id = rows.insertId
 
             query = 'INSERT INTO `settings` (user_id, theme, wake_up_time, bed_time, newsletter, language) VALUES (?, ?, ?, ?, ?, ?)';
-            params = [id, 1, '07:00:00', '23:00:00', 1, "En"]
+            params = [id, 1, '07:00:00', '23:00:00', 1, "en"]
             rows = await executeQuery(query, params);
         }
         if (type === "loginUser") {

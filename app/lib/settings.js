@@ -22,7 +22,7 @@ export async function getSettings() {
 
     let defaultSettings = {
         "theme": 1,
-        "language": "En",
+        "language": "en",
     }
     return defaultSettings
 }
