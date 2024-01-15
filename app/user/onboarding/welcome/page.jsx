@@ -13,7 +13,7 @@ export default async function instructions() {
             <h3 className="mb-10">to Fatigue Diary!</h3>
             <p>Have a look at this video to learn how to use Fatigue Diary effectively.</p>
             <div className="aspect-video my-2">
-                <iframe src="https://www.youtube.com/embed/V73Hobz1Sgw?si=iGxJFEZBx7nH8T-T" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                <iframe src="https://www.youtube.com/embed/V73Hobz1Sgw?si=iGxJFEZBx7nH8T-T" frameBorder="0" allow="accelerometer; autoplay; fullscreen; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
             </div>
             <p>You can also read the <a href="/instructions" className="underline">written instructions</a>.</p>
             <div className="absolute bottom-10 flex flex-col gap-3">

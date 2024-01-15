@@ -19,7 +19,7 @@ export default function Instructions() {
 
                 <p>Watch this video or read the text below to learn how to use Fatigue Diary.</p>
                 <div class="aspect-w-16 aspect-h-9 my-2">
-                    <iframe src="https://www.youtube.com/embed/V73Hobz1Sgw?si=iGxJFEZBx7nH8T-T" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                    <iframe src="https://www.youtube.com/embed/V73Hobz1Sgw?si=iGxJFEZBx7nH8T-T" frameborder="0" allow="accelerometer; autoplay; fullscreen; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                 </div>
 
                 <h2>Written Instructions</h2>
