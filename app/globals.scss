@@ -1,0 +1,164 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+// https://realtimecolors.com/?colors=070f1d-f5f6fa-3F5D96-aec4f9-ffa061
+
+@layer base {
+    :root {
+        --background: 228 33% 97%;
+        --foreground: 218 61% 7%;
+
+        --card: 228 33% 97%;
+        --card-foreground: 218 61% 7%;
+
+        --popover: 228 33% 97%;
+        --popover-foreground: 218 61% 7%;
+
+        --primary: 219 41% 42%;
+        --primary-foreground: 210 20% 98%;
+
+        --secondary: 222 86% 83%;
+        --secondary-foreground: 218 61% 7%;
+
+        --muted: 220 14.3% 95.9%;
+        --muted-foreground: 220 8.9% 46.1%;
+
+        // orange accent
+        --accent: 24 100% 69%;
+        --accent-foreground: 218 61% 7%;
+
+        --accent: 3 89% 64%;
+        --accent-foreground: 218 61% 7%;
+        
+        --destructive: 0 84.2% 60.2%;
+        --destructive-foreground: 210 20% 98%;
+
+        --border: 220 13% 91%;
+        --input: 220 13% 91%;
+        --ring: 224 71.4% 4.1%;
+
+        --radius: 0.5rem;
+    }
+
+    .dark {
+        --background: 218 61% 7%;
+        --background: 214 12% 12%;
+        --foreground: 228 33% 97%;
+        
+        --card: 218 61% 7%;
+        --card: 214 12% 12%;
+        --card-foreground: 228 33% 97%;
+
+        --popover: 218 61% 7%;
+        --popover-foreground: 228 33% 97%;
+
+        --primary: 219 41% 42%;
+        --primary-foreground: 210 20% 98%;
+
+        --secondary: 222 86% 83%;
+        --secondary-foreground: 218 61% 7%;
+
+        --accent: 24 100% 69%;
+        --accent-foreground: 218 61% 7%;
+
+        --accent: 3 89% 64%;
+        --accent-foreground: 218 61% 7%;
+
+        --destructive: 0 62.8% 30.6%;
+        --destructive-foreground: 210 20% 98%;
+
+        --border: 215 27.9% 16.9%;
+        --input: 215 27.9% 16.9%;
+        --ring: 216 12.2% 83.9%;
+    }
+}
+
+@layer base {
+    * {
+        @apply border-border;
+    }
+    body {
+        @apply bg-background text-foreground;
+    }
+}
+
+a.link {
+    color: hsl(var(--accent));
+}
+a:hover {
+    transition: all 200ms;
+    color: hsl(var(--accent));
+}
+
+body {
+    width: 100%;
+    min-height: 100vh;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+h1 {
+    font-size: 32px;
+    text-align: center;
+    margin-bottom: 16px;
+}
+
+h2 {
+    font-size: 24px;
+    margin-top: 16px;
+}
+
+input[type="time"]::-webkit-calendar-picker-indicator {
+    background: none;
+    display: none;
+}
+
+input[type="date"]::-webkit-calendar-picker-indicator {
+    background: none;
+    display: none;
+}
+
+input[type="range"] {
+    -webkit-appearance: none;
+    width: 100%;
+    height: 10px;
+    border-radius: 8px;  
+    background: hsl(var(--secondary));
+
+    &::-webkit-slider-thumb {
+        -webkit-appearance: none;
+        appearance: none;
+        width: 25px;
+        height: 25px;
+        border-radius: 50%; 
+        background: hsl(var(--primary));
+        cursor: pointer;
+    }
+
+    &::-moz-range-thumb {
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    background: hsl(var(--primary));
+    cursor: pointer;
+    }
+}
+
+.activities {
+    width: 100%;
+    overflow-wrap: break-word;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
+    grid-row-gap: 8px;
+    grid-column-gap: 8px;
+}
+.custom-list-item {
+    margin-left: 0.2rem; /* Adjust the margin value as needed */
+}
+  
+
+.wrapWords {
+    overflow-wrap: anywhere !important; 
+}
