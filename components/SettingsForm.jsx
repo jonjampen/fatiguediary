@@ -68,7 +68,7 @@ export function SettingsForm() {
         data = await data.json()
         data = data.data
         data = formatDataToCSV(data)
-return;
+
         var blob = new Blob([data], {type: 'text/csv'})
         let url = window.URL.createObjectURL(blob)
         let linkEl = document.createElement("a")
@@ -85,7 +85,6 @@ return;
 
         let rows;
         rows = data.map((item) => Object.values(item).join(';') + '\n');
-        console.log(rows)
       
         return headers + rows.join('');
     }
