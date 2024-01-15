@@ -1,0 +1,4 @@
+# /etc/sudoers.d/fatiguediary
+
+Cmnd_Alias DEV_SERVICE = /usr/bin/systemctl stop fatiguediary, /usr/bin/systemctl start fatiguediary
+fatiguediary ALL=(ALL) NOPASSWD: DEV_SERVICE
