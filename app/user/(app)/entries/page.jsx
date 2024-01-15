@@ -113,7 +113,7 @@ export default function Dashboard() {
         <section className="mx-4">
             <h1>Your Entries</h1>
             <div className="w-full flex flex-col items-center justify-between gap-4">
-                <DatePicker updateValues={setSelectedDate} />
+                <DatePicker updateValues={setSelectedDate} selectedRange="isoWeek" />
             </div>
             {Object.entries(entries).map(([date, dayEntries]) => {
                 return (
