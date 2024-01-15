@@ -7,13 +7,13 @@ import { Moon, Sun } from "lucide-react"
 import { LoaderButton } from "./ui/loaderButton"
 import { useEffect, useState } from "react"
 import moment from "moment"
-import ExportItem from "./ExportItem"
 
 export function SettingsForm() {
     const [awakeTime, setAwakeTime] = useState()
     const [bedTime, setBedTime] = useState()
     const [theme, setTheme] = useState()
     const [language, setLanguage] = useState()
+    const [exportState, setExportState] = useState()
 
     async function getValues() {
         // get activities
@@ -56,6 +56,8 @@ export function SettingsForm() {
     }, [])
 
     async function createExport() {
+        setExportState("Generating export...")
+
         // get data from database to export it
         let data = await fetch(process.env.URL + "/api", {
             method: "POST",
@@ -65,26 +67,28 @@ export function SettingsForm() {
         })
         data = await data.json()
         data = data.data
+        data = formatDataToCSV(data)
+return;
+        var blob = new Blob([data], {type: 'text/csv'})
+        let url = window.URL.createObjectURL(blob)
+        let linkEl = document.createElement("a")
+        linkEl.download = moment().format("YYYY-MM-DD") + "-FatigueDiary-Export"
+        linkEl.href = url
+        linkEl.click();
 
-        let res = await fetch(process.env.URL + '/api/export', {
-            method: 'POST',
-            body: JSON.stringify({
-                "data": data,
-            }),
-        });
-
-        console.log(res)
-        res = await res.json()
-        console.log(res)
+        setExportState("Your exported file has been downloaded!")
     }
-/*     res = await fetch(process.env.URL + "/api", {
-        method: "POST",
-        body: JSON.stringify({
-            "type": "addUserExport",
-            "filePath": "SomeFileName",
-            "datetime": moment().format("YYYY-MM-DD hh:mm:ss")
-        }),
-    }) */
+
+    function formatDataToCSV(data) {
+        let headers = Object.keys(data[0]).map(header => '"' + header + '"')
+        headers = Object.keys(data[0]).join(';') + '\n';
+
+        let rows;
+        rows = data.map((item) => Object.values(item).join(';') + '\n');
+        console.log(rows)
+      
+        return headers + rows.join('');
+    }
 
     return (
         <section className="mx-4">
@@ -120,15 +124,13 @@ export function SettingsForm() {
                     </div>
                 </div>
                 <div className="space-y-4 w-full">
-                    <div className="rounded-lg border p-4">
+                    <div className="flex flex-row items-center justify-between rounded-lg border p-4">
                         <div className="space-y-0.5 mr-1">
                             <h4 className="font-semibold text-lg">Data Export</h4>
+                            <p className="text-muted-foreground text-sm" id="downloadParent">{exportState}</p>
                         </div>
-                        <div className="flex flex-col gap-4 mt-2">
-                            <ul className="flex flex-col gap-4">
-                                <ExportItem readableFileName="2024-01-10_16-35_John-Doe" filePath="/a.png" />
-                            </ul>
-                            <Button className="w-32" type="button" onClick={createExport}>Export now</Button>
+                        <div className="flex flex-col gap-2">
+                        <Button className="w-32" type="button" onClick={createExport}>Export now</Button>
                         </div>
                     </div>
                 </div>
