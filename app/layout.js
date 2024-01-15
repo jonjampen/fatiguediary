@@ -42,12 +42,12 @@ export const metadata = {
   },
 
   robots: {
-    index: false, // TODO: change
-    follow: false, // TODO: change
-    nocache: false, // TODO: change
+    index: true, // TODO: change
+    follow: true, // TODO: change
+    nocache: true, // TODO: change
     googleBot: {
-      index: false, // TODO: change
-      follow: false,
+      index: true, // TODO: change
+      follow: true,
       noimageindex: false,
       'max-video-preview': -1,
       'max-image-preview': 'large',
