@@ -25,7 +25,7 @@ export default function DatePicker({ updateValues, selectedRange }) {
 
     return (
         <div className="flex gap-2">
-            <Button variant="outline" size="icon" className="" onClick={() => setDate(moment(date).startOf("day").subtract(1, selectedRange).toDate())}>
+            <Button type="button" variant="outline" size="icon" className="" onClick={() => setDate(moment(date).startOf("day").subtract(1, selectedRange).toDate())}>
                 <ChevronLeft className="h-4 w-4" />
             </Button>
 
@@ -52,7 +52,7 @@ export default function DatePicker({ updateValues, selectedRange }) {
                 </PopoverContent>
             </Popover>
 
-            <Button variant="outline" size="icon" className="" onClick={() => setDate(moment(date).startOf("day").add(1, selectedRange).toDate())}>
+            <Button type="button" variant="outline" size="icon" className="" onClick={() => setDate(moment(date).startOf("day").add(1, selectedRange).toDate())}>
                 <ChevronRight className="h-4 w-4" />
             </Button>
         </div>

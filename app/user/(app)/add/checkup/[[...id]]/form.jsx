@@ -13,8 +13,10 @@ import TimeSliderSelector from "@/components/ui/timeSliderSelector";
 import DatePicker from '@/components/DatePicker';
 import SymptomRating from '@/components/ui/symptomRating';
 import {Button} from '@/components/ui/button';
+import moment from "moment";
 
 export default function DailyCheckupForm({createCheckupEntry}) {
+    const [date, setDate] = useState(moment().format("YYYY-MM-DD"));
     const [sleepQuality, setSleepQuality] = useState(0);
     const [sleepDuration, setSleepDuration] = useState(0);
     const [stress, setStress] = useState(0);
@@ -27,7 +29,9 @@ export default function DailyCheckupForm({createCheckupEntry}) {
             sleepDuration: sleepDuration,
             stress: stress,
             mood: mood,
+            date: moment(date).format("YYYY-MM-DD"),
         }
+        createCheckupEntry
         createCheckupEntry(data)
     }
 
@@ -40,8 +44,8 @@ export default function DailyCheckupForm({createCheckupEntry}) {
     return (
         <form onSubmit={submitEntry} className="mx-4 mb-4 flex flex-col gap-6 justify-center items-center" >
             <h1>Daily Checkup</h1>
-            <div className="w-full md:w-[500px] flex items-center justify-between    gap-8 md:gap-16">
-                <DatePicker updateValues={() => "x"} selectedRange="day" />
+            <div className="w-full md:w-[500px] flex items-center justify-center gap-8 md:gap-16">
+                <DatePicker updateValues={setDate} selectedRange="day" />
             </div>
             <Card className="w-full md:w-[500px]">
                 <CardHeader>
@@ -94,7 +98,7 @@ export default function DailyCheckupForm({createCheckupEntry}) {
                 </CardContent>
             </Card> */}
 
-            <Button>Save Entry</Button>
+            <Button type="submit">Save Entry</Button>
         </form>
     )
 }

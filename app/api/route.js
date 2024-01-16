@@ -277,6 +277,11 @@ export async function POST(request) {
             params = [userid]
             rows = await executeQuery(query, params);
         }
+        else if (type === "createCheckupEntry") {
+            query = "INSERT INTO checkup (user_id, sleepQuality, sleepDuration, stress, mood, date) VALUES (?,?,?,?,?,?)";
+            params = [userid, body.sleepQuality, body.sleepDuration, body.stress, body.mood, body.date]
+            rows = await executeQuery(query, params);
+        }
     }
     catch (error) {
         console.log("ERROR when executing API request: " + error, "type: " + type)
