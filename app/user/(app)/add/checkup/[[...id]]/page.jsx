@@ -8,10 +8,6 @@ export default async function DailyCheckup({ params }) {
         "use server"
         let res = await fetch(process.env.URL + "/api", {
             method: "POST",
-            // credentials: "include",
-            // headers: {
-            // "cookie": headers().get("cookie"),
-            // },
             headers: { Cookie: cookies().toString() },
             body: JSON.stringify({
                 "type": "createCheckupEntry",
@@ -21,9 +17,23 @@ export default async function DailyCheckup({ params }) {
         })
     }
 
+    async function createNewSymptom(name) {
+        "use server"
+        console.log(name)
+        let res = await fetch(process.env.URL + "/api", {
+            method: "POST",
+            headers: { Cookie: cookies().toString() },
+            body: JSON.stringify({
+                "type": "createSymptom",
+                "name": name,
+            }),
+            cache: 'no-store',
+        })
+    }
+
     return (
         <section>
-            <DailyCheckupForm createCheckupEntry={createCheckupEntry}/>
+            <DailyCheckupForm createCheckupEntry={createCheckupEntry} createNewSymptom={createNewSymptom}/>
         </section>
     )
 }
