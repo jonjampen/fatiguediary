@@ -3,10 +3,14 @@ import DailyCheckupForm from './form'
 
 
 export default async function DailyCheckup({ params }) {
+    async function createCheckupEntry(data) {
+        "use server"
+        console.log(data)
+    }
 
     return (
         <section>
-            <DailyCheckupForm />
+            <DailyCheckupForm createCheckupEntry={createCheckupEntry}/>
         </section>
     )
 }

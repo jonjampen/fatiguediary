@@ -12,17 +12,35 @@ import {
 import TimeSliderSelector from "@/components/ui/timeSliderSelector";
 import DatePicker from '@/components/DatePicker';
 import SymptomRating from '@/components/ui/symptomRating';
+import {Button} from '@/components/ui/button';
 
-export default function DailyCheckupForm() {
+export default function DailyCheckupForm({createCheckupEntry}) {
     const [sleepQuality, setSleepQuality] = useState(0);
-    const [sleepDuration, setSleepDuration] = useState("0h 0m");
+    const [sleepDuration, setSleepDuration] = useState(0);
     const [stress, setStress] = useState(0);
     const [mood, setMood] = useState(0);
 
+    function submitEntry(e) {
+        e.preventDefault()
+        let data = {
+            sleepQuality: sleepQuality,
+            sleepDuration: sleepDuration,
+            stress: stress,
+            mood: mood,
+        }
+        createCheckupEntry(data)
+    }
+
+    function formatSleepDuration(value) {
+        const hours = Math.floor(value / 60);
+        const minutes = value % 60;
+        return `${hours}h ${minutes}m`;
+      };
+
     return (
-        <form className="mx-4 mb-4 flex flex-col gap-6 justify-center items-center" >
+        <form onSubmit={submitEntry} className="mx-4 mb-4 flex flex-col gap-6 justify-center items-center" >
             <h1>Daily Checkup</h1>
-            <div className="w-full md:w-[500px] flex items-center justify-between gap-8 md:gap-16">
+            <div className="w-full md:w-[500px] flex items-center justify-between    gap-8 md:gap-16">
                 <DatePicker updateValues={() => "x"} selectedRange="day" />
             </div>
             <Card className="w-full md:w-[500px]">
@@ -33,10 +51,10 @@ export default function DailyCheckupForm() {
                 <CardContent className="flex flex-col gap-3">
                     <div className="flex justify-between items-center w-full">
                         <h4>Quality:</h4>
-                        <SymptomRating ratings={["0", "1", "2", "3"]} />
+                        <SymptomRating ratings={["0", "1", "2", "3"]} selectedRating={sleepQuality} setSelectedRating={setSleepQuality} />
                     </div>
                     <div className="flex justify-between items-center w-full">
-                        <h4>Duration: {sleepDuration}</h4>
+                        <h4>Duration: {formatSleepDuration(sleepDuration)}</h4>
                         <TimeSliderSelector onValueChange={setSleepDuration} />
                     </div>
                 </CardContent>
@@ -48,33 +66,35 @@ export default function DailyCheckupForm() {
                 <CardContent className="flex flex-col gap-3">
                     <div className="flex justify-between items-center w-full">
                         <h4>Stress:</h4>
-                        <SymptomRating />
+                        <SymptomRating selectedRating={stress} setSelectedRating={setStress} />
                     </div>
                     <div className="flex justify-between items-center w-full">
                         <h4>Mood:</h4>
-                        <SymptomRating ratings={["😄", "🙂", "😐", "😞"]} />
+                        <SymptomRating ratings={["😄", "🙂", "😐", "😞"]} selectedRating={mood} setSelectedRating={setMood} />
                     </div>
                 </CardContent>
             </Card>
-            <Card className="w-full md:w-[500px]">
+            {/* <Card className="w-full md:w-[500px]">
                 <CardHeader>
                     <CardTitle>Symptoms</CardTitle>
                 </CardHeader>
                 <CardContent className="flex flex-col gap-3">
                     <div className="flex justify-between items-center w-full">
                         <h4>Fatigue:</h4>
-                        <SymptomRating />
+                        <SymptomRating selectedRating="0" setSelectedRating={() => e} />
                     </div>
                     <div className="flex justify-between items-center w-full">
                         <h4>Brainfog:</h4>
-                        <SymptomRating />
+                        <SymptomRating selectedRating="0" setSelectedRating={() => e} />
                     </div>
                     <div className="flex justify-between items-center w-full">
                         <h4>Headaches:</h4>
-                        <SymptomRating />
+                        <SymptomRating selectedRating="0" setSelectedRating={() => e} />
                     </div>
                 </CardContent>
-            </Card>
+            </Card> */}
+
+            <Button>Save Entry</Button>
         </form>
     )
 }
