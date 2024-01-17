@@ -278,15 +278,53 @@ export async function POST(request) {
             rows = await executeQuery(query, params);
         }
         else if (type === "createCheckupEntry") {
-            query = "INSERT INTO dailyentry (user_id, date) VALUES (?,?)";
-            params = [userid, body.date]
+            // check if daily entry already exists
+            query = 'SELECT * from `dailyentry` WHERE date=?';
+            params = [body.date]
             rows = await executeQuery(query, params);
-            let checkupid = rows.insertId
+            console.log("first select", rows)
+
+            let checkupid;
+
+            if (rows.length == 0) {
+                console.log("today does NOT exist yed")
+                query = "INSERT INTO dailyentry (user_id, date) VALUES (?,?)";
+                params = [userid, body.date]
+                rows = await executeQuery(query, params);
+                checkupid = rows.insertId
+                console.log("U check", checkupid)
+            }
+            else {
+                checkupid = rows[0].id
+                console.log("U check", checkupid)
+            }
+            console.log("checkupid", checkupid)
 
             body.metrics.map(async (metric) => {
-                query = 'INSERT INTO `dailyentry_metrics` (dailyentry_id, metric_id, rating) VALUES (?, ?, ?)';
-                params = [checkupid, metric.id, metric.rating]
+                // return;
+                // check if metric already added for that day
+                query = 'SELECT * from `dailyentry_metrics` WHERE metric_id=? AND dailyentry_id=?';
+                params = [metric.id, checkupid]
+                console.log('Query:', query);
+                console.log('Params:', params);
+
                 rows = await executeQuery(query, params);
+                console.log("metric exists?", rows)
+
+                if (rows.length > 0) {
+                    // if yes, update
+                    console.log(metric.name, "already exists, updating")
+                    query = 'UPDATE `dailyentry_metrics` SET rating = ? WHERE `id` = ?';
+                    params = [metric.rating, rows[0].id]
+                    rows = await executeQuery(query, params);
+                }
+                else {
+                    console.log(metric.name, "does not exists, inserting")
+                    // if no, add
+                    query = 'INSERT INTO `dailyentry_metrics` (dailyentry_id, metric_id, rating) VALUES (?, ?, ?)';
+                    params = [checkupid, metric.id, metric.rating]
+                    rows = await executeQuery(query, params);
+                }
             })
         }
         else if (type === "createMetric") {
@@ -306,9 +344,11 @@ export async function POST(request) {
 
             if (rows[0] && rows[0].id) {
                 console.log(rows)
+
                 query = "SELECT * FROM dailyentry_metrics WHERE dailyentry_id=?";
                 params = [rows[0].id]
                 rows = await executeQuery(query, params);
+
                 rows = await Promise.all(rows.map(async (row) => {
                     query = "SELECT * FROM metrics WHERE id=?";
                     params = [row.metric_id]

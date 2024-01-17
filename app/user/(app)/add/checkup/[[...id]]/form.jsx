@@ -72,10 +72,10 @@ export default function DailyCheckupForm({ createCheckupEntry, createNewMetric, 
         let metricCreated = await createNewMetric(newMetric, newMetricType);
         setDialogError("")
         dialogClose();
-        setMetrics(await getMetrics());
+        updateMetrics();
     }
 
-    async function dateChanged() {
+    async function updateMetrics() {
         let oldEntry = await getEntryByDate(moment(date).format("YYYY-MM-DD"))
         let newMetrics = await getMetrics()
 
@@ -107,17 +107,17 @@ export default function DailyCheckupForm({ createCheckupEntry, createNewMetric, 
         getAsync();
     }, [])
 
-    useEffect(() => {
-        setMetricsRating((prevMetricsRating) => {
-            return metrics.reduce((acc, metric) => {
-                acc[metric.id] = prevMetricsRating[metric.id] || 0;
-                return acc;
-            }, {});
-        });
-    }, [metrics]);
+    // useEffect(() => {
+    //     setMetricsRating((prevMetricsRating) => {
+    //         return metrics.reduce((acc, metric) => {
+    //             acc[metric.id] = prevMetricsRating[metric.id] || 0;
+    //             return acc;
+    //         }, {});
+    //     });
+    // }, [metrics]);
 
     useEffect(() => {
-        dateChanged();
+        updateMetrics();
     }, [date])
 
     return (
