@@ -42,10 +42,6 @@ export default function DailyCheckupForm({ createCheckupEntry, createNewMetric }
     function submitEntry(e) {
         e.preventDefault()
         let data = {
-            sleepQuality: sleepQuality,
-            sleepDuration: sleepDuration,
-            stress: stress,
-            mood: mood,
             date: moment(date).format("YYYY-MM-DD"),
             metrics: metricsRating,
         }
