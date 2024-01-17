@@ -2,9 +2,7 @@
 
 import React, { useState } from 'react'
 
-export default function SymptomRating({ ratings = ["-", "1", "2", "3"], selectedRating, setSelectedRating }) {
-    // const [selectedRating, setSelectedRating] = useState(0)
-
+export default function MetricRating({ ratings = ["-", "1", "2", "3"], selectedRating, setSelectedRating }) {
     function changeRating(e, pos) {
         e.preventDefault();
         setSelectedRating(pos)

@@ -278,13 +278,28 @@ export async function POST(request) {
             rows = await executeQuery(query, params);
         }
         else if (type === "createCheckupEntry") {
+            console.log(body)
             query = "INSERT INTO checkup (user_id, sleepQuality, sleepDuration, stress, mood, date) VALUES (?,?,?,?,?,?)";
             params = [userid, body.sleepQuality, body.sleepDuration, body.stress, body.mood, body.date]
             rows = await executeQuery(query, params);
+            let checkupid = rows.insertId
+
+            console.log(rows)
+
+            Object.keys(body.metrics).map(async (metric) => {
+                query = 'INSERT INTO `checkup_symptoms` (checkup_id, symptom_id, rating) VALUES (?, ?, ?)';
+                params = [checkupid, metric, body.metrics[metric]]
+                rows = await executeQuery(query, params);
+            })
         }
-        else if (type === "createSymptom") {
+        else if (type === "createMetric") {
             query = "INSERT INTO symptoms (user_id, name) VALUES (?,?)";
             params = [userid, body.name]
+            rows = await executeQuery(query, params);
+        }
+        else if (type === "getMetrics") {
+            query = "SELECT * FROM symptoms WHERE user_id = ?";
+            params = [userid]
             rows = await executeQuery(query, params);
         }
     }

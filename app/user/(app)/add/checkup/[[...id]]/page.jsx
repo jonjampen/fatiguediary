@@ -17,23 +17,23 @@ export default async function DailyCheckup({ params }) {
         })
     }
 
-    async function createNewSymptom(name) {
+    async function createNewMetric(name) {
         "use server"
-        console.log(name)
         let res = await fetch(process.env.URL + "/api", {
             method: "POST",
             headers: { Cookie: cookies().toString() },
             body: JSON.stringify({
-                "type": "createSymptom",
+                "type": "createMetric",
                 "name": name,
             }),
             cache: 'no-store',
         })
+        return true;
     }
 
     return (
         <section>
-            <DailyCheckupForm createCheckupEntry={createCheckupEntry} createNewSymptom={createNewSymptom}/>
+            <DailyCheckupForm createCheckupEntry={createCheckupEntry} createNewMetric={createNewMetric} />
         </section>
     )
 }
