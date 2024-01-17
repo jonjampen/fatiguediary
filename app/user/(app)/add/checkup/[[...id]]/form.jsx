@@ -36,7 +36,7 @@ import { Calendar, Clock, Edit, Plus } from 'lucide-react'
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 
-export default function DailyCheckupForm({ createCheckupEntry, createNewMetric }) {
+export default function DailyCheckupForm({ createCheckupEntry, createNewMetric, getEntryByDate }) {
     const [date, setDate] = useState(moment().format("YYYY-MM-DD"));
     const [sleepQuality, setSleepQuality] = useState(0);
     const [sleepDuration, setSleepDuration] = useState(0);
@@ -52,7 +52,7 @@ export default function DailyCheckupForm({ createCheckupEntry, createNewMetric }
         e.preventDefault()
         let data = {
             date: moment(date).format("YYYY-MM-DD"),
-            metrics: metricsRating,
+            metrics: metrics,
         }
         // createCheckupEntry
         createCheckupEntry(data)
@@ -75,6 +75,16 @@ export default function DailyCheckupForm({ createCheckupEntry, createNewMetric }
         setMetrics(await getMetrics());
     }
 
+    async function dateChanged() {
+        let oldEntry = await getEntryByDate(moment(date).format("YYYY-MM-DD"))
+        let newMetrics = await getMetrics()
+
+        const mergedMetrics = [...oldEntry, ...newMetrics.filter(obj2 => !oldEntry.some(obj1 => obj1.id === obj2.id))];
+
+        setMetrics(mergedMetrics);
+        console.log(mergedMetrics)
+    }
+
     async function getMetrics() {
         let res = await fetch(process.env.URL + "/api", {
             method: "POST",
@@ -85,6 +95,8 @@ export default function DailyCheckupForm({ createCheckupEntry, createNewMetric }
         })
         res = await res.json()
         res = res.data
+
+        res = res.map(metric => { return { ...metric, rating: 0 } })
         return res
     }
 
@@ -104,6 +116,10 @@ export default function DailyCheckupForm({ createCheckupEntry, createNewMetric }
         });
     }, [metrics]);
 
+    useEffect(() => {
+        dateChanged();
+    }, [date])
+
     return (
         <form onSubmit={submitEntry} className="mx-4 mb-4 flex flex-col gap-6 justify-center items-center" >
             <h1>Daily Metrics</h1>
@@ -116,16 +132,18 @@ export default function DailyCheckupForm({ createCheckupEntry, createNewMetric }
                     <CardDescription>Keep track of your symptoms, medications, treatments, measurements, etc.</CardDescription>
                 </CardHeader>
                 <CardContent className="flex flex-col gap-3">
-                    {metrics.map(metric => {
+                    {metrics.map((metric, pos) => {
                         return (
                             <div className="flex justify-between items-center w-full">
                                 <h4>{metric.name}</h4>
                                 <MetricRating
                                     ratingType={metric.type}
-                                    selectedRating={metricsRating[metric.id] || 0}
+                                    selectedRating={metric.rating}
                                     setSelectedRating={(rating) => {
-                                        setMetricsRating((prevmetricsRating) => {
-                                            return { ...prevmetricsRating, [metric.id]: rating };
+                                        setMetrics((prevMetrics) => {
+                                            const updatedMetrics = [...prevMetrics];
+                                            updatedMetrics[pos] = { ...metric, rating: rating };
+                                            return updatedMetrics;
                                         });
                                     }} />
                             </div>

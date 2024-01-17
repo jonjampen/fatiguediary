@@ -33,9 +33,27 @@ export default async function DailyCheckup({ params }) {
         return true;
     }
 
+    async function getEntryByDate(date) {
+        "use server"
+        console.log(date)
+        let res = await fetch(process.env.URL + "/api", {
+            method: "POST",
+            headers: { Cookie: cookies().toString() },
+            body: JSON.stringify({
+                "type": "getdayilyEntry",
+                "date": date,
+            }),
+            cache: 'no-store',
+        })
+        res = await res.json()
+        res = res.data
+        return res
+
+    }
+
     return (
         <section>
-            <DailyCheckupForm createCheckupEntry={createCheckupEntry} createNewMetric={createNewMetric} />
+            <DailyCheckupForm createCheckupEntry={createCheckupEntry} createNewMetric={createNewMetric} getEntryByDate={getEntryByDate} />
         </section>
     )
 }

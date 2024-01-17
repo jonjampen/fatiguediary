@@ -278,17 +278,14 @@ export async function POST(request) {
             rows = await executeQuery(query, params);
         }
         else if (type === "createCheckupEntry") {
-            console.log(body)
             query = "INSERT INTO dailyentry (user_id, date) VALUES (?,?)";
             params = [userid, body.date]
             rows = await executeQuery(query, params);
             let checkupid = rows.insertId
 
-            console.log(rows)
-
-            Object.keys(body.metrics).map(async (metric) => {
+            body.metrics.map(async (metric) => {
                 query = 'INSERT INTO `dailyentry_metrics` (dailyentry_id, metric_id, rating) VALUES (?, ?, ?)';
-                params = [checkupid, metric, body.metrics[metric]]
+                params = [checkupid, metric.id, metric.rating]
                 rows = await executeQuery(query, params);
             })
         }
@@ -301,6 +298,27 @@ export async function POST(request) {
             query = "SELECT * FROM metrics WHERE user_id = ?";
             params = [userid]
             rows = await executeQuery(query, params);
+        }
+        else if (type === "getdayilyEntry") {
+            query = "SELECT * FROM dailyentry WHERE user_id=? and date=?";
+            params = [userid, body.date]
+            rows = await executeQuery(query, params);
+
+            if (rows[0] && rows[0].id) {
+                console.log(rows)
+                query = "SELECT * FROM dailyentry_metrics WHERE dailyentry_id=?";
+                params = [rows[0].id]
+                rows = await executeQuery(query, params);
+                rows = await Promise.all(rows.map(async (row) => {
+                    query = "SELECT * FROM metrics WHERE id=?";
+                    params = [row.metric_id]
+                    let metric = await executeQuery(query, params);
+                    return { ...metric[0], rating: row.rating }
+                }))
+                console.log("it worked:", rows)
+            }
+
+            console.log("db w/ rating:", rows)
         }
     }
     catch (error) {

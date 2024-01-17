@@ -4,6 +4,7 @@ import React, { useState } from 'react'
 import { Input } from './input';
 
 export default function MetricRating({ ratingType, selectedRating, setSelectedRating }) {
+    const [value, setValue] = useState(selectedRating)
     function changeRating(e, val) {
         e.preventDefault();
         setSelectedRating(val)
@@ -11,7 +12,7 @@ export default function MetricRating({ ratingType, selectedRating, setSelectedRa
 
     if (ratingType === "numberInput") {
         return (
-            <Input type="number" defaultValue={selectedRating} onChange={(e) => changeRating(e, e.target.value)} className="max-w-[152px]" />
+            <Input type="number" value={selectedRating} onChange={(e) => changeRating(e, e.target.value)} className="max-w-[152px]" />
         )
     }
     else {
