@@ -119,8 +119,9 @@ export default function DailyCheckupForm({ createCheckupEntry, createNewMetric }
                     {metrics.map(metric => {
                         return (
                             <div className="flex justify-between items-center w-full">
-                                <h4>{metric.name} {metric.id}</h4>
+                                <h4>{metric.name}</h4>
                                 <MetricRating
+                                    ratingType={metric.type}
                                     selectedRating={metricsRating[metric.id] || 0}
                                     setSelectedRating={(rating) => {
                                         setMetricsRating((prevmetricsRating) => {
