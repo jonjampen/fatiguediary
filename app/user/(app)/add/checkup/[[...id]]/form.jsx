@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, use } from 'react';
 import {
     Card,
     CardContent,
@@ -32,30 +32,30 @@ import DatePicker from '@/components/DatePicker';
 import MetricRating from '@/components/ui/metricRating';
 import { Button } from '@/components/ui/button';
 import moment from "moment";
-import { Calendar, Clock, Edit, Plus } from 'lucide-react'
+import { Calendar, Check, Clock, Edit, Plus } from 'lucide-react'
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 
 export default function DailyCheckupForm({ createCheckupEntry, createNewMetric, getEntryByDate }) {
     const [date, setDate] = useState(moment().format("YYYY-MM-DD"));
-    const [sleepQuality, setSleepQuality] = useState(0);
-    const [sleepDuration, setSleepDuration] = useState(0);
-    const [stress, setStress] = useState(0);
-    const [mood, setMood] = useState(0);
     const [metrics, setMetrics] = useState([]);
-    const [metricsRating, setMetricsRating] = useState({});
     const [newMetric, setNewMetric] = useState("");
     const [newMetricType, setNewMetricType] = useState("");
     const [dialogError, setDialogError] = useState("");
+    const [saveMessage, setSaveMessage] = useState("");
+    const [isEditing, setIsEditing] = useState(false);
 
-    function submitEntry(e) {
-        e.preventDefault()
+    async function saveEntry() {
         let data = {
             date: moment(date).format("YYYY-MM-DD"),
             metrics: metrics,
         }
-        // createCheckupEntry
-        createCheckupEntry(data)
+
+        await createCheckupEntry(data)
+        setSaveMessage("Saved!")
+        setTimeout(() => {
+            setSaveMessage("")
+        }, 500)
     }
 
     function formatSleepDuration(value) {
@@ -107,28 +107,25 @@ export default function DailyCheckupForm({ createCheckupEntry, createNewMetric, 
         getAsync();
     }, [])
 
-    // useEffect(() => {
-    //     setMetricsRating((prevMetricsRating) => {
-    //         return metrics.reduce((acc, metric) => {
-    //             acc[metric.id] = prevMetricsRating[metric.id] || 0;
-    //             return acc;
-    //         }, {});
-    //     });
-    // }, [metrics]);
-
     useEffect(() => {
         updateMetrics();
     }, [date])
 
     return (
-        <form onSubmit={submitEntry} className="mx-4 mb-4 flex flex-col gap-6 justify-center items-center" >
-            <h1>Daily Metrics</h1>
-            <div className="w-full md:w-[500px] flex items-center justify-center gap-8 md:gap-16">
+        <form className="mx-4 mb-4 flex flex-col justify-center items-center" >
+            <div className="h-20">
+                <h1 className="!mb-0">Daily Metrics</h1>
+                <p className='text-success text-base h-4 text-center'>{saveMessage}</p>
+            </div>
+            <div className="w-full mb-6 md:w-[500px] flex items-center justify-center gap-8 md:gap-16">
                 <DatePicker updateValues={setDate} selectedRange="day" />
             </div>
-            <Card className="w-full md:w-[500px]">
+            <Card className={`w-full md:w-[500px] transition-all duration-200 ${saveMessage ? "border-success" : ""}`}>
                 <CardHeader>
-                    <CardTitle>Health Metrics</CardTitle>
+                    <div className="flex justify-between items-center">
+                        <CardTitle>Health Metrics</CardTitle>
+                        {isEditing ? <button onClick={() => setIsEditing(!isEditing)}>Done</button> : <Edit onClick={() => setIsEditing(!isEditing)} style={{ cursor: "pointer" }} />}
+                    </div>
                     <CardDescription>Keep track of your symptoms, medications, treatments, measurements, etc.</CardDescription>
                 </CardHeader>
                 <CardContent className="flex flex-col gap-3">
@@ -145,6 +142,7 @@ export default function DailyCheckupForm({ createCheckupEntry, createNewMetric, 
                                             updatedMetrics[pos] = { ...metric, rating: rating };
                                             return updatedMetrics;
                                         });
+                                        saveEntry();
                                     }} />
                             </div>
                         )
@@ -194,8 +192,6 @@ export default function DailyCheckupForm({ createCheckupEntry, createNewMetric, 
                     </div>
                 </CardContent>
             </Card>
-
-            <Button type="submit">Save Entry</Button>
         </form>
     )
 }
