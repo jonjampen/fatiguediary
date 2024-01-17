@@ -17,14 +17,16 @@ export default async function DailyCheckup({ params }) {
         })
     }
 
-    async function createNewMetric(name) {
+    async function createNewMetric(name, type) {
         "use server"
+        console.log(name, type)
         let res = await fetch(process.env.URL + "/api", {
             method: "POST",
             headers: { Cookie: cookies().toString() },
             body: JSON.stringify({
                 "type": "createMetric",
                 "name": name,
+                "metricType": type,
             }),
             cache: 'no-store',
         })

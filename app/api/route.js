@@ -293,8 +293,8 @@ export async function POST(request) {
             })
         }
         else if (type === "createMetric") {
-            query = "INSERT INTO metrics (user_id, name) VALUES (?,?)";
-            params = [userid, body.name]
+            query = "INSERT INTO metrics (user_id, name, type) VALUES (?,?,?)";
+            params = [userid, body.name, body.metricType]
             rows = await executeQuery(query, params);
         }
         else if (type === "getMetrics") {

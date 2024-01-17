@@ -2,7 +2,7 @@
 import React from 'react'
 import { Button } from '@/components/ui/button'
 import { useRouter } from 'next/navigation'
-import { BarChart4, PlusCircle, ClipboardList } from 'lucide-react'
+import { BarChart4, PlusCircle, ClipboardList, HeartPulse } from 'lucide-react'
 
 export default function AppNav() {
     const { push } = useRouter();
@@ -16,6 +16,9 @@ export default function AppNav() {
                 </Button>
                 <Button variant="ghost" size="icon" className="" onClick={() => push("/user/add/fatigue")} >
                     <PlusCircle className="h-8 w-8" />
+                </Button>
+                <Button variant="ghost" size="icon" className="" onClick={() => push("/user/add/checkup")} >
+                    <HeartPulse className="h-8 w-8" />
                 </Button>
                 <Button variant="ghost" size="icon" className="" onClick={() => push("/user/entries")} >
                     <ClipboardList className="h-8 w-8" />

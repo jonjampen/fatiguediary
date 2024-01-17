@@ -20,6 +20,13 @@ import {
     DialogClose,
     dialogClose,
 } from "@/components/ui/dialog";
+import {
+    Select,
+    SelectContent,
+    SelectItem,
+    SelectTrigger,
+    SelectValue,
+} from "@/components/ui/select"
 import TimeSliderSelector from "@/components/ui/timeSliderSelector";
 import DatePicker from '@/components/DatePicker';
 import MetricRating from '@/components/ui/metricRating';
@@ -35,9 +42,11 @@ export default function DailyCheckupForm({ createCheckupEntry, createNewMetric }
     const [sleepDuration, setSleepDuration] = useState(0);
     const [stress, setStress] = useState(0);
     const [mood, setMood] = useState(0);
-    const [newMetric, setNewMetric] = useState("");
     const [metrics, setMetrics] = useState([]);
     const [metricsRating, setMetricsRating] = useState({});
+    const [newMetric, setNewMetric] = useState("");
+    const [newMetricType, setNewMetricType] = useState("");
+    const [dialogError, setDialogError] = useState("");
 
     function submitEntry(e) {
         e.preventDefault()
@@ -56,7 +65,12 @@ export default function DailyCheckupForm({ createCheckupEntry, createNewMetric }
     };
 
     async function addNewMetric() {
-        let metricCreated = await createNewMetric(newMetric);
+        if (!newMetric || !newMetricType) {
+            setDialogError("Select name and rating type!")
+            return;
+        }
+        let metricCreated = await createNewMetric(newMetric, newMetricType);
+        setDialogError("")
         dialogClose();
         setMetrics(await getMetrics());
     }
@@ -125,13 +139,29 @@ export default function DailyCheckupForm({ createCheckupEntry, createNewMetric }
                             <DialogContent>
                                 <DialogHeader>
                                     <DialogTitle className="text-left">Create new Metric</DialogTitle>
+                                    {dialogError ? <DialogDescription className="text-left text-destructive">{dialogError}</DialogDescription> : null}
                                 </DialogHeader>
-                                <div className="grid gap-4 py-4">
+                                <div className="flex gap-4 py-4">
                                     <div className="flex flex-col items-start gap-4">
-                                        <Label htmlFor="activityName">
+                                        <Label htmlFor="metricNAme">
                                             Metric name
                                         </Label>
-                                        <Input id="activityName" placeholder="Headache" className="col-span-3" onChange={(e) => setNewMetric(e.target.value)} />
+                                        <Input id="metricNAme" placeholder="Headache" className="col-span-3" onChange={(e) => setNewMetric(e.target.value)} />
+                                    </div>
+                                    <div className="flex flex-col items-start gap-4 w-[40%]">
+                                        <Label>
+                                            Rating type
+                                        </Label>
+                                        <Select onValueChange={setNewMetricType}>
+                                            <SelectTrigger className="max-w-full">
+                                                <SelectValue placeholder="Select..." />
+                                            </SelectTrigger>
+                                            <SelectContent>
+                                                <SelectItem value="scale03">0 - 3</SelectItem>
+                                                <SelectItem value="numberInput">Number</SelectItem>
+                                            </SelectContent>
+                                        </Select>
+
                                     </div>
                                 </div>
                                 <DialogFooter className="flex flex-row justify-between">
