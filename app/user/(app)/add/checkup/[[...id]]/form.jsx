@@ -27,27 +27,22 @@ import {
     SelectTrigger,
     SelectValue,
 } from "@/components/ui/select"
-import TimeSliderSelector from "@/components/ui/timeSliderSelector";
 import DatePicker from '@/components/DatePicker';
 import MetricRating from '@/components/ui/metricRating';
 import { Button } from '@/components/ui/button';
 import moment from "moment";
-import { Calendar, Check, Clock, Edit, EyeOff, Pencil, Plus, Trash2 } from 'lucide-react'
+import { Edit, EyeOff, Pencil, Trash2 } from 'lucide-react'
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 
 export default function DailyCheckupForm({ createCheckupEntry, createNewMetric, getEntryByDate, editMetricDb }) {
     const [date, setDate] = useState(moment().format("YYYY-MM-DD"));
     const [metrics, setMetrics] = useState([]);
-    const [newMetric, setNewMetric] = useState("");
-    const [newMetricType, setNewMetricType] = useState("");
     const [dialogError, setDialogError] = useState("");
     const [saveMessage, setSaveMessage] = useState("");
     const [isEditing, setIsEditing] = useState(false);
     const [entryEdited, setEntryEdited] = useState(false);
-    const [newMetric2, setNewMetric2] = useState({});
-    const [newMetric3, setNewMetric3] = useState({});
-    // let newMetric3 = {}
+    const [newMetric, setNewMetric] = useState({});
 
     async function saveEntry() {
         let data = {
@@ -71,26 +66,26 @@ export default function DailyCheckupForm({ createCheckupEntry, createNewMetric, 
     };
 
     async function addNewMetric() {
-        console.log("N: ", newMetric3.name, "T", newMetric3.type)
-        if (!newMetric3.name || !newMetric3.type) {
+        console.log("N: ", newMetric.name, "T", newMetric.type)
+        if (!newMetric.name || !newMetric.type) {
             setDialogError("Select name and rating type!")
-            console.log(newMetric3)
+            console.log(newMetric)
             return;
         }
-        let metricCreated = await createNewMetric(newMetric3);
-        setNewMetric3({})
+        let metricCreated = await createNewMetric(newMetric);
+        setNewMetric({})
         setDialogError("")
         dialogClose();
         updateMetrics();
     }
 
     async function editMetric() {
-        if (!newMetric3.name) {
+        if (!newMetric.name) {
             setDialogError("Enter name!")
             return;
         }
-        let metricCreated = await editMetricDb(newMetric3);
-        setNewMetric3({})
+        let metricCreated = await editMetricDb(newMetric);
+        setNewMetric({})
         setDialogError("")
         dialogClose();
         updateMetrics();
@@ -163,7 +158,7 @@ export default function DailyCheckupForm({ createCheckupEntry, createNewMetric, 
                                     <div className="flex gap-2">
                                         <Dialog>
                                             <DialogTrigger>
-                                                <Button variant="outline" size="icon" className="h-8 w-8" onClick={() => setNewMetric3(metric)}><Pencil className="w-4 h-4" /></Button>
+                                                <Button variant="outline" size="icon" className="h-8 w-8" onClick={() => setNewMetric(metric)}><Pencil className="w-4 h-4" /></Button>
                                             </DialogTrigger>
                                             <DialogContent>
                                                 <DialogHeader>
@@ -175,7 +170,7 @@ export default function DailyCheckupForm({ createCheckupEntry, createNewMetric, 
                                                         <Label htmlFor="metricNAme">
                                                             Metric name
                                                         </Label>
-                                                        <Input id="metricNAme" defaultValue={metric.name} placeholder="Headache" className="col-span-3" onChange={(e) => setNewMetric3((prev) => ({ ...prev, name: e.target.value }))} />
+                                                        <Input id="metricNAme" defaultValue={metric.name} placeholder="Headache" className="col-span-3" onChange={(e) => setNewMetric((prev) => ({ ...prev, name: e.target.value }))} />
                                                     </div>
                                                 </div>
                                                 <DialogFooter className="flex flex-row justify-between">
@@ -223,13 +218,13 @@ export default function DailyCheckupForm({ createCheckupEntry, createNewMetric, 
                                         <Label htmlFor="metricNAme">
                                             Metric name
                                         </Label>
-                                        <Input id="metricName" placeholder="Headache" value={newMetric3.name} className="col-span-3" onChange={(e) => setNewMetric3((prev) => ({ ...newMetric3, name: e.target.value }))} />
+                                        <Input id="metricName" placeholder="Headache" value={newMetric.name} className="col-span-3" onChange={(e) => setNewMetric((prev) => ({ ...newMetric, name: e.target.value }))} />
                                     </div>
                                     <div className="flex flex-col items-start gap-4 w-[40%]">
                                         <Label>
                                             Rating type
                                         </Label>
-                                        <Select onValueChange={(newType) => setNewMetric3((prev) => ({ ...newMetric3, type: newType }))}>
+                                        <Select onValueChange={(newType) => setNewMetric((prev) => ({ ...newMetric, type: newType }))}>
                                             <SelectTrigger className="max-w-full">
                                                 <SelectValue placeholder="Select..." />
                                             </SelectTrigger>
