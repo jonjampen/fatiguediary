@@ -12,7 +12,7 @@ export default function MetricRating({ ratingType, selectedRating, setSelectedRa
 
     if (ratingType === "numberInput") {
         return (
-            <Input type="number" value={selectedRating} onChange={(e) => changeRating(e, e.target.value)} className="max-w-[152px]" />
+            <Input type="number" value={selectedRating} onChange={(e) => changeRating(e, e.target.value)} className="max-w-[152px] h-8" />
         )
     }
     else {

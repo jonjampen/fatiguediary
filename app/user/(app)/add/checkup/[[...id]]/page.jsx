@@ -15,11 +15,13 @@ export default async function DailyCheckup({ params }) {
             }),
             cache: 'no-store',
         })
+
+        return true
     }
 
-    async function createNewMetric(name, type) {
+    async function createNewMetric({ name, type }) {
         "use server"
-        console.log(name, type)
+        console.log("Hello")
         let res = await fetch(process.env.URL + "/api", {
             method: "POST",
             headers: { Cookie: cookies().toString() },
@@ -27,6 +29,21 @@ export default async function DailyCheckup({ params }) {
                 "type": "createMetric",
                 "name": name,
                 "metricType": type,
+            }),
+            cache: 'no-store',
+        })
+        return true;
+    }
+
+    async function editMetricDb({ name, id }) {
+        "use server"
+        let res = await fetch(process.env.URL + "/api", {
+            method: "POST",
+            headers: { Cookie: cookies().toString() },
+            body: JSON.stringify({
+                "type": "editMetric",
+                "name": name,
+                "metricId": id,
             }),
             cache: 'no-store',
         })
@@ -53,7 +70,7 @@ export default async function DailyCheckup({ params }) {
 
     return (
         <section>
-            <DailyCheckupForm createCheckupEntry={createCheckupEntry} createNewMetric={createNewMetric} getEntryByDate={getEntryByDate} />
+            <DailyCheckupForm createCheckupEntry={createCheckupEntry} createNewMetric={createNewMetric} getEntryByDate={getEntryByDate} editMetricDb={editMetricDb} />
         </section>
     )
 }

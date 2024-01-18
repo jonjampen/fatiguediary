@@ -332,6 +332,11 @@ export async function POST(request) {
             params = [userid, body.name, body.metricType]
             rows = await executeQuery(query, params);
         }
+        else if (type === "editMetric") {
+            query = "UPDATE metrics SET name=? WHERE user_id = ? AND id = ?";
+            params = [body.name, userid, body.metricId]
+            rows = await executeQuery(query, params);
+        }
         else if (type === "getMetrics") {
             query = "SELECT * FROM metrics WHERE user_id = ?";
             params = [userid]
