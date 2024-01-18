@@ -46,8 +46,8 @@ export default function DailyCheckupForm({ createCheckupEntry, createNewMetric, 
     const [isEditing, setIsEditing] = useState(false);
     const [entryEdited, setEntryEdited] = useState(false);
     const [newMetric2, setNewMetric2] = useState({});
-
-    let newMetric3 = {}
+    const [newMetric3, setNewMetric3] = useState({});
+    // let newMetric3 = {}
 
     async function saveEntry() {
         let data = {
@@ -70,26 +70,27 @@ export default function DailyCheckupForm({ createCheckupEntry, createNewMetric, 
         return `${hours}h ${minutes}m`;
     };
 
-    async function addNewMetric(updated) {
-        console.log("N: ", updated.name, "T", updated.type)
-        if (!updated.name || !updated.type) {
+    async function addNewMetric() {
+        console.log("N: ", newMetric3.name, "T", newMetric3.type)
+        if (!newMetric3.name || !newMetric3.type) {
             setDialogError("Select name and rating type!")
-            console.log(updated)
-            newMetric3 = updated;
+            console.log(newMetric3)
             return;
         }
-        let metricCreated = await createNewMetric(updated);
+        let metricCreated = await createNewMetric(newMetric3);
+        setNewMetric3({})
         setDialogError("")
         dialogClose();
         updateMetrics();
     }
 
-    async function editMetric(updated) {
-        if (!updated.name) {
+    async function editMetric() {
+        if (!newMetric3.name) {
             setDialogError("Enter name!")
             return;
         }
-        let metricCreated = await editMetricDb(updated);
+        let metricCreated = await editMetricDb(newMetric3);
+        setNewMetric3({})
         setDialogError("")
         dialogClose();
         updateMetrics();
@@ -162,7 +163,7 @@ export default function DailyCheckupForm({ createCheckupEntry, createNewMetric, 
                                     <div className="flex gap-2">
                                         <Dialog>
                                             <DialogTrigger>
-                                                <Button variant="outline" size="icon" className="h-8 w-8" onClick={() => newMetric3 = metric}><Pencil className="w-4 h-4" /></Button>
+                                                <Button variant="outline" size="icon" className="h-8 w-8" onClick={() => setNewMetric3(metric)}><Pencil className="w-4 h-4" /></Button>
                                             </DialogTrigger>
                                             <DialogContent>
                                                 <DialogHeader>
@@ -174,7 +175,7 @@ export default function DailyCheckupForm({ createCheckupEntry, createNewMetric, 
                                                         <Label htmlFor="metricNAme">
                                                             Metric name
                                                         </Label>
-                                                        <Input id="metricNAme" defaultValue={metric.name} placeholder="Headache" className="col-span-3" onChange={(e) => newMetric3 = { ...newMetric3, name: e.target.value }} />
+                                                        <Input id="metricNAme" defaultValue={metric.name} placeholder="Headache" className="col-span-3" onChange={(e) => setNewMetric3((prev) => ({ ...prev, name: e.target.value }))} />
                                                     </div>
                                                 </div>
                                                 <DialogFooter className="flex flex-row justify-between">
@@ -182,7 +183,7 @@ export default function DailyCheckupForm({ createCheckupEntry, createNewMetric, 
                                                         <Button variant="outline">Cancel</Button>
                                                     </DialogClose>
                                                     <Button onClick={() => {
-                                                        editMetric(newMetric3)
+                                                        editMetric()
                                                     }} type="button">Save Metric</Button>
                                                 </DialogFooter>
                                             </DialogContent>
@@ -222,13 +223,13 @@ export default function DailyCheckupForm({ createCheckupEntry, createNewMetric, 
                                         <Label htmlFor="metricNAme">
                                             Metric name
                                         </Label>
-                                        <Input id="metricName" placeholder="Headache" className="col-span-3" onChange={(e) => newMetric3 = { ...newMetric3, name: e.target.value }} />
+                                        <Input id="metricName" placeholder="Headache" value={newMetric3.name} className="col-span-3" onChange={(e) => setNewMetric3((prev) => ({ ...newMetric3, name: e.target.value }))} />
                                     </div>
                                     <div className="flex flex-col items-start gap-4 w-[40%]">
                                         <Label>
                                             Rating type
                                         </Label>
-                                        <Select onValueChange={(newType) => newMetric3 = { ...newMetric3, type: newType }}>
+                                        <Select onValueChange={(newType) => setNewMetric3((prev) => ({ ...newMetric3, type: newType }))}>
                                             <SelectTrigger className="max-w-full">
                                                 <SelectValue placeholder="Select..." />
                                             </SelectTrigger>
@@ -244,7 +245,7 @@ export default function DailyCheckupForm({ createCheckupEntry, createNewMetric, 
                                     <DialogClose asChild>
                                         <Button variant="outline">Cancel</Button>
                                     </DialogClose>
-                                    <Button onClick={() => addNewMetric(newMetric3)} type="button">Create Metric</Button>
+                                    <Button onClick={() => addNewMetric()} type="button">Create Metric</Button>
                                 </DialogFooter>
                             </DialogContent>
                         </Dialog>
