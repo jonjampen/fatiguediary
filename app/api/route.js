@@ -327,6 +327,11 @@ export async function POST(request) {
             params = [body.name, userid, body.metricId]
             rows = await executeQuery(query, params);
         }
+        else if (type === "changeMetricVisability") {
+            query = "UPDATE metrics SET hidden=? WHERE user_id = ? AND id = ?";
+            params = [body.visibility, userid, body.metricId]
+            rows = await executeQuery(query, params);
+        }
         else if (type === "deleteMetric") {
             query = "DELETE FROM metrics WHERE id = ?";
             params = [body.metricId]

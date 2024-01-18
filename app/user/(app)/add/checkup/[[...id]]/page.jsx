@@ -64,6 +64,22 @@ export default async function DailyCheckup({ params }) {
         return true;
     }
 
+    async function changeVisibility({ id, hidden }) {
+        "use server"
+        console.log(id, hidden)
+        let res = await fetch(process.env.URL + "/api", {
+            method: "POST",
+            headers: { Cookie: cookies().toString() },
+            body: JSON.stringify({
+                "type": "changeMetricVisability",
+                "visibility": hidden,
+                "metricId": id,
+            }),
+            cache: 'no-store',
+        })
+        return true;
+    }
+
     async function getEntryByDate(date) {
         "use server"
         console.log(date)
@@ -84,7 +100,7 @@ export default async function DailyCheckup({ params }) {
 
     return (
         <section>
-            <DailyCheckupForm createCheckupEntry={createCheckupEntry} createNewMetric={createNewMetric} getEntryByDate={getEntryByDate} editMetricDb={editMetricDb} deleteMetricDb={deleteMetric} />
+            <DailyCheckupForm createCheckupEntry={createCheckupEntry} createNewMetric={createNewMetric} getEntryByDate={getEntryByDate} editMetricDb={editMetricDb} deleteMetricDb={deleteMetric} changeVisibilityDb={changeVisibility} />
         </section>
     )
 }

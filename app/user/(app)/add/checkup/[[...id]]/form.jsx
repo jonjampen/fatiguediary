@@ -42,11 +42,11 @@ import DatePicker from '@/components/DatePicker';
 import MetricRating from '@/components/ui/metricRating';
 import { Button } from '@/components/ui/button';
 import moment from "moment";
-import { Edit, EyeOff, Pencil, Trash2 } from 'lucide-react'
+import { Edit, EyeOff, Eye, Pencil, Trash2 } from 'lucide-react'
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 
-export default function DailyCheckupForm({ createCheckupEntry, createNewMetric, getEntryByDate, editMetricDb, deleteMetricDb }) {
+export default function DailyCheckupForm({ createCheckupEntry, createNewMetric, getEntryByDate, editMetricDb, deleteMetricDb, changeVisibilityDb }) {
     const [date, setDate] = useState(moment().format("YYYY-MM-DD"));
     const [metrics, setMetrics] = useState([]);
     const [dialogError, setDialogError] = useState("");
@@ -101,8 +101,16 @@ export default function DailyCheckupForm({ createCheckupEntry, createNewMetric, 
         dialogClose();
         updateMetrics();
     }
+
     async function deleteMetric(id) {
         let metricCreated = await deleteMetricDb(id);
+        updateMetrics();
+    }
+
+    async function changeVisibility(updated) {
+        console.log(updated.hidden)
+        updated.hidden = !updated.hidden;
+        let metricCreated = await changeVisibilityDb(updated);
         updateMetrics();
     }
 
@@ -151,7 +159,7 @@ export default function DailyCheckupForm({ createCheckupEntry, createNewMetric, 
 
     return (
         <div className="mx-4 mb-4 flex flex-col justify-center items-center" >
-            <h1 className="!mb-0">Daily Metrics</h1>
+            <h1>Daily Metrics</h1>
             <div className="w-full mb-6 md:w-[500px] flex items-center justify-center gap-8 md:gap-16">
                 <DatePicker updateValues={setDate} selectedRange="day" />
             </div>
@@ -166,79 +174,158 @@ export default function DailyCheckupForm({ createCheckupEntry, createNewMetric, 
                 </CardHeader>
                 <CardContent className="flex flex-col gap-3">
                     {metrics.map((metric, pos) => {
-                        return (
-                            <div className="flex justify-between items-center w-full">
-                                <h4>{metric.name}</h4>
-                                {isEditing ?
-                                    <div className="flex gap-2">
-                                        <Dialog>
-                                            <DialogTrigger>
-                                                <Button variant="outline" size="icon" className="h-8 w-8" onClick={() => setNewMetric(metric)}><Pencil className="w-4 h-4" /></Button>
-                                            </DialogTrigger>
-                                            <DialogContent>
-                                                <DialogHeader>
-                                                    <DialogTitle className="text-left">Edit Metric: {metric.name}</DialogTitle>
-                                                    {dialogError ? <DialogDescription className="text-left text-destructive">{dialogError}</DialogDescription> : null}
-                                                </DialogHeader>
-                                                <div className="flex gap-4 py-4">
-                                                    <div className="flex flex-col items-start gap-4">
-                                                        <Label htmlFor="metricNAme">
-                                                            Metric name
-                                                        </Label>
-                                                        <Input id="metricNAme" defaultValue={metric.name} placeholder="Headache" className="col-span-3" onChange={(e) => setNewMetric((prev) => ({ ...prev, name: e.target.value }))} />
+                        if (!metric.hidden) {
+                            return (
+                                <div className="flex justify-between items-center w-full">
+                                    <h4>{metric.name}</h4>
+                                    {isEditing ?
+                                        <div className="flex gap-2">
+                                            <Dialog>
+                                                <DialogTrigger>
+                                                    <Button variant="outline" size="icon" className="h-8 w-8" onClick={() => setNewMetric(metric)}><Pencil className="w-4 h-4" /></Button>
+                                                </DialogTrigger>
+                                                <DialogContent>
+                                                    <DialogHeader>
+                                                        <DialogTitle className="text-left">Edit Metric: {metric.name}</DialogTitle>
+                                                        {dialogError ? <DialogDescription className="text-left text-destructive">{dialogError}</DialogDescription> : null}
+                                                    </DialogHeader>
+                                                    <div className="flex gap-4 py-4">
+                                                        <div className="flex flex-col items-start gap-4">
+                                                            <Label htmlFor="metricNAme">
+                                                                Metric name
+                                                            </Label>
+                                                            <Input id="metricNAme" defaultValue={metric.name} placeholder="Headache" className="col-span-3" onChange={(e) => setNewMetric((prev) => ({ ...prev, name: e.target.value }))} />
+                                                        </div>
                                                     </div>
-                                                </div>
-                                                <DialogFooter className="flex flex-row justify-between">
-                                                    <DialogClose asChild>
-                                                        <Button variant="outline">Cancel</Button>
-                                                    </DialogClose>
-                                                    <Button onClick={() => {
-                                                        editMetric()
-                                                    }} type="button">Save Metric</Button>
-                                                </DialogFooter>
-                                            </DialogContent>
-                                        </Dialog>
+                                                    <DialogFooter className="flex flex-row justify-between">
+                                                        <DialogClose asChild>
+                                                            <Button variant="outline">Cancel</Button>
+                                                        </DialogClose>
+                                                        <Button onClick={() => {
+                                                            editMetric()
+                                                        }} type="button">Save Metric</Button>
+                                                    </DialogFooter>
+                                                </DialogContent>
+                                            </Dialog>
 
-                                        <Button variant="outline" size="icon" className="h-8 w-8"><EyeOff className="w-4 h-4" /></Button>
+                                            <div className="">
+                                                <Button variant="outline" size="icon" className="h-8 w-8" onClick={() => changeVisibility(metric)}>{metric.hidden ? <Eye className="w-4 h-4" /> : <EyeOff className="w-4 h-4" />}</Button>
+                                            </div>
 
-                                        <AlertDialog>
-                                            <AlertDialogTrigger className="w-full">
-                                                <Button variant="outline" size="icon" className="h-8 w-8 text-destructive"><Trash2 className="w-4 h-4" /></Button>
-                                            </AlertDialogTrigger>
+                                            <AlertDialog>
+                                                <AlertDialogTrigger className="w-full">
+                                                    <Button variant="outline" size="icon" className="h-8 w-8 text-destructive"><Trash2 className="w-4 h-4" /></Button>
+                                                </AlertDialogTrigger>
 
-                                            <AlertDialogContent>
-                                                <AlertDialogHeader>
-                                                    <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
-                                                    <AlertDialogDescription>
-                                                        Do you want to delete the metric &quot;{metric.name}&quot;? Deleting this metric will remove it from all entries that were already created. This action cannot be undone! You can also just hide the metric so it will not be removed from past entries.
-                                                    </AlertDialogDescription>
-                                                </AlertDialogHeader>
-                                                <AlertDialogFooter>
-                                                    <AlertDialogCancel>Cancel</AlertDialogCancel>
-                                                    <AlertDialogAction onClick={() => deleteMetric(metric.id)}>Delete</AlertDialogAction>
-                                                </AlertDialogFooter>
-                                            </AlertDialogContent>
-                                        </AlertDialog>
+                                                <AlertDialogContent>
+                                                    <AlertDialogHeader>
+                                                        <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
+                                                        <AlertDialogDescription>
+                                                            Do you want to delete the metric &quot;{metric.name}&quot;? Deleting this metric will remove it from all entries that were already created. This action cannot be undone! You can also just hide the metric so it will not be removed from past entries.
+                                                        </AlertDialogDescription>
+                                                    </AlertDialogHeader>
+                                                    <AlertDialogFooter>
+                                                        <AlertDialogCancel>Cancel</AlertDialogCancel>
+                                                        <AlertDialogAction onClick={() => deleteMetric(metric.id)}>Delete</AlertDialogAction>
+                                                    </AlertDialogFooter>
+                                                </AlertDialogContent>
+                                            </AlertDialog>
 
-                                    </div>
-                                    :
-                                    <MetricRating
-                                        ratingType={metric.type}
-                                        selectedRating={metric.rating}
-                                        setSelectedRating={(rating) => {
-                                            setMetrics((prevMetrics) => {
-                                                const updatedMetrics = [...prevMetrics];
-                                                updatedMetrics[pos] = { ...metric, rating: rating };
-                                                setEntryEdited(true)
-                                                return updatedMetrics;
-                                            });
-                                        }} />
-                                }
-                            </div>
-                        )
-                    })
+                                        </div>
+                                        :
+                                        <MetricRating
+                                            ratingType={metric.type}
+                                            selectedRating={metric.rating}
+                                            setSelectedRating={(rating) => {
+                                                setMetrics((prevMetrics) => {
+                                                    const updatedMetrics = [...prevMetrics];
+                                                    updatedMetrics[pos] = { ...metric, rating: rating };
+                                                    setEntryEdited(true)
+                                                    return updatedMetrics;
+                                                });
+                                            }} />
+                                    }
+                                </div>
+                            )
+                        }
+                    })}
+
+                    {isEditing ?
+                        <>
+                            <hr />
+                            <p className='text-center'>Hidden Metrics</p>
+                        </>
+                        : null
                     }
-                    <div className="flex justify-between items-center w-full">
+
+
+                    {
+                        metrics.map((metric, pos) => {
+                            if (metric.hidden && isEditing) {
+                                return (
+                                    <div className="flex justify-between items-center w-full">
+                                        <h4>{metric.name}</h4>
+
+                                        <div className="flex gap-2">
+                                            <Dialog>
+                                                <DialogTrigger>
+                                                    <Button variant="outline" size="icon" className="h-8 w-8" onClick={() => setNewMetric(metric)}><Pencil className="w-4 h-4" /></Button>
+                                                </DialogTrigger>
+                                                <DialogContent>
+                                                    <DialogHeader>
+                                                        <DialogTitle className="text-left">Edit Metric: {metric.name}</DialogTitle>
+                                                        {dialogError ? <DialogDescription className="text-left text-destructive">{dialogError}</DialogDescription> : null}
+                                                    </DialogHeader>
+                                                    <div className="flex gap-4 py-4">
+                                                        <div className="flex flex-col items-start gap-4">
+                                                            <Label htmlFor="metricNAme">
+                                                                Metric name
+                                                            </Label>
+                                                            <Input id="metricNAme" defaultValue={metric.name} placeholder="Headache" className="col-span-3" onChange={(e) => setNewMetric((prev) => ({ ...prev, name: e.target.value }))} />
+                                                        </div>
+                                                    </div>
+                                                    <DialogFooter className="flex flex-row justify-between">
+                                                        <DialogClose asChild>
+                                                            <Button variant="outline">Cancel</Button>
+                                                        </DialogClose>
+                                                        <Button onClick={() => {
+                                                            editMetric()
+                                                        }} type="button">Save Metric</Button>
+                                                    </DialogFooter>
+                                                </DialogContent>
+                                            </Dialog>
+
+                                            <div className="">
+                                                <Button variant="outline" size="icon" className="h-8 w-8" onClick={() => changeVisibility(metric)}>{metric.hidden ? <Eye className="w-4 h-4" /> : <EyeOff className="w-4 h-4" />}</Button>
+                                            </div>
+
+                                            <AlertDialog>
+                                                <AlertDialogTrigger className="w-full">
+                                                    <Button variant="outline" size="icon" className="h-8 w-8 text-destructive"><Trash2 className="w-4 h-4" /></Button>
+                                                </AlertDialogTrigger>
+
+                                                <AlertDialogContent>
+                                                    <AlertDialogHeader>
+                                                        <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
+                                                        <AlertDialogDescription>
+                                                            Do you want to delete the metric &quot;{metric.name}&quot;? Deleting this metric will remove it from all entries that were already created. This action cannot be undone! You can also just hide the metric so it will not be removed from past entries.
+                                                        </AlertDialogDescription>
+                                                    </AlertDialogHeader>
+                                                    <AlertDialogFooter>
+                                                        <AlertDialogCancel>Cancel</AlertDialogCancel>
+                                                        <AlertDialogAction onClick={() => deleteMetric(metric.id)}>Delete</AlertDialogAction>
+                                                    </AlertDialogFooter>
+                                                </AlertDialogContent>
+                                            </AlertDialog>
+
+                                        </div>
+                                    </div>
+                                )
+                            }
+                        })
+                    }
+
+                    <div div className="flex justify-between items-center w-full" >
                         <Dialog>
                             <DialogTrigger>
                                 <button type="button" className="text-muted-foreground underline cursor-pointer">+ add new metric</button>
@@ -282,6 +369,6 @@ export default function DailyCheckupForm({ createCheckupEntry, createNewMetric, 
                     </div>
                 </CardContent>
             </Card>
-        </div>
+        </div >
     )
 }
