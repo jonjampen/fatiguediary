@@ -27,6 +27,17 @@ import {
     SelectTrigger,
     SelectValue,
 } from "@/components/ui/select"
+import {
+    AlertDialog,
+    AlertDialogAction,
+    AlertDialogCancel,
+    AlertDialogContent,
+    AlertDialogDescription,
+    AlertDialogFooter,
+    AlertDialogHeader,
+    AlertDialogTitle,
+    AlertDialogTrigger,
+} from "@/components/ui/alert-dialog"
 import DatePicker from '@/components/DatePicker';
 import MetricRating from '@/components/ui/metricRating';
 import { Button } from '@/components/ui/button';
@@ -35,7 +46,7 @@ import { Edit, EyeOff, Pencil, Trash2 } from 'lucide-react'
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 
-export default function DailyCheckupForm({ createCheckupEntry, createNewMetric, getEntryByDate, editMetricDb }) {
+export default function DailyCheckupForm({ createCheckupEntry, createNewMetric, getEntryByDate, editMetricDb, deleteMetricDb }) {
     const [date, setDate] = useState(moment().format("YYYY-MM-DD"));
     const [metrics, setMetrics] = useState([]);
     const [dialogError, setDialogError] = useState("");
@@ -88,6 +99,10 @@ export default function DailyCheckupForm({ createCheckupEntry, createNewMetric, 
         setNewMetric({})
         setDialogError("")
         dialogClose();
+        updateMetrics();
+    }
+    async function deleteMetric(id) {
+        let metricCreated = await deleteMetricDb(id);
         updateMetrics();
     }
 
@@ -183,8 +198,28 @@ export default function DailyCheckupForm({ createCheckupEntry, createNewMetric, 
                                                 </DialogFooter>
                                             </DialogContent>
                                         </Dialog>
+
                                         <Button variant="outline" size="icon" className="h-8 w-8"><EyeOff className="w-4 h-4" /></Button>
-                                        <Button variant="outline" size="icon" className="h-8 w-8 text-destructive"><Trash2 className="w-4 h-4" /></Button>
+
+                                        <AlertDialog>
+                                            <AlertDialogTrigger className="w-full">
+                                                <Button variant="outline" size="icon" className="h-8 w-8 text-destructive"><Trash2 className="w-4 h-4" /></Button>
+                                            </AlertDialogTrigger>
+
+                                            <AlertDialogContent>
+                                                <AlertDialogHeader>
+                                                    <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
+                                                    <AlertDialogDescription>
+                                                        Do you want to delete the metric &quot;{metric.name}&quot;? Deleting this metric will remove it from all entries that were already created. This action cannot be undone! You can also just hide the metric so it will not be removed from past entries.
+                                                    </AlertDialogDescription>
+                                                </AlertDialogHeader>
+                                                <AlertDialogFooter>
+                                                    <AlertDialogCancel>Cancel</AlertDialogCancel>
+                                                    <AlertDialogAction onClick={() => deleteMetric(metric.id)}>Delete</AlertDialogAction>
+                                                </AlertDialogFooter>
+                                            </AlertDialogContent>
+                                        </AlertDialog>
+
                                     </div>
                                     :
                                     <MetricRating
