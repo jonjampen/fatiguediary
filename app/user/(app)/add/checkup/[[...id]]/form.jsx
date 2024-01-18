@@ -121,7 +121,6 @@ export default function DailyCheckupForm({ createCheckupEntry, createNewMetric, 
         const mergedMetrics = [...oldEntry, ...newMetrics.filter(obj2 => !oldEntry.some(obj1 => obj1.id === obj2.id))];
 
         setMetrics(mergedMetrics);
-        console.log(mergedMetrics)
     }
 
     async function getMetrics() {
@@ -163,6 +162,7 @@ export default function DailyCheckupForm({ createCheckupEntry, createNewMetric, 
             <div className="w-full mb-6 md:w-[500px] flex items-center justify-center gap-8 md:gap-16">
                 <DatePicker updateValues={setDate} selectedRange="day" />
             </div>
+
             <Card className={`w-full md:w-[500px] transition-all duration-200 ${saveMessage ? "border-success" : ""}`}>
                 <CardHeader>
                     <div className="flex justify-between items-center">
@@ -173,87 +173,26 @@ export default function DailyCheckupForm({ createCheckupEntry, createNewMetric, 
                     <CardDescription>Keep track of your symptoms, medications, treatments, measurements, etc.</CardDescription>
                 </CardHeader>
                 <CardContent className="flex flex-col gap-3">
-                    {metrics.map((metric, pos) => {
-                        if (!metric.hidden) {
-                            return (
-                                <Metric metric={metric} position={pos} setMetrics={setMetrics} isEditing={isEditing} updateMetrics={updateMetrics} setEntryEdited={setEntryEdited} />
-                            )
-                        }
+                    {metrics.filter(metric => !metric.hidden).map((metric, pos) => {
+                        return (
+                            <Metric metric={metric} position={pos} setMetrics={setMetrics} isEditing={isEditing} updateMetrics={updateMetrics} setEntryEdited={setEntryEdited} />
+                        )
                     })}
 
+                    {/* Show hidden activities only if editing mode is on */}
                     {isEditing ?
                         <>
                             <hr />
                             <p className='text-center'>Hidden Metrics</p>
+
+                            {metrics.filter(metric => metric.hidden).map((metric, pos) => {
+                                return (
+                                    <Metric metric={metric} position={pos} setMetrics={setMetrics} isEditing={isEditing} updateMetrics={updateMetrics} setEntryEdited={setEntryEdited} />
+                                )
+                            })
+                            }
                         </>
                         : null
-                    }
-
-
-                    {
-                        metrics.map((metric, pos) => {
-                            if (metric.hidden && isEditing) {
-                                return (
-                                    <div className="flex justify-between items-center w-full">
-                                        <h4>{metric.name}</h4>
-
-                                        <div className="flex gap-2">
-                                            <Dialog>
-                                                <DialogTrigger>
-                                                    <Button variant="outline" size="icon" className="h-8 w-8" onClick={() => setNewMetric(metric)}><Pencil className="w-4 h-4" /></Button>
-                                                </DialogTrigger>
-                                                <DialogContent>
-                                                    <DialogHeader>
-                                                        <DialogTitle className="text-left">Edit Metric: {metric.name}</DialogTitle>
-                                                        {dialogError ? <DialogDescription className="text-left text-destructive">{dialogError}</DialogDescription> : null}
-                                                    </DialogHeader>
-                                                    <div className="flex gap-4 py-4">
-                                                        <div className="flex flex-col items-start gap-4">
-                                                            <Label htmlFor="metricNAme">
-                                                                Metric name
-                                                            </Label>
-                                                            <Input id="metricNAme" defaultValue={metric.name} placeholder="Headache" className="col-span-3" onChange={(e) => setNewMetric((prev) => ({ ...prev, name: e.target.value }))} />
-                                                        </div>
-                                                    </div>
-                                                    <DialogFooter className="flex flex-row justify-between">
-                                                        <DialogClose asChild>
-                                                            <Button variant="outline">Cancel</Button>
-                                                        </DialogClose>
-                                                        <Button onClick={() => {
-                                                            editMetric()
-                                                        }} type="button">Save Metric</Button>
-                                                    </DialogFooter>
-                                                </DialogContent>
-                                            </Dialog>
-
-                                            <div className="">
-                                                <Button variant="outline" size="icon" className="h-8 w-8" onClick={() => changeVisibility(metric)}>{metric.hidden ? <Eye className="w-4 h-4" /> : <EyeOff className="w-4 h-4" />}</Button>
-                                            </div>
-
-                                            <AlertDialog>
-                                                <AlertDialogTrigger className="w-full">
-                                                    <Button variant="outline" size="icon" className="h-8 w-8 text-destructive"><Trash2 className="w-4 h-4" /></Button>
-                                                </AlertDialogTrigger>
-
-                                                <AlertDialogContent>
-                                                    <AlertDialogHeader>
-                                                        <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
-                                                        <AlertDialogDescription>
-                                                            Do you want to delete the metric &quot;{metric.name}&quot;? Deleting this metric will remove it from all entries that were already created. This action cannot be undone! You can also just hide the metric so it will not be removed from past entries.
-                                                        </AlertDialogDescription>
-                                                    </AlertDialogHeader>
-                                                    <AlertDialogFooter>
-                                                        <AlertDialogCancel>Cancel</AlertDialogCancel>
-                                                        <AlertDialogAction onClick={() => deleteMetric(metric.id)}>Delete</AlertDialogAction>
-                                                    </AlertDialogFooter>
-                                                </AlertDialogContent>
-                                            </AlertDialog>
-
-                                        </div>
-                                    </div>
-                                )
-                            }
-                        })
                     }
 
                     <div div className="flex justify-between items-center w-full" >

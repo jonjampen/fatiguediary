@@ -1,10 +1,9 @@
 "use client"
 import React, { useState } from 'react'
 import MetricRating from '@/components/ui/metricRating';
-import { EyeOff, Eye } from 'lucide-react'
 import EditMetricDialog from './EditMetricDialog';
-import { Button } from '@/components/ui/button';
 import DeleteMetricDialog from './DeleteMetricDialog';
+import MetricVisibilitySwitch from './MetricVisibilitySwitch';
 
 export default function Metric({ metric, setMetrics, isEditing, position, updateMetrics, setEntryEdited }) {
     return (
@@ -15,7 +14,7 @@ export default function Metric({ metric, setMetrics, isEditing, position, update
                     <EditMetricDialog metric={metric} updateMetrics={updateMetrics} />
 
                     <div className="">
-                        <Button variant="outline" size="icon" className="h-8 w-8" onClick={() => changeVisibility(metric)}>{metric.hidden ? <Eye className="w-4 h-4" /> : <EyeOff className="w-4 h-4" />}</Button>
+                        <MetricVisibilitySwitch metric={metric} updateMetrics={updateMetrics} />
                     </div>
 
                     <DeleteMetricDialog metric={metric} updateMetrics={updateMetrics} />
