@@ -81,7 +81,7 @@ export default function DailyCheckupForm({ createCheckupEntry, getEntryByDate })
                 <CardContent className="flex flex-col gap-3">
                     {metrics.filter(metric => !metric.hidden).map((metric, pos) => {
                         return (
-                            <Metric metric={metric} position={pos} setMetrics={setMetrics} isEditing={isEditing} updateMetrics={updateMetrics} setEntryEdited={setEntryEdited} />
+                            <Metric key={metric.id} metric={metric} position={pos} setMetrics={setMetrics} isEditing={isEditing} updateMetrics={updateMetrics} setEntryEdited={setEntryEdited} />
                         )
                     })}
 
@@ -93,7 +93,7 @@ export default function DailyCheckupForm({ createCheckupEntry, getEntryByDate })
 
                             {metrics.filter(metric => metric.hidden).map((metric, pos) => {
                                 return (
-                                    <Metric metric={metric} position={pos} setMetrics={setMetrics} isEditing={isEditing} updateMetrics={updateMetrics} setEntryEdited={setEntryEdited} />
+                                    <Metric key={metric.id} metric={metric} position={pos} setMetrics={setMetrics} isEditing={isEditing} updateMetrics={updateMetrics} setEntryEdited={setEntryEdited} />
                                 )
                             })
                             }

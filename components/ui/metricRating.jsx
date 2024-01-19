@@ -30,6 +30,7 @@ export default function MetricRating({ ratingType, selectedRating, setSelectedRa
                 {
                     ratings.map((rating, pos) => {
                         return <button
+                            key={pos}
                             className={`w-8 h-8 border rounded ${selectedRating == pos ? "bg-primary text-primary-foreground" : "text-foreground"}`}
                             onClick={(e) => changeRating(e, pos)}
                         >{rating}</button>
