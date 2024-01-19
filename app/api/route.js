@@ -296,7 +296,6 @@ export async function POST(request) {
             }
 
             body.metrics.map(async (metric) => {
-                // return;
                 // check if metric already added for that day
                 query = 'SELECT * from `dailyentry_metrics` WHERE metric_id=? AND dailyentry_id=?';
                 params = [metric.id, checkupid]
@@ -363,7 +362,8 @@ export async function POST(request) {
                     query = "SELECT * FROM dailyentry_metrics WHERE dailyentry_id=? AND metric_id=?";
                     params = [dailyEntries[0].id, metric.id]
                     let metricEntry = await executeQuery(query, params);
-                    return { ...metric, rating: metricEntry[0].rating || 0 }
+                    let rating = metricEntry[0]?.rating ?? 0;
+                    return { ...metric, rating: rating }
                 }
                 else {
                     return { ...metric, rating: 0 }

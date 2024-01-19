@@ -23,12 +23,14 @@ export default function DailyCheckupForm({ createCheckupEntry, getEntryByDate })
     const [entryEdited, setEntryEdited] = useState(false);
 
     async function saveEntry() {
+        let changedMetrics = metrics.filter(metric => metric.changed)
         let data = {
             date: moment(date).format("YYYY-MM-DD"),
-            metrics: metrics,
+            metrics: changedMetrics,
         }
 
         let ready = await createCheckupEntry(data)
+        metrics.filter(metric => metric.changed).map(metric => metric.changed = false)
         if (ready) {
             setSaveMessage("Saved!")
             setTimeout(() => {

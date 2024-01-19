@@ -27,7 +27,7 @@ export default function Metric({ metric, setMetrics, isEditing, position, update
                     setSelectedRating={(rating) => {
                         setMetrics((prevMetrics) => {
                             const updatedMetrics = [...prevMetrics];
-                            updatedMetrics[position] = { ...metric, rating: rating };
+                            updatedMetrics[position] = { ...metric, rating: rating, changed: true };
                             setEntryEdited(true)
                             return updatedMetrics;
                         });
