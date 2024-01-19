@@ -66,7 +66,7 @@ export default function AddMetricDialog({ updateMetrics }) {
         <div div className="flex justify-between items-center w-full" >
             <Dialog>
                 <DialogTrigger>
-                    <button type="button" className="text-muted-foreground underline cursor-pointer">+ add new metric</button>
+                    <p className="text-muted-foreground underline cursor-pointer">+ add new metric</p>
                 </DialogTrigger>
                 <DialogContent>
                     <DialogHeader>

@@ -28,7 +28,7 @@ export default function MobileProfileNav({ getInitials }) {
                             <NavItem link={item.link} name={item.name} key={id} />
                         )
                     })}
-                    <button className="w-full text-left" onClick={() => signOut({ callbackUrl: process.env.URL + '/login' })} ><a><li className="py-2 px-1 md:py-0 md:px-0 w-full">Sign Out</li></a></button>
+                    <button className="w-full text-left hover:text-accent cursor-pointer" onClick={() => signOut({ callbackUrl: process.env.URL + '/login' })} ><li className="py-2 px-1 md:py-0 md:px-0 w-full">Sign Out</li></button>
                 </ul>
             </li>
         </>

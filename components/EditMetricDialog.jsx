@@ -49,10 +49,14 @@ export default function EditMetricDialog({ metric, updateMetrics }) {
         }))
     }
 
+    let buttonStyle = "inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 "
+    buttonStyle += "border border-input bg-background hover:bg-accent hover:text-accent-foreground "
+    buttonStyle += "h-8 w-8"
+
     return (
         <Dialog>
             <DialogTrigger>
-                <Button variant="outline" size="icon" className="h-8 w-8" onClick={() => setNewMetric(metric)}><Pencil className="w-4 h-4" /></Button>
+                <div className={buttonStyle} onClick={() => setNewMetric(metric)}><Pencil className="w-4 h-4" /></div>
             </DialogTrigger>
             <DialogContent>
                 <DialogHeader>
