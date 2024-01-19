@@ -38,32 +38,13 @@ export default function DailyCheckupForm({ createCheckupEntry, getEntryByDate })
     }
 
     async function updateMetrics() {
-        let oldEntry = await getEntryByDate(moment(date).format("YYYY-MM-DD"))
-        let newMetrics = await getMetrics()
-
-        const mergedMetrics = [...oldEntry, ...newMetrics.filter(obj2 => !oldEntry.some(obj1 => obj1.id === obj2.id))];
-
-        setMetrics(mergedMetrics);
-    }
-
-    async function getMetrics() {
-        let res = await fetch(process.env.URL + "/api", {
-            method: "POST",
-            body: JSON.stringify({
-                "type": "getMetrics",
-            }),
-            cache: 'no-store',
-        })
-        res = await res.json()
-        res = res.data
-
-        res = res.map(metric => { return { ...metric, rating: 0 } })
-        return res
+        let updatedMetrics = await getEntryByDate(moment(date).format("YYYY-MM-DD"))
+        setMetrics(updatedMetrics);
     }
 
     useEffect(() => {
         let getAsync = async () => {
-            setMetrics(await getMetrics());
+            await updateMetrics();
         }
         getAsync();
     }, [])

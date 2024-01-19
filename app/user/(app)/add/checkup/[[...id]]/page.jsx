@@ -25,7 +25,7 @@ export default async function DailyCheckup() {
             method: "POST",
             headers: { Cookie: cookies().toString() },
             body: JSON.stringify({
-                "type": "getdayilyEntry",
+                "type": "getDailyEntry",
                 "date": date,
             }),
             cache: 'no-store',

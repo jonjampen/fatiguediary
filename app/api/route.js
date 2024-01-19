@@ -348,23 +348,27 @@ export async function POST(request) {
             params = [userid]
             rows = await executeQuery(query, params);
         }
-        else if (type === "getdayilyEntry") {
+        else if (type === "getDailyEntry") {
             query = "SELECT * FROM dailyentry WHERE user_id=? and date=?";
             params = [userid, body.date]
-            rows = await executeQuery(query, params);
+            let dailyEntries = await executeQuery(query, params);
 
-            if (rows[0] && rows[0].id) {
-                query = "SELECT * FROM dailyentry_metrics WHERE dailyentry_id=?";
-                params = [rows[0].id]
-                rows = await executeQuery(query, params);
+            query = "SELECT * FROM metrics WHERE user_id=?";
+            params = [userid]
+            let metrics = await executeQuery(query, params);
 
-                rows = await Promise.all(rows.map(async (row) => {
-                    query = "SELECT * FROM metrics WHERE id=?";
-                    params = [row.metric_id]
-                    let metric = await executeQuery(query, params);
-                    return { ...metric[0], rating: row.rating }
-                }))
-            }
+            rows = await Promise.all(metrics.map(async (metric) => {
+                // entry exists
+                if (dailyEntries[0] && dailyEntries[0].id) {
+                    query = "SELECT * FROM dailyentry_metrics WHERE dailyentry_id=? AND metric_id=?";
+                    params = [dailyEntries[0].id, metric.id]
+                    let metricEntry = await executeQuery(query, params);
+                    return { ...metric, rating: metricEntry[0].rating || 0 }
+                }
+                else {
+                    return { ...metric, rating: 0 }
+                }
+            }))
         }
     }
     catch (error) {
