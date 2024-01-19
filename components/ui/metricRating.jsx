@@ -16,9 +16,9 @@ export default function MetricRating({ ratingType, selectedRating, setSelectedRa
     if (ratingType === "numberInput") {
         return (
             <div className='flex gap-2 w-[152px]'>
-                <Button variant="outline" size="icon" className="h-8 w-8 flex-shrink-0" onClick={(e) => changeRating(e, selectedRating - 1)}><Minus className="w-4 h-4" /></Button>
+                <Button type="button" variant="outline" size="icon" className="h-8 w-8 flex-shrink-0" onClick={(e) => changeRating(e, selectedRating - 1)}><Minus className="w-4 h-4" /></Button>
                 <Input type="number" value={selectedRating} onChange={(e) => changeRating(e, e.target.value)} className="h-8 flex-grow" />
-                <Button variant="outline" size="icon" className="h-8 w-8 flex-shrink-0" onClick={(e) => changeRating(e, selectedRating + 1)}><Plus className="w-4 h-4" /></Button>
+                <Button type="button" variant="outline" size="icon" className="h-8 w-8 flex-shrink-0" onClick={(e) => changeRating(e, selectedRating + 1)}><Plus className="w-4 h-4" /></Button>
             </div>
 
         )

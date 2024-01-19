@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect, use } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
     Card,
     CardContent,
@@ -9,51 +9,18 @@ import {
     CardHeader,
     CardTitle,
 } from "@/components/ui/card";
-import {
-    Dialog,
-    DialogContent,
-    DialogDescription,
-    DialogHeader,
-    DialogTitle,
-    DialogTrigger,
-    DialogFooter,
-    DialogClose,
-    dialogClose,
-} from "@/components/ui/dialog";
-import {
-    Select,
-    SelectContent,
-    SelectItem,
-    SelectTrigger,
-    SelectValue,
-} from "@/components/ui/select"
-import {
-    AlertDialog,
-    AlertDialogAction,
-    AlertDialogCancel,
-    AlertDialogContent,
-    AlertDialogDescription,
-    AlertDialogFooter,
-    AlertDialogHeader,
-    AlertDialogTitle,
-    AlertDialogTrigger,
-} from "@/components/ui/alert-dialog"
 import DatePicker from '@/components/DatePicker';
-import { Button } from '@/components/ui/button';
 import moment from "moment";
-import { Edit, EyeOff, Eye, Pencil, Trash2 } from 'lucide-react'
-import { Input } from "@/components/ui/input"
-import { Label } from "@/components/ui/label"
+import { Edit } from 'lucide-react'
 import Metric from '@/components/Metric';
+import AddMetricDialog from '@/components/AddMetricDialog';
 
-export default function DailyCheckupForm({ createCheckupEntry, createNewMetric, getEntryByDate, editMetricDb, deleteMetricDb, changeVisibilityDb }) {
+export default function DailyCheckupForm({ createCheckupEntry, getEntryByDate }) {
     const [date, setDate] = useState(moment().format("YYYY-MM-DD"));
     const [metrics, setMetrics] = useState([]);
-    const [dialogError, setDialogError] = useState("");
     const [saveMessage, setSaveMessage] = useState("");
     const [isEditing, setIsEditing] = useState(false);
     const [entryEdited, setEntryEdited] = useState(false);
-    const [newMetric, setNewMetric] = useState({});
 
     async function saveEntry() {
         let data = {
@@ -68,50 +35,6 @@ export default function DailyCheckupForm({ createCheckupEntry, createNewMetric, 
                 setSaveMessage("")
             }, 500)
         }
-    }
-
-    function formatSleepDuration(value) {
-        const hours = Math.floor(value / 60);
-        const minutes = value % 60;
-        return `${hours}h ${minutes}m`;
-    };
-
-    async function addNewMetric() {
-        console.log("N: ", newMetric.name, "T", newMetric.type)
-        if (!newMetric.name || !newMetric.type) {
-            setDialogError("Select name and rating type!")
-            console.log(newMetric)
-            return;
-        }
-        let metricCreated = await createNewMetric(newMetric);
-        setNewMetric({})
-        setDialogError("")
-        dialogClose();
-        updateMetrics();
-    }
-
-    async function editMetric() {
-        if (!newMetric.name) {
-            setDialogError("Enter name!")
-            return;
-        }
-        let metricCreated = await editMetricDb(newMetric);
-        setNewMetric({})
-        setDialogError("")
-        dialogClose();
-        updateMetrics();
-    }
-
-    async function deleteMetric(id) {
-        let metricCreated = await deleteMetricDb(id);
-        updateMetrics();
-    }
-
-    async function changeVisibility(updated) {
-        console.log(updated.hidden)
-        updated.hidden = !updated.hidden;
-        let metricCreated = await changeVisibilityDb(updated);
-        updateMetrics();
     }
 
     async function updateMetrics() {
@@ -179,7 +102,7 @@ export default function DailyCheckupForm({ createCheckupEntry, createNewMetric, 
                         )
                     })}
 
-                    {/* Show hidden activities only if editing mode is on */}
+                    {/* Show hidden activities in editing mode */}
                     {isEditing ?
                         <>
                             <hr />
@@ -195,48 +118,7 @@ export default function DailyCheckupForm({ createCheckupEntry, createNewMetric, 
                         : null
                     }
 
-                    <div div className="flex justify-between items-center w-full" >
-                        <Dialog>
-                            <DialogTrigger>
-                                <button type="button" className="text-muted-foreground underline cursor-pointer">+ add new metric</button>
-                            </DialogTrigger>
-                            <DialogContent>
-                                <DialogHeader>
-                                    <DialogTitle className="text-left">Create new Metric</DialogTitle>
-                                    {dialogError ? <DialogDescription className="text-left text-destructive">{dialogError}</DialogDescription> : null}
-                                </DialogHeader>
-                                <div className="flex gap-4 py-4">
-                                    <div className="flex flex-col items-start gap-4">
-                                        <Label htmlFor="metricNAme">
-                                            Metric name
-                                        </Label>
-                                        <Input id="metricName" placeholder="Headache" value={newMetric.name} className="col-span-3" onChange={(e) => setNewMetric((prev) => ({ ...newMetric, name: e.target.value }))} />
-                                    </div>
-                                    <div className="flex flex-col items-start gap-4 w-[40%]">
-                                        <Label>
-                                            Rating type
-                                        </Label>
-                                        <Select onValueChange={(newType) => setNewMetric((prev) => ({ ...newMetric, type: newType }))}>
-                                            <SelectTrigger className="max-w-full">
-                                                <SelectValue placeholder="Select..." />
-                                            </SelectTrigger>
-                                            <SelectContent>
-                                                <SelectItem value="scale03">0 - 3</SelectItem>
-                                                <SelectItem value="numberInput">Number</SelectItem>
-                                            </SelectContent>
-                                        </Select>
-
-                                    </div>
-                                </div>
-                                <DialogFooter className="flex flex-row justify-between">
-                                    <DialogClose asChild>
-                                        <Button variant="outline">Cancel</Button>
-                                    </DialogClose>
-                                    <Button onClick={() => addNewMetric()} type="button">Create Metric</Button>
-                                </DialogFooter>
-                            </DialogContent>
-                        </Dialog>
-                    </div>
+                    <AddMetricDialog updateMetrics={updateMetrics} />
                 </CardContent>
             </Card>
         </div >
