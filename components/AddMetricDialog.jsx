@@ -63,7 +63,7 @@ export default function AddMetricDialog({ updateMetrics }) {
     }
 
     return (
-        <div div className="flex justify-between items-center w-full" >
+        <div className="flex justify-between items-center w-full" >
             <Dialog>
                 <DialogTrigger>
                     <p className="text-muted-foreground underline cursor-pointer">+ add new metric</p>
@@ -78,7 +78,7 @@ export default function AddMetricDialog({ updateMetrics }) {
                             <Label htmlFor="metricNAme">
                                 Metric name
                             </Label>
-                            <Input name="name" placeholder="Headache" value={newMetric.name} className="col-span-3" onChange={handleInputChange} />
+                            <Input name="name" placeholder="Headache" value={newMetric?.name ?? ''} className="col-span-3" onChange={handleInputChange} />
                         </div>
                         <div className="flex flex-col items-start gap-4 w-[40%]">
                             <Label>
