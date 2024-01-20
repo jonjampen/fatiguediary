@@ -52,6 +52,8 @@ export default async function page() {
             return dateArray;
         }
 
+        console.log(startDate, endDate)
+
         let res = await fetch(process.env.URL + "/api", {
             method: "POST",
             headers: { Cookie: cookies().toString() },
@@ -64,7 +66,7 @@ export default async function page() {
         })
         res = await res.json()
         res = res.data
-
+        console.log(res)
         // format
         let chartData = {}
 

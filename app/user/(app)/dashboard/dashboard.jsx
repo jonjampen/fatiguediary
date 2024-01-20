@@ -19,38 +19,23 @@ import MetricsChart from "@/components/charts/MetricsChart"
 import RatedActivities from '@/components/RatedActivities'
 
 export default function Dashboard({ fetchEntries, getActivities, getAllDailyEntriesInRange }) {
-    const [entries, setEntries] = useState([])
     const [startDate, setStartDate] = useState(moment().startOf('day').format("YYYY-MM-DD HH:mm:ss"))
     const [endDate, setEndDate] = useState(moment().endOf("day").format("YYYY-MM-DD HH:mm:ss"))
     const [selectedDate, setSelectedDate] = useState(moment().startOf("day").toDate())
     const [range, setRange] = useState("day")
+    const [entries, setEntries] = useState([])
     const [activities, setActivities] = useState({})
-    const [metrics, setMetrics] = useState([])
-
+    const [dailyEntries, setDailyEntries] = useState([])
+    
     async function updateEntries() {
         setEntries(await fetchEntries(startDate, endDate));
         setActivities(await getActivities(startDate, endDate));
+        setDailyEntries(await getAllDailyEntriesInRange(startDate, endDate))
     }
 
     function updateDate(date) {
         setStartDate(moment(date).startOf(range).format("YYYY-MM-DD HH:mm:ss"))
         setEndDate(moment(date).endOf(range).format("YYYY-MM-DD HH:mm:ss"))
-    }
-
-    async function getMetrics() {
-        let res = await fetch(process.env.URL + "/api", {
-            method: "POST",
-            body: JSON.stringify({
-                "type": "getMetrics",
-            }),
-            cache: 'no-store',
-        })
-        res = await res.json()
-        res = res.data
-
-        // res = res.map(metric => { return { ...metric, rating: 0 } })
-        console.log(res)
-        return res
     }
 
     useEffect(() => {
@@ -60,15 +45,6 @@ export default function Dashboard({ fetchEntries, getActivities, getAllDailyEntr
     useEffect(() => {
         updateDate(selectedDate)
     }, [selectedDate, range])
-
-    useEffect(() => {
-        const fetchData = async () => {
-            const newMetrics = await getMetrics();
-            setMetrics(newMetrics)
-        }
-        fetchData();
-
-    }, [])
 
     return (
         <>
@@ -110,7 +86,7 @@ export default function Dashboard({ fetchEntries, getActivities, getAllDailyEntr
 
                             }
                             else if (range === "isoWeek") {
-                                return (<MetricsChart metrics={metrics} startDate={startDate} endDate={endDate} range={range} getAllDailyEntriesInRange={getAllDailyEntriesInRange} />)
+                                return (<MetricsChart entries={dailyEntries} startDate={startDate} endDate={endDate} range={range} />)
                             }
                             else if (range === "month") {
                                 return (<MonthChart entries={entries} activities={activities} startDate={startDate} endDate={endDate} range={range} />)

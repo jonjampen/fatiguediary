@@ -7,16 +7,16 @@ import { getSettings } from '@/app/lib/settings';
 import ApexCharts from 'apexcharts';
 const Chart = dynamic(() => import("react-apexcharts"), { ssr: false });
 
-export default function MonthChart({ metrics, startDate, endDate, range, getAllDailyEntriesInRange }) {
-    const [series, setSeries] = useState([])
+export default function MonthChart({ entries, startDate, endDate, range }) {
+    // const [series, setSeries] = useState([])
 
-    useEffect(() => {
-        const getData = async () => {
-            let data = await getAllDailyEntriesInRange(startDate, endDate);
-            setSeries(data)
-        }
-        getData()
-    }, [startDate, endDate])
+    // useEffect(() => {
+    //     const getData = async () => {
+    //         let data = await getAllDailyEntriesInRange(startDate, endDate);
+    //         setSeries(data)
+    //     }
+    //     getData()
+    // }, [startDate, endDate])
 
     const [settings, setSettings] = useState({ "theme": 1, })
 
@@ -123,7 +123,7 @@ export default function MonthChart({ metrics, startDate, endDate, range, getAllD
                 borderColor: 'hsl(var(--border))',
             }
         },
-        series: series,
+        series: entries,
         type: "line",
     }
 
@@ -132,7 +132,7 @@ export default function MonthChart({ metrics, startDate, endDate, range, getAllD
         <>
             <Chart options={state.options} series={state.series} type={state.type} height={320} width="100%" />
             <div className="flex gap-2">
-                {metrics.map(metric => {
+                {/* {metrics.map(metric => {
                     // console.log(metric);
                     return (
                         <div key={metric.id} className="bg-primary h-10 rounded border px-4 py-2 inline whitespace-nowrap cursor-pointer"
@@ -140,7 +140,7 @@ export default function MonthChart({ metrics, startDate, endDate, range, getAllD
                                 ApexCharts.getChartByID("chartIdXy").toggleSeries(metric.name)
                             }}>{metric.name}</div>
                     )
-                })}
+                })} */}
             </div>
         </>
     )
