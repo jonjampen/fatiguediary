@@ -7,94 +7,13 @@ import { getSettings } from '@/app/lib/settings';
 import ApexCharts from 'apexcharts';
 const Chart = dynamic(() => import("react-apexcharts"), { ssr: false });
 
-export default function MonthChart({ metrics, startDate, endDate, range }) {
+export default function MonthChart({ metrics, startDate, endDate, range, getAllDailyEntriesInRange }) {
     const [series, setSeries] = useState([])
 
-    async function getAllDailyEntriesInRange() {
-        let res = await fetch(process.env.URL + "/api", {
-            method: "POST",
-            body: JSON.stringify({
-                "type": "getDailyEntriesInRange",
-                "startDate": startDate,
-                "endDate": endDate,
-            }),
-            cache: 'no-store',
-        })
-        res = await res.json()
-        res = res.data
-        // console.log(res)
-
-        // format
-        let chartData = {}
-
-        const dateRange = getDatesBetween(startDate, endDate);
-
-        console.log(startDate, endDate)
-
-        res.map((item) => {
-            const { name } = item;
-            chartData[name] = { name, data: [] };
-        });
-
-        dateRange.map((date) => {
-            Object.values(chartData).forEach((metric) => {
-                const matchingEntry = res.find((entry) => entry.name === metric.name && entry.date === date);
-                const rating = matchingEntry ? matchingEntry.rating : 0;
-
-                // Convert the date to Unix timestamp in milliseconds using moment.js
-                const dateUnixMs = moment(date).valueOf();
-
-                // Push the data into the metric's data array
-                metric.data.push([dateUnixMs, rating]);
-            });
-        });
-
-
-
-        // map((item) => {
-        //     const { name, date, rating } = item;
-        //     const dateUnixMs = new Date(date).getTime();
-
-        //     if (!chartData[name]) {
-        //         chartData[name] = { name, data: [] };
-        //     }
-
-        //     chartData[name].data.push([dateUnixMs, rating]);
-        // })
-        console.log(Object.values(chartData))
-        setSeries(Object.values(chartData))
-
-        // let x = []
-        // x.push({
-        //     x: moment(entry.datetime).format("YYYY-MM-DD HH:mm"),
-        //     y: entry.energylevel,
-        //     z: currentActivities.join(", "),
-        // })
-
-
-
-
-        return []
-    }
-
-    function getDatesBetween(start, end) {
-        const startDate = moment(start);
-        const endDate = moment(end);
-        const dateArray = [];
-
-        for (let currentDate = startDate; currentDate.isSameOrBefore(endDate); currentDate.add(1, 'days')) {
-            dateArray.push(currentDate.format('YYYY-MM-DD'));
-        }
-
-        return dateArray;
-    }
-
-
-    let data;
     useEffect(() => {
         const getData = async () => {
-            console.log(startDate, endDate)
-            data = await getAllDailyEntriesInRange(startDate, endDate);
+            let data = await getAllDailyEntriesInRange(startDate, endDate);
+            setSeries(data)
         }
         getData()
     }, [startDate, endDate])

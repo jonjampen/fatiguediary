@@ -1,37 +1,17 @@
-"use client"
-import DatePicker from '@/components/DatePicker'
-import RangePicker from '@/components/RangePicker'
-import React, { useEffect, useState } from 'react'
-import {
-    Card,
-    CardContent,
-    CardDescription,
-    CardFooter,
-    CardHeader,
-    CardTitle,
-} from "@/components/ui/card"
-import { useSession } from 'next-auth/react';
-import moment from "moment"
-import DayChart from "@/components/charts/DayChart"
-import WeekChart from "@/components/charts/WeekChart"
-import MonthChart from "@/components/charts/MonthChart"
-import YearChart from "@/components/charts/YearChart"
-import MetricsChart from "@/components/charts/MetricsChart"
-import RatedActivities from '@/components/RatedActivities'
+import { getServerSession } from 'next-auth';
+import { options } from '@/app/api/auth/[...nextauth]/options';
+import { cookies } from 'next/headers'
+import Dashboard from "./dashboard";
+import moment from 'moment';
 
-export default function Dashboard() {
-    const { data: session, status } = useSession()
-    const [entries, setEntries] = useState([])
-    const [startDate, setStartDate] = useState(moment().startOf('day').format("YYYY-MM-DD HH:mm:ss"))
-    const [endDate, setEndDate] = useState(moment().endOf("day").format("YYYY-MM-DD HH:mm:ss"))
-    const [selectedDate, setSelectedDate] = useState(moment().startOf("day").toDate())
-    const [range, setRange] = useState("day")
-    const [activities, setActivities] = useState({})
-    const [metrics, setMetrics] = useState([])
+export default async function page() {
+    const session = await getServerSession(options)
 
-    async function fetchEntries() {
+    async function fetchEntries(startDate, endDate) {
+        "use server"
         let res = await fetch(process.env.URL + "/api", {
             method: "POST",
+            headers: { Cookie: cookies().toString() },
             body: JSON.stringify({
                 "type": "getEntriesByUserId",
                 "startDate": startDate,
@@ -42,9 +22,11 @@ export default function Dashboard() {
         return res.data
     }
 
-    async function getActivities() {
+    async function getActivities(startDate, endDate) {
+        "use server"
         let res = await fetch(process.env.URL + "/api", {
             method: "POST",
+            headers: { Cookie: cookies().toString() },
             body: JSON.stringify({
                 "type": "getActivitiesById",
                 "startDate": startDate,
@@ -55,48 +37,59 @@ export default function Dashboard() {
         return res.data
     }
 
-    async function updateEntries() {
-        setEntries(await fetchEntries());
-        setActivities(await getActivities());
-    }
 
-    function updateDate(date) {
-        setStartDate(moment(date).startOf(range).format("YYYY-MM-DD HH:mm:ss"))
-        setEndDate(moment(date).endOf(range).format("YYYY-MM-DD HH:mm:ss"))
-    }
+    async function getAllDailyEntriesInRange(startDate, endDate) {
+        "use server"
+        function getDatesBetween(start, end) {
+            const startDate = moment(start);
+            const endDate = moment(end);
+            const dateArray = [];
 
-    async function getMetrics() {
+            for (let currentDate = startDate; currentDate.isSameOrBefore(endDate); currentDate.add(1, 'days')) {
+                dateArray.push(currentDate.format('YYYY-MM-DD'));
+            }
+
+            return dateArray;
+        }
+
         let res = await fetch(process.env.URL + "/api", {
             method: "POST",
+            headers: { Cookie: cookies().toString() },
             body: JSON.stringify({
-                "type": "getMetrics",
+                "type": "getDailyEntriesInRange",
+                "startDate": startDate,
+                "endDate": endDate,
             }),
             cache: 'no-store',
         })
         res = await res.json()
         res = res.data
 
-        // res = res.map(metric => { return { ...metric, rating: 0 } })
-        console.log(res)
-        return res
+        // format
+        let chartData = {}
+
+        const dateRange = getDatesBetween(startDate, endDate);
+
+        res.map((item) => {
+            const { name } = item;
+            chartData[name] = { name, data: [] };
+        });
+
+        dateRange.map((date) => {
+            Object.values(chartData).forEach((metric) => {
+                const matchingEntry = res.find((entry) => entry.name === metric.name && entry.date === date);
+                const rating = matchingEntry ? matchingEntry.rating : 0;
+
+                // Convert the date to Unix timestamp in milliseconds using moment.js
+                const dateUnixMs = moment(date).valueOf();
+
+                // Push the data into the metric's data array
+                metric.data.push([dateUnixMs, rating]);
+            });
+        });
+        // setSeries(Object.values(chartData))
+        return Object.values(chartData)
     }
-
-    useEffect(() => {
-        updateEntries()
-    }, [startDate, endDate])
-
-    useEffect(() => {
-        updateDate(selectedDate)
-    }, [selectedDate, range])
-
-    useEffect(() => {
-        const fetchData = async () => {
-            const newMetrics = await getMetrics();
-            setMetrics(newMetrics)
-        }
-        fetchData();
-
-    }, [])
 
     return (
         <section className="mx-4">
@@ -104,59 +97,7 @@ export default function Dashboard() {
                 <h5 className="text-gray-600">Hi, {session ? session.user.name : ""}</h5>
                 <h1 className="text-left text-2xl">Your Dashboard</h1>
             </div>
-            <div className="w-full flex flex-col items-center justify-between gap-4">
-                <DatePicker updateValues={setSelectedDate} selectedRange={range} />
-                <RangePicker setRange={setRange} />
-            </div>
-            <div className="w-full flex flex-col items-center justify-between gap-4 mt-6">
-                <Card className="w-full">
-                    <CardHeader>
-                        <CardTitle>Energy</CardTitle>
-                    </CardHeader>
-                    <CardContent>
-                        {(() => {
-                            if (range === "day") {
-                                return (<DayChart entries={entries} activities={activities} startDate={startDate} endDate={endDate} range={range} />)
-                            }
-                            else if (range === "isoWeek") {
-                                return (<WeekChart entries={entries} activities={activities} startDate={startDate} endDate={endDate} range={range} />)
-                            }
-                            else if (range === "month") {
-                                return (<MonthChart entries={entries} activities={activities} startDate={startDate} endDate={endDate} range={range} />)
-                            }
-                            else if (range === "year") {
-                                return (<YearChart entries={entries} activities={activities} startDate={startDate} endDate={endDate} range={range} />)
-                            }
-                        })()}
-
-                    </CardContent>
-                </Card>
-                <Card className="w-full">
-                    <CardHeader>
-                        <CardTitle>Metrics</CardTitle>
-                    </CardHeader>
-                    <CardContent>
-                        {(() => {
-                            if (range === "day") {
-                                return (<DayChart entries={entries} activities={activities} startDate={startDate} endDate={endDate} range={range} />)
-
-                            }
-                            else if (range === "isoWeek") {
-                                return (<MetricsChart metrics={metrics} startDate={startDate} endDate={endDate} range={range} />)
-                            }
-                            else if (range === "month") {
-                                return (<MonthChart entries={entries} activities={activities} startDate={startDate} endDate={endDate} range={range} />)
-                            }
-                            else if (range === "year") {
-                                return (<YearChart entries={entries} activities={activities} startDate={startDate} endDate={endDate} range={range} />)
-                            }
-                        })()}
-
-                    </CardContent>
-                </Card>
-                <RatedActivities />
-
-            </div>
+            <Dashboard fetchEntries={fetchEntries} getActivities={getActivities} getAllDailyEntriesInRange={getAllDailyEntriesInRange} />
         </section>
     )
 }

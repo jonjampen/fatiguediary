@@ -24,4 +24,15 @@ Libraries:
 - MySQL2
 - next-pwa
 
-`Originally it was built using HTML, CSS, and JavaScript for frontend. For the backend I used PHP and a MySQL database. (Libraries: Shepherd, Toastify, Apexcharts)`
+
+Originally it was built using HTML, CSS, and JavaScript for frontend. For the backend I used PHP and a MySQL database. (Libraries: Shepherd, Toastify, Apexcharts)
+
+
+# Todo
+- [ ] metrics tracking
+    - [ ] sortable symptoms
+    - [ ] chart
+    - [ ] choose what metrics to display
+    - [ ] custom charts
+    - [ ] sort dashboard
+    - [ ] clean code
