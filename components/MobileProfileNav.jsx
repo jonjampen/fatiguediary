@@ -2,12 +2,9 @@ import React from 'react'
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import { links } from "@/lib/navbarLinks"
 import NavItem from './NavItem'
-import { useSession } from 'next-auth/react';
 import { signOut } from 'next-auth/react';
 
-export default function MobileProfileNav({ getInitials }) {
-    const { data: session, status } = useSession()
-
+export default function MobileProfileNav({ session, getInitials }) {
     return (
         <>
             {/* Mobile Profile */}

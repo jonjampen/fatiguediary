@@ -8,10 +8,8 @@ import DesktopProfileNav from './DesktopProfileNav'
 import LoginNavButtons from './LoginNavButtons'
 import NavItem from './NavItem'
 import { Menu } from 'lucide-react'
-import { useSession } from 'next-auth/react';
 
-export default function Navbar() {
-  const { data: session, status } = useSession()
+export default function Navbar({ session }) {
   let isLoggedIn = !!session;
 
   async function shareIt() {
@@ -32,8 +30,8 @@ export default function Navbar() {
     if (isLoggedIn) {
       return (
         <>
-          <DesktopProfileNav getInitials={getInitials} />
-          <MobileProfileNav getInitials={getInitials} />
+          <DesktopProfileNav session={session} getInitials={getInitials} />
+          <MobileProfileNav session={session} getInitials={getInitials} />
         </>
       )
     }

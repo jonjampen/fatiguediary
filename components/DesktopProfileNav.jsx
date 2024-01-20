@@ -11,11 +11,8 @@ import {
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import { links } from "@/lib/navbarLinks"
 import { signOut } from 'next-auth/react'
-import { useSession } from 'next-auth/react';
 
-export default function DesktopProfileNav({ getInitials }) {
-    const { data: session, status } = useSession()
-
+export default function DesktopProfileNav({ session, getInitials }) {
     return (
         <>
             {/* Desktop Profile */}
