@@ -347,6 +347,11 @@ export async function POST(request) {
             params = [userid]
             rows = await executeQuery(query, params);
         }
+        else if (type === "getDailyEntriesInRange") {
+            query = "SELECT dailyentry_metrics.id AS id, metrics.id AS metric_id, metrics.name, dailyentry_metrics.rating, dailyentry.date FROM dailyentry JOIN dailyentry_metrics ON dailyentry.id = dailyentry_metrics.dailyentry_id JOIN metrics ON dailyentry_metrics.metric_id = metrics.id WHERE dailyentry.user_id = ? AND (dailyentry.date BETWEEN ? AND ?) ORDER BY dailyentry.date;";
+            params = [userid, body.startDate, body.endDate]
+            rows = await executeQuery(query, params);
+        }
         else if (type === "getDailyEntry") {
             query = "SELECT * FROM dailyentry WHERE user_id=? and date=?";
             params = [userid, body.date]
