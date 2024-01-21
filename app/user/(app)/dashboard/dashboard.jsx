@@ -105,22 +105,22 @@ export default function Dashboard({ fetchEntries, getActivities, getAllDailyEntr
                 <RangePicker setRange={setRange} />
             </div>
             <div className="w-full flex flex-col items-center justify-between gap-4 mt-6">
-                <Card className="w-full">
-                    <CardHeader>
+                <Card className="w-full min-h-[300px]">
+                    <CardHeader className="pb-2">
                         <CardTitle>Energy</CardTitle>
                     </CardHeader>
-                    <CardContent>
+                    <CardContent className="px-0 lg:px-6 pb-0">
                         <EnergyCharts entries={entries} activities={activities} startDate={startDate} endDate={endDate} range={range} />
                     </CardContent>
                 </Card>
-                <Card className="w-full">
-                    <CardHeader>
-                        <CardTitle>Metrics</CardTitle>
+                <Card className={`w-full ${range === 'day' ? "min-h-0" : "min-h-[300px]"}`}>
+                    <CardHeader className="pb-2">
+                        <CardTitle>Health Metrics</CardTitle>
                     </CardHeader>
-                    <CardContent>
+                    <CardContent className="px-0 lg:px-6 pb-0">
                         {(() => {
                             if (range === "day") {
-                                return (<DayMetrics metrics={metricEntries} />)
+                                return (<DayMetrics metrics={metricEntries} /> || <p>Loading...</p>)
 
                             }
                             else {
