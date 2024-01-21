@@ -93,13 +93,30 @@ export default async function page() {
         return Object.values(chartData)
     }
 
+    async function getMetricEntryByDate(date) {
+        "use server"
+        console.log(date)
+        let res = await fetch(process.env.URL + "/api", {
+            method: "POST",
+            headers: { Cookie: cookies().toString() },
+            body: JSON.stringify({
+                "type": "getDailyEntry",
+                "date": date,
+            }),
+            cache: 'no-store',
+        })
+        res = await res.json()
+        res = res.data
+        return res
+    }
+
     return (
         <section className="mx-4">
             <div className="w-full flex flex-col justify-start text-left mb-4">
                 <h5 className="text-gray-600">Hi, {session ? session.user.name : ""}</h5>
                 <h1 className="text-left text-2xl">Your Dashboard</h1>
             </div>
-            <Dashboard fetchEntries={fetchEntries} getActivities={getActivities} getAllDailyEntriesInRange={getAllDailyEntriesInRange} />
+            <Dashboard fetchEntries={fetchEntries} getActivities={getActivities} getAllDailyEntriesInRange={getAllDailyEntriesInRange} getMetricEntryByDate={getMetricEntryByDate} />
         </section>
     )
 }

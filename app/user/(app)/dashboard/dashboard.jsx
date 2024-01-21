@@ -1,7 +1,7 @@
 "use client"
 import DatePicker from '@/components/DatePicker'
 import RangePicker from '@/components/RangePicker'
-import React, { useEffect, useState } from 'react'
+import React, { use, useEffect, useState } from 'react'
 import {
     Card,
     CardContent,
@@ -15,8 +15,9 @@ import DayChart from "@/components/charts/DayChart"
 import MetricsChart from "@/components/charts/MetricsChart"
 import RatedActivities from '@/components/RatedActivities'
 import EnergyCharts from '@/components/charts/EnergyCharts'
+import DayMetrics from '@/components/charts/DayMetrics'
 
-export default function Dashboard({ fetchEntries, getActivities, getAllDailyEntriesInRange }) {
+export default function Dashboard({ fetchEntries, getActivities, getAllDailyEntriesInRange, getMetricEntryByDate }) {
     const [startDate, setStartDate] = useState(moment().startOf('day').format("YYYY-MM-DD HH:mm:ss"))
     const [endDate, setEndDate] = useState(moment().endOf("day").format("YYYY-MM-DD HH:mm:ss"))
     const [selectedDate, setSelectedDate] = useState(moment().startOf("day").toDate())
@@ -24,11 +25,13 @@ export default function Dashboard({ fetchEntries, getActivities, getAllDailyEntr
     const [entries, setEntries] = useState([])
     const [activities, setActivities] = useState({})
     const [dailyEntries, setDailyEntries] = useState([])
+    const [metricEntries, setMetricEntries] = useState([])
 
     async function updateEntries() {
         setEntries(await fetchEntries(startDate, endDate));
         setActivities(await getActivities(startDate, endDate));
         setDailyEntries(await getAllDailyEntriesInRange(startDate, endDate))
+        setMetricEntries(await getMetricEntryByDate(moment(startDate).format("YYYY-MM-DD")))
     }
 
     function updateDate(date) {
@@ -88,6 +91,10 @@ export default function Dashboard({ fetchEntries, getActivities, getAllDailyEntr
     }, [startDate, endDate])
 
     useEffect(() => {
+        const updateMetrics = async () => {
+            setMetricEntries(await getMetricEntryByDate(moment(startDate).format("YYYY-MM-DD")))
+        }
+        updateMetrics()
         updateDate(selectedDate)
     }, [selectedDate, range])
 
@@ -113,7 +120,7 @@ export default function Dashboard({ fetchEntries, getActivities, getAllDailyEntr
                     <CardContent>
                         {(() => {
                             if (range === "day") {
-                                return (<div></div>)
+                                return (<DayMetrics metrics={metricEntries} />)
 
                             }
                             else {
