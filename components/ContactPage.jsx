@@ -65,6 +65,7 @@ export default function ContactPage() {
                                 <Label htmlFor="message">Message</Label>
                                 <Textarea id="message" placeholder="Your message" name="message" />
                             </div>
+                            <Input type="hidden" name="token" value={new Date().getTime()} />
                         </div>
                     </CardContent>
                     <CardFooter className="flex justify-between">
