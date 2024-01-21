@@ -42,6 +42,9 @@ export default function ContactPage() {
                                     if (success === "true") {
                                         return <p>Your message was sent successfully, you&apos;ll receive a confirmation email shortly and I&apos;ll get back to you as soon as possible.</p>
                                     }
+                                    else if (searchParams.get('type') == "expired") {
+                                        return <p>Your token expired, wait 30 seconds and try again.</p>
+                                    }
                                     else {
                                         return <p>An error occurred while sending the email. Please contact me directly at info@fatiguediary.ch.</p>
                                     }
@@ -55,15 +58,15 @@ export default function ContactPage() {
                         <div className="grid w-full items-center gap-4">
                             <div className="flex flex-col space-y-3">
                                 <Label htmlFor="name">Name</Label>
-                                <Input id="name" placeholder="John Doe" name="name" />
+                                <Input id="name" placeholder="John Doe" defaultValue={searchParams.get('name') || ""} name="name" />
                             </div>
                             <div className="flex flex-col space-y-3">
                                 <Label htmlFor="email">Email</Label>
-                                <Input id="email" placeholder="john@doe.com" name="email" />
+                                <Input id="email" placeholder="john@doe.com" defaultValue={searchParams.get('email') || ""} name="email" />
                             </div>
                             <div className="flex flex-col space-y-3">
                                 <Label htmlFor="message">Message</Label>
-                                <Textarea id="message" placeholder="Your message" name="message" />
+                                <Textarea id="message" placeholder="Your message" defaultValue={searchParams.get('message') || ""} name="message" />
                             </div>
                             <Input type="hidden" name="token" value={new Date().getTime()} />
                         </div>
