@@ -1,23 +1,11 @@
 "use client"
 import React, { useEffect, useState } from 'react'
 import moment from 'moment';
-import formatChartData from '@/app/lib/formatChartData';
 import dynamic from "next/dynamic";
 import { getSettings } from '@/app/lib/settings';
-import ApexCharts from 'apexcharts';
 const Chart = dynamic(() => import("react-apexcharts"), { ssr: false });
 
 export default function MonthChart({ entries, startDate, endDate, range }) {
-    // const [series, setSeries] = useState([])
-
-    // useEffect(() => {
-    //     const getData = async () => {
-    //         let data = await getAllDailyEntriesInRange(startDate, endDate);
-    //         setSeries(data)
-    //     }
-    //     getData()
-    // }, [startDate, endDate])
-
     const [settings, setSettings] = useState({ "theme": 1, })
 
     useEffect(() => {
@@ -65,24 +53,30 @@ export default function MonthChart({ entries, startDate, endDate, range }) {
                     },
                 },
             },
-            xaxis: {
-                type: 'datetime',
-                min: moment(startDate).toDate().getTime(),
-                max: moment(endDate).toDate().getTime(),
-                tickAmount: 7,
-                labels: {
-                    datetimeFormatter: {
-                        year: 'YYYY',
-                        month: 'MMM \'yy',
-                        day: 'dd',
-                        hour: ''
+            xaxis:
+                range === "year" ?
+                    {
+                        type: 'category',
+                    }
+                    :
+                    {
+                        type: 'datetime',
+                        min: moment(startDate).toDate().getTime(),
+                        max: moment(endDate).toDate().getTime(),
+                        tickAmount: 7,
+                        labels: {
+                            datetimeFormatter: {
+                                year: 'YYYY',
+                                month: 'MMM \'yy',
+                                day: 'dd',
+                                hour: ''
+                            },
+                            style: {
+                                colors: 'hsl(var(--muted-foreground))',
+                            },
+                            datetimeUTC: false, // Do not convert to UTC
+                        },
                     },
-                    style: {
-                        colors: 'hsl(var(--muted-foreground))',
-                    },
-                    datetimeUTC: false, // Do not convert to UTC
-                },
-            },
             yaxis: {
                 labels: {
                     formatter: function (val) {
@@ -102,6 +96,7 @@ export default function MonthChart({ entries, startDate, endDate, range }) {
             },
             stroke: {
                 curve: 'straight',
+                width: range === "month" ? 2 : 3
             },
             // colors: ['hsl(var(--accent))'],
             tooltip: {
@@ -129,20 +124,7 @@ export default function MonthChart({ entries, startDate, endDate, range }) {
 
 
     return (
-        <>
-            <Chart options={state.options} series={state.series} type={state.type} height={320} width="100%" />
-            <div className="flex gap-2">
-                {/* {metrics.map(metric => {
-                    // console.log(metric);
-                    return (
-                        <div key={metric.id} className="bg-primary h-10 rounded border px-4 py-2 inline whitespace-nowrap cursor-pointer"
-                            onClick={() => {
-                                ApexCharts.getChartByID("chartIdXy").toggleSeries(metric.name)
-                            }}>{metric.name}</div>
-                    )
-                })} */}
-            </div>
-        </>
+        <Chart options={state.options} series={state.series} type={state.type} height={320} width="100%" />
     )
 
 }

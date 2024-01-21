@@ -12,11 +12,9 @@ import {
 } from "@/components/ui/card"
 import moment from "moment"
 import DayChart from "@/components/charts/DayChart"
-import WeekChart from "@/components/charts/WeekChart"
-import MonthChart from "@/components/charts/MonthChart"
-import YearChart from "@/components/charts/YearChart"
 import MetricsChart from "@/components/charts/MetricsChart"
 import RatedActivities from '@/components/RatedActivities'
+import EnergyCharts from '@/components/charts/EnergyCharts'
 
 export default function Dashboard({ fetchEntries, getActivities, getAllDailyEntriesInRange }) {
     const [startDate, setStartDate] = useState(moment().startOf('day').format("YYYY-MM-DD HH:mm:ss"))
@@ -26,7 +24,7 @@ export default function Dashboard({ fetchEntries, getActivities, getAllDailyEntr
     const [entries, setEntries] = useState([])
     const [activities, setActivities] = useState({})
     const [dailyEntries, setDailyEntries] = useState([])
-    
+
     async function updateEntries() {
         setEntries(await fetchEntries(startDate, endDate));
         setActivities(await getActivities(startDate, endDate));
@@ -36,6 +34,53 @@ export default function Dashboard({ fetchEntries, getActivities, getAllDailyEntr
     function updateDate(date) {
         setStartDate(moment(date).startOf(range).format("YYYY-MM-DD HH:mm:ss"))
         setEndDate(moment(date).endOf(range).format("YYYY-MM-DD HH:mm:ss"))
+    }
+
+    function monthlyAvg(entries) {
+        if (entries.length > 0) {
+
+            console.log("old:", entries)
+            let newA = entries.map(metric => {
+                let monthlyAverages = {};
+                console.log(metric)
+                metric.data.forEach(entry => {
+                    let data = entry[1]
+                    let timestamp = entry[0]
+
+                    const date = moment(timestamp);
+                    const monthName = date.format('MMMM');
+
+                    if (!monthlyAverages[monthName]) {
+                        monthlyAverages[monthName] = {
+                            total: 0,
+                            count: 0,
+                            average: 0,
+                        };
+                    }
+                    monthlyAverages[monthName].total += data;
+                    monthlyAverages[monthName].count += 1;
+                })
+                let months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+                const result = months.map(month => {
+                    let data = monthlyAverages[month] || false;
+                    let average = 0;
+
+                    if (data) {
+                        let count = data.count;
+                        let total = data.total;
+
+                        average = count > 0 ? total / count : 0;
+                    }
+
+                    return { x: month, y: average };
+                });
+
+                return { name: metric.name, data: result }
+            })
+            console.log("new:", newA)
+            return newA;
+        }
+        return [];
     }
 
     useEffect(() => {
@@ -58,21 +103,7 @@ export default function Dashboard({ fetchEntries, getActivities, getAllDailyEntr
                         <CardTitle>Energy</CardTitle>
                     </CardHeader>
                     <CardContent>
-                        {(() => {
-                            if (range === "day") {
-                                return (<DayChart entries={entries} activities={activities} startDate={startDate} endDate={endDate} range={range} />)
-                            }
-                            else if (range === "isoWeek") {
-                                return (<WeekChart entries={entries} activities={activities} startDate={startDate} endDate={endDate} range={range} />)
-                            }
-                            else if (range === "month") {
-                                return (<MonthChart entries={entries} activities={activities} startDate={startDate} endDate={endDate} range={range} />)
-                            }
-                            else if (range === "year") {
-                                return (<YearChart entries={entries} activities={activities} startDate={startDate} endDate={endDate} range={range} />)
-                            }
-                        })()}
-
+                        <EnergyCharts entries={entries} activities={activities} startDate={startDate} endDate={endDate} range={range} />
                     </CardContent>
                 </Card>
                 <Card className="w-full">
@@ -82,17 +113,11 @@ export default function Dashboard({ fetchEntries, getActivities, getAllDailyEntr
                     <CardContent>
                         {(() => {
                             if (range === "day") {
-                                return (<DayChart entries={entries} activities={activities} startDate={startDate} endDate={endDate} range={range} />)
+                                return (<div></div>)
 
                             }
-                            else if (range === "isoWeek") {
-                                return (<MetricsChart entries={dailyEntries} startDate={startDate} endDate={endDate} range={range} />)
-                            }
-                            else if (range === "month") {
-                                return (<MonthChart entries={entries} activities={activities} startDate={startDate} endDate={endDate} range={range} />)
-                            }
-                            else if (range === "year") {
-                                return (<YearChart entries={entries} activities={activities} startDate={startDate} endDate={endDate} range={range} />)
+                            else {
+                                return (<MetricsChart entries={range === "year" ? monthlyAvg(dailyEntries) : dailyEntries} startDate={startDate} endDate={endDate} range={range} />)
                             }
                         })()}
 

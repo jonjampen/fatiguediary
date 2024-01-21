@@ -31,7 +31,7 @@ Originally it was built using HTML, CSS, and JavaScript for frontend. For the ba
 # Todo
 - [ ] metrics tracking
     - [ ] sortable symptoms
-    - [ ] chart
+    - [x] chart
     - [ ] choose what metrics to display
     - [ ] custom charts
     - [ ] sort dashboard
