@@ -356,7 +356,7 @@ export async function POST(request) {
             console.log("deleted2: ", rows)
         }
         else if (type === "getMetrics") {
-            query = "SELECT * FROM metrics WHERE user_id = ?";
+            query = "SELECT * FROM metrics WHERE user_id = ? ORDER BY order_index ASC";
             params = [userid]
             rows = await executeQuery(query, params);
         }
@@ -387,6 +387,22 @@ export async function POST(request) {
                     return { ...metric, rating: 0 }
                 }
             }))
+        }
+        else if (type === "getCharts") {
+            query = "SELECT c.id AS chart_id, c.user_id, c.name AS chart_name, c.order_index AS chart_order_index, GROUP_CONCAT(cm.metric_id) AS metric_ids FROM charts AS c LEFT JOIN charts_metrics AS cm ON c.id = cm.chart_id WHERE c.user_id = ? GROUP BY c.id, c.user_id, c.name, c.order_index ORDER BY c.order_index ASC;";
+            params = [userid]
+            rows = await executeQuery(query, params);
+        }
+        else if (type === "updateChartMetrics") {
+            query = "DELETE FROM charts_metrics WHERE chart_id=? AND metric_id=?"
+            params = [body.chart_id, body.metric_id]
+            rows = await executeQuery(query, params);
+
+            if (body.metric_state) {
+                query = "INSERT INTO charts_metrics (chart_id, metric_id) VALUES (?,?);"
+                params = [body.chart_id, body.metric_id]
+                rows = await executeQuery(query, params);
+            }
         }
     }
     catch (error) {
