@@ -16,6 +16,9 @@ import MetricsChart from "@/components/charts/MetricsChart"
 import RatedActivities from '@/components/RatedActivities'
 import EnergyCharts from '@/components/charts/EnergyCharts'
 import DayMetrics from '@/components/charts/DayMetrics'
+import { Button } from '@/components/ui/button'
+import { Pencil } from 'lucide-react'
+import Link from 'next/link'
 
 export default function Dashboard({ fetchEntries, getActivities, getAllDailyEntriesInRange, getMetricEntryByDate }) {
     const [startDate, setStartDate] = useState(moment().startOf('day').format("YYYY-MM-DD HH:mm:ss"))
@@ -104,7 +107,7 @@ export default function Dashboard({ fetchEntries, getActivities, getAllDailyEntr
                 <DatePicker updateValues={setSelectedDate} selectedRange={range} />
                 <RangePicker setRange={setRange} />
             </div>
-            <div className="w-full flex flex-col items-center justify-between gap-4 mt-6">
+            <div className="w-full flex flex-col items-center justify-between gap-4 mt-6 mb-4">
                 <Card className="w-full min-h-[300px]">
                     <CardHeader className="pb-2">
                         <CardTitle>Energy</CardTitle>
@@ -131,7 +134,7 @@ export default function Dashboard({ fetchEntries, getActivities, getAllDailyEntr
                     </CardContent>
                 </Card>
                 <RatedActivities />
-
+                <Link href={"/user/dashboard/edit"}><Button><Pencil className="mr-2 h-4 w-4" />Edit Dashboard</Button></Link>
             </div>
         </>
     )
