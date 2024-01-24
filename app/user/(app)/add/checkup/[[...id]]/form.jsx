@@ -42,7 +42,6 @@ export default function DailyCheckupForm({ createCheckupEntry, getEntryByDate })
 
     async function updateMetrics() {
         let updatedMetrics = await getEntryByDate(moment(date).format("YYYY-MM-DD"))
-        console.log(updatedMetrics)
         setMetrics(updatedMetrics);
     }
 
@@ -65,7 +64,8 @@ export default function DailyCheckupForm({ createCheckupEntry, getEntryByDate })
     }, [metrics])
 
     async function handleReorder(newOrder) {
-        let updatedOrder = newOrder.map((metric, index) => ({ ...metric, order_index: index }))
+        let updatedOrder = [...newOrder, ...metrics.filter(metric => metric.hidden)]
+        updatedOrder = updatedOrder.map((metric, index) => ({ ...metric, order_index: index }))
         setMetrics(updatedOrder)
 
         await fetch(process.env.URL + "/api", {
@@ -119,9 +119,9 @@ export default function DailyCheckupForm({ createCheckupEntry, getEntryByDate })
                     {/* Show hidden activities in editing mode */}
                     {isEditing ?
                         <>
+                            <br />
                             <hr />
                             <p className='text-center'>Hidden Metrics</p>
-
                             {metrics.filter(metric => metric.hidden).map((metric, pos) => {
                                 return (
                                     <Metric key={metric.id} metric={metric} position={pos} setMetrics={setMetrics} isEditing={isEditing} updateMetrics={updateMetrics} setEntryEdited={setEntryEdited} />

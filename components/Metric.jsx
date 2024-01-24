@@ -10,7 +10,14 @@ export default function Metric({ metric, setMetrics, isEditing, position, update
     // const [draggable, setDraggable] = useState(false)
     return (
         <div className="flex justify-between items-center w-full">
-            <h4>{metric.name}</h4>
+            <div className="flex gap-2">
+                {isEditing && !metric.hidden ?
+                    <div className="draggable-icon flex items-center justify-center cursor-grab">
+                        <GripVertical className="w-4 h-4" />
+                    </div>
+                    : null}
+                <h4>{metric.name}</h4>
+            </div>
             {isEditing ?
                 <div className="flex gap-2">
                     <EditMetricDialog metric={metric} updateMetrics={updateMetrics} />
@@ -20,10 +27,6 @@ export default function Metric({ metric, setMetrics, isEditing, position, update
                     </div>
 
                     <DeleteMetricDialog metric={metric} updateMetrics={updateMetrics} />
-
-                    <div className="draggable-icon flex items-center justify-center cursor-grab">
-                        <GripVertical className="w-4 h-4" />
-                    </div>
                 </div>
                 :
                 <MetricRating
