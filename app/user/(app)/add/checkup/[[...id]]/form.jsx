@@ -14,6 +14,7 @@ import moment from "moment";
 import { Edit } from 'lucide-react'
 import Metric from '@/components/Metric';
 import AddMetricDialog from '@/components/AddMetricDialog';
+import { ReactSortable } from 'react-sortablejs';
 
 export default function DailyCheckupForm({ createCheckupEntry, getEntryByDate }) {
     const [date, setDate] = useState(moment().format("YYYY-MM-DD"));
@@ -41,6 +42,7 @@ export default function DailyCheckupForm({ createCheckupEntry, getEntryByDate })
 
     async function updateMetrics() {
         let updatedMetrics = await getEntryByDate(moment(date).format("YYYY-MM-DD"))
+        console.log(updatedMetrics)
         setMetrics(updatedMetrics);
     }
 
@@ -62,6 +64,24 @@ export default function DailyCheckupForm({ createCheckupEntry, getEntryByDate })
         }
     }, [metrics])
 
+    async function handleReorder(newOrder) {
+        let updatedOrder = newOrder.map((metric, index) => ({ ...metric, order_index: index }))
+        setMetrics(updatedOrder)
+
+        await fetch(process.env.URL + "/api", {
+            method: "POST",
+            body: JSON.stringify({
+                "type": "editMetricsOrder",
+                "metrics": updatedOrder,
+            }),
+            cache: 'no-store',
+        })
+    }
+
+    const renderedMetrics = metrics.filter(metric => !metric.hidden).map((metric, pos) => (
+        <Metric key={metric.id} metric={metric} position={pos} setMetrics={setMetrics} isEditing={isEditing} updateMetrics={updateMetrics} setEntryEdited={setEntryEdited} />
+    ));
+
     return (
         <div className="mx-4 mb-4 flex flex-col justify-center items-center" >
             <h1>Daily Metrics</h1>
@@ -78,12 +98,23 @@ export default function DailyCheckupForm({ createCheckupEntry, getEntryByDate })
                     </div>
                     <CardDescription>Keep track of your symptoms, medications, treatments, measurements, etc.</CardDescription>
                 </CardHeader>
-                <CardContent className="flex flex-col gap-3">
-                    {metrics.filter(metric => !metric.hidden).map((metric, pos) => {
-                        return (
-                            <Metric key={metric.id} metric={metric} position={pos} setMetrics={setMetrics} isEditing={isEditing} updateMetrics={updateMetrics} setEntryEdited={setEntryEdited} />
-                        )
-                    })}
+                <CardContent>
+                    {isEditing ? (
+                        <ReactSortable
+                            list={metrics.filter(metric => !metric.hidden)}
+                            setList={(newOrder) => handleReorder(newOrder)}
+                            ghostClass="ghost"
+                            chosenClass="bg-primary"
+                            handle=".draggable-icon"
+                            className="flex flex-col gap-3"
+                        >
+                            {renderedMetrics}
+                        </ReactSortable>
+                    ) : (
+                        <div className="flex flex-col gap-3">
+                            {renderedMetrics}
+                        </div>
+                    )}
 
                     {/* Show hidden activities in editing mode */}
                     {isEditing ?

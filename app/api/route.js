@@ -317,14 +317,27 @@ export async function POST(request) {
             })
         }
         else if (type === "createMetric") {
-            query = "INSERT INTO metrics (user_id, name, type) VALUES (?,?,?)";
-            params = [userid, body.name, body.metricType]
+            query = "SELECT MAX(order_index) AS highest_order_index FROM metrics WHERE user_id=?"
+            params = [userid]
+            rows = await executeQuery(query, params);
+            let max_order_index = rows[0].highest_order_index;
+            max_order_index = max_order_index + 1;
+
+            query = "INSERT INTO metrics (user_id, name, order_index, type) VALUES (?,?,?,?)";
+            params = [userid, body.name, max_order_index, body.metricType]
             rows = await executeQuery(query, params);
         }
         else if (type === "editMetric") {
             query = "UPDATE metrics SET name=? WHERE user_id = ? AND id = ?";
             params = [body.name, userid, body.metricId]
             rows = await executeQuery(query, params);
+        }
+        else if (type === "editMetricsOrder") {
+            body.metrics.forEach(async (metric) => {
+                query = "UPDATE metrics SET order_index=? WHERE user_id = ? AND id = ?";
+                params = [metric.order_index, userid, metric.id]
+                rows = await executeQuery(query, params);
+            })
         }
         else if (type === "changeMetricVisability") {
             query = "UPDATE metrics SET hidden=? WHERE user_id = ? AND id = ?";
@@ -357,7 +370,7 @@ export async function POST(request) {
             params = [userid, body.date]
             let dailyEntries = await executeQuery(query, params);
 
-            query = "SELECT * FROM metrics WHERE user_id=?";
+            query = "SELECT * FROM metrics WHERE user_id=? ORDER BY order_index ASC";
             params = [userid]
             let metrics = await executeQuery(query, params);
 

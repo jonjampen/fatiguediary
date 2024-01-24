@@ -4,8 +4,10 @@ import MetricRating from '@/components/ui/metricRating';
 import EditMetricDialog from './EditMetricDialog';
 import DeleteMetricDialog from './DeleteMetricDialog';
 import MetricVisibilitySwitch from './MetricVisibilitySwitch';
+import { GripVertical } from 'lucide-react';
 
 export default function Metric({ metric, setMetrics, isEditing, position, updateMetrics, setEntryEdited }) {
+    // const [draggable, setDraggable] = useState(false)
     return (
         <div className="flex justify-between items-center w-full">
             <h4>{metric.name}</h4>
@@ -19,6 +21,9 @@ export default function Metric({ metric, setMetrics, isEditing, position, update
 
                     <DeleteMetricDialog metric={metric} updateMetrics={updateMetrics} />
 
+                    <div className="draggable-icon flex items-center justify-center cursor-grab">
+                        <GripVertical className="w-4 h-4" />
+                    </div>
                 </div>
                 :
                 <MetricRating

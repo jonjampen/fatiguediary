@@ -167,3 +167,8 @@ input[type="range"] {
 .wrapWords {
     overflow-wrap: anywhere !important; 
 }
+
+// sortable
+.ghost {
+    background: hsl(var(--border));
+}
