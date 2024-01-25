@@ -73,8 +73,9 @@ export default async function page() {
         const dateRange = getDatesBetween(startDate, endDate);
 
         res.map((item) => {
-            const { name } = item;
-            chartData[name] = { name, data: [] };
+            const { name, metric_id } = item;
+            console.log(metric_id);
+            chartData[name] = { name, metric_id, data: [] };
         });
 
         dateRange.map((date) => {
@@ -90,12 +91,12 @@ export default async function page() {
             });
         });
         // setSeries(Object.values(chartData))
+        console.log(Object.values(chartData))
         return Object.values(chartData)
     }
 
     async function getMetricEntryByDate(date) {
         "use server"
-        console.log(date)
         let res = await fetch(process.env.URL + "/api", {
             method: "POST",
             headers: { Cookie: cookies().toString() },
@@ -110,13 +111,30 @@ export default async function page() {
         return res
     }
 
+    async function getCharts() {
+        "use server"
+
+        let res = await fetch(process.env.URL + "/api", {
+            method: "POST",
+            headers: { Cookie: cookies().toString() },
+            body: JSON.stringify({
+                "type": "getCharts",
+            }),
+            cache: 'no-store',
+        })
+        res = await res.json()
+        res = res.data
+        return res.map(chart => ({ ...chart, metric_ids: chart.metric_ids ? chart.metric_ids.split(",") : [] }))
+    }
+    let charts = await getCharts();
+
     return (
         <section className="mx-4">
             <div className="w-full flex flex-col justify-start text-left mb-4">
                 <h5 className="text-gray-600">Hi, {session ? session.user.name : ""}</h5>
                 <h1 className="text-left text-2xl">Your Dashboard</h1>
             </div>
-            <Dashboard fetchEntries={fetchEntries} getActivities={getActivities} getAllDailyEntriesInRange={getAllDailyEntriesInRange} getMetricEntryByDate={getMetricEntryByDate} />
+            <Dashboard charts={charts} fetchEntries={fetchEntries} getActivities={getActivities} getAllDailyEntriesInRange={getAllDailyEntriesInRange} getMetricEntryByDate={getMetricEntryByDate} />
         </section>
     )
 }

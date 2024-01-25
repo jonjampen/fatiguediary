@@ -32,7 +32,7 @@ export default async function editDashboard() {
         })
         res = await res.json()
         res = res.data
-        return res.map(chart => ({ ...chart, metric_ids: chart.metric_ids.split(",") }))
+        return res.map(chart => ({ ...chart, metric_ids: chart.metric_ids ? chart.metric_ids.split(",") : [] }))
     }
 
     let metrics = await getMetrics()

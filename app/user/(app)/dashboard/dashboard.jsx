@@ -20,7 +20,7 @@ import { Button } from '@/components/ui/button'
 import { Pencil } from 'lucide-react'
 import Link from 'next/link'
 
-export default function Dashboard({ fetchEntries, getActivities, getAllDailyEntriesInRange, getMetricEntryByDate }) {
+export default function Dashboard({ charts, fetchEntries, getActivities, getAllDailyEntriesInRange, getMetricEntryByDate }) {
     const [startDate, setStartDate] = useState(moment().startOf('day').format("YYYY-MM-DD HH:mm:ss"))
     const [endDate, setEndDate] = useState(moment().endOf("day").format("YYYY-MM-DD HH:mm:ss"))
     const [selectedDate, setSelectedDate] = useState(moment().startOf("day").toDate())
@@ -33,7 +33,9 @@ export default function Dashboard({ fetchEntries, getActivities, getAllDailyEntr
     async function updateEntries() {
         setEntries(await fetchEntries(startDate, endDate));
         setActivities(await getActivities(startDate, endDate));
-        setDailyEntries(await getAllDailyEntriesInRange(startDate, endDate))
+        let newAll = await getAllDailyEntriesInRange(startDate, endDate)
+        console.log(newAll);
+        setDailyEntries(newAll)
         setMetricEntries(await getMetricEntryByDate(moment(startDate).format("YYYY-MM-DD")))
     }
 
@@ -44,7 +46,7 @@ export default function Dashboard({ fetchEntries, getActivities, getAllDailyEntr
 
     function monthlyAvg(entries) {
         if (entries.length > 0) {
-
+            console.log("YEAR loading ")
             console.log("old:", entries)
             let newA = entries.map(metric => {
                 let monthlyAverages = {};
@@ -86,7 +88,7 @@ export default function Dashboard({ fetchEntries, getActivities, getAllDailyEntr
             console.log("new:", newA)
             return newA;
         }
-        return [];
+        // return [];
     }
 
     useEffect(() => {
@@ -116,7 +118,7 @@ export default function Dashboard({ fetchEntries, getActivities, getAllDailyEntr
                         <EnergyCharts entries={entries} activities={activities} startDate={startDate} endDate={endDate} range={range} />
                     </CardContent>
                 </Card>
-                <Card className={`w-full ${range === 'day' ? "min-h-0" : "min-h-[300px]"}`}>
+                {/* <Card className={`w-full ${range === 'day' ? "min-h-0" : "min-h-[300px]"}`}>
                     <CardHeader className="pb-2">
                         <CardTitle>Health Metrics</CardTitle>
                     </CardHeader>
@@ -132,7 +134,34 @@ export default function Dashboard({ fetchEntries, getActivities, getAllDailyEntr
                         })()}
 
                     </CardContent>
-                </Card>
+                </Card> */}
+
+                {charts.map(chart => {
+                    return (
+                        <Card className={`w-full ${range === 'day' ? "min-h-0" : "min-h-[300px]"}`}>
+                            <CardHeader className="pb-2">
+                                <CardTitle>{chart.chart_name}</CardTitle>
+                            </CardHeader>
+                            <CardContent className="px-0 lg:px-6 pb-0">
+                                {(() => {
+                                    if (range === "day") {
+                                        return (<DayMetrics metrics={metricEntries.filter(entry => chart.metric_ids.includes(entry.id.toString()))} /> || <p>Loading...</p>)
+
+                                    }
+                                    else {
+                                        console.log(dailyEntries)
+                                        console.log(dailyEntries.filter(entry => chart.metric_ids.includes(entry.metric_id?.toString() ?? false)))
+                                        let entriesAllowed = dailyEntries.filter(entry => chart.metric_ids.includes(entry.metric_id?.toString() ?? false))
+                                        let x = entriesAllowed.map(entry => { delete entry.metric_id; return entry })
+                                        console.log(range, x)
+                                        return (<MetricsChart entries={range === "year" ? monthlyAvg(entriesAllowed) : entriesAllowed} startDate={startDate} endDate={endDate} range={range} />)
+                                    }
+                                })()}
+
+                            </CardContent>
+                        </Card>
+                    )
+                })}
                 <RatedActivities />
                 <Link href={"/user/dashboard/edit"}><Button><Pencil className="mr-2 h-4 w-4" />Edit Dashboard</Button></Link>
             </div>

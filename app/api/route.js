@@ -404,6 +404,21 @@ export async function POST(request) {
                 rows = await executeQuery(query, params);
             }
         }
+        else if (type === "updateChartName") {
+            query = "UPDATE charts SET name=? WHERE user_id = ? AND id = ?";
+            params = [body.name, userid, body.chart_id]
+            rows = await executeQuery(query, params);
+        }
+        else if (type === "createNewChart") {
+            query = "SELECT MAX(order_index) AS highest_order_index FROM charts WHERE user_id=?"
+            params = [userid]
+            rows = await executeQuery(query, params);
+            let max = rows[0].highest_order_index;
+
+            query = "INSERT INTO charts (user_id, order_index) VALUES (?,?);"
+            params = [userid, max + 1]
+            rows = await executeQuery(query, params);
+        }
     }
     catch (error) {
         console.log("ERROR when executing API request: " + error, "type: " + type)

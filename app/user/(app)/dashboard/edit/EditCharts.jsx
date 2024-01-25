@@ -17,8 +17,6 @@ export default function EditCharts({ metrics, initialCharts, getCharts }) {
     const [charts, setCharts] = useState(initialCharts)
 
     async function editActivityInChart(chartId, metricId, checked) {
-        console.log(chartId, metricId, checked)
-
         let res = await fetch(process.env.URL + "/api", {
             method: "POST",
             body: JSON.stringify({
@@ -33,13 +31,38 @@ export default function EditCharts({ metrics, initialCharts, getCharts }) {
         let newCharts = await getCharts()
         setCharts(newCharts)
     }
+
+    async function updateChartName(chartId, name) {
+        let res = await fetch(process.env.URL + "/api", {
+            method: "POST",
+            body: JSON.stringify({
+                "type": "updateChartName",
+                "chart_id": chartId,
+                "name": name,
+            }),
+            cache: 'no-store',
+        })
+    }
+
+    async function createNewChart() {
+        let res = await fetch(process.env.URL + "/api", {
+            method: "POST",
+            body: JSON.stringify({
+                "type": "createNewChart",
+            }),
+            cache: 'no-store',
+        })
+        let newCharts = await getCharts()
+        setCharts(newCharts)
+    }
+
     return (
         <div className='flex flex-col items-center gap-4 mt-6 mb-4 mx-4'>
             {charts.map((chart) => {
                 return (
                     <Card key={chart.chart_id} className="w-full">
                         <CardHeader className="pb-4">
-                            <Input name="title" type="text" placeholder="Chart Title" defaultValue={chart.chart_name} />
+                            <Input name="title" type="text" placeholder="Chart Title" defaultValue={chart.chart_name} onChange={(e) => updateChartName(chart.chart_id, e.target.value)} />
                         </CardHeader>
                         <CardContent>
                             <ul className="flex flex-col gap-2">
@@ -51,7 +74,7 @@ export default function EditCharts({ metrics, initialCharts, getCharts }) {
                     </Card>
                 )
             })}
-            <Button><Plus className="mr-2 h-4 w-4" /> Add Chart</Button>
+            <Button onClick={createNewChart}><Plus className="mr-2 h-4 w-4" /> Add Chart</Button>
         </div>
     )
 }
