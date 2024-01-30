@@ -100,6 +100,7 @@ export default function MonthChart({ entries, startDate, endDate, range }) {
             },
             // colors: ['hsl(var(--accent))'],
             tooltip: {
+                hideEmptySeries: false,
                 theme: settings.theme === 0 ? "dark" : "light",
                 x: {
                     show: true,

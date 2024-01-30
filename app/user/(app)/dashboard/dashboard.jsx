@@ -85,10 +85,9 @@ export default function Dashboard({ charts, fetchEntries, getActivities, getAllD
 
                 return { name: metric.name, data: result }
             })
-            console.log("new:", newA)
             return newA;
         }
-        // return [];
+        return [];
     }
 
     useEffect(() => {
@@ -149,11 +148,7 @@ export default function Dashboard({ charts, fetchEntries, getActivities, getAllD
 
                                     }
                                     else {
-                                        console.log(dailyEntries)
-                                        console.log(dailyEntries.filter(entry => chart.metric_ids.includes(entry.metric_id?.toString() ?? false)))
                                         let entriesAllowed = dailyEntries.filter(entry => chart.metric_ids.includes(entry.metric_id?.toString() ?? false))
-                                        let x = entriesAllowed.map(entry => { delete entry.metric_id; return entry })
-                                        console.log(range, x)
                                         return (<MetricsChart entries={range === "year" ? monthlyAvg(entriesAllowed) : entriesAllowed} startDate={startDate} endDate={endDate} range={range} />)
                                     }
                                 })()}
