@@ -172,3 +172,27 @@ input[type="range"] {
 .ghost {
     background: hsl(var(--border));
 }
+
+.customScrollBar {
+    /* width */
+    &::-webkit-scrollbar {
+        width: 8px;
+    }
+    
+    /* Track */
+    &::-webkit-scrollbar-track {
+        background: hsl(var(--border));
+        border-radius: 4px;
+    }
+
+    /* Handle */
+    &::-webkit-scrollbar-thumb {
+        background: hsl(var(--foreground));
+        border-radius: 4px;
+    }
+
+    /* Handle on hover */
+    &::-webkit-scrollbar-thumb:hover {
+        background: hsl(var(--muted-foreground));
+    }
+}

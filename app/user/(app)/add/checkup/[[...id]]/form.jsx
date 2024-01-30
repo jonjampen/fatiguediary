@@ -16,7 +16,7 @@ import Metric from '@/components/Metric';
 import AddMetricDialog from '@/components/AddMetricDialog';
 import { ReactSortable } from 'react-sortablejs';
 
-export default function DailyCheckupForm({ createCheckupEntry, getEntryByDate }) {
+export default function DailyCheckupForm({ createCheckupEntry, getEntryByDate, charts }) {
     const [date, setDate] = useState(moment().format("YYYY-MM-DD"));
     const [metrics, setMetrics] = useState([]);
     const [saveMessage, setSaveMessage] = useState("");
@@ -79,7 +79,7 @@ export default function DailyCheckupForm({ createCheckupEntry, getEntryByDate })
     }
 
     const renderedMetrics = metrics.filter(metric => !metric.hidden).map((metric, pos) => (
-        <Metric key={metric.id} metric={metric} position={pos} setMetrics={setMetrics} isEditing={isEditing} updateMetrics={updateMetrics} setEntryEdited={setEntryEdited} />
+        <Metric key={metric.id} metric={metric} position={pos} setMetrics={setMetrics} isEditing={isEditing} updateMetrics={updateMetrics} seEntryEdited={setEntryEdited} />
     ));
 
     return (
@@ -132,7 +132,7 @@ export default function DailyCheckupForm({ createCheckupEntry, getEntryByDate })
                         : null
                     }
 
-                    <AddMetricDialog updateMetrics={updateMetrics} />
+                    <AddMetricDialog updateMetrics={updateMetrics} charts={charts} />
                 </CardContent>
             </Card>
         </div >

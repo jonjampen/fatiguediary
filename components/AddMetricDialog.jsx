@@ -1,5 +1,5 @@
 "use client"
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import {
     Dialog,
     DialogContent,
@@ -22,9 +22,10 @@ import { Button } from '@/components/ui/button';
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 
-export default function AddMetricDialog({ updateMetrics }) {
+export default function AddMetricDialog({ updateMetrics, charts }) {
     const [newMetric, setNewMetric] = useState({});
     const [dialogError, setDialogError] = useState("");
+    const [allCharts, setAllCharts] = useState(charts);
 
     async function addMetric() {
         if (!newMetric.name || !newMetric.type) {
@@ -38,6 +39,7 @@ export default function AddMetricDialog({ updateMetrics }) {
                 "type": "createMetric",
                 "name": newMetric.name,
                 "metricType": newMetric.type,
+                "addToCharts": allCharts,
             }),
             cache: 'no-store',
         })
@@ -45,6 +47,7 @@ export default function AddMetricDialog({ updateMetrics }) {
         setNewMetric({})
         setDialogError("")
         dialogClose();
+        setAllCharts(charts)
         updateMetrics();
     }
 
@@ -96,6 +99,22 @@ export default function AddMetricDialog({ updateMetrics }) {
 
                         </div>
                     </div>
+                    <Label>Show in charts:</Label>
+                    <div className="max-h-24 overflow-y-scroll customScrollBar flex flex-col gap-1">
+                        {charts.map((chart, i) => {
+                            return (
+                                <div className="inline-flex items-center gap-3">
+                                    <Input type="checkbox" className="h-4 w-4" checked={allCharts[i]?.checked ?? false} onChange={(e) => setAllCharts(prev => {
+                                        let newCharts = [...prev]
+                                        newCharts[i].checked = e.target.checked
+                                        return newCharts
+                                    })} /> {chart.name}
+                                </div>
+                            )
+                        })
+                        }
+                    </div>
+
                     <DialogFooter className="flex flex-row justify-between">
                         <DialogClose asChild>
                             <Button variant="outline">Cancel</Button>

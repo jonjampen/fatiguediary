@@ -37,9 +37,26 @@ export default async function DailyCheckup() {
         return res
     }
 
+    async function getCharts(date) {
+        "use server"
+
+        let res = await fetch(process.env.URL + "/api", {
+            method: "POST",
+            headers: { Cookie: cookies().toString() },
+            body: JSON.stringify({
+                "type": "getChartsOnly",
+            }),
+            cache: 'no-store',
+        })
+        res = await res.json()
+        res = res.data
+        return res
+    }
+    let charts = await getCharts();
+
     return (
         <section>
-            <DailyCheckupForm createCheckupEntry={createCheckupEntry} getEntryByDate={getEntryByDate} />
+            <DailyCheckupForm createCheckupEntry={createCheckupEntry} getEntryByDate={getEntryByDate} charts={charts} />
         </section>
     )
 }
