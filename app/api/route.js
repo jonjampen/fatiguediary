@@ -419,6 +419,15 @@ export async function POST(request) {
             params = [userid, max + 1]
             rows = await executeQuery(query, params);
         }
+        else if (type === "deleteChart") {
+            query = "DELETE FROM charts WHERE id=?"
+            params = [body.chart_id]
+            rows = await executeQuery(query, params);
+
+            query = "DELETE FROM charts_metrics WHERE chart_id=?"
+            params = [body.chart_id]
+            rows = await executeQuery(query, params);
+        }
     }
     catch (error) {
         console.log("ERROR when executing API request: " + error, "type: " + type)

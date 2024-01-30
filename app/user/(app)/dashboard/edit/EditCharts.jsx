@@ -12,6 +12,7 @@ import {
 } from "@/components/ui/card"
 import MetricsInChartSelector from '@/components/MetricsInChartSelector'
 import { Input } from "@/components/ui/input"
+import DeleteChartDialog from '@/components/DeleteChartDialog'
 
 export default function EditCharts({ metrics, initialCharts, getCharts }) {
     const [charts, setCharts] = useState(initialCharts)
@@ -61,8 +62,12 @@ export default function EditCharts({ metrics, initialCharts, getCharts }) {
             {charts.map((chart) => {
                 return (
                     <Card key={chart.chart_id} className="w-full">
-                        <CardHeader className="pb-4">
+                        <CardHeader className="pb-4 flex flex-row justify-between items-center gap-2 w-full">
                             <Input name="title" type="text" placeholder="Chart Title" defaultValue={chart.chart_name} onChange={(e) => updateChartName(chart.chart_id, e.target.value)} />
+                            <DeleteChartDialog className="inline-block flex-shrink-0" chart={chart} updateCharts={async () => {
+                                let newCharts = await getCharts()
+                                setCharts(newCharts)
+                            }} />
                         </CardHeader>
                         <CardContent>
                             <ul className="flex flex-col gap-2">
