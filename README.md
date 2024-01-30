@@ -33,7 +33,8 @@ Originally (as my Matura Project), Fatigue Diary was built using HTML, CSS, and 
     - [x] sortable symptoms
     - [x] chart
     - [ ] custom charts -> cache!!!
-    - [ ] delete charts
+    - [x] delete charts
+    - [x] select in which chart to display newly created metric
     - [ ] sort dashboard
     - [ ] clean code
 - [ ] reminders

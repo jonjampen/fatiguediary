@@ -79,7 +79,7 @@ export default function DailyCheckupForm({ createCheckupEntry, getEntryByDate, c
     }
 
     const renderedMetrics = metrics.filter(metric => !metric.hidden).map((metric, pos) => (
-        <Metric key={metric.id} metric={metric} position={pos} setMetrics={setMetrics} isEditing={isEditing} updateMetrics={updateMetrics} seEntryEdited={setEntryEdited} />
+        <Metric key={metric.id} metric={metric} position={pos} setMetrics={setMetrics} isEditing={isEditing} updateMetrics={updateMetrics} setEntryEdited={setEntryEdited} />
     ));
 
     return (
