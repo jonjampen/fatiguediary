@@ -38,6 +38,7 @@ export default function AddMetricDialog({ updateMetrics, charts }) {
             body: JSON.stringify({
                 "type": "createMetric",
                 "name": newMetric.name,
+                "color": newMetric?.color ?? "#43B9F4",
                 "metricType": newMetric.type,
                 "addToCharts": allCharts,
             }),
@@ -78,7 +79,13 @@ export default function AddMetricDialog({ updateMetrics, charts }) {
                     </DialogHeader>
                     <div className="flex gap-4 py-4">
                         <div className="flex flex-col items-start gap-4">
-                            <Label htmlFor="metricNAme">
+                            <Label htmlFor="color">
+                                Color
+                            </Label>
+                            <input type="color" name="color" value={newMetric?.color ?? '#43B9F4'} className="w-10 h-10 rounded-full" onChange={handleInputChange} />
+                        </div>
+                        <div className="flex flex-col items-start gap-4">
+                            <Label htmlFor="metricName">
                                 Metric name
                             </Label>
                             <Input name="name" placeholder="Headache" value={newMetric?.name ?? ''} className="col-span-3" onChange={handleInputChange} />

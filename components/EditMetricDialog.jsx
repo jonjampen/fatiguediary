@@ -30,6 +30,7 @@ export default function EditMetricDialog({ metric, updateMetrics }) {
             body: JSON.stringify({
                 "type": "editMetric",
                 "name": newMetric.name,
+                "color": newMetric.color,
                 "metricId": newMetric.id,
             }),
             cache: 'no-store',
@@ -64,6 +65,12 @@ export default function EditMetricDialog({ metric, updateMetrics }) {
                     {dialogError ? <DialogDescription className="text-left text-destructive">{dialogError}</DialogDescription> : null}
                 </DialogHeader>
                 <div className="flex gap-4 py-4">
+                    <div className="flex flex-col items-start gap-4">
+                        <Label htmlFor="color">
+                            Color
+                        </Label>
+                        <input type="color" name="color" defaultValue={metric.color} className="w-10 h-10 rounded-full" onChange={handleInputChange} />
+                    </div>
                     <div className="flex flex-col items-start gap-4">
                         <Label htmlFor="metricNAme">
                             Metric name

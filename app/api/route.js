@@ -323,8 +323,8 @@ export async function POST(request) {
             let max_order_index = rows[0].highest_order_index;
             max_order_index = max_order_index + 1;
 
-            query = "INSERT INTO metrics (user_id, name, order_index, type) VALUES (?,?,?,?)";
-            params = [userid, body.name, max_order_index, body.metricType]
+            query = "INSERT INTO metrics (user_id, name, color, order_index, type) VALUES (?,?,?,?)";
+            params = [userid, body.name, body.color, max_order_index, body.metricType]
             rows = await executeQuery(query, params);
 
             let insertedMetricId = rows.insertId
@@ -338,8 +338,8 @@ export async function POST(request) {
             })
         }
         else if (type === "editMetric") {
-            query = "UPDATE metrics SET name=? WHERE user_id = ? AND id = ?";
-            params = [body.name, userid, body.metricId]
+            query = "UPDATE metrics SET name=?, color=? WHERE user_id = ? AND id = ?";
+            params = [body.name, body.color, userid, body.metricId]
             rows = await executeQuery(query, params);
         }
         else if (type === "editMetricsOrder") {
