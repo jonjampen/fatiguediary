@@ -323,7 +323,7 @@ export async function POST(request) {
             let max_order_index = rows[0].highest_order_index;
             max_order_index = max_order_index + 1;
 
-            query = "INSERT INTO metrics (user_id, name, color, order_index, type) VALUES (?,?,?,?)";
+            query = "INSERT INTO metrics (user_id, name, color, order_index, type) VALUES (?,?,?,?,?)";
             params = [userid, body.name, body.color, max_order_index, body.metricType]
             rows = await executeQuery(query, params);
 
