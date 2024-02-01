@@ -277,6 +277,206 @@ export async function POST(request) {
             params = [userid]
             rows = await executeQuery(query, params);
         }
+        else if (type === "createCheckupEntry") {
+            // check if daily entry already exists
+            query = 'SELECT * from `dailyentry` WHERE date=?';
+            params = [body.date]
+            rows = await executeQuery(query, params);
+
+            let checkupid;
+
+            if (rows.length == 0) {
+                query = "INSERT INTO dailyentry (user_id, date) VALUES (?,?)";
+                params = [userid, body.date]
+                rows = await executeQuery(query, params);
+                checkupid = rows.insertId
+            }
+            else {
+                checkupid = rows[0].id
+            }
+
+            body.metrics.map(async (metric) => {
+                // check if metric already added for that day
+                query = 'SELECT * from `dailyentry_metrics` WHERE metric_id=? AND dailyentry_id=?';
+                params = [metric.id, checkupid]
+
+                rows = await executeQuery(query, params);
+
+                if (rows.length > 0) {
+                    // if yes, update
+                    query = 'UPDATE `dailyentry_metrics` SET rating = ? WHERE `id` = ?';
+                    params = [metric.rating, rows[0].id]
+                    rows = await executeQuery(query, params);
+                }
+                else {
+                    // if no, add
+                    query = 'INSERT INTO `dailyentry_metrics` (dailyentry_id, metric_id, rating) VALUES (?, ?, ?)';
+                    params = [checkupid, metric.id, metric.rating]
+                    rows = await executeQuery(query, params);
+                }
+            })
+        }
+        else if (type === "createMetric") {
+            query = "SELECT MAX(order_index) AS highest_order_index FROM metrics WHERE user_id=?"
+            params = [userid]
+            rows = await executeQuery(query, params);
+            let max_order_index = rows[0].highest_order_index;
+            max_order_index = max_order_index + 1;
+
+            query = "INSERT INTO metrics (user_id, name, color, order_index, type) VALUES (?,?,?,?)";
+            params = [userid, body.name, body.color, max_order_index, body.metricType]
+            rows = await executeQuery(query, params);
+
+            let insertedMetricId = rows.insertId
+
+            body.addToCharts.map(async (chart) => {
+                if (chart.checked) {
+                    query = "INSERT INTO charts_metrics (chart_id, metric_id) VALUES (?,?)";
+                    params = [chart.id, insertedMetricId]
+                    rows = await executeQuery(query, params);
+                }
+            })
+        }
+        else if (type === "editMetric") {
+            query = "UPDATE metrics SET name=?, color=? WHERE user_id = ? AND id = ?";
+            params = [body.name, body.color, userid, body.metricId]
+            rows = await executeQuery(query, params);
+        }
+        else if (type === "editMetricsOrder") {
+            body.metrics.forEach(async (metric) => {
+                query = "UPDATE metrics SET order_index=? WHERE user_id = ? AND id = ?";
+                params = [metric.order_index, userid, metric.id]
+                rows = await executeQuery(query, params);
+            })
+        }
+        else if (type === "changeMetricVisability") {
+            query = "UPDATE metrics SET hidden=? WHERE user_id = ? AND id = ?";
+            params = [body.visibility, userid, body.metricId]
+            rows = await executeQuery(query, params);
+        }
+        else if (type === "deleteMetric") {
+            query = "DELETE FROM metrics WHERE id = ?";
+            params = [body.metricId]
+            rows = await executeQuery(query, params);
+            console.log("deleted: ", rows)
+
+            query = "DELETE FROM dailyentry_metrics WHERE metric_id = ?";
+            params = [body.metricId]
+            rows = await executeQuery(query, params);
+            console.log("deleted2: ", rows)
+        }
+        else if (type === "getMetrics") {
+            query = "SELECT * FROM metrics WHERE user_id = ? ORDER BY order_index ASC";
+            params = [userid]
+            rows = await executeQuery(query, params);
+        }
+        else if (type === "getDailyEntriesInRange") {
+            query = "SELECT dailyentry_metrics.id AS id, metrics.id AS metric_id, metrics.name, metrics.color, dailyentry_metrics.rating, dailyentry.date FROM dailyentry JOIN dailyentry_metrics ON dailyentry.id = dailyentry_metrics.dailyentry_id JOIN metrics ON dailyentry_metrics.metric_id = metrics.id WHERE dailyentry.user_id = ? AND (dailyentry.date BETWEEN ? AND ?) ORDER BY dailyentry.date;";
+            params = [userid, body.startDate, body.endDate]
+            rows = await executeQuery(query, params);
+        }
+        else if (type === "getDailyEntry") {
+            query = "SELECT * FROM dailyentry WHERE user_id=? and date=?";
+            params = [userid, body.date]
+            let dailyEntries = await executeQuery(query, params);
+
+            query = "SELECT * FROM metrics WHERE user_id=? ORDER BY order_index ASC";
+            params = [userid]
+            let metrics = await executeQuery(query, params);
+
+            rows = await Promise.all(metrics.map(async (metric) => {
+                // entry exists
+                if (dailyEntries[0] && dailyEntries[0].id) {
+                    query = "SELECT * FROM dailyentry_metrics WHERE dailyentry_id=? AND metric_id=?";
+                    params = [dailyEntries[0].id, metric.id]
+                    let metricEntry = await executeQuery(query, params);
+                    let rating = metricEntry[0]?.rating ?? 0;
+                    return { ...metric, rating: rating }
+                }
+                else {
+                    return { ...metric, rating: 0 }
+                }
+            }))
+        }
+        else if (type === "getCharts") {
+            query = "SELECT c.id AS chart_id, c.user_id, c.name AS chart_name, c.order_index AS chart_order_index, GROUP_CONCAT(cm.metric_id) AS metric_ids FROM charts AS c LEFT JOIN charts_metrics AS cm ON c.id = cm.chart_id WHERE c.user_id = ? GROUP BY c.id, c.user_id, c.name, c.order_index ORDER BY c.order_index ASC;";
+            params = [userid]
+            rows = await executeQuery(query, params);
+        }
+        else if (type === "getChartsOnly") {
+            query = "SELECT * FROM charts WHERE user_id=? ORDER BY order_index ASC";
+            params = [userid]
+            rows = await executeQuery(query, params);
+        }
+        else if (type === "updateChartMetrics") {
+            query = "DELETE FROM charts_metrics WHERE chart_id=? AND metric_id=?"
+            params = [body.chart_id, body.metric_id]
+            rows = await executeQuery(query, params);
+
+            if (body.metric_state) {
+                query = "INSERT INTO charts_metrics (chart_id, metric_id) VALUES (?,?);"
+                params = [body.chart_id, body.metric_id]
+                rows = await executeQuery(query, params);
+            }
+        }
+        else if (type === "updateChartName") {
+            query = "UPDATE charts SET name=? WHERE user_id = ? AND id = ?";
+            params = [body.name, userid, body.chart_id]
+            rows = await executeQuery(query, params);
+        }
+        else if (type === "updateChartPos") {
+            query = "SELECT `order_index` FROM charts WHERE id = ?";
+            params = [body.chart_id]
+            rows = await executeQuery(query, params);
+            let order_move = rows[0].order_index
+
+            query = "SELECT MAX(order_index) AS max_order_index FROM charts WHERE user_id = ?";
+            params = [userid]
+            rows = await executeQuery(query, params);
+            let max_order = rows[0].max_order_index
+
+            let valid = true;
+
+            if (body.direction === "up") {
+                valid = order_move > 0;
+                query = "UPDATE charts SET `order_index` = `order_index` - 1 WHERE id = ?";
+            }
+            else {
+                valid = order_move < max_order;
+                query = "UPDATE charts SET `order_index` = `order_index` + 1 WHERE id = ?";
+            }
+            params = [body.chart_id]
+            rows = valid ? await executeQuery(query, params) : undefined;
+
+
+            if (body.direction === "up") {
+                query = "UPDATE charts SET `order_index` = `order_index` + 1 WHERE `order_index` = ? - 1 AND id != ? AND user_id=?";
+            }
+            else {
+                query = "UPDATE charts SET `order_index` = `order_index` - 1 WHERE `order_index` = ? + 1 AND id != ? AND user_id=?";
+            }
+            params = [order_move, body.chart_id, userid]
+            rows = valid ? await executeQuery(query, params) : undefined;
+        }
+        else if (type === "createNewChart") {
+            query = "SELECT MAX(order_index) AS highest_order_index FROM charts WHERE user_id=?"
+            params = [userid]
+            rows = await executeQuery(query, params);
+            let max = rows[0].highest_order_index;
+
+            query = "INSERT INTO charts (user_id, order_index) VALUES (?,?);"
+            params = [userid, max + 1]
+            rows = await executeQuery(query, params);
+        }
+        else if (type === "deleteChart") {
+            query = "DELETE FROM charts WHERE id=?"
+            params = [body.chart_id]
+            rows = await executeQuery(query, params);
+
+            query = "DELETE FROM charts_metrics WHERE chart_id=?"
+            params = [body.chart_id]
+            rows = await executeQuery(query, params);
+        }
     }
     catch (error) {
         console.log("ERROR when executing API request: " + error, "type: " + type)

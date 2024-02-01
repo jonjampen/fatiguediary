@@ -24,4 +24,22 @@ Libraries:
 - MySQL2
 - next-pwa
 
-`Originally it was built using HTML, CSS, and JavaScript for frontend. For the backend I used PHP and a MySQL database. (Libraries: Shepherd, Toastify, Apexcharts)`
+
+Originally (as my Matura Project), Fatigue Diary was built using HTML, CSS, and JavaScript for frontend. For the backend I used PHP and a MySQL database. (Libraries: Shepherd, Toastify, Apexcharts)
+
+
+# Todo
+- metrics tracking
+    - [x] sortable symptoms
+    - [x] chart
+    - [ ] custom charts
+    - [x] delete charts
+    - [x] select in which chart to display newly created metric
+    - [x] custom metric color
+    - [ ] cache!!!
+    - [x] sort dashboard
+    - [ ] clean code
+- Bug fixes
+    - [ ] Date selector not opening on current date
+- [ ] reminders
+- [ ] account management

@@ -190,9 +190,6 @@ export default function AddForm({ startActivities, fetchActivities, id }) {
                             <DialogContent>
                                 <DialogHeader>
                                     <DialogTitle className="text-left">Create new Activity</DialogTitle>
-                                    <DialogDescription className="text-left">
-                                        Once created, activities cannot be deleted. However, they can be hidden or edited from the settings.
-                                    </DialogDescription>
                                 </DialogHeader>
                                 <div className="grid gap-4 py-4">
                                     <div className="flex flex-col items-start gap-4">
