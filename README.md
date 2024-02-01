@@ -36,7 +36,7 @@ Originally (as my Matura Project), Fatigue Diary was built using HTML, CSS, and 
     - [x] delete charts
     - [x] select in which chart to display newly created metric
     - [ ] sort dashboard
-    - [ ] custom metric color
+    - [x] custom metric color
     - [ ] clean code
 - [ ] reminders
 - [ ] account management

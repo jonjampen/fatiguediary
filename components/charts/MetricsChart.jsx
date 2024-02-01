@@ -98,7 +98,7 @@ export default function MonthChart({ entries, startDate, endDate, range }) {
                 curve: 'straight',
                 width: range === "month" ? 2 : 3
             },
-            // colors: ['hsl(var(--accent))'],
+            colors: entries.map(entry => entry.color),
             tooltip: {
                 hideEmptySeries: false,
                 theme: settings.theme === 0 ? "dark" : "light",
@@ -123,6 +123,7 @@ export default function MonthChart({ entries, startDate, endDate, range }) {
         type: "line",
     }
 
+    console.log(entries.map(entry => entry.color))
 
     return (
         <Chart options={state.options} series={state.series} type={state.type} height={280} width="100%" />

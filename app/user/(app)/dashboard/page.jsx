@@ -73,9 +73,9 @@ export default async function page() {
         const dateRange = getDatesBetween(startDate, endDate);
 
         res.map((item) => {
-            const { name, metric_id } = item;
+            const { name, color, metric_id } = item;
             console.log(metric_id);
-            chartData[name] = { name, metric_id, data: [] };
+            chartData[name] = { name, color, metric_id, data: [] };
         });
 
         dateRange.map((date) => {
