@@ -137,7 +137,7 @@ export default function Dashboard({ charts, fetchEntries, getActivities, getAllD
 
                 {charts.map(chart => {
                     return (
-                        <Card className={`w-full ${range === 'day' ? "min-h-0" : "min-h-[300px]"}`}>
+                        <Card key={chart.chart_id} className={`w-full ${range === 'day' ? "min-h-0" : "min-h-[300px]"}`}>
                             <CardHeader className="pb-2">
                                 <CardTitle>{chart.chart_name}</CardTitle>
                             </CardHeader>

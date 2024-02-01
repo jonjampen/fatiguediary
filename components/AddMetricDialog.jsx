@@ -110,7 +110,7 @@ export default function AddMetricDialog({ updateMetrics, charts }) {
                     <div className="max-h-24 overflow-y-scroll customScrollBar flex flex-col gap-1">
                         {charts.map((chart, i) => {
                             return (
-                                <div className="inline-flex items-center gap-3">
+                                <div key={chart.chart_id} className="inline-flex items-center gap-3">
                                     <Input type="checkbox" className="h-4 w-4" checked={allCharts[i]?.checked ?? false} onChange={(e) => setAllCharts(prev => {
                                         let newCharts = [...prev]
                                         newCharts[i].checked = e.target.checked
