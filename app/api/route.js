@@ -404,7 +404,7 @@ export async function POST(request) {
             rows = await executeQuery(query, params);
         }
         else if (type === "getChartsOnly") {
-            query = "SELECT * FROM charts WHERE user_id=?";
+            query = "SELECT * FROM charts WHERE user_id=? ORDER BY order_index ASC";
             params = [userid]
             rows = await executeQuery(query, params);
         }
@@ -423,6 +423,40 @@ export async function POST(request) {
             query = "UPDATE charts SET name=? WHERE user_id = ? AND id = ?";
             params = [body.name, userid, body.chart_id]
             rows = await executeQuery(query, params);
+        }
+        else if (type === "updateChartPos") {
+            query = "SELECT `order_index` FROM charts WHERE id = ?";
+            params = [body.chart_id]
+            rows = await executeQuery(query, params);
+            let order_move = rows[0].order_index
+
+            query = "SELECT MAX(order_index) AS max_order_index FROM charts WHERE user_id = ?";
+            params = [userid]
+            rows = await executeQuery(query, params);
+            let max_order = rows[0].max_order_index
+
+            let valid = true;
+
+            if (body.direction === "up") {
+                valid = order_move > 0;
+                query = "UPDATE charts SET `order_index` = `order_index` - 1 WHERE id = ?";
+            }
+            else {
+                valid = order_move < max_order;
+                query = "UPDATE charts SET `order_index` = `order_index` + 1 WHERE id = ?";
+            }
+            params = [body.chart_id]
+            rows = valid ? await executeQuery(query, params) : undefined;
+
+
+            if (body.direction === "up") {
+                query = "UPDATE charts SET `order_index` = `order_index` + 1 WHERE `order_index` = ? - 1 AND id != ? AND user_id=?";
+            }
+            else {
+                query = "UPDATE charts SET `order_index` = `order_index` - 1 WHERE `order_index` = ? + 1 AND id != ? AND user_id=?";
+            }
+            params = [order_move, body.chart_id, userid]
+            rows = valid ? await executeQuery(query, params) : undefined;
         }
         else if (type === "createNewChart") {
             query = "SELECT MAX(order_index) AS highest_order_index FROM charts WHERE user_id=?"

@@ -29,14 +29,17 @@ Originally (as my Matura Project), Fatigue Diary was built using HTML, CSS, and 
 
 
 # Todo
-- [ ] metrics tracking
+- metrics tracking
     - [x] sortable symptoms
     - [x] chart
-    - [ ] custom charts -> cache!!!
+    - [ ] custom charts
     - [x] delete charts
     - [x] select in which chart to display newly created metric
-    - [ ] sort dashboard
     - [x] custom metric color
+    - [ ] cache!!!
+    - [x] sort dashboard
     - [ ] clean code
+- Bug fixes
+    - [ ] Date selector not opening on current date
 - [ ] reminders
 - [ ] account management
