@@ -2,6 +2,7 @@ import { NextResponse } from "next/server";
 import mysql from "mysql2/promise"
 import { getServerSession } from 'next-auth';
 import { options } from '@/app/api/auth/[...nextauth]/options';
+import { revalidateTag } from 'next/cache'
 const bcrypt = require('bcrypt');
 const crypto = require('crypto');
 
@@ -418,11 +419,15 @@ export async function POST(request) {
                 params = [body.chart_id, body.metric_id]
                 rows = await executeQuery(query, params);
             }
+
+            revalidateTag('charts');
         }
         else if (type === "updateChartName") {
             query = "UPDATE charts SET name=? WHERE user_id = ? AND id = ?";
             params = [body.name, userid, body.chart_id]
             rows = await executeQuery(query, params);
+
+            revalidateTag('charts');
         }
         else if (type === "updateChartPos") {
             query = "SELECT `order_index` FROM charts WHERE id = ?";
@@ -461,6 +466,8 @@ export async function POST(request) {
                 params = [chart1.pos, chart2.id]
                 rows = await executeQuery(query, params);
             }
+
+            revalidateTag('charts');
         }
         else if (type === "createNewChart") {
             query = "SELECT MAX(order_index) AS highest_order_index FROM charts WHERE user_id=?"
@@ -472,6 +479,8 @@ export async function POST(request) {
             query = "INSERT INTO charts (user_id, order_index) VALUES (?,?);"
             params = [userid, max + 1]
             rows = await executeQuery(query, params);
+
+            revalidateTag('charts');
         }
         else if (type === "deleteChart") {
             query = "DELETE FROM charts WHERE id=?"
@@ -481,6 +490,8 @@ export async function POST(request) {
             query = "DELETE FROM charts_metrics WHERE chart_id=?"
             params = [body.chart_id]
             rows = await executeQuery(query, params);
+
+            revalidateTag('charts');
         }
     }
     catch (error) {

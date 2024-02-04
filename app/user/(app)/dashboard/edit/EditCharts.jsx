@@ -58,8 +58,6 @@ export default function EditCharts({ metrics, initialCharts, getCharts }) {
     }
 
     async function moveChart(id, pos, direction) {
-        if ((pos === 0 && direction === "up") || (pos === charts.length - 1 && direction === "down")) return
-
         let res = await fetch(process.env.URL + "/api", {
             method: "POST",
             body: JSON.stringify({
@@ -75,32 +73,38 @@ export default function EditCharts({ metrics, initialCharts, getCharts }) {
     }
 
     return (
-        <div className='flex flex-col items-center gap-4 mt-6 mb-4 mx-4'>
-            {charts.map((chart, i) => {
-                return (
-                    <Card key={chart.chart_id} className="w-full">
-                        <CardHeader className="pb-4 flex flex-row justify-between items-center gap-2 w-full">
-                            <div className="flex flex-col">
-                                <Button size="icon" variant="ghost" onClick={() => moveChart(chart.chart_id, chart.chart_order_index, "up")} className="h-4 w-4 hover:bg-transparent"><ChevronUp className={i === 0 ? "text-border cursor-default" : "text-foreground cursor-pointer"} /></Button>
-                                <Button size="icon" variant="ghost" onClick={() => moveChart(chart.chart_id, chart.chart_order_index, "down")} className="h-4 w-4 hover:bg-transparent"><ChevronDown className={i === charts.length - 1 ? "text-border cursor-default" : "text-foreground cursor-pointer"} /></Button>
-                            </div>
-                            <Input name="title" type="text" placeholder="Chart Title" defaultValue={chart.chart_name} onChange={(e) => updateChartName(chart.chart_id, e.target.value)} />
-                            <DeleteChartDialog className="inline-block flex-shrink-0" chart={chart} updateCharts={async () => {
-                                let newCharts = await getCharts()
-                                setCharts(newCharts)
-                            }} />
-                        </CardHeader>
-                        <CardContent>
-                            <ul className="flex flex-col gap-2">
-                                {metrics.map(metric => {
-                                    return <MetricsInChartSelector key={metric.id} chartId={chart.chart_id} metric={metric} checked={chart.metric_ids.includes(metric.id.toString())} onChange={editActivityInChart} />
-                                })}
-                            </ul>
-                        </CardContent>
-                    </Card>
-                )
-            })}
-            <Button onClick={createNewChart}><Plus className="mr-2 h-4 w-4" /> Add Chart</Button>
-        </div>
+        <>
+            <div className="flex flex-col items-center gap-2">
+                <h1>Edit your Dashboard</h1>
+                <Button type="button" onClick={() => window.location.href = "/user/dashboard"} className="min-w-0 flex-shrink">Apply Changes</Button>
+            </div>
+            <div className='flex flex-col items-center gap-4 mt-6 mb-4 mx-4'>
+                {charts.map((chart, i) => {
+                    return (
+                        <Card key={chart.chart_id} className="w-full">
+                            <CardHeader className="pb-4 flex flex-row justify-between items-center gap-2 w-full">
+                                <div className="flex flex-col">
+                                    <Button size="icon" variant="ghost" onClick={() => moveChart(chart.chart_id, chart.chart_order_index, "up")} className="h-4 w-4 hover:bg-transparent"><ChevronUp className={i === 0 ? "text-border cursor-default" : "text-foreground cursor-pointer"} /></Button>
+                                    <Button size="icon" variant="ghost" onClick={() => moveChart(chart.chart_id, chart.chart_order_index, "down")} className="h-4 w-4 hover:bg-transparent"><ChevronDown className={i === charts.length - 1 ? "text-border cursor-default" : "text-foreground cursor-pointer"} /></Button>
+                                </div>
+                                <Input name="title" type="text" placeholder="Chart Title" defaultValue={chart.chart_name} onChange={(e) => updateChartName(chart.chart_id, e.target.value)} />
+                                <DeleteChartDialog className="inline-block flex-shrink-0" chart={chart} updateCharts={async () => {
+                                    let newCharts = await getCharts()
+                                    setCharts(newCharts)
+                                }} />
+                            </CardHeader>
+                            <CardContent>
+                                <ul className="flex flex-col gap-2">
+                                    {metrics.map(metric => {
+                                        return <MetricsInChartSelector key={metric.id} chartId={chart.chart_id} metric={metric} checked={chart.metric_ids.includes(metric.id.toString())} onChange={editActivityInChart} />
+                                    })}
+                                </ul>
+                            </CardContent>
+                        </Card>
+                    )
+                })}
+                <Button onClick={createNewChart} variant="outline"><Plus className="mr-2 h-4 w-4" /> Add Chart</Button>
+            </div>
+        </>
     )
 }
