@@ -28,6 +28,7 @@ export default async function editDashboard() {
             body: JSON.stringify({
                 "type": "getCharts",
             }),
+            next: { tags: ['charts'] },
             cache: 'no-store',
         })
         res = await res.json()
@@ -45,7 +46,6 @@ export default async function editDashboard() {
     return (
         <div className="flex flex-col items-center justify-start">
             <div className="max-w-[500px] w-full">
-                <h1>Edit your Dashboard</h1>
                 <EditCharts metrics={metrics} getCharts={getCharts} initialCharts={charts} />
             </div>
         </div>

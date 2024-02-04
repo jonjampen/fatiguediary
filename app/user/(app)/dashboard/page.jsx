@@ -120,6 +120,7 @@ export default async function page() {
             body: JSON.stringify({
                 "type": "getCharts",
             }),
+            next: { tags: ['charts'] },
             cache: 'no-store',
         })
         res = await res.json()
