@@ -31,6 +31,7 @@ export default async function DailyCheckup() {
                 "date": date,
             }),
             cache: 'no-store',
+            next: { tags: ['metrics'] },
         })
         res = await res.json()
         res = res.data
@@ -46,6 +47,7 @@ export default async function DailyCheckup() {
             body: JSON.stringify({
                 "type": "getChartsOnly",
             }),
+            next: { tags: ['metrics'] },
             cache: 'no-store',
         })
         res = await res.json()

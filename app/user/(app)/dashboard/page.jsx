@@ -62,6 +62,7 @@ export default async function page() {
                 "startDate": startDate,
                 "endDate": endDate,
             }),
+            next: { tags: ['metrics'] },
             cache: 'no-store',
         })
         res = await res.json()
@@ -104,6 +105,7 @@ export default async function page() {
                 "type": "getDailyEntry",
                 "date": date,
             }),
+            next: { tags: ['metrics'] },
             cache: 'no-store',
         })
         res = await res.json()
@@ -120,7 +122,7 @@ export default async function page() {
             body: JSON.stringify({
                 "type": "getCharts",
             }),
-            next: { tags: ['charts'] },
+            next: { tags: ['charts', 'metrics'] },
             cache: 'no-store',
         })
         res = await res.json()
