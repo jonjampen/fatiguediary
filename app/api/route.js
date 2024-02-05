@@ -29,6 +29,24 @@ const pool = mysql.createPool({
     dateStrings: true,
 });
 
+const defaultMetrics = [
+    {
+        name: "Brainfog",
+        color: "#33d67c",
+        type: "scale03",
+    },
+    {
+        name: "Headache",
+        color: "#d66133",
+        type: "scale03",
+    },
+    {
+        name: "Sleep",
+        color: "#334ed6",
+        type: "numberInput",
+    },
+]
+
 
 async function executeQuery(query, params) {
     let [values] = await pool.execute(query, params, function (err, results, fields) {
@@ -104,6 +122,24 @@ export async function POST(request) {
             query = 'INSERT INTO `settings` (user_id, theme, wake_up_time, bed_time, newsletter, language) VALUES (?, ?, ?, ?, ?, ?)';
             params = [id, 1, '07:00:00', '23:00:00', 1, "en"]
             rows = await executeQuery(query, params);
+
+            // default charts and metrics
+            query = 'INSERT INTO `charts` (user_id, name, order_index) VALUES (?, ?, ?)';
+            params = [id, "Health Metrics", 0]
+            rows = await executeQuery(query, params);
+            let chart_id = rows.insertId;
+
+            let metric_id;
+            defaultMetrics.map(async (metric, i) => {
+                query = 'INSERT INTO `metrics` (user_id, name, color, type, order_index) VALUES (?, ?, ?, ?, ?)';
+                params = [id, metric.name, metric.color, metric.type, i]
+                rows = await executeQuery(query, params);
+                metric_id = rows.insertId;
+
+                query = 'INSERT INTO `charts_metrics` (chart_id, metric_id) VALUES (?, ?)';
+                params = [chart_id, metric_id];
+                rows = await executeQuery(query, params);
+            })
         }
         if (type === "loginUser") {
             console.log("Logging in user (API)")
@@ -372,6 +408,7 @@ export async function POST(request) {
             rows = await executeQuery(query, params);
         }
         else if (type === "getDailyEntriesInRange") {
+            console.log(body.startDate, body.endDate)
             query = "SELECT dailyentry_metrics.id AS id, metrics.id AS metric_id, metrics.name, metrics.color, dailyentry_metrics.rating, dailyentry.date FROM dailyentry JOIN dailyentry_metrics ON dailyentry.id = dailyentry_metrics.dailyentry_id JOIN metrics ON dailyentry_metrics.metric_id = metrics.id WHERE dailyentry.user_id = ? AND (dailyentry.date BETWEEN ? AND ?) ORDER BY dailyentry.date;";
             params = [userid, body.startDate, body.endDate]
             rows = await executeQuery(query, params);
