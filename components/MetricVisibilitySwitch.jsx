@@ -7,7 +7,7 @@ export default function MetricVisibilitySwitch({ metric, updateMetrics }) {
         let res = await fetch(process.env.URL + "/api", {
             method: "POST",
             body: JSON.stringify({
-                "type": "changeMetricVisability",
+                "type": "changeMetricVisibility",
                 "visibility": !metric.hidden,
                 "metricId": metric.id,
             }),
