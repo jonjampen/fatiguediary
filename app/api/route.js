@@ -280,8 +280,8 @@ export async function POST(request) {
         }
         else if (type === "createCheckupEntry") {
             // check if daily entry already exists
-            query = 'SELECT * from `dailyentry` WHERE date=?';
-            params = [body.date]
+            query = 'SELECT * from `dailyentry` WHERE date=? and user_id=?';
+            params = [body.date, userid]
             rows = await executeQuery(query, params);
 
             let checkupid;
