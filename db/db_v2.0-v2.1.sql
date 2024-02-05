@@ -185,8 +185,7 @@ COMMIT;
 ---
 --- Add last_active_version_id column to users table
 ---
-ALTER TABLE `users`
-  ADD `last_active_version_id` INT NOT NULL DEFAULT '0' AFTER `password`;
+ALTER TABLE `users` ADD `last_active_version_id` INT NOT NULL DEFAULT '0' AFTER `password`;
 
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
