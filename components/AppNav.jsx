@@ -17,7 +17,7 @@ export default function AppNav() {
                 <Button variant="ghost" size="icon" className="" onClick={() => push("/user/add/fatigue")} >
                     <PlusCircle className="h-8 w-8" />
                 </Button>
-                <Button variant="ghost" size="icon" className="" onClick={() => push("/user/add/checkup")} >
+                <Button variant="ghost" size="icon" className="" onClick={() => push("/user/metrics")} >
                     <HeartPulse className="h-8 w-8" />
                 </Button>
                 <Button variant="ghost" size="icon" className="" onClick={() => push("/user/entries")} >
