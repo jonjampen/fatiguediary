@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Feb 01, 2024 at 02:56 PM
+-- Generation Time: Feb 05, 2024 at 02:24 PM
 -- Server version: 10.11.6-MariaDB-2~progress7+u1
 -- PHP Version: 8.2.7
 
@@ -20,6 +20,20 @@ SET time_zone = "+00:00";
 --
 -- Database: `fatiguediary`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `app_versions`
+--
+
+CREATE TABLE `app_versions` (
+  `id` int(11) NOT NULL,
+  `version` varchar(10) NOT NULL,
+  `title` varchar(255) NOT NULL,
+  `description` text NOT NULL,
+  `image_path` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -92,6 +106,12 @@ CREATE TABLE `metrics` (
 --
 
 --
+-- Indexes for table `app_versions`
+--
+ALTER TABLE `app_versions`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `charts`
 --
 ALTER TABLE `charts`
@@ -126,6 +146,12 @@ ALTER TABLE `metrics`
 --
 
 --
+-- AUTO_INCREMENT for table `app_versions`
+--
+ALTER TABLE `app_versions`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT for table `charts`
 --
 ALTER TABLE `charts`
@@ -155,6 +181,13 @@ ALTER TABLE `dailyentry_metrics`
 ALTER TABLE `metrics`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 COMMIT;
+
+---
+--- Add last_active_version_id column to users table
+---
+ALTER TABLE `users`
+  ADD `last_active_version_id` INT NOT NULL DEFAULT '0' AFTER `password`;
+
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
