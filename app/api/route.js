@@ -538,6 +538,23 @@ export async function POST(request) {
 
             revalidateTag('charts');
         }
+        else if (type === "getCurrentVersion") {
+            query = "SELECT * FROM app_versions ORDER BY id ASC"
+            params = []
+            rows = await executeQuery(query, params);
+        }
+        else if (type === "getUsersVersion") {
+            query = "SELECT * FROM users WHERE id=?"
+            params = [userid]
+            rows = await executeQuery(query, params);
+            rows = rows[0].last_active_version_id
+        }
+        else if (type === "updateUsersVersion") {
+            query = "UPDATE users SET last_active_version_id=? WHERE id=?"
+            params = [body.version, userid]
+            rows = await executeQuery(query, params);
+            rows = rows[0].last_active_version_id
+        }
     }
     catch (error) {
         console.log("ERROR when executing API request: " + error, "type: " + type)
