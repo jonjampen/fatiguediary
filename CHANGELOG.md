@@ -19,6 +19,10 @@ All notable changes to [Fatigue Diary](https://fatiguediary.ch) will be document
 -   Popup when there is a new version with version info
     -   based on whether user has already seen the change
 
+## Changed
+
+-   Loading navigation server side to prevent login detection after page load
+
 ## [v2.0] - 2024-01-15
 
 ### Added
