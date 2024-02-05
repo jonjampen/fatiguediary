@@ -32,21 +32,7 @@ Originally (as my Matura Project), Fatigue Diary was built using HTML, CSS, and 
 
 # Todo
 
--   metrics tracking **(v2.1)**
-    -   [x] sortable symptoms
-    -   [x] chart
-    -   [x] custom charts
-    -   [x] delete charts
-    -   [x] select in which chart to display newly created metric
-    -   [x] custom metric color
-    -   [x] sort dashboard
-    -   [x] default chart and metrics
-    -   [x] hidden metrics not in charts
-    -   [x] cache!!!
--   Update info in-app
-    -   [x] versions table
-    -   [x] column in user table with last used version_id
-    -   [x] in layout design update popup & show if version_id < last version
+-   close issue
 -   Bug fixes
     -   [ ] Date selector not opening on current date
 -   PWA improvements **(v2.2)**
