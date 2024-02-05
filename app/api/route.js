@@ -373,11 +373,15 @@ export async function POST(request) {
                     rows = await executeQuery(query, params);
                 }
             })
+
+            revalidateTag('metrics');
         }
         else if (type === "editMetric") {
             query = "UPDATE metrics SET name=?, color=? WHERE user_id = ? AND id = ?";
             params = [body.name, body.color, userid, body.metricId]
             rows = await executeQuery(query, params);
+
+            revalidateTag('metrics');
         }
         else if (type === "editMetricsOrder") {
             body.metrics.forEach(async (metric) => {
@@ -385,11 +389,15 @@ export async function POST(request) {
                 params = [metric.order_index, userid, metric.id]
                 rows = await executeQuery(query, params);
             })
+
+            revalidateTag('metrics');
         }
         else if (type === "changeMetricVisibility") {
             query = "UPDATE metrics SET hidden=? WHERE user_id = ? AND id = ?";
             params = [body.visibility, userid, body.metricId]
             rows = await executeQuery(query, params);
+
+            revalidateTag('metrics');
         }
         else if (type === "deleteMetric") {
             query = "DELETE FROM metrics WHERE id = ? AND user_id = ?";
@@ -399,6 +407,8 @@ export async function POST(request) {
             query = "DELETE dm FROM dailyentry_metrics AS dm JOIN metrics AS m ON dm.metric_id = m.id WHERE dm.metric_id = ? AND m.user_id = ?";
             params = [body.metricId, userid]
             rows = await executeQuery(query, params);
+
+            revalidateTag('metrics');
         }
         else if (type === "getMetrics") {
             query = "SELECT * FROM metrics WHERE user_id = ? ORDER BY order_index ASC";

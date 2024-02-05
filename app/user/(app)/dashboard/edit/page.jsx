@@ -12,6 +12,7 @@ export default async function editDashboard() {
             body: JSON.stringify({
                 "type": "getMetrics",
             }),
+            next: { tags: ['metrics'] },
             cache: 'no-store',
         })
         res = await res.json()
@@ -28,7 +29,7 @@ export default async function editDashboard() {
             body: JSON.stringify({
                 "type": "getCharts",
             }),
-            next: { tags: ['charts'] },
+            next: { tags: ['charts', 'metrics'] },
             cache: 'no-store',
         })
         res = await res.json()
