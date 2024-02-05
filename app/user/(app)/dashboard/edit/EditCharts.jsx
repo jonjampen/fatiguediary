@@ -95,7 +95,7 @@ export default function EditCharts({ metrics, initialCharts, getCharts }) {
                             </CardHeader>
                             <CardContent>
                                 <ul className="flex flex-col gap-2">
-                                    {metrics.map(metric => {
+                                    {metrics.filter(metric => !metric.hidden).map(metric => {
                                         return <MetricsInChartSelector key={metric.id} chartId={chart.chart_id} metric={metric} checked={chart.metric_ids.includes(metric.id.toString())} onChange={editActivityInChart} />
                                     })}
                                 </ul>

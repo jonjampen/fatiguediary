@@ -445,7 +445,7 @@ export async function POST(request) {
             }))
         }
         else if (type === "getCharts") {
-            query = "SELECT c.id AS chart_id, c.user_id, c.name AS chart_name, c.order_index AS chart_order_index, GROUP_CONCAT(cm.metric_id) AS metric_ids FROM charts AS c LEFT JOIN charts_metrics AS cm ON c.id = cm.chart_id WHERE c.user_id = ? GROUP BY c.id, c.user_id, c.name, c.order_index ORDER BY c.order_index ASC;";
+            query = "SELECT c.id AS chart_id, c.user_id, c.name AS chart_name, c.order_index AS chart_order_index, GROUP_CONCAT(CASE WHEN m.hidden = 0 THEN cm.metric_id ELSE NULL END) AS metric_ids FROM charts AS c LEFT JOIN charts_metrics AS cm ON c.id = cm.chart_id LEFT JOIN metrics AS m ON cm.metric_id = m.id WHERE c.user_id = ? GROUP BY c.id, c.user_id, c.name, c.order_index ORDER BY c.order_index ASC;";
             params = [userid]
             rows = await executeQuery(query, params);
         }
