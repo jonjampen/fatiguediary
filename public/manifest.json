@@ -1,12 +1,27 @@
 {
-  "name": "Fatigue Diary",
+  "name": "Fatigue Diary: Pacing for CFS and Long Covid",
   "short_name": "Fatigue Diary",
+  "id": "pwa.fatiguediary.ch",
   "description": "Effortlessly monitor, analyze, and improve your energy levels and daily activities with Fatigue Diary.",
   "scope": "/",
   "start_url": "/user/dashboard/",
   "display": "standalone",
   "background_color": "#1B1E22",
   "theme_color": "#4A83B4",
+  "launch_handler": {
+    "client_mode": "navigate-existing"
+  },
+  "orientation": "portrait",
+  "lang": "en",
+  "categories": [
+    "health",
+    "medical",
+    "lifestyle",
+    "fitness",
+    "wellbeing",
+    "tracking",
+    "utilities"
+  ],
   "icons": [
     {
       "src": "/logos/icon-48x48.png",
@@ -61,6 +76,51 @@
       "sizes": "512x512",
       "type": "image/png",
       "purpose": "maskable any"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Create Energy Entry",
+      "url": "/user/add/fatigue"
+    },
+    {
+      "name": "Daily Health Metrics",
+      "url": "/user/metrics"
+    },
+    {
+      "name": "Dashboard",
+      "url": "/user/dashboard"
+    }
+  ],
+  "dir": "ltr",
+  "screenshots": [
+    {
+      "src": "/preview/appstore/Screenshot-1.png",
+      "sizes": "1440x810",
+      "type": "image/png",
+      "form_factor": "narrow",
+      "label": "Monitor, analyze, and improve your energy levels and activities while preventing crashes!"
+    },
+    {
+      "src": "/preview/appstore/Screenshot-2.png",
+      "sizes": "1440x810",
+      "type": "image/png",
+      "form_factor": "narrow",
+      "label": "Effortlessly track your energy and activities during the day."
+    },
+    {
+      "src": "/preview/appstore/Screenshot-3.png",
+      "sizes": "1440x810",
+      "type": "image/png",
+      "form_factor": "narrow",
+      "label": "Learn what influences your energy levels with interactive charts and automated activity analysis."
+    },
+    {
+      "src": "/preview/appstore/Screenshot-4.png",
+      "sizes": "1440x810",
+      "type": "image/png",
+      "form_factor": "narrow",
+      "label": "Keep track of your symptoms, medication, treatments, and measurements to see how they influence your well-being."
     }
   ]
 }
