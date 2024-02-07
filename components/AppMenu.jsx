@@ -19,9 +19,9 @@ export default function AppMenu({ menuItems }) {
 
     return (
         <div className="flex flex-col w-full items-center gap-8">
-            {menuItems.map(menuCard => {
+            {menuItems.map((menuCard, i) => {
                 return (
-                    <Card className="w-full md:w-[500px]">
+                    <Card key={i} className="w-full md:w-[500px]">
                         <CardContent className="pt-6">
                             <ul className="flex flex-col gap-4">
                                 {menuCard.map(menuItem => {
@@ -31,7 +31,7 @@ export default function AppMenu({ menuItems }) {
                                     else {
                                         if (menuItem?.link) {
                                             return (
-                                                <li>
+                                                <li key={menuItem.name}>
                                                     <Link href={menuItem.link} className="flex justify-between items-center cursor-pointer w-full">
                                                         <div className="flex gap-4">
                                                             {menuItem.icon} {menuItem.name}
@@ -43,7 +43,7 @@ export default function AppMenu({ menuItems }) {
                                         }
                                         else if (menuItem?.url) {
                                             return (
-                                                <li>
+                                                <li key={menuItem.name}>
                                                     <a href={menuItem.url} target="_blank" className="flex justify-between items-center cursor-pointer w-full">
                                                         <div className="flex gap-4">
                                                             {menuItem.icon} {menuItem.name}
@@ -55,7 +55,7 @@ export default function AppMenu({ menuItems }) {
                                         }
                                         else if (menuItem?.action) {
                                             return (
-                                                <li>
+                                                <li key={menuItem.name}>
                                                     <button onClick={shareIt} className="flex justify-between items-center cursor-pointer w-full">
                                                         <div className="flex gap-4">
                                                             {menuItem.icon} {menuItem.name}

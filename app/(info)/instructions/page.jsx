@@ -55,7 +55,7 @@ export default function Instructions() {
                 <p>Now, let&apos;s analyze your data on the &apos;Dashboard.&apos; Select the date and the range you&apos;d like to explore.</p>
 
                 <p>Use the interactive charts to understand how your activities, the time of day, and other factors influence your energy levels. Below that, you&apos;ll find automated analysis with color-coded insights into how certain activities influence your energy.</p>
-                <p>By clicking on "Edit Dashboard" you can create custom charts that display your selected health metrics. Just create a new chart, give it a name, and select which metrics to display in it.</p>
+                <p>By clicking on &quot;Edit Dashboard&quot; you can create custom charts that display your selected health metrics. Just create a new chart, give it a name, and select which metrics to display in it.</p>
 
                 <h3>Developer</h3>
 
