@@ -61,7 +61,7 @@ export default async function Layout({ children }) {
     let newVersions = await getCurrentVersion(userVersion)
 
     return (
-        <main className="h-[calc(100vh-64px-24px-1px)] mt-4"> {/* -nav-margintop-navborder */}
+        <main className="h-[calc(100vh-64px-24px-1px)] mt-4 md:mt-10"> {/* -nav-margintop-navborder */}
             {children}
             <VersionUpdate
                 data={newVersions}
