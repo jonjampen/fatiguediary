@@ -63,7 +63,6 @@ export default async function Layout({ children }) {
     return (
         <>
             {children}
-            {userVersion}
             <VersionUpdate
                 data={newVersions}
                 show={!!newVersions.length}
