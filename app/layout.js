@@ -1,10 +1,7 @@
 import './globals.scss'
 import { Inter } from 'next/font/google'
-import Navbar from '@/components/Navbar'
 import Provider from './lib/Provider'
 import { getSettings } from './lib/settings'
-import { getServerSession } from 'next-auth';
-import { options } from '@/app/api/auth/[...nextauth]/options';
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -92,18 +89,13 @@ export const viewport = {
 
 
 export default async function RootLayout({ children }) {
-  const session = await getServerSession(options)
-
   let settings = await getSettings();
 
   return (
     <html lang="en" className={settings.theme !== 1 && "dark"}>
       <body className={inter.className}>
         <Provider>
-          <Navbar session={session} />
-          <main className="h-[calc(100vh-64px-24px-1px)]"> {/* -nav-margintop-navborder */}
-            {children}
-          </main>
+          {children}
         </Provider>
       </body>
     </html>
