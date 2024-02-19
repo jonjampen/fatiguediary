@@ -18,7 +18,7 @@ export default function ProfileItem({ session }) {
                     <AvatarFallback className="bg-secondary">{session.user.name ? getInitials(session.user.name) : "?"}</AvatarFallback>
                 </Avatar>
                 <div className="flex flex-col gap-0 justify-center items-start">
-                    <p>{session.user.name || ""}({session.user.email || ""})</p>
+                    <p>{session.user.email || ""}</p>
                     <div className="flex gap-8">
                         <button onClick={() => signOut({ callbackUrl: process.env.URL + '/login' })} className="text-destructive" >Sign Out</button>
                         {/* <Link href="/user/account" className="text-primary">Manage Account</Link> */}
