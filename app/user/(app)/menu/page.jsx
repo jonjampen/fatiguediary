@@ -1,5 +1,5 @@
 import React from 'react'
-import { FileDown, HelpCircle, Instagram, Mail, MessageSquarePlus, Settings, Share2, Smartphone, Youtube } from 'lucide-react'
+import { ArrowDownToLine, FileDown, HelpCircle, Instagram, Mail, MessageSquarePlus, Settings, Share2, Smartphone, Youtube } from 'lucide-react'
 import { getServerSession } from 'next-auth';
 import { options } from '@/app/api/auth/[...nextauth]/options';
 import ProfileItem from '@/components/ProfileItem';
@@ -36,6 +36,18 @@ export default async function menu() {
                 link: "/instructions",
             },
             {
+                name: "Install the App",
+                icon: <ArrowDownToLine />,
+                link: "/install",
+            },
+            {
+                name: "Share the App",
+                icon: <Share2 />,
+                action: "share",
+            },
+        ],
+        [
+            {
                 name: "Contact",
                 icon: <Mail />,
                 link: "/contact",
@@ -45,13 +57,7 @@ export default async function menu() {
                 icon: <MessageSquarePlus />,
                 link: "/feedback",
             },
-        ],
-        [
-            {
-                name: "Share App",
-                icon: <Share2 />,
-                action: "share",
-            },
+
             {
                 name: "Instagram",
                 icon: <Instagram />,
