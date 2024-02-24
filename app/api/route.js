@@ -114,8 +114,15 @@ export async function POST(request) {
         else if (type === "createNewUser") {
             encryptedPassword = await encryptPassword(body.password);
 
-            query = 'INSERT INTO `users` (name, email, password) VALUES (?, ?, ?)';
-            params = [body.name, body.email, encryptedPassword]
+            query = 'SELECT MAX(id) as currentId FROM app_versions';
+            params = [];
+            rows = await executeQuery(query, params);
+            console.log(rows);
+            let currentAppVersionId = rows[0].currentId;
+            console.log(currentAppVersionId);
+
+            query = 'INSERT INTO `users` (name, email, password, last_active_version_id) VALUES (?, ?, ?,?)';
+            params = [body.name, body.email, encryptedPassword, currentAppVersionId];
             rows = await executeQuery(query, params);
             let id = rows.insertId
 
