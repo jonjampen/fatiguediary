@@ -95,7 +95,7 @@ export default function MonthChart({ entries, startDate, endDate, range }) {
                 enabled: false,
             },
             stroke: {
-                curve: 'straight',
+                curve: 'smooth',
                 width: range === "month" ? 2 : 3
             },
             colors: entries.map(entry => entry.color),
