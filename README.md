@@ -32,7 +32,6 @@ Originally (as my Matura Project), Fatigue Diary was built using HTML, CSS, and 
 
 # Todo
 
--   close issue
 -   Bug fixes
     -   [ ] Date selector not opening on current date
 -   PWA improvements **(v2.2)**

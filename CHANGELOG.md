@@ -11,17 +11,20 @@ All notable changes to [Fatigue Diary](https://fatiguediary.ch) will be document
 ### Added
 
 -   Tracking health metrics (symptoms, measurements, treatments, medication, etc.).
-    -   Edit, hide, and delete health metrics
-    -   Sortable health metrics
-    -   Color for each health metric to display in chart
+    -   Edit, hide, and delete health metrics.
+    -   Sortable health metrics.
+    -   Color for each health metric to display in chart.
 -   Charts for health metrics that can be customized, created, edited, and deleted by the user.
--   Default chart and metrics are created on sign up
--   Popup when there is a new version with version info
-    -   based on whether user has already seen the change
+-   Default chart and metrics are created on sign up.
+-   Popup when there is a new version with version info.
+    -   based on whether user has already seen the change.
 
 ## Changed
 
--   Loading navigation server side to prevent login detection after page load
+-   Loading navigation server side to prevent login detection after page load.
+-   Removed the top navigation bar within the app. The menu is now a page linked in the bottom navigation.
+-   Updated the instructions, now using accordions instead of text.
+-   Adding shortcuts (long press the app icon for quick actions). Also improving other manifest settings.
 
 ## [v2.0] - 2024-01-15
 
