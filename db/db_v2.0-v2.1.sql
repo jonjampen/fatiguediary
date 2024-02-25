@@ -180,12 +180,13 @@ ALTER TABLE `dailyentry_metrics`
 --
 ALTER TABLE `metrics`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
-COMMIT;
 
 ---
 --- Add last_active_version_id column to users table
 ---
-ALTER TABLE `users` ADD `last_active_version_id` INT NOT NULL DEFAULT '0' AFTER `password`;
+ALTER TABLE `users`
+  ADD `last_active_version_id` INT NOT NULL DEFAULT '0' AFTER `password`;
+COMMIT;
 
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
