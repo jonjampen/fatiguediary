@@ -57,7 +57,7 @@ export default function Instructions() {
                     <AccordionItem value="item-3">
                         <AccordionTrigger>How to use Health Metrics to track symptoms, medications, etc?</AccordionTrigger>
                         <AccordionContent>
-                            {/* TODO add video */}
+                            <iframe width="560" height="315" src="https://www.youtube.com/embed/NY-MBOCQdew?si=zeVJDvVN2RL9sslI" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
                             You can track your symptoms, medication, therapies, and other health metrics in the metrics tab. Create your own metric, select a color and decide in which chart the metric should be displayed. Then each day, come back to this page and select the desired level for your metrics.
                         </AccordionContent>
                     </AccordionItem>
@@ -89,7 +89,7 @@ export default function Instructions() {
                     <AccordionItem value="item-7">
                         <AccordionTrigger>How to edit, delete, and reorder health metrics?</AccordionTrigger>
                         <AccordionContent>
-                            {/* TODO add video */}
+                            <iframe width="560" height="315" src="https://www.youtube.com/embed/NY-MBOCQdew?si=zeVJDvVN2RL9sslI&amp;start=49" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
                             Health metrics can be edited, delete and reordered from the health tab. Click on the edit icon and then choose the action you want to perform. Hidden metrics will no longer be displayed in the app, this action <b>can</b> be undone and past entries will not be deleted. Deleting a metric will delete all references of the selected metric from past entries. This action <b>cannot</b> be undone!
                         </AccordionContent>
                     </AccordionItem>
