@@ -37,7 +37,7 @@ export default function Instructions() {
                     <AccordionItem value="item-1">
                         <AccordionTrigger>What are energy levels?</AccordionTrigger>
                         <AccordionContent>
-                            <p>To maximize the use of Fatigue Diary, you should create an entry with an energy level after each activity throughout your day. Energy levels are an objective value of how energized you feel. So if the fatigue is worse, choose a lower number than when the fatigue is better. There are also emojis that can help you decide your current energy level.</p>
+                            <p>To maximize the use of Fatigue Diary, you should create an entry with an energy level after each activity throughout your day. Energy levels are a subjective value of how energized you feel. So if the fatigue is worse, choose a lower number than when the fatigue is better. There are also emojis that can help you decide your current energy level.</p>
                         </AccordionContent>
                     </AccordionItem>
                     <AccordionItem value="item-2">
