@@ -34,7 +34,6 @@ export default function Dashboard({ charts, fetchEntries, getActivities, getAllD
         setEntries(await fetchEntries(startDate, endDate));
         setActivities(await getActivities(startDate, endDate));
         let newAll = await getAllDailyEntriesInRange(startDate, endDate)
-        console.log(newAll);
         setDailyEntries(newAll)
         setMetricEntries(await getMetricEntryByDate(moment(startDate).format("YYYY-MM-DD")))
     }
@@ -46,11 +45,8 @@ export default function Dashboard({ charts, fetchEntries, getActivities, getAllD
 
     function monthlyAvg(entries) {
         if (entries.length > 0) {
-            console.log("YEAR loading ")
-            console.log("old:", entries)
             let newA = entries.map(metric => {
                 let monthlyAverages = {};
-                console.log(metric)
                 metric.data.forEach(entry => {
                     let data = entry[1]
                     let timestamp = entry[0]

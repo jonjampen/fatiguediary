@@ -52,7 +52,6 @@ export default async function page() {
             return dateArray;
         }
 
-        console.log(startDate, endDate)
 
         let res = await fetch(process.env.URL + "/api", {
             method: "POST",
@@ -67,7 +66,6 @@ export default async function page() {
         })
         res = await res.json()
         res = res.data
-        console.log(res)
         // format
         let chartData = {}
 
@@ -75,7 +73,6 @@ export default async function page() {
 
         res.map((item) => {
             const { name, color, metric_id } = item;
-            console.log(metric_id);
             chartData[name] = { name, color, metric_id, data: [] };
         });
 
@@ -92,7 +89,6 @@ export default async function page() {
             });
         });
         // setSeries(Object.values(chartData))
-        console.log(Object.values(chartData))
         return Object.values(chartData)
     }
 

@@ -6,7 +6,6 @@ import DailyCheckupForm from './form'
 export default async function DailyCheckup() {
     async function createCheckupEntry({ date, metrics }) {
         "use server"
-        console.log("D+M", date, metrics)
         let res = await fetch(process.env.URL + "/api", {
             method: "POST",
             headers: { Cookie: cookies().toString() },

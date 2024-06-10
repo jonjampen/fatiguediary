@@ -8,7 +8,6 @@ import { Minus, Plus } from 'lucide-react';
 export default function MetricRating({ ratingType, selectedRating, setSelectedRating }) {
     const [value, setValue] = useState(selectedRating)
     function changeRating(e, val) {
-        console.log(val)
         e.preventDefault();
         setSelectedRating(val)
     }

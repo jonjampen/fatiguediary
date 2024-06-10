@@ -25,7 +25,7 @@ export default function Login({ searchParams }) {
     ]
 
     let success = searchParams.success;
-    console.log(success)
+
     if (success === "success") {
         return (
             <div className="flex flex-col items-center">

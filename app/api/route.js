@@ -50,7 +50,6 @@ const defaultMetrics = [
 
 async function executeQuery(query, params) {
     let [values] = await pool.execute(query, params, function (err, results, fields) {
-        console.log("Error executing query: " + err)
     });
     return values
 }
@@ -98,10 +97,7 @@ export async function POST(request) {
     let encryptedPassword;
 
     if (!pool) {
-        console.log("ERROR with DB pool. Could not establish pool!")
-    }
-    else {
-        console.log("DB pool successful!", type)
+        // console.log("ERROR with DB pool. Could not establish pool!")
     }
 
     // perform db request
@@ -117,9 +113,7 @@ export async function POST(request) {
             query = 'SELECT MAX(id) as currentId FROM app_versions';
             params = [];
             rows = await executeQuery(query, params);
-            console.log(rows);
             let currentAppVersionId = rows[0].currentId;
-            console.log(currentAppVersionId);
 
             query = 'INSERT INTO `users` (name, email, password, last_active_version_id) VALUES (?, ?, ?,?)';
             params = [body.name, body.email, encryptedPassword, currentAppVersionId];
@@ -149,30 +143,22 @@ export async function POST(request) {
             })
         }
         if (type === "loginUser") {
-            console.log("Logging in user (API)")
             query = 'SELECT * FROM `users` WHERE `email` = ?';
             params = [body.email]
-            console.log("User Email:", body.email);
             let user = await executeQuery(query, params);
-            console.log("DB Return:", user);
 
             if (user.length > 0) {
-                console.log("user.length > 0; User[0]:", user[0]);
                 const storedHashedPassword = user[0].password;
-                console.log("Hashed PW:", storedHashedPassword);
 
                 // New password encryption
                 const isPasswordMatchBcrypt = await bcrypt.compare(body.password, storedHashedPassword);
 
                 // Old password encryption
                 const isPasswordMatchOld = (storedHashedPassword === oldEncryptPassword(body.password));
-                console.log("Is password match (old, new):", isPasswordMatchOld, isPasswordMatchBcrypt);
 
                 if (isPasswordMatchBcrypt || isPasswordMatchOld) {
                     delete user[0].password;
-                    console.log("User without PW:", user[0])
                     rows = user;
-                    console.log("Rows is now user; rows:", rows)
                     if (isPasswordMatchOld) {
                         // set new encryption
                         encryptedPassword = await encryptPassword(body.password);
@@ -183,11 +169,9 @@ export async function POST(request) {
                     }
                 } else {
                     rows = null;
-                    console.log("ERROR! user.length > 0; but is not a passwordMatch! rows:", rows)
                 }
             } else {
                 rows = null;
-                console.log("ERROR! user.length is not bigger than 0! rows:", rows)
             }
         }
         else if (type === "addEnergylevel") {
@@ -423,7 +407,6 @@ export async function POST(request) {
             rows = await executeQuery(query, params);
         }
         else if (type === "getDailyEntriesInRange") {
-            console.log(body.startDate, body.endDate)
             query = "SELECT dailyentry_metrics.id AS id, metrics.id AS metric_id, metrics.name, metrics.color, dailyentry_metrics.rating, dailyentry.date FROM dailyentry JOIN dailyentry_metrics ON dailyentry.id = dailyentry_metrics.dailyentry_id JOIN metrics ON dailyentry_metrics.metric_id = metrics.id WHERE dailyentry.user_id = ? AND (dailyentry.date BETWEEN ? AND ?) ORDER BY dailyentry.date, metrics.order_index;";
             params = [userid, body.startDate, body.endDate]
             rows = await executeQuery(query, params);
@@ -526,7 +509,6 @@ export async function POST(request) {
             params = [userid]
             rows = await executeQuery(query, params);
             let max = rows[0].highest_order_index != null ? rows[0].highest_order_index : -1;
-            console.log(max);
 
             query = "INSERT INTO charts (user_id, order_index) VALUES (?,?);"
             params = [userid, max + 1]
@@ -564,7 +546,7 @@ export async function POST(request) {
         }
     }
     catch (error) {
-        console.log("ERROR when executing API request: " + error, "type: " + type)
+        // console.log("ERROR when executing API request: " + error, "type: " + type)
     }
 
     return NextResponse.json({ data: rows }, { status: 200 });

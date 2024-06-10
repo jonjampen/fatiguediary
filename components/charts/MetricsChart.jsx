@@ -123,7 +123,6 @@ export default function MonthChart({ entries, startDate, endDate, range }) {
         type: "line",
     }
 
-    console.log(entries.map(entry => entry.color))
 
     return (
         <Chart options={state.options} series={state.series} type={state.type} height={280} width="100%" />
