@@ -80,7 +80,7 @@ export default function MonthChart({ entries, startDate, endDate, range }) {
             yaxis: {
                 labels: {
                     formatter: function (val) {
-                        return val.toFixed(0);
+                        return Math.round(val);
                     },
                     style: {
                         colors: 'hsl(var(--muted-foreground))',
@@ -108,7 +108,7 @@ export default function MonthChart({ entries, startDate, endDate, range }) {
                 },
                 y: {
                     formatter: function (val) {
-                        return val.toFixed(1)
+                        return val
                     },
                 },
                 z: {
